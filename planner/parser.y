@@ -1231,22 +1231,22 @@ isOfType( register idList_t *type1, register idList_t *type2 )
 static formula_t *
 copyReplaceFormula( register formula_t *formula, register instantiation_t *instantiation )
 {
-  register formula_t *new;
+  register formula_t *newf;
   register instantiation_t *inst;
   register idList_t *arg, *prevArg, *newArg;
 
   if( formula != NULL )
     {
-      new = (formula_t*)malloc( sizeof( formula_t ) );
-      assert( new != NULL );
-      new->type = formula->type;
+      newf = (formula_t*)malloc( sizeof( formula_t ) );
+      assert( newf != NULL );
+      newf->type = formula->type;
       switch( formula->type )
 	{
 	case ATOMIC_FORMULA:
-	  new->u.atomic = (atomicFormula_t*)malloc( sizeof( atomicFormula_t ) );
-	  assert( new->u.atomic != NULL );
-	  *(new->u.atomic) = *(formula->u.atomic);
-	  new->u.atomic->args = NULL;
+	  newf->u.atomic = (atomicFormula_t*)malloc( sizeof( atomicFormula_t ) );
+	  assert( newf->u.atomic != NULL );
+	  *(newf->u.atomic) = *(formula->u.atomic);
+	  newf->u.atomic->args = NULL;
 
 	  /* copy/replace arguments */
 	  prevArg = NULL;
@@ -1262,22 +1262,22 @@ copyReplaceFormula( register formula_t *formula, register instantiation_t *insta
 
 	      /* link it */
 	      if( prevArg == NULL )
-		new->u.atomic->args = newArg;
+		newf->u.atomic->args = newArg;
 	      else
 		prevArg->next = newArg;
 	      prevArg = newArg;
 	    }
 	  break;
 	case WHEN_FORMULA:
-	  new->u.when.condition = copyReplaceFormula( formula->u.when.condition, instantiation );
-	  new->u.when.addEffect = copyReplaceFormula( formula->u.when.addEffect, instantiation );
-	  new->u.when.delEffect = copyReplaceFormula( formula->u.when.delEffect, instantiation );
+	  newf->u.when.condition = copyReplaceFormula( formula->u.when.condition, instantiation );
+	  newf->u.when.addEffect = copyReplaceFormula( formula->u.when.addEffect, instantiation );
+	  newf->u.when.delEffect = copyReplaceFormula( formula->u.when.delEffect, instantiation );
 	  break;
 	}
 
       /* next */
-      new->next = copyReplaceFormula( formula->next, instantiation );
-      return( new );
+      newf->next = copyReplaceFormula( formula->next, instantiation );
+      return( newf );
     }
   else
     return( NULL );
@@ -1287,7 +1287,7 @@ copyReplaceFormula( register formula_t *formula, register instantiation_t *insta
 static void
 instantiateFormula( register formula_t *effects, register idList_t *vars, register instantiation_t *instantiation )
 {
-  instantiation_t new;
+  instantiation_t newf;
   formula_t *newFormula;
 
   if( vars == NULL )
@@ -1303,11 +1303,11 @@ instantiateFormula( register formula_t *effects, register idList_t *vars, regist
     }
   else
     {
-      new.next = instantiation;
-      new.var = vars;
-      for( new.val = objects; new.val != NULL; new.val = new.val->next )
-	if( isOfType( new.val->type, new.var->type ) )
-	  instantiateFormula( effects, vars->next, &new );
+      newf.next = instantiation;
+      newf.var = vars;
+      for( newf.val = objects; newf.val != NULL; newf.val = newf.val->next )
+	if( isOfType( newf.val->type, newf.var->type ) )
+	  instantiateFormula( effects, vars->next, &newf );
     }
 }
 

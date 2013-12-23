@@ -6,7 +6,8 @@
 */
 
 
-
+#ifndef PLANNER
+#define PLANNER
 /*********************************************************
 **********************************************************
 **
@@ -81,7 +82,9 @@
 #define H2PLUS               2
 #define H2MAX                3
 #define H2MAXP               4
-#define numberHeuristics     5
+#define H1EPLUS              5
+#define H1EMAX               6
+#define numberHeuristics     7
 
 /* constraint types */
 #define TIME                 1
@@ -116,11 +119,19 @@ struct iatom_s
 typedef struct iatom_s iatom_t;
 
 
-struct atom_s 
+struct atom_s
 {
   unsigned pack;
 } atom_s;
 typedef struct atom_s atom_t;
+
+
+struct experience_s
+{
+  char opName[128];
+  atom_t* state;
+} experience_s;
+typedef struct experience_s experience_t;
 
 
 struct node_s
@@ -130,9 +141,11 @@ struct node_s
   unsigned h2_plus;                       /* value of h^2-plus */
   unsigned h1_max;                        /* value of h^1-max */
   unsigned h2_max;                        /* value of h^2-max */
+  unsigned h1e_plus;                      /* value of h^1-e-plus */
+  unsigned h1e_max;                       /* value of h^1-e-max */
   int fvalue;                             /* f-function value */
   int valid;                              /* valid state? */
-  int operator;                           /* operator id that leads to this state */
+  int operatorId;                         /* operator id that leads to this state */
   int bucket;                             /* bucket number of node */
   int open;                               /* true if node in OPEN list */
 
@@ -263,3 +276,5 @@ extern int             _low_copyGoalAtoms[];
 extern suboperator_t * _low_suboperators;
 extern int             _low_groundingOperators;
 extern int             _low_negatedAtom[];
+
+#endif

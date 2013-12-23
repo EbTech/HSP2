@@ -5,6 +5,9 @@
 **
 */
 
+#ifndef PARSER
+#define PARSER
+
 struct idList_s
 {
   int id;
@@ -111,3 +114,6 @@ typedef union
 
 #define YYSTYPE  YYSTYPE_T
 #define YYSTYPE_IS_DECLARED 1
+
+#endif
+
