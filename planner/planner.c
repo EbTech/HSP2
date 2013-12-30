@@ -248,7 +248,7 @@ static int          mutexesAllPairs;
 static int          staticCompilation;
 static char *       searchAlgorithmName[] = { "bfs", "gbfs" };
 static char *       searchDirectionName[] = { "forward", "backward" };
-static char *       searchHeuristicName[] = { "h1plus", "h1max", "h2plus", "h2max", "h1eplus", "h1emax" };
+static char *       searchHeuristicName[] = { "h1plus", "h1max", "h2plus", "h2max", "h2maxp", "h1eplus", "h1emax" };
 
 /* schedules */
 static long         nodeMemoryUsed;
@@ -846,8 +846,8 @@ H1ESetCost( register cost_t *cost, register int* set )
   cost->plus = 0;
   for( p = set; *p != 0; ++p )
     {
-      cost->max = MAX( H1Cost[*p].max, cost->max );
-      cost->plus = PLUSSUM( H1Cost[*p].plus, cost->plus );
+      cost->max = MAX( H1ECost[*p].max, cost->max );
+      cost->plus = PLUSSUM( H1ECost[*p].plus, cost->plus );
     }
 }
 
@@ -889,26 +889,30 @@ H1ESetup( register atom_t *state )
             {
               for( op = invAddTable[p]; (op != NULL) && (*op != 0); ++op )
                 {
-                  int alpha = 3;
+                  int alpha = 2;
                   for (q = 0; q < experienceSize && alpha > 1; ++q)
+                  {
                     if (asserted(experience[q].state, p) && !strcmp(experience[q].opName, operatorTable[(*op)-1].name))
                       alpha = 1;
+                  }
                   H1ESetCost( &tmpCost, operatorTable[(*op)-1].prec );
-                  minCostMax = MIN( minCostMax, tmpCost.max + alpha );
-                  minCostPlus = MIN( minCostPlus, tmpCost.plus + alpha ); // TODO egraph: divide by |ops|
+                  minCostMax = MIN( minCostMax, PLUSSUM(tmpCost.max, alpha) );
+                  minCostPlus = MIN( minCostPlus, PLUSSUM(tmpCost.plus, alpha) );
                 }
             }
           else
             {
               for( op = HInvAddTable[p]; (op != NULL) && (*op != 0); ++op )
                 {
-                  int alpha = 3;
+                  int alpha = 2;
                   for (q = 0; q < experienceSize && alpha > 1; ++q)
+                  {
                     if (asserted(experience[q].state, p) && !strcmp(experience[q].opName, HOperatorTable[(*op)-1].name))
                       alpha = 1;
+                  }
                   H1ESetCost( &tmpCost, HOperatorTable[(*op)-1].prec );
-                  minCostMax = MIN( minCostMax, tmpCost.max + alpha );
-                  minCostPlus = MIN( minCostPlus, tmpCost.plus + alpha ); // TODO egraph: divide by |ops|
+                  minCostMax = MIN( minCostMax, PLUSSUM(tmpCost.max, alpha) );
+                  minCostPlus = MIN( minCostPlus, PLUSSUM(tmpCost.plus, alpha) );
                 }
             }
 
@@ -2006,9 +2010,9 @@ insertNodeIntoBucket( register node_t *node, register int bucket )
     resizeBucketTable(bucket);
 
   /* look for proper place of insertion */
-  for( n = firstNodeInBucket[bucket]; n != lastNodeInBucket[bucket]; n = n->bucketNext )
-    if( ((searchHeuristic == H1PLUS) && (node->h2_max <= n->h2_max)) ||
-        ((searchHeuristic == H1MAX) && (node->h1_plus <= n->h1_plus)) ||
+  for( n = firstNodeInBucket[bucket]; n != lastNodeInBucket[bucket]; n = n->bucketNext ) // TODO wtf?! heuristic mismatches!
+    if( ((searchHeuristic == H1PLUS || searchHeuristic == H1EPLUS) && (node->h2_max <= n->h2_max)) ||
+        ((searchHeuristic == H1MAX || searchHeuristic == H1EMAX) && (node->h1_plus <= n->h1_plus)) ||
         ((searchHeuristic == H2MAX) && (node->h1_plus <= n->h1_plus)) )
       break;
 
@@ -3475,7 +3479,7 @@ initialize( void )
   table_size = 0;
   for( i = 1; i < SIZE_ATOMS; ++i )
     if( backwardH1Cost[i].plus < INT_MAX )
-      table_size += backwardH1Cost[i].plus;
+      table_size += backwardH1Cost[i].plus; // TODO egraph: backwardH1ECost?
   table_size = MAX( table_size, MINBUCKETTABLESIZE );
   resizeBucketTable(table_size);
 
@@ -3612,6 +3616,7 @@ int
 checkProblem()
 {
   register int *p, *q;
+  // TODO egraph: check H1ECost
 
   /* check H1Costs for atoms in goal */
   for( p = _low_copyGoalAtoms; *p != 0; ++p ) {
