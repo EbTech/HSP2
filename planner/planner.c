@@ -131,7 +131,8 @@ int                 _low_groundingOperators;
 int                 _low_negatedAtom[ATOMSPERPACK*MAXATOMPACKS];
 
 /* for E-graphs */
-char*               EGraphFile = "EGraph.txt";
+char                EGraphIn[128];
+char*               EGraphOut[128];
 experience_t        experience[1024];
 int                 experienceSize;
 
@@ -889,7 +890,7 @@ H1ESetup( register atom_t *state )
             {
               for( op = invAddTable[p]; (op != NULL) && (*op != 0); ++op )
                 {
-                  int alpha = 2;
+                  int alpha = 10;
                   for (q = 0; q < experienceSize && alpha > 1; ++q)
                   {
                     if (asserted(experience[q].state, p) && !strcmp(experience[q].opName, operatorTable[(*op)-1].name))
@@ -904,7 +905,7 @@ H1ESetup( register atom_t *state )
             {
               for( op = HInvAddTable[p]; (op != NULL) && (*op != 0); ++op )
                 {
-                  int alpha = 2;
+                  int alpha = 10;
                   for (q = 0; q < experienceSize && alpha > 1; ++q)
                   {
                     if (asserted(experience[q].state, p) && !strcmp(experience[q].opName, HOperatorTable[(*op)-1].name))
@@ -1295,6 +1296,15 @@ heuristics( register node_t *node )
             node->h1e_plus = PLUSSUM( node->h1e_plus, H1ECost[*g].plus);
             node->h1e_max = MAX( node->h1e_max, H1ECost[*g].max );
           }
+      // TODO remove debug code
+      fprintf( stdout, "Gen node with h = %d:\t", node->h1e_max );
+      register int p;
+      for( p = 1; p < SIZE_ATOMS; ++p )
+        if( asserted( node->state, p ) )
+        {
+          fprintf( stdout, "%s ", readAtomName(p) );
+        }
+      fprintf( stdout, "\n" );
 
       /* H2 heuristics are too expensice for forward search */
       if( (_low_requirements & REQ_ADL) && (searchHeuristic == H2MAX) )
@@ -1730,10 +1740,11 @@ nodeHashStatistics( void )
       sum += nodeHashDiameter[index];
       n += (nodeHashDiameter[index] > 0);
     }
-
-  fprintf( stderr, "NODEHASH: nodes in hash table = %d\n", nodeHashNumElem );
-  fprintf( stderr, "NODEHASH: diameter of hash table = %d\n", diameter );
-  fprintf( stderr, "NODEHASH: average diameter of hash table = %f\n", (float)sum/(float)n );
+  
+  // TODO: change stdout back to stderr
+  fprintf( stdout, "NODEHASH: nodes in hash table = %d\n", nodeHashNumElem );
+  fprintf( stdout, "NODEHASH: diameter of hash table = %d\n", diameter );
+  fprintf( stdout, "NODEHASH: average diameter of hash table = %f\n", (float)sum/(float)n );
 }
 
 
@@ -2155,6 +2166,15 @@ forwardNodeExpansion( register node_t *node, register node_t ***result )
       if( !buffer )
         fatal( noMoreMemory );
     }
+  // TODO remove debug code
+  fprintf( stdout, "EXPAND node with h=%d:\t", node->h1e_max );
+  register int i;
+  for( i = 1; i < SIZE_ATOMS; ++i )
+    if( asserted( node->state, i ) )
+    {
+      fprintf( stdout, "%s ", readAtomName(i) );
+    }
+  fprintf( stdout, "\n" );
 
   /* update problem data */
   ++expandedNodes;
@@ -3622,12 +3642,12 @@ checkProblem()
   for( p = _low_copyGoalAtoms; *p != 0; ++p ) {
     if( asserted(staticAtom,*p) ) {
       if( !asserted(staticInitialState,*p) ) {
-        fprintf(stderr,"SOLUTION: goal atom %s is static but not in initial situation\n",readAtomName(*p));
+        fprintf(stderr, "SOLUTION: goal atom %s is static but not in initial situation\n", readAtomName(*p));
         return(0);
       }
     } else {
       if( backwardH1Cost[*p].max == INT_MAX ) {
-        fprintf(stderr,"SOLUTION: goal atom %s has infinite backward h1-cost\n",readAtomName(*p));
+        fprintf(stderr, "SOLUTION: goal atom %s has infinite backward h1-cost\n", readAtomName(*p));
         return(0);
       }
     }
@@ -3636,7 +3656,7 @@ checkProblem()
   /* check H1Costs for atoms in goal */
   for( p = _low_goalAtoms; *p != 0; ++p ) {
     if( backwardH1Cost[*p].max == INT_MAX ) {
-      fprintf(stderr,"SOLUTION: goal atom %s has infinite backward h1-cost\n",readAtomName(*p));
+      fprintf(stderr, "SOLUTION: goal atom %s has infinite backward h1-cost\n", readAtomName(*p));
       return(0);
     }
   }
@@ -3646,7 +3666,7 @@ checkProblem()
     for( p = _low_goalAtoms; *p != 0; ++p ) {
       for( q = p; *q != 0; ++q ) {
         if( PAIR(*p,*q).max == INT_MAX ) {
-          fprintf(stderr,"SOLUTION: pair of goal atoms (%s,%s) has infinite h2-cost\n",readAtomName(*p),readAtomName(*q));
+          fprintf(stderr, "SOLUTION: pair of goal atoms (%s,%s) has infinite h2-cost\n", readAtomName(*p), readAtomName(*q));
           return(0);
         }
       }
@@ -3671,13 +3691,13 @@ readEGraph(const char* fileName)
       return false;
     }
   
-  printf("readEGraph:");
+  fprintf(stdout, "readEGraph:");
   char name[128];
   register int i;
   while (fgets(name, 128, file) != NULL && name[0] != '\0')
     {
       name[strlen(name)-1] = '\0';
-      printf( " %s", name );
+      fprintf(stdout, " %s", name);
       strcpy(experience[experienceSize].opName, name);
       experience[experienceSize].state = malloc( SIZE_PACKS * sizeof(atom_t) );
       for (i = 0; i < SIZE_PACKS; ++i)
@@ -3686,8 +3706,8 @@ readEGraph(const char* fileName)
       }
       ++experienceSize;
     }
+  fprintf(stdout, "\n");
   fclose( file );
-  printf("\n");
   return true;
 }
 
@@ -3788,11 +3808,11 @@ void
 memorizePath( register node_t *node )
 {
   assert( node != NULL );
-  printf("memorizePath:");
+  fprintf(stderr, "memorizePath ");
   register int i;
   if( searchDirection == FORWARD )
     {
-      printf("forward\n");
+      fprintf(stderr, "Forward:");
       while( node->father != NULL )
         {
           experience[experienceSize].state = malloc( SIZE_PACKS * sizeof(atom_t) );
@@ -3800,7 +3820,7 @@ memorizePath( register node_t *node )
             experience[experienceSize].state[i].pack = node->state[i].pack;
           
           strcpy(experience[experienceSize].opName, operatorTable[node->operatorId].name);
-          printf( " %s", experience[experienceSize].opName);
+          fprintf(stderr, " %s", experience[experienceSize].opName);
           
           for (i = 0; i < experienceSize; ++i)
           if (!stateCmp(experience[i].state, experience[experienceSize].state)
@@ -3815,16 +3835,16 @@ memorizePath( register node_t *node )
     }
   else
     {
-      printf("backward\n");
+      fprintf(stderr, "Backward:");
       while( node->father != NULL )
         {
           // TODO egraph: backward edges memorize which endpoint?
           experience[experienceSize].state = malloc( SIZE_PACKS * sizeof(atom_t) );
           for (i = 0; i < SIZE_PACKS; ++i)
-            experience[experienceSize].state[i].pack = node->state[i].pack;
+            experience[experienceSize].state[i].pack = node->father->state[i].pack;
           
           strcpy(experience[experienceSize].opName, operatorTable[node->operatorId].name);
-          printf( " %s", experience[experienceSize].opName);
+          fprintf(stderr, " %s", experience[experienceSize].opName);
           
           for (i = 0; i < experienceSize; ++i)
           if (!stateCmp(experience[i].state, experience[experienceSize].state)
@@ -3837,7 +3857,7 @@ memorizePath( register node_t *node )
           node = node->father;
         }
     }
-    printf("\n");
+    fprintf(stderr, "\n");
 }
 
 
@@ -3845,10 +3865,10 @@ void
 printStatistics( void )
 {
   /* print problem data & statistics */
-  nodeHashStatistics();
-  fprintf( stderr, "STATISTICS: number expanded nodes = %d\n", expandedNodes );
-  fprintf( stderr, "STATISTICS: number generated nodes = %d\n", generatedNodes );
-  fprintf( stderr, "STATISTICS: average branching factor = %f\n", (float)generatedNodes / (float)expandedNodes );
+  nodeHashStatistics(); // TODO: change stdout back to stderr
+  fprintf( stdout, "STATISTICS: number expanded nodes = %d\n", expandedNodes );
+  fprintf( stdout, "STATISTICS: number generated nodes = %d\n", generatedNodes );
+  fprintf( stdout, "STATISTICS: average branching factor = %f\n", (float)generatedNodes / (float)expandedNodes );
 }
 
 
@@ -4175,7 +4195,8 @@ registerExit( void )
       getrusage( RUSAGE_SELF, &r_usage );
       proc->diffTime = (float)r_usage.ru_utime.tv_sec + (float)r_usage.ru_stime.tv_sec +
         (float)r_usage.ru_utime.tv_usec / (float)1000000 + (float)r_usage.ru_stime.tv_usec / (float)1000000;
-      fprintf( stderr, "REGISTER: %s took %f secs\n", proc->procedure, proc->diffTime );
+      // TODO: change stdout back to stderr
+      fprintf( stdout, "REGISTER: %s took %f secs\n", proc->procedure, proc->diffTime );
       procStackTop = proc->next;
       free( proc );
       return( 1 );
@@ -4279,7 +4300,7 @@ scheduler( schedule_t *schedule )
       backwardSearchInitialization( schedule );
       
       /* E-graph initialization */
-      readEGraph("EGraph.txt");
+      readEGraph(EGraphIn);
 
       /* weak check if problem has solution */
       if( checkProblem() == 0 )
@@ -4323,7 +4344,7 @@ scheduler( schedule_t *schedule )
           if( verbose > 0 )
             printPath( stderr, result, "+  ", "\n" );
           memorizePath(result);
-          printEGraph("EGraph.txt");
+          printEGraph(EGraphOut);
         }
       printStatistics();
 
@@ -4502,6 +4523,8 @@ parseArguments( int argc, char **argv )
   searchAlgorithm = _GBFS;
   searchDirection = BACKWARD;
   searchHeuristic = H1PLUS;
+  strcpy(EGraphIn, "EGraph.txt");
+  strcpy(EGraphOut, "EGraph.txt");
 
   /* parse options */
   while( argc > 1 && *(*++argv) == '-' )
@@ -4518,8 +4541,12 @@ parseArguments( int argc, char **argv )
           break;
         case 'h':
           searchHeuristic = readSymbolicParameter( *++argv, searchHeuristicName, numberHeuristics );
-          // TODO egraph: get filename for egraph
           --argc;
+          break;
+        case 'f': // specify filenames for E-graph
+          strcpy( EGraphIn, *++argv );
+          strcpy( EGraphOut, *++argv );
+          argc -= 2;
           break;
         case 'v':
           verbose = atoi( *++argv );
