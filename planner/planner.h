@@ -129,7 +129,8 @@ typedef struct atom_s atom_t;
 struct experience_s
 {
   char opName[128];
-  atom_t* state;
+  atom_t* tailState;
+  atom_t* headState;
 } experience_s;
 typedef struct experience_s experience_t;
 

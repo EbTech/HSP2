@@ -135,6 +135,11 @@ char                EGraphIn[128];
 char*               EGraphOut[128];
 experience_t        experience[1024];
 int                 experienceSize;
+atom_t*             eNode[256];
+int                 eNodeSize;
+int                 eDist[256][256];
+cost_t              bgDist[256];
+cost_t              agDist[256];
 
 
 
@@ -242,6 +247,7 @@ static cost_t **    H2Cost;                            /* O(n^2) so we allocate 
 /* some global parameters */
 static int          verbose;
 static float        heuristicWeight;
+static float        experienceWeight;
 static int          searchAlgorithm;
 static int          searchHeuristic;
 static int          searchDirection;
@@ -890,30 +896,30 @@ H1ESetup( register atom_t *state )
             {
               for( op = invAddTable[p]; (op != NULL) && (*op != 0); ++op )
                 {
-                  int alpha = 10;
+                  /*int alpha = 10;
                   for (q = 0; q < experienceSize && alpha > 1; ++q)
                   {
-                    if (asserted(experience[q].state, p) && !strcmp(experience[q].opName, operatorTable[(*op)-1].name))
+                    if (asserted(experience[q].headState, p) && !strcmp(experience[q].opName, operatorTable[(*op)-1].name))
                       alpha = 1;
-                  }
+                  }*/
                   H1ESetCost( &tmpCost, operatorTable[(*op)-1].prec );
-                  minCostMax = MIN( minCostMax, PLUSSUM(tmpCost.max, alpha) );
-                  minCostPlus = MIN( minCostPlus, PLUSSUM(tmpCost.plus, alpha) );
+                  minCostMax = MIN( minCostMax, PLUSSUM(tmpCost.max, 1) );
+                  minCostPlus = MIN( minCostPlus, PLUSSUM(tmpCost.plus, 1) );
                 }
             }
           else
             {
               for( op = HInvAddTable[p]; (op != NULL) && (*op != 0); ++op )
                 {
-                  int alpha = 10;
+                  /*int alpha = 10;
                   for (q = 0; q < experienceSize && alpha > 1; ++q)
                   {
-                    if (asserted(experience[q].state, p) && !strcmp(experience[q].opName, HOperatorTable[(*op)-1].name))
+                    if (asserted(experience[q].headState, p) && !strcmp(experience[q].opName, HOperatorTable[(*op)-1].name))
                       alpha = 1;
-                  }
+                  }*/
                   H1ESetCost( &tmpCost, HOperatorTable[(*op)-1].prec );
-                  minCostMax = MIN( minCostMax, PLUSSUM(tmpCost.max, alpha) );
-                  minCostPlus = MIN( minCostPlus, PLUSSUM(tmpCost.plus, alpha) );
+                  minCostMax = MIN( minCostMax, PLUSSUM(tmpCost.max, 1) );
+                  minCostPlus = MIN( minCostPlus, PLUSSUM(tmpCost.plus, 1) );
                 }
             }
 
@@ -1259,7 +1265,7 @@ H2Heuristics( register cost_t *cost, register atom_t *state )
 void
 heuristics( register node_t *node )
 {
-  register int i, *g;
+  register int i, p, *g;
   cost_t tmpCost;
 
   /* initialization */
@@ -1296,9 +1302,39 @@ heuristics( register node_t *node )
             node->h1e_plus = PLUSSUM( node->h1e_plus, H1ECost[*g].plus);
             node->h1e_max = MAX( node->h1e_max, H1ECost[*g].max );
           }
+      
+      node->h1e_plus *= experienceWeight;
+      node->h1e_max *= experienceWeight;
+      int a, b;
+      for ( a = 0; a < eNodeSize; ++a )
+      if ( agDist[a].plus < node->h1e_plus || agDist[a].max < node->h1e_max )
+        {
+          cost_t saDist;
+          saDist.plus = saDist.max = 0;
+          for( p = 1; p < SIZE_ATOMS; ++p )
+          if( asserted( eNode[a], p ) )
+            { 
+              if( H1Cost[p].plus == INT_MAX )
+                {
+                  saDist.plus = INT_MAX;
+                  saDist.max = INT_MAX;
+                  break;
+                }
+              else
+                {
+                  saDist.plus = PLUSSUM( saDist.plus, H1ECost[p].plus );
+                  saDist.max = MAX( saDist.max, H1ECost[p].max );
+                }
+            }
+          if (saDist.plus != INT_MAX)
+          {
+            node->h1e_plus = MIN(node->h1e_plus, experienceWeight*saDist.plus + agDist[a].plus);
+            node->h1e_max = MIN(node->h1e_max, experienceWeight*saDist.max + agDist[a].max);
+          }
+        }
+      
       // TODO remove debug code
       fprintf( stdout, "Gen node with h = %d:\t", node->h1e_max );
-      register int p;
       for( p = 1; p < SIZE_ATOMS; ++p )
         if( asserted( node->state, p ) )
         {
@@ -3682,7 +3718,10 @@ bool
 readEGraph(const char* fileName)
 {
   while (experienceSize)
-    free(experience[--experienceSize].state);
+    free(experience[--experienceSize].tailState),
+    free(experience[experienceSize].headState);
+  eNodeSize = 0;
+  memset(eDist, 0x3f3f3f3f, sizeof eDist);
   
   FILE *file = fopen( fileName, "r" );
   if (file == NULL)
@@ -3693,21 +3732,75 @@ readEGraph(const char* fileName)
   
   fprintf(stdout, "readEGraph:");
   char name[128];
-  register int i;
+  register int i, j, k, p;
   while (fgets(name, 128, file) != NULL && name[0] != '\0')
     {
       name[strlen(name)-1] = '\0';
       fprintf(stdout, " %s", name);
       strcpy(experience[experienceSize].opName, name);
-      experience[experienceSize].state = malloc( SIZE_PACKS * sizeof(atom_t) );
+      experience[experienceSize].tailState = malloc( SIZE_PACKS * sizeof(atom_t) );
+      experience[experienceSize].headState = malloc( SIZE_PACKS * sizeof(atom_t) );
       for (i = 0; i < SIZE_PACKS; ++i)
       {
-        fscanf( file, " %u ", &experience[experienceSize].state[i].pack );
+        fscanf( file, " %u ", &experience[experienceSize].tailState[i].pack );
       }
+      int idxT, idxH;
+      for (idxT = 0; idxT < eNodeSize; ++idxT)
+        if (!stateCmp(eNode[idxT], experience[experienceSize].tailState))
+          break;
+      if (idxT == eNodeSize)
+        eNode[eNodeSize++] = experience[experienceSize].tailState;
+      for (i = 0; i < SIZE_PACKS; ++i)
+      {
+        fscanf( file, " %u ", &experience[experienceSize].headState[i].pack );
+      }
+      for (idxH = 0; idxH < eNodeSize; ++idxH)
+        if (!stateCmp(eNode[idxH], experience[experienceSize].headState))
+          break;
+      if (idxH == eNodeSize)
+        eNode[eNodeSize++] = experience[experienceSize].headState;
+      eDist[idxT][idxH] = 1;
+      
       ++experienceSize;
     }
   fprintf(stdout, "\n");
   fclose( file );
+  
+  // Floyd-Warshall
+  for (k = 0; k < eNodeSize; ++k)
+    for (i = 0; i < eNodeSize; ++i)
+      for (j = 0; j < eNodeSize; ++j)
+        eDist[i][j] = MIN(eDist[i][j], eDist[i][k] + eDist[k][j]);
+  for (i = 0; i < eNodeSize; ++i)
+  {
+    H1ESetup( eNode[i] );
+    bgDist[i].plus = bgDist[i].max = 0;
+    for( p = 1; p < SIZE_ATOMS; ++p )
+    if( asserted( eNode[i], p ) )
+      { 
+        if( H1Cost[p].plus == INT_MAX )
+          {
+            bgDist[i].plus = INT_MAX;
+            bgDist[i].max = INT_MAX;
+            break;
+          }
+        else
+          {
+            bgDist[i].plus = PLUSSUM( bgDist[i].plus, H1ECost[p].plus );
+            bgDist[i].max = MAX( bgDist[i].max, H1ECost[p].max );
+          }
+      }
+    for (i = 0; i < eNodeSize; ++i)
+      {
+        agDist[i].plus = agDist[i].max = INT_MAX;
+        for( j = 0; j < eNodeSize; ++j )
+        if (bgDist[j].plus != INT_MAX)
+          {
+            agDist[i].plus = MIN(agDist[i].plus, eDist[i][j] + experienceWeight*bgDist[j].plus);
+            agDist[i].max = MIN(agDist[i].max, eDist[i][j] + experienceWeight*bgDist[j].max);
+          }
+      }
+  }
   return true;
 }
 
@@ -3727,7 +3820,9 @@ printEGraph(const char* fileName)
     {
       fprintf( file, "%s\n", experience[p].opName );
       for (i = 0; i < SIZE_PACKS; ++i)
-        fprintf( file, " %u", experience[p].state[i].pack );
+        fprintf( file, " %u", experience[p].tailState[i].pack );
+      for (i = 0; i < SIZE_PACKS; ++i)
+        fprintf( file, " %u", experience[p].headState[i].pack );
       fprintf( file, "\n" );
     }
   fclose( file );
@@ -3815,18 +3910,23 @@ memorizePath( register node_t *node )
       fprintf(stderr, "Forward:");
       while( node->father != NULL )
         {
-          experience[experienceSize].state = malloc( SIZE_PACKS * sizeof(atom_t) );
+          experience[experienceSize].tailState = malloc( SIZE_PACKS * sizeof(atom_t) );
+          experience[experienceSize].headState = malloc( SIZE_PACKS * sizeof(atom_t) );
           for (i = 0; i < SIZE_PACKS; ++i)
-            experience[experienceSize].state[i].pack = node->state[i].pack;
+            experience[experienceSize].tailState[i].pack = node->father->state[i].pack;
+          for (i = 0; i < SIZE_PACKS; ++i)
+            experience[experienceSize].headState[i].pack = node->state[i].pack;
           
           strcpy(experience[experienceSize].opName, operatorTable[node->operatorId].name);
           fprintf(stderr, " %s", experience[experienceSize].opName);
           
           for (i = 0; i < experienceSize; ++i)
-          if (!stateCmp(experience[i].state, experience[experienceSize].state)
+          if (!stateCmp(experience[i].tailState, experience[experienceSize].tailState)
             && !strcmp(experience[i].opName, experience[experienceSize].opName))
             {
-              free(experience[experienceSize--].state);
+              free(experience[experienceSize].tailState);
+              free(experience[experienceSize].headState);
+              --experienceSize;
               break;
             }
           ++experienceSize;
@@ -3839,18 +3939,23 @@ memorizePath( register node_t *node )
       while( node->father != NULL )
         {
           // TODO egraph: backward edges memorize which endpoint?
-          experience[experienceSize].state = malloc( SIZE_PACKS * sizeof(atom_t) );
+          experience[experienceSize].tailState = malloc( SIZE_PACKS * sizeof(atom_t) );
+          experience[experienceSize].headState = malloc( SIZE_PACKS * sizeof(atom_t) );
           for (i = 0; i < SIZE_PACKS; ++i)
-            experience[experienceSize].state[i].pack = node->father->state[i].pack;
+            experience[experienceSize].tailState[i].pack = node->father->state[i].pack;
+          for (i = 0; i < SIZE_PACKS; ++i)
+            experience[experienceSize].headState[i].pack = node->state[i].pack;
           
           strcpy(experience[experienceSize].opName, operatorTable[node->operatorId].name);
           fprintf(stderr, " %s", experience[experienceSize].opName);
           
           for (i = 0; i < experienceSize; ++i)
-          if (!stateCmp(experience[i].state, experience[experienceSize].state)
+          if (!stateCmp(experience[i].tailState, experience[experienceSize].tailState)
             && !strcmp(experience[i].opName, experience[experienceSize].opName))
             {
-              free(experience[experienceSize--].state);
+              free(experience[experienceSize].tailState);
+              free(experience[experienceSize].headState);
+              --experienceSize;
               break;
             }
           ++experienceSize;
@@ -4520,6 +4625,7 @@ parseArguments( int argc, char **argv )
   /* set default schedule */
   staticCompilation = 1;
   heuristicWeight = 5.0;
+  experienceWeight = 1.0;
   searchAlgorithm = _GBFS;
   searchDirection = BACKWARD;
   searchHeuristic = H1PLUS;
@@ -4554,6 +4660,10 @@ parseArguments( int argc, char **argv )
           break;
         case 'w':
           heuristicWeight = atof( *++argv );
+          --argc;
+          break;
+        case 'e':
+          experienceWeight = atof( *++argv );
           --argc;
           break;
         case 'S':
