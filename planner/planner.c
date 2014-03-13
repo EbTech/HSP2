@@ -1303,14 +1303,13 @@ heuristics( register node_t *node )
       
       node->h1e_plus *= experienceWeight;
       node->h1e_max *= experienceWeight;
-      int a, b;
-      for ( a = 0; a < eNodeSize; ++a )
-      if ( eDist[a][0].plus < node->h1e_plus || eDist[a][0].max < node->h1e_max )
+      for ( i = 0; i < eNodeSize; ++i )
+      if ( eDist[i][0].plus < node->h1e_plus || eDist[i][0].max < node->h1e_max )
         {
           cost_t saDist;
           saDist.plus = saDist.max = 0;
           for( p = 1; p < SIZE_ATOMS; ++p )
-          if( asserted( eNode[a], p ) )
+          if( asserted( eNode[i], p ) )
             { 
               if( H1ECost[p].plus == INT_MAX )
                 {
@@ -1326,8 +1325,8 @@ heuristics( register node_t *node )
             }
           if (saDist.plus != INT_MAX)
           {
-            node->h1e_plus = MIN(node->h1e_plus, experienceWeight*saDist.plus + eDist[a][0].plus);
-            node->h1e_max = MIN(node->h1e_max, experienceWeight*saDist.max + eDist[a][0].max);
+            node->h1e_plus = MIN(node->h1e_plus, experienceWeight*saDist.plus + eDist[i][0].plus);
+            node->h1e_max = MIN(node->h1e_max, experienceWeight*saDist.max + eDist[i][0].max);
           }
         }
       
@@ -3747,17 +3746,9 @@ readEGraph(const char* fileName)
     free(experience[experienceSize].tailState);
     free(experience[experienceSize].headState);
   }
+  eNode[0] = staticGoalState;
   eNodeSize = 1;
   memset(eDist, 0x3f3f3f3f, sizeof eDist);
-  
-  int p, *g;
-  // TODO: malloc with no clear -> memory leak
-  eNode[0] = malloc( sizeof(atom_t) );
-  // insert goal node into E-graph
-  for ( p = 1; p < SIZE_ATOMS; ++p )
-    clear(eNode[0], p);
-  for ( g = _low_goalAtoms; *g != 0; ++g )
-    set(eNode[0], *g);
   
   FILE *file = fopen( fileName, "r" );
   if (file == NULL)
@@ -3768,7 +3759,7 @@ readEGraph(const char* fileName)
   
   fprintf(stdout, "readEGraph:");
   char name[128];
-  register int i, j, k;
+  register int i, j, k, p;
   while (fgets(name, 128, file) != NULL && name[0] != '\0')
     {
       name[strlen(name)-1] = '\0';
