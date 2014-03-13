@@ -1331,13 +1331,13 @@ heuristics( register node_t *node )
         }
       
       // TODO remove debug code
-      fprintf( stdout, "Gen node with h = %d:\t", node->h1e_max );
+      /*fprintf( stdout, "GENERATE node with h=%d:\t", node->h1e_max );
       for( p = 1; p < SIZE_ATOMS; ++p )
         if( asserted( node->state, p ) )
         {
           fprintf( stdout, "%s ", readAtomName(p) );
         }
-      fprintf( stdout, "\n" );
+      fprintf( stdout, "\n" );*/
 
       /* H2 heuristics are too expensice for forward search */
       if( (_low_requirements & REQ_ADL) && (searchHeuristic == H2MAX) )
@@ -1828,17 +1828,6 @@ nodeBucket( register node_t *node )
       break;
     case H1EMAX: /* f(n) = g(n) + W*h1e_max(n) */
       result = node->cost + (int)(heuristicWeight * node->h1e_max);
-      
-      // TODO remove debug code
-      fprintf( stdout, "Bucket node %d with f = %d:\t", node->valid, result );
-      int p;
-      for( p = 1; p < SIZE_ATOMS; ++p )
-        if( asserted( node->state, p ) )
-        {
-          fprintf( stdout, "%s ", readAtomName(p) );
-        }
-      fprintf( stdout, "\n" );
-      
       break;
     }
   return( result );
@@ -2226,14 +2215,14 @@ forwardNodeExpansion( register node_t *node, register node_t ***result )
         fatal( noMoreMemory );
     }
   // TODO remove debug code
-  fprintf( stdout, "EXPAND node with h=%d:\t", node->h1e_max );
+  /*fprintf( stdout, "EXPAND node with h=%d:\t", node->h1e_max );
   register int i;
   for( i = 1; i < SIZE_ATOMS; ++i )
     if( asserted( node->state, i ) )
     {
       fprintf( stdout, "%s ", readAtomName(i) );
     }
-  fprintf( stdout, "\n" );
+  fprintf( stdout, "\n" );*/
 
   /* update problem data */
   ++expandedNodes;
@@ -3832,22 +3821,17 @@ readEGraph(const char* fileName)
         eDist[i][j].plus = MIN(eDist[i][j].plus, eDist[i][k].plus + eDist[k][j].plus);
         eDist[i][j].max = MIN(eDist[i][j].max, eDist[i][k].max + eDist[k][j].max);
       }
-  // TODO remove debug code (set eDist[i][i] = 0?)
-  /*  for (i = 0; i < eNodeSize; ++i)
-      for (j = 0; j < eNodeSize; ++j)
-        fprintf(stdout, "%d %d %d\n", i, j, eDist[i][j]);
-  */
   // TODO remove debug code
-  for (i = 0; i < eNodeSize; ++i)
+  /*for (i = 0; i < eNodeSize; ++i)
   {
-      fprintf( stdout, "AGdist with A = %d has h = %d:\t", i, eDist[i][0].max );
+      fprintf( stdout, "%d'th distance to goal is %d:\t", i, eDist[i][0].max );
       for( p = 1; p < SIZE_ATOMS; ++p )
         if( asserted( eNode[i], p ) )
         {
           fprintf( stdout, "%s ", readAtomName(p) );
         }
       fprintf( stdout, "\n" );
-  }
+  }*/
   return true;
 }
 
@@ -3994,7 +3978,7 @@ memorizePath( register node_t *node )
             experience[experienceSize].headState[i].pack = node->state[i].pack;
           
           strcpy(experience[experienceSize].opName, operatorTable[node->operatorId].name);
-          fprintf(stderr, " %s", experience[experienceSize].opName);
+          fprintf(stderr, " %d-%s", experienceSize, experience[experienceSize].opName);
           
           for (i = 0; i < experienceSize; ++i)
           if (!stateCmp(experience[i].tailState, experience[experienceSize].tailState)
@@ -4290,7 +4274,7 @@ GBFS( schedule_t *schedule )
       assert( nodesInOPEN > 0 );
 
       /* next node: first try a probe */
-      nextNode = NULL; // TODO egraph?
+      nextNode = NULL; // TODO egraph: why h1plus? This will not necessarily choose the best f-value
       for( i = 0; i < children; ++i )
         if( (buffer[i]->valid == 1) &&
             ((nextNode == NULL) ||
@@ -4634,6 +4618,8 @@ usage( void )
   fprintf( stderr, "where <flags> are among:\n" );
   fprintf( stderr, "   -v <level>\t\tVerbose level >= 0 (default is 1).\n" );
   fprintf( stderr, "   -w <weight>\t\tFloat to weight the heuristic component of the cost function.\n" );
+  fprintf( stderr, "   -e <eweight>\t\tFloat to additionally weight non E-graph edges in the heuristic.\n" );
+  fprintf( stderr, "   -f <fi> <fo>\t\tFile locations at which to retrieve and store the E-graph.\n" );
   fprintf( stderr, "<algorithm> is:\n" );
   fprintf( stderr, "   -a <algorithm>\tEither 'bfs' or 'gbfs'.\n" );
   fprintf( stderr, "   -d <direction>\tEither 'forward' or 'backward'.\n" );
