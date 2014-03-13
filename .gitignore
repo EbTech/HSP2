@@ -1,0 +1,7 @@
+*~
+.kdev4
+.svn
+*.pddl
+*.o
+/planner/parser.c
+/planner/pddl.c
