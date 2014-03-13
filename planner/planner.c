@@ -137,9 +137,7 @@ experience_t        experience[1024];
 int                 experienceSize;
 atom_t*             eNode[256];
 int                 eNodeSize;
-int                 eDist[256][256];
-cost_t              bgDist[256];
-cost_t              agDist[256];
+cost_t              eDist[256][256];
 
 
 
@@ -1307,14 +1305,14 @@ heuristics( register node_t *node )
       node->h1e_max *= experienceWeight;
       int a, b;
       for ( a = 0; a < eNodeSize; ++a )
-      if ( agDist[a].plus < node->h1e_plus || agDist[a].max < node->h1e_max )
+      if ( eDist[a][0].plus < node->h1e_plus || eDist[a][0].max < node->h1e_max )
         {
           cost_t saDist;
           saDist.plus = saDist.max = 0;
           for( p = 1; p < SIZE_ATOMS; ++p )
           if( asserted( eNode[a], p ) )
             { 
-              if( H1Cost[p].plus == INT_MAX )
+              if( H1ECost[p].plus == INT_MAX )
                 {
                   saDist.plus = INT_MAX;
                   saDist.max = INT_MAX;
@@ -1328,8 +1326,8 @@ heuristics( register node_t *node )
             }
           if (saDist.plus != INT_MAX)
           {
-            node->h1e_plus = MIN(node->h1e_plus, experienceWeight*saDist.plus + agDist[a].plus);
-            node->h1e_max = MIN(node->h1e_max, experienceWeight*saDist.max + agDist[a].max);
+            node->h1e_plus = MIN(node->h1e_plus, experienceWeight*saDist.plus + eDist[a][0].plus);
+            node->h1e_max = MIN(node->h1e_max, experienceWeight*saDist.max + eDist[a][0].max);
           }
         }
       
@@ -1677,6 +1675,21 @@ freeAllSpace( void )
 **/
 
 int
+stateDiff( register atom_t *state1, register atom_t *state2 )
+{
+  register atom_t *lp1, *lp2;
+  int i, diff = 0;
+
+  assert( globalInitialized );
+  for( lp1 = state1, lp2 = state2; (lp1 < &state1[SIZE_PACKS]); ++lp1, ++lp2 )
+  for( i = 1; i < SIZE_ATOMS; ++i )
+    if( asserted( state1, i ) != asserted( state2, i ) )
+      ++diff;
+  return diff;
+}
+
+
+int
 stateCmp( register atom_t *state1, register atom_t *state2 )
 {
   register atom_t *lp1, *lp2;
@@ -1816,6 +1829,17 @@ nodeBucket( register node_t *node )
       break;
     case H1EMAX: /* f(n) = g(n) + W*h1e_max(n) */
       result = node->cost + (int)(heuristicWeight * node->h1e_max);
+      
+      // TODO remove debug code
+      fprintf( stdout, "Bucket node %d with f = %d:\t", node->valid, result );
+      int p;
+      for( p = 1; p < SIZE_ATOMS; ++p )
+        if( asserted( node->state, p ) )
+        {
+          fprintf( stdout, "%s ", readAtomName(p) );
+        }
+      fprintf( stdout, "\n" );
+      
       break;
     }
   return( result );
@@ -3718,10 +3742,22 @@ bool
 readEGraph(const char* fileName)
 {
   while (experienceSize)
-    free(experience[--experienceSize].tailState),
+  {
+    --experienceSize;
+    free(experience[experienceSize].tailState);
     free(experience[experienceSize].headState);
-  eNodeSize = 0;
+  }
+  eNodeSize = 1;
   memset(eDist, 0x3f3f3f3f, sizeof eDist);
+  
+  int p, *g;
+  // TODO: malloc with no clear -> memory leak
+  eNode[0] = malloc( sizeof(atom_t) );
+  // insert goal node into E-graph
+  for ( p = 1; p < SIZE_ATOMS; ++p )
+    clear(eNode[0], p);
+  for ( g = _low_goalAtoms; *g != 0; ++g )
+    set(eNode[0], *g);
   
   FILE *file = fopen( fileName, "r" );
   if (file == NULL)
@@ -3732,7 +3768,7 @@ readEGraph(const char* fileName)
   
   fprintf(stdout, "readEGraph:");
   char name[128];
-  register int i, j, k, p;
+  register int i, j, k;
   while (fgets(name, 128, file) != NULL && name[0] != '\0')
     {
       name[strlen(name)-1] = '\0';
@@ -3744,62 +3780,82 @@ readEGraph(const char* fileName)
       {
         fscanf( file, " %u ", &experience[experienceSize].tailState[i].pack );
       }
+      for (i = 0; i < SIZE_PACKS; ++i)
+      {
+        fscanf( file, " %u ", &experience[experienceSize].headState[i].pack );
+      }
       int idxT, idxH;
       for (idxT = 0; idxT < eNodeSize; ++idxT)
         if (!stateCmp(eNode[idxT], experience[experienceSize].tailState))
           break;
       if (idxT == eNodeSize)
         eNode[eNodeSize++] = experience[experienceSize].tailState;
-      for (i = 0; i < SIZE_PACKS; ++i)
-      {
-        fscanf( file, " %u ", &experience[experienceSize].headState[i].pack );
-      }
       for (idxH = 0; idxH < eNodeSize; ++idxH)
         if (!stateCmp(eNode[idxH], experience[experienceSize].headState))
           break;
       if (idxH == eNodeSize)
         eNode[eNodeSize++] = experience[experienceSize].headState;
-      eDist[idxT][idxH] = 1;
+      eDist[idxT][idxH].plus = eDist[idxT][idxH].max = 1;
       
       ++experienceSize;
     }
   fprintf(stdout, "\n");
   fclose( file );
   
+  for (i = 0; i < eNodeSize; ++i)
+  {
+    H1Setup( eNode[i] );
+    
+    for (j = 0; j < eNodeSize; ++j)
+    {
+      cost_t dist;
+      dist.plus = dist.max = 0;
+      for( p = 1; p < SIZE_ATOMS; ++p )
+      if( asserted( eNode[j], p ) )
+        { 
+          if( H1Cost[p].plus == INT_MAX )
+            {
+              dist.plus = INT_MAX;
+              dist.max = INT_MAX;
+              break;
+            }
+          else
+            {
+              dist.plus = PLUSSUM( dist.plus, H1Cost[p].plus );
+              dist.max = MAX( dist.max, H1Cost[p].max );
+            }
+        }
+      if (dist.plus != INT_MAX)
+      {
+        eDist[i][j].plus = MIN(eDist[i][j].plus, experienceWeight*dist.plus);
+        eDist[i][j].max = MIN(eDist[i][j].max, experienceWeight*dist.max);
+      }
+    }
+  }
+  
   // Floyd-Warshall
   for (k = 0; k < eNodeSize; ++k)
     for (i = 0; i < eNodeSize; ++i)
       for (j = 0; j < eNodeSize; ++j)
-        eDist[i][j] = MIN(eDist[i][j], eDist[i][k] + eDist[k][j]);
+      {
+        eDist[i][j].plus = MIN(eDist[i][j].plus, eDist[i][k].plus + eDist[k][j].plus);
+        eDist[i][j].max = MIN(eDist[i][j].max, eDist[i][k].max + eDist[k][j].max);
+      }
+  // TODO remove debug code (set eDist[i][i] = 0?)
+  /*  for (i = 0; i < eNodeSize; ++i)
+      for (j = 0; j < eNodeSize; ++j)
+        fprintf(stdout, "%d %d %d\n", i, j, eDist[i][j]);
+  */
+  // TODO remove debug code
   for (i = 0; i < eNodeSize; ++i)
   {
-    H1ESetup( eNode[i] );
-    bgDist[i].plus = bgDist[i].max = 0;
-    for( p = 1; p < SIZE_ATOMS; ++p )
-    if( asserted( eNode[i], p ) )
-      { 
-        if( H1Cost[p].plus == INT_MAX )
-          {
-            bgDist[i].plus = INT_MAX;
-            bgDist[i].max = INT_MAX;
-            break;
-          }
-        else
-          {
-            bgDist[i].plus = PLUSSUM( bgDist[i].plus, H1ECost[p].plus );
-            bgDist[i].max = MAX( bgDist[i].max, H1ECost[p].max );
-          }
-      }
-    for (i = 0; i < eNodeSize; ++i)
-      {
-        agDist[i].plus = agDist[i].max = INT_MAX;
-        for( j = 0; j < eNodeSize; ++j )
-        if (bgDist[j].plus != INT_MAX)
-          {
-            agDist[i].plus = MIN(agDist[i].plus, eDist[i][j] + experienceWeight*bgDist[j].plus);
-            agDist[i].max = MIN(agDist[i].max, eDist[i][j] + experienceWeight*bgDist[j].max);
-          }
-      }
+      fprintf( stdout, "AGdist with A = %d has h = %d:\t", i, eDist[i][0].max );
+      for( p = 1; p < SIZE_ATOMS; ++p )
+        if( asserted( eNode[i], p ) )
+        {
+          fprintf( stdout, "%s ", readAtomName(p) );
+        }
+      fprintf( stdout, "\n" );
   }
   return true;
 }
@@ -3918,7 +3974,7 @@ memorizePath( register node_t *node )
             experience[experienceSize].headState[i].pack = node->state[i].pack;
           
           strcpy(experience[experienceSize].opName, operatorTable[node->operatorId].name);
-          fprintf(stderr, " %s", experience[experienceSize].opName);
+          fprintf(stderr, " %d-%s", experienceSize, experience[experienceSize].opName);
           
           for (i = 0; i < experienceSize; ++i)
           if (!stateCmp(experience[i].tailState, experience[experienceSize].tailState)
