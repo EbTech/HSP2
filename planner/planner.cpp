@@ -54,25 +54,32 @@
 **
 **/
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <strings.h>
-#include <signal.h>
-#include <time.h>
+#include <string>
+#include <vector>
+#include <algorithm>
+
+extern "C"
+{
+
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
+#include <csignal>
+#include <ctime>
+#include <climits>
+#include <cassert>
+#include <cstdbool>
 #include <sys/types.h>
 #include <sys/resource.h>
 #include <sys/time.h>
-#include <limits.h>
+#include <strings.h>
 #include <ulimit.h>
 #include <unistd.h>
 #include <fcntl.h>
-#include <assert.h>
 
 #include "parser.h"
 #include "planner.h"
 
-#include <stdbool.h>
 
 
 /*********************************************************
@@ -132,7 +139,7 @@ int                 _low_negatedAtom[ATOMSPERPACK*MAXATOMPACKS];
 
 /* for E-graphs */
 char                EGraphIn[128];
-char*               EGraphOut[128];
+char                EGraphOut[128];
 experience_t        experience[1024];
 int                 experienceSize;
 atom_t*             eNode[256];
@@ -305,7 +312,7 @@ void                printStatistics( void );
 void                setTimer( unsigned long );
 
 int                 stateCmp( register atom_t *state1, register atom_t *state2 );
-
+//std::string vs;
 
 
 /*********************************************************
@@ -3754,8 +3761,8 @@ readEGraph(const char* fileName)
       name[strlen(name)-1] = '\0';
       fprintf(stdout, " %s", name);
       strcpy(experience[experienceSize].opName, name);
-      experience[experienceSize].tailState = malloc( SIZE_PACKS * sizeof(atom_t) );
-      experience[experienceSize].headState = malloc( SIZE_PACKS * sizeof(atom_t) );
+      experience[experienceSize].tailState = (atom_t*) malloc( SIZE_PACKS * sizeof(atom_t) );
+      experience[experienceSize].headState = (atom_t*) malloc( SIZE_PACKS * sizeof(atom_t) );
       for (i = 0; i < SIZE_PACKS; ++i)
       {
         fscanf( file, " %u ", &experience[experienceSize].tailState[i].pack );
@@ -3941,8 +3948,8 @@ memorizePath( register node_t *node )
       fprintf(stderr, "Forward:");
       while( node->father != NULL )
         {
-          experience[experienceSize].tailState = malloc( SIZE_PACKS * sizeof(atom_t) );
-          experience[experienceSize].headState = malloc( SIZE_PACKS * sizeof(atom_t) );
+          experience[experienceSize].tailState = (atom_t*) malloc( SIZE_PACKS * sizeof(atom_t) );
+          experience[experienceSize].headState = (atom_t*) malloc( SIZE_PACKS * sizeof(atom_t) );
           for (i = 0; i < SIZE_PACKS; ++i)
             experience[experienceSize].tailState[i].pack = node->father->state[i].pack;
           for (i = 0; i < SIZE_PACKS; ++i)
@@ -3970,8 +3977,8 @@ memorizePath( register node_t *node )
       while( node->father != NULL )
         {
           // TODO egraph: backward edges memorize which endpoint?
-          experience[experienceSize].tailState = malloc( SIZE_PACKS * sizeof(atom_t) );
-          experience[experienceSize].headState = malloc( SIZE_PACKS * sizeof(atom_t) );
+          experience[experienceSize].tailState = (atom_t*) malloc( SIZE_PACKS * sizeof(atom_t) );
+          experience[experienceSize].headState = (atom_t*) malloc( SIZE_PACKS * sizeof(atom_t) );
           for (i = 0; i < SIZE_PACKS; ++i)
             experience[experienceSize].tailState[i].pack = node->father->state[i].pack;
           for (i = 0; i < SIZE_PACKS; ++i)
@@ -4824,3 +4831,6 @@ main( int argc, char **argv )
 
   return( rv );
 }
+
+
+} // end extern "C"

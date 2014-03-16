@@ -1,5 +1,5 @@
 CC	= gcc
-C++	= g++
+C++	= g++ -std=c++0x
 LD	= $(CC)
 YACC	= bison
 FLEX	= flex
@@ -16,8 +16,8 @@ compile:
 hsp2:			planner.o parser.o pddl.o
 			$(LD) $(LDFLAGS) -o hsp2 planner.o parser.o pddl.o
 
-planner.o:		planner.c parser.h planner.h
-			$(CC) $(CFLAGS) -c planner.c
+planner.o:		planner.cpp parser.h planner.h
+			$(C++) $(CFLAGS) -c planner.cpp
 
 parser.c:		parser.y
 			$(YACC) -v -d -t parser.y
