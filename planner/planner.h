@@ -15,26 +15,19 @@
 **
 **/
 
-#define MIN(x,y)             ((x) > (y) ? (y) : (x))
-#define MAX(x,y)             ((x) > (y) ? (x) : (y))
 #if 0
-#define MUTEX(x,y)           ((y) <= (x) ? _mutex[((y)+(((x)*((x)-1))>>1))-1] : _mutex[((x)+(((y)*((y)-1))>>1))-1])
+#define MUTEX(x,y)              ((y) <= (x) ? _mutex[((y)+(((x)*((x)-1))>>1))-1] : _mutex[((x)+(((y)*((y)-1))>>1))-1])
 #endif
-#define MUTEX(x,y)           _mutex[(MIN(x,y)+((MAX(x,y)*(MAX(x,y)-1))>>1))-1]
+#define MUTEX(x,y)              _mutex[(min(x,y)+((max(x,y)*(max(x,y)-1))>>1))-1]
 
-#define fatal(code)          _fatal( (code), NULL, __FILE__, __LINE__ )
-#define fatal1(code,s)       _fatal( (code), (s), __FILE__, __LINE__ )
+#define fatal(code)             _fatal( (code), NULL, __FILE__, __LINE__ )
+#define fatal1(code,s)          _fatal( (code), (s), __FILE__, __LINE__ )
 
-#define PLUSSUM(x,y)         (((x) == INT_MAX) || ((y) == INT_MAX) ? INT_MAX : (x) + (y))
+#define PLUSSUM(x,y)            (((x) == INT_MAX) || ((y) == INT_MAX) ? INT_MAX : (x) + (y))
 #if 0
-#define PAIR(x,y)            ((x) <= (y) ? H2Cost[(x)][(y)-(x)] : H2Cost[(y)][(x)-(y)])
+#define PAIR(x,y)               ((x) <= (y) ? H2Cost[(x)][(y)-(x)] : H2Cost[(y)][(x)-(y)])
 #endif
-#define PAIR(x,y)            H2Cost[MIN(x,y)][MAX(x,y)-MIN(x,y)]
-
-/* state bits packing */
-#define asserted(s,b)        ((s)[(b)/ATOMSPERPACK].pack & (1<<((b)%ATOMSPERPACK)))
-#define set(s,b)             ((s)[(b)/ATOMSPERPACK].pack |= (1<<((b)%ATOMSPERPACK)))
-#define clear(s,b)           ((s)[(b)/ATOMSPERPACK].pack &= ~(1<<((b)%ATOMSPERPACK)))
+#define PAIR(x,y)               H2Cost[min(x,y)][max(x,y)-min(x,y)]
 
 
 
@@ -45,60 +38,60 @@
 **
 **/
 
-#define MAXPARAMETERS        20
-#define ATOMSPERPACK         (8*sizeof( unsigned ))
-#define MAXATOMPACKS         (1<<16)         /* enough for 4096 * 32 = 131072 atoms */
-#define MAXSCHEMA            100000
+#define MAXPARAMETERS          20
+const int ATOMSPERPACK          = 8*sizeof( unsigned );
+const int MAXATOMPACKS          = 1<<16;         /* enough for 4096 * 32 = 131072 atoms */
+const int MAXSCHEMA             = 100000;
 
-#define MINBUCKETTABLESIZE   2048
-#define NODEHASHSIZE         5119            /* prime nearest to 5K */
-#define ATOMHASHSIZE         1021            /* prime nearest to 1K */
-#define INCRATE              (1.5)           /* increase rate for dynamic sized structures */
+const int MINBUCKETTABLESIZE    = 2048;
+const int NODEHASHSIZE          = 5119;            /* prime nearest to 5K */
+const int ATOMHASHSIZE          = 1021;            /* prime nearest to 1K */
+const float INCRATE             = 1.5;           /* increase rate for dynamic sized structures */
 
-#define SIZE_ATOMS           (1 + numberAtoms)
-#define SIZE_PACKS           (1 + numberAtoms / ATOMSPERPACK)
-#define NODESIZE             (sizeof( node_t ) + SIZE_PACKS * sizeof( atom_t ))
-#define MEGABYTE             (1024*1024)
+#define SIZE_ATOMS              (1 + numberAtoms)
+#define SIZE_PACKS              (1 + numberAtoms / ATOMSPERPACK)
+#define NODESIZE                (sizeof( node_t ) + SIZE_PACKS * sizeof( atom_t ))
+const int MEGABYTE              = 1024*1024;
 
 /* PDDL requirements */
-#define REQ_STRIPS           1
-#define REQ_EQUALITY         2
-#define REQ_TYPING           4
-#define REQ_ADL              8
+const int REQ_STRIPS            = 1;
+const int REQ_EQUALITY          = 2;
+const int REQ_TYPING            = 4;
+const int REQ_ADL               = 8;
 
 /* search direction */
-#define FORWARD              0
-#define BACKWARD             1
-#define numberDirections     2
+const int FORWARD               = 0;
+const int BACKWARD              = 1;
+const int numberDirections      = 2;
 
 /* search algorithm */
-#define _BFS                 0
-#define _GBFS                1
-#define numberAlgorithms     2
+const int _BFS                  = 0;
+const int _GBFS                 = 1;
+const int numberAlgorithms      = 2;
 
 /* heuristics */
-#define H1PLUS               0
-#define H1MAX                1
-#define H2PLUS               2
-#define H2MAX                3
-#define H2MAXP               4
-#define H1EPLUS              5
-#define H1EMAX               6
-#define numberHeuristics     7
+const int H1PLUS                = 0;
+const int H1MAX                 = 1;
+const int H2PLUS                = 2;
+const int H2MAX                 = 3;
+const int H2MAXP                = 4;
+const int H1EPLUS               = 5;
+const int H1EMAX                = 6;
+const int numberHeuristics      = 7;
 
 /* constraint types */
-#define TIME                 1
-#define MEMORY               2
+const int TIME                  = 1;
+const int MEMORY                = 2;
 
 /* exit codes */
-#define noError              00
-#define noMoreMemory         10
-#define maxSchema            20
-#define maxAtoms             30
-#define noAlgorithm          40
-#define noChildren           50
-#define optionSyntax         60
-#define searchParameter      70
+const int noError               = 00;
+const int noMoreMemory          = 10;
+const int maxSchema             = 20;
+const int maxAtoms              = 30;
+const int noAlgorithm           = 40;
+const int noChildren            = 50;
+const int optionSyntax          = 60;
+const int searchParameter       = 70;
 
 
 
@@ -138,12 +131,12 @@ typedef struct experience_s experience_t;
 struct node_s
 {
   int cost;                               /* cost from root to this node */
-  unsigned h1_plus;                       /* value of h^1-plus */
-  unsigned h2_plus;                       /* value of h^2-plus */
-  unsigned h1_max;                        /* value of h^1-max */
-  unsigned h2_max;                        /* value of h^2-max */
-  unsigned h1e_plus;                      /* value of h^1-e-plus */
-  unsigned h1e_max;                       /* value of h^1-e-max */
+  unsigned long h1_plus;                  /* value of h^1-plus */
+  unsigned long h2_plus;                  /* value of h^2-plus */
+  unsigned long h1_max;                   /* value of h^1-max */
+  unsigned long h2_max;                   /* value of h^2-max */
+  unsigned long h1e_plus;                 /* value of h^1-e-plus */
+  unsigned long h1e_max;                  /* value of h^1-e-max */
   int fvalue;                             /* f-function value */
   int valid;                              /* valid state? */
   int operatorId;                         /* operator id that leads to this state */
@@ -277,5 +270,7 @@ extern int             _low_copyGoalAtoms[];
 extern suboperator_t * _low_suboperators;
 extern int             _low_groundingOperators;
 extern int             _low_negatedAtom[];
+
+
 
 #endif

@@ -1,6 +1,6 @@
 CC	= gcc
 C++	= g++ -std=c++0x
-LD	= $(CC)
+LD	= $(C++)
 YACC	= bison
 FLEX	= flex
 ARCH	= #-m64

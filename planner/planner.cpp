@@ -80,6 +80,11 @@ extern "C"
 #include "parser.h"
 #include "planner.h"
 
+using std::string;
+using std::vector;
+using std::min;
+using std::max;
+
 
 
 /*********************************************************
@@ -95,8 +100,8 @@ char *              domainFile;
 int                 precPlusCost, precMaxCost;
 char *              _low_yyfile;
 int                 _low_requirements = 0;
-char *              _low_problemName = NULL;
-char *              _low_domainName = NULL;
+char *              _low_problemName = nullptr;
+char *              _low_domainName = nullptr;
 char **             _low_schemaName;
 char **             _low_objectName;
 char **             _low_predicateName;
@@ -138,13 +143,11 @@ int                 _low_groundingOperators;
 int                 _low_negatedAtom[ATOMSPERPACK*MAXATOMPACKS];
 
 /* for E-graphs */
-char                EGraphIn[128];
-char                EGraphOut[128];
-experience_t        experience[1024];
-int                 experienceSize;
-atom_t*             eNode[256];
-int                 eNodeSize;
-cost_t              eDist[256][256];
+string               EGraphIn;
+string               EGraphOut;
+vector<experience_t> experience;
+vector<atom_t*>      eNode;
+vector<vector<cost_t> > eDist;
 
 
 
@@ -157,7 +160,7 @@ cost_t              eDist[256][256];
 
 /* atom hash table */
 static iatom_t *    atomHashTable[ATOMHASHSIZE];
-static iatom_t *    atomHashPool = NULL;
+static iatom_t *    atomHashPool = nullptr;
 static int          atomHashClaimSize = 0;
 
 /* node hash table */
@@ -168,9 +171,9 @@ static int          nodeHashNumElem = 0;
 
 /* for mutexes */
 static int *        _mutex;
-static mutex_t *    mutexList = NULL;
+static mutex_t *    mutexList = nullptr;
 static mutexSet_t * mutexSet;
-static mutexSet_t * mutexSetList = NULL;
+static mutexSet_t * mutexSetList = nullptr;
 static int          numberMutexes = 0;
 
 /* static atoms */
@@ -180,9 +183,9 @@ static int          staticAtomsList[ATOMSPERPACK*MAXATOMPACKS+1];
 
 /* operator info */
 static int          operatorTableSize = 0;
-static operator_t * operatorTable = NULL;
+static operator_t * operatorTable = nullptr;
 static int          HOperatorTableSize = 0;
-static operator_t * HOperatorTable = NULL;
+static operator_t * HOperatorTable = nullptr;
 static int *        validOperators;
 static int **       invPrecTable;
 static int *        invPrecTableSize;
@@ -192,9 +195,9 @@ static int **       invDelTable;
 static int *        invDelTableSize;
 static int **       notAdmissible;
 static int *        notAdmissibleSize;
-static int *        operatorsWithNoPrec = NULL;
+static int *        operatorsWithNoPrec = nullptr;
 static int          operatorsWithNoPrecSize = 0;
-static int *        HOperatorsWithNoPrec = NULL;
+static int *        HOperatorsWithNoPrec = nullptr;
 static int          HOperatorsWithNoPrecSize = 0;
 static int **       HInvPrecTable;
 static int *        HInvPrecTableSize;
@@ -205,7 +208,7 @@ static int *        HSubTableSize;
 
 /* for node pool management */
 static int          pageSize;
-static char *       nodePool = NULL;
+static char *       nodePool = nullptr;
 static int          currentNodePool = -1;
 static int          nodePoolClaimSize = 0;
 static int *        nodePoolSize;
@@ -214,11 +217,11 @@ static int          nodePoolTableSize = 0;
 static char **      nodePoolTable;
 
 /* for Best-First Search */
-static node_t *     headOPEN = NULL;
-static node_t *     tailOPEN = NULL;
-static node_t *     CLOSE = NULL;
-static node_t **    firstNodeInBucket = NULL;
-static node_t **    lastNodeInBucket = NULL;
+static node_t *     headOPEN = nullptr;
+static node_t *     tailOPEN = nullptr;
+static node_t *     CLOSE = nullptr;
+static node_t **    firstNodeInBucket = nullptr;
+static node_t **    lastNodeInBucket = nullptr;
 static int          bucketTableSize = 0;
 static int          minBucket;
 static int          maxBucket;
@@ -267,11 +270,11 @@ static long         nodeMemoryUsed;
 static long         memoryConstraint;
 static int          timeExpired;
 static int          memoryExpired;
-static schedule_t * globalSchedule = NULL;
-static char *       scheduleString = NULL;
+static schedule_t * globalSchedule = nullptr;
+static char *       scheduleString = nullptr;
 
 /* procedure registration stack */
-static procRegister_t *procStackTop = NULL;
+static procRegister_t *procStackTop = nullptr;
 
 
 
@@ -282,38 +285,50 @@ static procRegister_t *procStackTop = NULL;
 **
 **/
 
-void                newMutex( register int, register int, register mutex_t ** );
-void                delMutex( register mutex_t * );
-void                newMutexSet( register int );
+void                newMutex( int, int, mutex_t ** );
+void                delMutex( mutex_t * );
+void                newMutexSet( int );
 
-void                identifyGoalParents( register int * );
-void                printNode( register FILE *, register char *, register node_t * );
-void                resizeBucketTable( register int min_size );
-void                removeNodeFromOPEN( register node_t * );
-node_t *            removeLastFromOPEN( register node_t * );
+void                identifyGoalParents( int * );
+void                printNode( FILE *, char *, node_t * );
+void                resizeBucketTable( int min_size );
+void                removeNodeFromOPEN( node_t * );
+node_t *            removeLastFromOPEN( node_t * );
 node_t *            removeNodeFromCLOSE( void  );
 
 node_t *            BFS( schedule_t * );
 node_t *            GBFS( schedule_t * );
 
 void                generateHOperators( void );
-char *              operatorName( register int *, register int );
-char *              readAtomName( register int );
-iatom_t *           readAtomByNumber( register int );
-void                orderAtomList( register int *, register int );
-void                printState( register FILE *, register atom_t * );
-void                registerEntry( register char * );
+char *              operatorName( int *, int );
+char *              readAtomName( int );
+iatom_t *           readAtomByNumber( int );
+void                orderAtomList( int *, int );
+void                printState( FILE *, atom_t * );
+void                registerEntry( char * );
 int                 registerExit( void );
 void                flushAllRegisters( void );
 
 void                notYetImplemented( schedule_t * );
-void                _fatal( register int, register char *, register char *, register int );
+void                _fatal( int, char *, char *, int );
 void                printStatistics( void );
 void                setTimer( unsigned long );
 
-int                 stateCmp( register atom_t *state1, register atom_t *state2 );
-//std::string vs;
+int                 stateCmp( atom_t *state1, atom_t *state2 );
 
+/* state bits packing */
+int asserted(atom_t* s, int b)
+{
+  return s[b/ATOMSPERPACK].pack & (1<<(b%ATOMSPERPACK));
+}
+void set(atom_t* s, int b)
+{
+  s[b/ATOMSPERPACK].pack |= (1<<(b%ATOMSPERPACK));
+}
+void clear(atom_t* s, int b)
+{
+  s[b/ATOMSPERPACK].pack &= ~(1<<(b%ATOMSPERPACK));
+}
 
 /*********************************************************
 **********************************************************
@@ -323,15 +338,15 @@ int                 stateCmp( register atom_t *state1, register atom_t *state2 )
 **/
 
 void
-buildParameterList( register int *parameters, register int schema, register int *ip,
-                    void (*insertOperator)( register int *, register int ),
-                    int (*testOperatorPrecondition)( register int *, register int ) )
+buildParameterList( int *parameters, int schema, int *ip,
+                    void (*insertOperator)( int *, int ),
+                    int (*testOperatorPrecondition)( int *, int ) )
 {
-  register int *vp, *jp;
-
+  int *jp;
+  
   if( *ip != 0 )
     {
-      for( vp = values[numberSchema * (*ip - 1) + schema]; *vp != 0; ++vp )
+      for( int* vp = values[numberSchema * (*ip - 1) + schema]; *vp != 0; ++vp )
         {
 #if 0 /* instantiate objects with restrictions on equality */
           if( !(_low_requirements & REQ_EQUALITY) )
@@ -373,13 +388,12 @@ buildParameterList( register int *parameters, register int schema, register int 
 
 
 void
-instantiateOperators( void (*insertOperator)( register int *, register int ),
-                      int (*testOperatorPrecondition)( register int *, register int ) )
+instantiateOperators( void (*insertOperator)( int *, int ),
+                      int (*testOperatorPrecondition)( int *, int ) )
 {
-  register int schema;
   static int parameters[MAXPARAMETERS];
 
-  for( schema = 0; schema < numberSchema; ++schema )
+  for( int schema = 0; schema < numberSchema; ++schema )
     {
       memset( parameters, 0, MAXPARAMETERS * sizeof( int ) );
       parameters[0] = schema + 1;
@@ -397,13 +411,12 @@ instantiateOperators( void (*insertOperator)( register int *, register int ),
 **/
 
 void
-removeDuplicates( register int *list, register int *size )
+removeDuplicates( int *list, int *size )
 {
-  int *p, *q;
-  for( p = list; *p != 0; ++p ) {
-    for( q = p+1; *q != 0; ++q ) {
+  for( int* p = list; *p != 0; ++p ) {
+    for( int* q = p+1; *q != 0; ++q ) {
       if( *p == *q ) {
-        int *last = &list[*size-1];
+        int* last = &list[*size-1];
         *q = *last;
         *last = 0;
         --*size;
@@ -413,18 +426,17 @@ removeDuplicates( register int *list, register int *size )
 }
 
 int
-testOperatorPrecondition( register int *parameters, register int schema )
+testOperatorPrecondition( int *parameters, int schema )
 {
-  register int rv;
   extern int evaluateFormula( void *, atom_t *, int *, int );
 
-  rv = evaluateFormula( _low_schemaTable[schema]->prec, reachableAtom, parameters, 0 );
+  int rv = evaluateFormula( _low_schemaTable[schema]->prec, reachableAtom, parameters, 0 );
   return( rv );
 }
 
 
 void
-insertOperator( register int *parameters, register int schema )
+insertOperator( int *parameters, int schema )
 {
   int *add, *del, *last_add, *last_del;
   extern int  applyOperatorSchema( schema_t *, atom_t *, atom_t *, int * );
@@ -504,7 +516,7 @@ insertOperator( register int *parameters, register int schema )
             }
 
           /* generate suboperators */
-          _low_suboperators = NULL;
+          _low_suboperators = nullptr;
           instantiateConditionalEffects( numberOperators, _low_schemaTable[schema], parameters );
           operatorTable[numberOperators].suboperators = _low_suboperators;
 
@@ -516,10 +528,8 @@ insertOperator( register int *parameters, register int schema )
 
 
 void
-reachabilityAnalysis( register atom_t *state )
+reachabilityAnalysis( atom_t *state )
 {
-  register int i, number;
-
   /* basic initialization */
   _low_groundingOperators = 0;
   memset( _low_negatedAtom, 0, MAXATOMPACKS * ATOMSPERPACK * sizeof( int ) );
@@ -529,8 +539,7 @@ reachabilityAnalysis( register atom_t *state )
   memcpy( dummyAtom, state, MAXATOMPACKS * sizeof( atom_t ) );
 
   /* computation of reachable atoms */
-  number = 1;
-  while( number != 0 )
+  for ( int number = 1; number != 0; )
     {
       instantiateOperators( &insertOperator, &testOperatorPrecondition );
       number = memcmp( dummyAtom, reachableAtom, MAXATOMPACKS * sizeof( atom_t ) );
@@ -540,7 +549,7 @@ reachabilityAnalysis( register atom_t *state )
   /* print reachable atoms */
   if( verbose > 7 )
     {
-      for( i = 1; i < SIZE_ATOMS; ++i )
+      for( size_t i = 1; i < SIZE_ATOMS; ++i )
         if( asserted( reachableAtom, i ) )
           fprintf( stderr, "atom %s is reachable from initial state\n", readAtomByNumber( i )->name );
     }
@@ -556,29 +565,27 @@ reachabilityAnalysis( register atom_t *state )
 **/
 
 void
-H1SetCost( register cost_t *cost, register int* set )
+H1SetCost( cost_t *cost, int* set )
 {
-  register int *p;
-
   cost->max = 0;
   cost->plus = 0;
-  for( p = set; *p != 0; ++p )
+  for( int* p = set; *p != 0; ++p )
     {
-      cost->max = MAX( H1Cost[*p].max, cost->max );
+      cost->max = max( H1Cost[*p].max, cost->max );
       cost->plus = PLUSSUM( H1Cost[*p].plus, cost->plus );
     }
 }
 
 
 void
-H1Setup( register atom_t *state )
+H1Setup( atom_t *state )
 {
-  register int p, *op, change;
-  register unsigned long minCostMax, minCostPlus;
+  int change;
+  unsigned long minCostMax, minCostPlus;
   cost_t tmpCost;
 
   /* initial costs */
-  for( p = 1; p < SIZE_ATOMS; ++p )
+  for( size_t p = 1; p < SIZE_ATOMS; ++p )
     if( asserted( state, p ) )
       {
         H1Cost[p].max = 0;
@@ -598,26 +605,26 @@ H1Setup( register atom_t *state )
       change = 0;
 
       /* single full backup for { p } */
-      for( p = 1; p < SIZE_ATOMS; ++p )
+      for( size_t p = 1; p < SIZE_ATOMS; ++p )
         {
           minCostMax = INT_MAX;
           minCostPlus = INT_MAX;
           if( !(_low_requirements & REQ_ADL) )
             {
-              for( op = invAddTable[p]; (op != NULL) && (*op != 0); ++op )
+              for( int* op = invAddTable[p]; (op != nullptr) && (*op != 0); ++op )
                 {
                   H1SetCost( &tmpCost, operatorTable[(*op)-1].prec );
-                  minCostMax = MIN( minCostMax, tmpCost.max );
-                  minCostPlus = MIN( minCostPlus, tmpCost.plus );
+                  minCostMax = min( minCostMax, tmpCost.max );
+                  minCostPlus = min( minCostPlus, tmpCost.plus );
                 }
             }
           else
             {
-              for( op = HInvAddTable[p]; (op != NULL) && (*op != 0); ++op )
+              for( int* op = HInvAddTable[p]; (op != nullptr) && (*op != 0); ++op )
                 {
                   H1SetCost( &tmpCost, HOperatorTable[(*op)-1].prec );
-                  minCostMax = MIN( minCostMax, tmpCost.max );
-                  minCostPlus = MIN( minCostPlus, tmpCost.plus );
+                  minCostMax = min( minCostMax, tmpCost.max );
+                  minCostPlus = min( minCostPlus, tmpCost.plus );
                 }
             }
           minCostMax = PLUSSUM( minCostMax, 1 );
@@ -643,7 +650,7 @@ H1Setup( register atom_t *state )
   /* print costs */
   if( verbose > 7 )
     {
-      for( p = 1; p < SIZE_ATOMS; ++p )
+      for( size_t p = 1; p < SIZE_ATOMS; ++p )
         if( (H1Cost[p].plus < INT_MAX) || (verbose >= 10) )
           fprintf( stderr, "cost of %s is (%lu,%lu)\n", readAtomByNumber( p )->name,
                    H1Cost[p].plus, H1Cost[p].max );
@@ -652,30 +659,26 @@ H1Setup( register atom_t *state )
 
 
 void
-H2SetCost( register cost_t *cost, register int *set, register int *extra )
+H2SetCost( cost_t *cost, int *set, int *extra )
 {
-  register int *p, *q;
-
   /* go over all pairs: compute max cost & build PQ with plus costs */
   cost->max = 0;
   cost->plus = 0;
-  for( p = set; *p != 0; ++p )
-    for( q = p; *q != 0; ++q )
-      cost->max = MAX( PAIR( *p, *q ).max, cost->max );
+  for( int* p = set; *p != 0; ++p )
+    for( int* q = p; *q != 0; ++q )
+      cost->max = max( PAIR( *p, *q ).max, cost->max );
 
-  if( extra != NULL )
-    for( p = extra; *p != 0; ++p )
-      for( q = p; *q != 0; ++q )
-        cost->max = MAX( PAIR( *p, *q ).max, cost->max );
+  if( extra != nullptr )
+    for( int* p = extra; *p != 0; ++p )
+      for( int* q = p; *q != 0; ++q )
+        cost->max = max( PAIR( *p, *q ).max, cost->max );
 }
 
 
 void
-H2Setup( register atom_t *state )
+H2Setup( atom_t *state )
 {
-  register int p, q, *a, *t, op, *op2, change, localChange;
-  register unsigned long maxCost1, maxCost2;
-  cost_t precCost;
+  int change, localChange;
 
   static int initialized = 0;
   static char *display;
@@ -692,15 +695,15 @@ H2Setup( register atom_t *state )
       if( !H2Cost || !display )
         fatal( noMoreMemory );
 
-      for( p = 1, q = SIZE_ATOMS; p < SIZE_ATOMS; ++p, --q )
-        if( (H2Cost[p] = (cost_t*)calloc( q, sizeof( cost_t ) )) == NULL )
+      for( size_t p = 1, q = SIZE_ATOMS; p < SIZE_ATOMS; ++p, --q )
+        if( (H2Cost[p] = (cost_t*)calloc( q, sizeof( cost_t ) )) == nullptr )
           fatal( noMoreMemory );
     }
 
   /* initial pair's costs */
   memset( display, 0, numberOperators * sizeof( char ) );
-  for( p = 1; p < SIZE_ATOMS; ++p )
-    for( q = p; q < SIZE_ATOMS; ++q )
+  for( size_t p = 1; p < SIZE_ATOMS; ++p )
+    for( size_t q = p; q < SIZE_ATOMS; ++q )
       if( asserted( state, p ) && asserted( state, q) )
         {
           PAIR( p, q ).max = 0;
@@ -713,7 +716,7 @@ H2Setup( register atom_t *state )
         }
 
   /* initially, add all operators */
-  for( op = 0; op < numberOperators; ++op )
+  for( size_t op = 0; op < numberOperators; ++op )
     display[op] = 1;
 
   /* use dynamic programming for computing the pair's costs */
@@ -724,7 +727,7 @@ H2Setup( register atom_t *state )
       change = 0;
 
       /* outer loop over all operators. Inner loops over their Add/Del lists */
-      for( op = 0; op < numberOperators; ++op )
+      for( size_t op = 0; op < numberOperators; ++op )
         if( (operatorTable[op].valid == 1) && (display[op] == 1) )
           {
             /* clean display */
@@ -733,30 +736,31 @@ H2Setup( register atom_t *state )
             /* compute the H2 value of the preconditions, and check if we are going to
                do something useful.
             */
-            H2SetCost( &precCost, operatorTable[op].prec, NULL );
-            maxCost1 = PLUSSUM( precCost.max, 1 );
+            cost_t precCost;
+            H2SetCost( &precCost, operatorTable[op].prec, nullptr );
+            unsigned long maxCost1 = PLUSSUM( precCost.max, 1 );
             if( maxCost1 == INT_MAX )
               continue;
 
             /* update for pairs { *a, *t } such that *t is in Add (this includes singleton { *a }) */
-            for( a = operatorTable[op].add; *a != 0; ++a )
+            for( int* a = operatorTable[op].add; *a != 0; ++a )
               {
                 localChange = 0;
-                for( t = a; *t != 0; ++t )
+                for( int* t = a; *t != 0; ++t )
                   if( PAIR( *a, *t ).max > maxCost1 )
                     {
                       change = 1;
                       localChange = 1;
                       PAIR( *a, *t ).max = maxCost1;
 
-                      for( op2 = invPrecTable[*t]; (op2 != NULL) && (*op2 != 0); ++op2 )
+                      for( int* op2 = invPrecTable[*t]; (op2 != nullptr) && (*op2 != 0); ++op2 )
                         display[(*op2)-1] = 1;
 
                       /* if singleton updated, flag all operators */
                       if( *a == *t )
                         {
                           localChange = 0;
-                          for( p = 0; p < numberOperators; ++p )
+                          for( size_t p = 0; p < numberOperators; ++p )
                             display[p] = 1;
                         }
                     }
@@ -765,38 +769,39 @@ H2Setup( register atom_t *state )
                 if( localChange == 1 )
                   {
                     localChange = 0;
-                    for( op2 = invPrecTable[*a]; (op2 != NULL) && (*op2 != 0); ++op2 )
+                    for( int* op2 = invPrecTable[*a]; (op2 != nullptr) && (*op2 != 0); ++op2 )
                       display[(*op2)-1] = 1;
 
                     /* also, add all operators with null preconditions */
-                    for( p = 0; p < operatorsWithNoPrecSize; ++p )
+                    for( size_t p = 0; p < operatorsWithNoPrecSize; ++p )
                       display[operatorsWithNoPrec[p]] = 1;
                   }
               }
 
             /* update for pairs { q, *a } such that q is not in Del/Add */
-            for( q = 1; q < SIZE_ATOMS; ++q )
+            for( int q = 1; q < SIZE_ATOMS; ++q )
               {
                 /* precompute updated cost and check if we really need to do the update */
                 localChange = 0;
-                maxCost2 = MAX( precCost.max, PAIR( q, q ).max );
+                unsigned long maxCost2 = max( precCost.max, PAIR( q, q ).max );
                 if( maxCost2 == INT_MAX )
                   continue;
 
                 /* ok, check that q is not affected by the operator */
-                for( t = operatorTable[op].del; (t != NULL) && (*t != 0) && (*t != q); ++t);
-                if( (t == NULL) || (*t == 0) )
-                  for( t = operatorTable[op].add; (t != NULL) && (*t != 0) && (*t != q); ++t);
-                if( (t != NULL) && (*t == 0) )
+                int* t;
+                for( t = operatorTable[op].del; (t != nullptr) && (*t != 0) && (*t != q); ++t);
+                if( (t == nullptr) || (*t == 0) )
+                  for( t = operatorTable[op].add; (t != nullptr) && (*t != 0) && (*t != q); ++t);
+                if( (t != nullptr) && (*t == 0) )
                   {
                     /* finish computing of cost */
                     for( t = operatorTable[op].prec; *t != 0; ++t )
-                      maxCost2 = MAX( PAIR( q, *t ).max, maxCost2 );
+                      maxCost2 = max( PAIR( q, *t ).max, maxCost2 );
                     maxCost2 = PLUSSUM( maxCost2, 1 );
                     if( maxCost2 < INT_MAX )
                       {
                         /* update cost for { *a, q } */
-                        for( a = operatorTable[op].add; *a != 0; ++a )
+                        for( int* a = operatorTable[op].add; *a != 0; ++a )
                           if( PAIR( *a, q ).max > maxCost2 )
                             {
                               change = 1;
@@ -804,7 +809,7 @@ H2Setup( register atom_t *state )
                               PAIR( *a, q ).max = maxCost2;
 
                               assert( *a != q );
-                              for( op2 = invPrecTable[*a]; (op2 != NULL) && (*op2 != 0); ++op2 )
+                              for( int* op2 = invPrecTable[*a]; (op2 != nullptr) && (*op2 != 0); ++op2 )
                                 display[(*op2)-1] = 1;
                             }
                       }
@@ -814,11 +819,11 @@ H2Setup( register atom_t *state )
                 if( localChange == 1 )
                   {
                     localChange = 0;
-                    for( op2 = invPrecTable[q]; (op2 != NULL) && (*op2 != 0); ++op2 )
+                    for( int* op2 = invPrecTable[q]; (op2 != nullptr) && (*op2 != 0); ++op2 )
                       display[(*op2)-1] = 1;
 
                     /* also, add all operators with null preconditions */
-                    for( p = 0; p < operatorsWithNoPrecSize; ++p )
+                    for( size_t p = 0; p < operatorsWithNoPrecSize; ++p )
                       display[operatorsWithNoPrec[p]] = 1;
                   }
               }
@@ -828,8 +833,8 @@ H2Setup( register atom_t *state )
   /* print pair's costs */
   if( verbose > 7 )
     {
-      for( p = 1; p < SIZE_ATOMS; ++p )
-        for( q = p; q < SIZE_ATOMS; ++q )
+      for( size_t p = 1; p < SIZE_ATOMS; ++p )
+        for( size_t q = p; q < SIZE_ATOMS; ++q )
           if( PAIR( p, q ).max < INT_MAX )
             {
               assert( PAIR( p, q ).max == PAIR( p, q ).max );
@@ -850,29 +855,27 @@ H2Setup( register atom_t *state )
 
 
 void
-H1ESetCost( register cost_t *cost, register int* set )
+H1ESetCost( cost_t *cost, int* set )
 {
-  register int *p;
-
   cost->max = 0;
   cost->plus = 0;
-  for( p = set; *p != 0; ++p )
+  for( int* p = set; *p != 0; ++p )
     {
-      cost->max = MAX( H1ECost[*p].max, cost->max );
+      cost->max = max( H1ECost[*p].max, cost->max );
       cost->plus = PLUSSUM( H1ECost[*p].plus, cost->plus );
     }
 }
 
 
 void
-H1ESetup( register atom_t *state )
+H1ESetup( atom_t *state )
 {
-  register int p, q, *op, change;
-  register unsigned long minCostMax, minCostPlus;
+  int change;
+  unsigned long minCostMax, minCostPlus;
   cost_t tmpCost;
 
   /* initial costs */
-  for( p = 1; p < SIZE_ATOMS; ++p )
+  for( size_t p = 1; p < SIZE_ATOMS; ++p )
     if( asserted( state, p ) )
       {
         H1ECost[p].max = 0;
@@ -892,14 +895,14 @@ H1ESetup( register atom_t *state )
       change = 0;
 
       /* single full backup for { p } */
-      for( p = 1; p < SIZE_ATOMS; ++p )
+      for( size_t p = 1; p < SIZE_ATOMS; ++p )
         {
           
           minCostMax = INT_MAX;
           minCostPlus = INT_MAX;
           if( !(_low_requirements & REQ_ADL) )
             {
-              for( op = invAddTable[p]; (op != NULL) && (*op != 0); ++op )
+              for( int* op = invAddTable[p]; (op != nullptr) && (*op != 0); ++op )
                 {
                   /*int alpha = 10;
                   for (q = 0; q < experienceSize && alpha > 1; ++q)
@@ -908,13 +911,13 @@ H1ESetup( register atom_t *state )
                       alpha = 1;
                   }*/
                   H1ESetCost( &tmpCost, operatorTable[(*op)-1].prec );
-                  minCostMax = MIN( minCostMax, PLUSSUM(tmpCost.max, 1) );
-                  minCostPlus = MIN( minCostPlus, PLUSSUM(tmpCost.plus, 1) );
+                  minCostMax = min( minCostMax, PLUSSUM(tmpCost.max, 1) );
+                  minCostPlus = min( minCostPlus, PLUSSUM(tmpCost.plus, 1) );
                 }
             }
           else
             {
-              for( op = HInvAddTable[p]; (op != NULL) && (*op != 0); ++op )
+              for( int* op = HInvAddTable[p]; (op != nullptr) && (*op != 0); ++op )
                 {
                   /*int alpha = 10;
                   for (q = 0; q < experienceSize && alpha > 1; ++q)
@@ -923,8 +926,8 @@ H1ESetup( register atom_t *state )
                       alpha = 1;
                   }*/
                   H1ESetCost( &tmpCost, HOperatorTable[(*op)-1].prec );
-                  minCostMax = MIN( minCostMax, PLUSSUM(tmpCost.max, 1) );
-                  minCostPlus = MIN( minCostPlus, PLUSSUM(tmpCost.plus, 1) );
+                  minCostMax = min( minCostMax, PLUSSUM(tmpCost.max, 1) );
+                  minCostPlus = min( minCostPlus, PLUSSUM(tmpCost.plus, 1) );
                 }
             }
 
@@ -948,7 +951,7 @@ H1ESetup( register atom_t *state )
   /* print costs */
   if( verbose > 7 )
     {
-      for( p = 1; p < SIZE_ATOMS; ++p )
+      for( size_t p = 1; p < SIZE_ATOMS; ++p )
         if( (H1ECost[p].plus < INT_MAX) || (verbose >= 10) )
           fprintf( stderr, "cost of %s is (%lu,%lu)\n", readAtomByNumber( p )->name,
                    H1ECost[p].plus, H1ECost[p].max );
@@ -957,10 +960,10 @@ H1ESetup( register atom_t *state )
 
 
 void
-ADLH2Setup( register atom_t *state )
+ADLH2Setup( atom_t *state )
 {
-  register int p, q, *a, *t, op, *op2, change, localChange;
-  register unsigned long maxCost1, maxCost2;
+  int change, localChange;
+  unsigned long maxCost1, maxCost2;
   cost_t precCost;
 
   static int initialized = 0;
@@ -976,25 +979,25 @@ ADLH2Setup( register atom_t *state )
       if( !H2Cost || !display1 || !display2 )
         fatal( noMoreMemory );
 
-      for( p = 1, q = SIZE_ATOMS; p < SIZE_ATOMS; ++p, --q )
-        if( (H2Cost[p] = (cost_t*)malloc( q * sizeof( cost_t ) )) == NULL )
+      for( size_t p = 1, q = SIZE_ATOMS; p < SIZE_ATOMS; ++p, --q )
+        if( (H2Cost[p] = (cost_t*)malloc( q * sizeof( cost_t ) )) == nullptr )
           fatal( noMoreMemory );
     }
 
   /* initial pair's costs */
   memset( display1, 0, numberHOperators * sizeof( char ) );
   memset( display2, 0, numberHOperators * sizeof( char ) );
-  for( p = 1; p < SIZE_ATOMS; ++p )
-    for( q = p; q < SIZE_ATOMS; ++q )
+  for( size_t p = 1; p < SIZE_ATOMS; ++p )
+    for( size_t q = p; q < SIZE_ATOMS; ++q )
       if( asserted( state, p ) && asserted( state, q ) )
         PAIR( p, q ).max = 0;
       else
         PAIR( p, q ).max = INT_MAX;
 
   /* initially, add all operators */
-  for( op = 0; op < numberHOperators; ++op )
+  for( size_t op = 0; op < numberHOperators; ++op )
     display1[op] = 1;
-  for( op = 0; op < numberOperators; ++op )
+  for( size_t op = 0; op < numberOperators; ++op )
     display2[op] = 1;
 
   /* use dynamic programming for computing the pair's costs */
@@ -1005,7 +1008,7 @@ ADLH2Setup( register atom_t *state )
       change = 0;
 
       /* outer loop over all operators. Inner loops over their Add/Del lists */
-      for( op = 0; op < numberHOperators; ++op )
+      for( size_t op = 0; op < numberHOperators; ++op )
         if( (HOperatorTable[op].valid == 1) && (display1[op] == 1) )
           {
             /* clean display */
@@ -1014,141 +1017,142 @@ ADLH2Setup( register atom_t *state )
             /* compute the H2 value of the preconditions, and check if we are going to
                do something useful.
             */
-            H2SetCost( &precCost, HOperatorTable[op].prec, NULL );
+            H2SetCost( &precCost, HOperatorTable[op].prec, nullptr );
             maxCost1 = PLUSSUM( precCost.max, 1 );
             if( maxCost1 == INT_MAX )
               continue;
 
             /* update for pairs { *a, *t } such that *t is in Add (this includes singleton { *a }) */
-            for( a = HOperatorTable[op].add; *a != 0; ++a )
+            for( int* a = HOperatorTable[op].add; *a != 0; ++a )
+            {
+              localChange = 0;
+              for( int* t = a; *t != 0; ++t )
+                if( PAIR( *a, *t ).max > maxCost1 )
+                {
+                  change = 1;
+                  localChange = 1;
+                  PAIR( *a, *t ).max = maxCost1;
+
+                  for( int* op2 = HInvPrecTable[*t]; (op2 != nullptr) && (*op2 != 0); ++op2 )
+                  {
+                    display1[(*op2)-1] = 1;
+                    display2[HOperatorTable[(*op2)-1].father] = 1;
+                  }
+
+                  /* if singleton updated, flag all operators */
+                  if( *a == *t )
+                  {
+                    localChange = 0;
+                    for( size_t p = 0; p < numberHOperators; ++p )
+                      display1[p] = 1;
+                    for( size_t p = 0; p < numberOperators; ++p )
+                      display2[p] = 1;
+                  }
+                }
+
+              /* set display */
+              if( localChange == 1 )
               {
                 localChange = 0;
-                for( t = a; *t != 0; ++t )
-                  if( PAIR( *a, *t ).max > maxCost1 )
+                for( int* op2 = HInvPrecTable[*a]; (op2 != nullptr) && (*op2 != 0); ++op2 )
+                  {
+                    display1[(*op2)-1] = 1;
+                    display2[HOperatorTable[(*op2)-1].father] = 1;
+                  }
+
+                /* also, add all operators with null preconditions */
+                for( size_t p = 0; p < HOperatorsWithNoPrecSize; ++p )
+                  display1[HOperatorsWithNoPrec[p]] = 1;
+                for( size_t p = 0; p < operatorsWithNoPrecSize; ++p )
+                  display2[operatorsWithNoPrec[p]] = 1;
+              }
+            }
+
+            /* update for pairs { q, *a } such that q is not in Del/Add */
+            for( int q = 1; q < SIZE_ATOMS; ++q )
+            {
+              /* precompute updated cost and check if we really need to do the update */
+              localChange = 0;
+              maxCost2 = max( precCost.max, PAIR( q, q ).max );
+              if( maxCost2 == INT_MAX )
+                continue;
+
+              /* ok, check that q is not affected by the operator */
+              int* t;
+              for( t = HOperatorTable[op].del; (t != nullptr) && (*t != 0) && (*t != q); ++t);
+              if( (t == nullptr) || (*t == 0) )
+                for( t = HOperatorTable[op].add; (t != nullptr) && (*t != 0) && (*t != q); ++t);
+              if( (t != nullptr) && (*t == 0) )
+              {
+                /* finish computing of cost */
+                for( t = HOperatorTable[op].prec; *t != 0; ++t )
+                  maxCost2 = max( PAIR( q, *t ).max, maxCost2 );
+                maxCost2 = PLUSSUM( maxCost2, 1 );
+                if( maxCost2 < INT_MAX )
+                {
+                  /* update cost for { *a, q } */
+                  for( int* a = HOperatorTable[op].add; *a != 0; ++a )
+                    if( PAIR( *a, q ).max > maxCost2 )
                     {
                       change = 1;
                       localChange = 1;
-                      PAIR( *a, *t ).max = maxCost1;
-
-                      for( op2 = HInvPrecTable[*t]; (op2 != NULL) && (*op2 != 0); ++op2 )
-                        {
-                          display1[(*op2)-1] = 1;
-                          display2[HOperatorTable[(*op2)-1].father] = 1;
-                        }
-
-                      /* if singleton updated, flag all operators */
-                      if( *a == *t )
-                        {
-                          localChange = 0;
-                          for( p = 0; p < numberHOperators; ++p )
-                            display1[p] = 1;
-                          for( p = 0; p < numberOperators; ++p )
-                            display2[p] = 1;
-                        }
+                      PAIR( *a, q ).max = maxCost2;
+                      assert( *a != q );
+                      for( int* op2 = HInvPrecTable[*a]; (op2 != nullptr) && (*op2 != 0); ++op2 )
+                      {
+                        display1[(*op2)-1] = 1;
+                        display2[HOperatorTable[(*op2)-1].father] = 1;
+                      }
                     }
-
-                /* set display */
-                if( localChange == 1 )
-                  {
-                    localChange = 0;
-                    for( op2 = HInvPrecTable[*a]; (op2 != NULL) && (*op2 != 0); ++op2 )
-                      {
-                        display1[(*op2)-1] = 1;
-                        display2[HOperatorTable[(*op2)-1].father] = 1;
-                      }
-
-                    /* also, add all operators with null preconditions */
-                    for( p = 0; p < HOperatorsWithNoPrecSize; ++p )
-                      display1[HOperatorsWithNoPrec[p]] = 1;
-                    for( p = 0; p < operatorsWithNoPrecSize; ++p )
-                      display2[operatorsWithNoPrec[p]] = 1;
-                  }
+                }
               }
 
-            /* update for pairs { q, *a } such that q is not in Del/Add */
-            for( q = 1; q < SIZE_ATOMS; ++q )
+              /* set display */
+              if( localChange == 1 )
               {
-                /* precompute updated cost and check if we really need to do the update */
                 localChange = 0;
-                maxCost2 = MAX( precCost.max, PAIR( q, q ).max );
-                if( maxCost2 == INT_MAX )
-                  continue;
+                for( int* op2 = HInvPrecTable[q]; (op2 != nullptr) && (*op2 != 0); ++op2 )
+                {
+                  display1[(*op2)-1] = 1;
+                  display2[HOperatorTable[(*op2)-1].father] = 1;
+                }
 
-                /* ok, check that q is not affected by the operator */
-                for( t = HOperatorTable[op].del; (t != NULL) && (*t != 0) && (*t != q); ++t);
-                if( (t == NULL) || (*t == 0) )
-                  for( t = HOperatorTable[op].add; (t != NULL) && (*t != 0) && (*t != q); ++t);
-                if( (t != NULL) && (*t == 0) )
-                  {
-                    /* finish computing of cost */
-                    for( t = HOperatorTable[op].prec; *t != 0; ++t )
-                      maxCost2 = MAX( PAIR( q, *t ).max, maxCost2 );
-                    maxCost2 = PLUSSUM( maxCost2, 1 );
-                    if( maxCost2 < INT_MAX )
-                      {
-                        /* update cost for { *a, q } */
-                        for( a = HOperatorTable[op].add; *a != 0; ++a )
-                          if( PAIR( *a, q ).max > maxCost2 )
-                            {
-                              change = 1;
-                              localChange = 1;
-                              PAIR( *a, q ).max = maxCost2;
-                              assert( *a != q );
-                              for( op2 = HInvPrecTable[*a]; (op2 != NULL) && (*op2 != 0); ++op2 )
-                                {
-                                  display1[(*op2)-1] = 1;
-                                  display2[HOperatorTable[(*op2)-1].father] = 1;
-                                }
-                            }
-                      }
-                  }
-
-                /* set display */
-                if( localChange == 1 )
-                  {
-                    localChange = 0;
-                    for( op2 = HInvPrecTable[q]; (op2 != NULL) && (*op2 != 0); ++op2 )
-                      {
-                        display1[(*op2)-1] = 1;
-                        display2[HOperatorTable[(*op2)-1].father] = 1;
-                      }
-
-                    /* also, add all operators with null preconditions */
-                    for( p = 0; p < HOperatorsWithNoPrecSize; ++p )
-                      display1[HOperatorsWithNoPrec[p]] = 1;
-                    for( p = 0; p < operatorsWithNoPrecSize; ++p )
-                      display2[operatorsWithNoPrec[p]] = 1;
-                  }
+                /* also, add all operators with null preconditions */
+                for( size_t p = 0; p < HOperatorsWithNoPrecSize; ++p )
+                  display1[HOperatorsWithNoPrec[p]] = 1;
+                for( size_t p = 0; p < operatorsWithNoPrecSize; ++p )
+                  display2[operatorsWithNoPrec[p]] = 1;
               }
+            }
           }
 
       /* now, loop over all operators for the 'parallel' action term */
-      for( op = 0; op < numberOperators; ++op )
+      for( size_t op = 0; op < numberOperators; ++op )
         if( (operatorTable[op].valid == 1) && (display2[op] == 1) )
           {
-            register int *s1, *s2, *e1, *e2;
+            int *s1, *s2, *e1, *e2;
 
             display2[op] = 0;
-            for( s1 = HSubTable[op]; (s1 != NULL) && (*s1 != 0); ++s1 )
+            for( s1 = HSubTable[op]; (s1 != nullptr) && (*s1 != 0); ++s1 )
               for( s2 = s1 + 1; *s2 != 0; ++s2 )
                 {
                   /* check if consistent and relevant */
-                  for( e1 = HOperatorTable[(*s1)-1].add; (e1 != NULL) && (*e1 != 0); ++e1 )
+                  for( e1 = HOperatorTable[(*s1)-1].add; (e1 != nullptr) && (*e1 != 0); ++e1 )
                     {
-                      for( e2 = HOperatorTable[(*s2)-1].del; (e2!=NULL) && (*e2!=0) && (*e2!=*e1); ++e2 );
-                      if( (e1 != NULL) && (*e2 != 0) )
+                      for( e2 = HOperatorTable[(*s2)-1].del; (e2!=nullptr) && (*e2!=0) && (*e2!=*e1); ++e2 );
+                      if( (e1 != nullptr) && (*e2 != 0) )
                         break;
                     }
-                  if( (e1 != NULL) && (*e1 != 0) )
+                  if( (e1 != nullptr) && (*e1 != 0) )
                     continue;
 
-                  for( e1 = HOperatorTable[(*s2)-1].add; (e1 != NULL) && (*e1 != 0); ++e1 )
+                  for( e1 = HOperatorTable[(*s2)-1].add; (e1 != nullptr) && (*e1 != 0); ++e1 )
                     {
-                      for( e2 = HOperatorTable[(*s1)-1].del; (e2!=NULL) && (*e2!=0) && (*e2!=*e1); ++e2 );
-                      if( (e1 != NULL) && (*e2 != 0) )
+                      for( e2 = HOperatorTable[(*s1)-1].del; (e2!=nullptr) && (*e2!=0) && (*e2!=*e1); ++e2 );
+                      if( (e1 != nullptr) && (*e2 != 0) )
                         break;
                     }
-                  if( (e1 != NULL) && (*e1 != 0) )
+                  if( (e1 != nullptr) && (*e1 != 0) )
                     continue;
 
                   /* precompute cost */
@@ -1158,16 +1162,16 @@ ADLH2Setup( register atom_t *state )
                     continue;
 
                   /* update costs */
-                  for( a = HOperatorTable[(*s1)-1].add; *a != 0; ++a )
+                  for( int* a = HOperatorTable[(*s1)-1].add; *a != 0; ++a )
                     {
                       localChange = 0;
-                      for( t = HOperatorTable[(*s2)-1].add; *t != 0; ++t )
+                      for( int* t = HOperatorTable[(*s2)-1].add; *t != 0; ++t )
                         if( PAIR( *a, *t ).max > maxCost1 )
                           {
                             change = 1;
                             localChange = 1;
                             PAIR( *a, *t ).max = maxCost1;
-                            for( op2 = HInvPrecTable[*t]; (op2 != NULL) && (*op2 != 0); ++op2 )
+                            for( int* op2 = HInvPrecTable[*t]; (op2 != nullptr) && (*op2 != 0); ++op2 )
                               {
                                 display1[(*op2)-1] = 1;
                                 display2[HOperatorTable[(*op2)-1].father] = 1;
@@ -1177,9 +1181,9 @@ ADLH2Setup( register atom_t *state )
                             if( *a == *t )
                               {
                                 localChange = 0;
-                                for( p = 0; p < numberHOperators; ++p )
+                                for( size_t p = 0; p < numberHOperators; ++p )
                                   display1[p] = 1;
-                                for( p = 0; p < numberOperators; ++p )
+                                for( size_t p = 0; p < numberOperators; ++p )
                                   display2[p] = 1;
                               }
                           }
@@ -1188,16 +1192,16 @@ ADLH2Setup( register atom_t *state )
                       if( localChange == 1 )
                         {
                           localChange = 0;
-                          for( op2 = HInvPrecTable[*a]; (op2 != NULL) && (*op2 != 0); ++op2 )
+                          for( int* op2 = HInvPrecTable[*a]; (op2 != nullptr) && (*op2 != 0); ++op2 )
                             {
                               display1[(*op2)-1] = 1;
                               display2[HOperatorTable[(*op2)-1].father] = 1;
                             }
 
                           /* also, add all operators with null preconditions */
-                          for( p = 0; p < HOperatorsWithNoPrecSize; ++p )
+                          for( size_t p = 0; p < HOperatorsWithNoPrecSize; ++p )
                             display1[HOperatorsWithNoPrec[p]] = 1;
-                          for( p = 0; p < operatorsWithNoPrecSize; ++p )
+                          for( size_t p = 0; p < operatorsWithNoPrecSize; ++p )
                             display2[operatorsWithNoPrec[p]] = 1;
                         }
                     }
@@ -1208,8 +1212,8 @@ ADLH2Setup( register atom_t *state )
   /* print pair's costs */
   if( verbose > 7 )
     {
-      for( p = 1; p < SIZE_ATOMS; ++p )
-        for( q = p; q < SIZE_ATOMS; ++q )
+      for( size_t p = 1; p < SIZE_ATOMS; ++p )
+        for( size_t q = p; q < SIZE_ATOMS; ++q )
           if( PAIR( p, q ).max < INT_MAX )
             {
               assert( PAIR( p, q ).max == PAIR( p, q ).max );
@@ -1229,30 +1233,27 @@ ADLH2Setup( register atom_t *state )
 
 
 void
-runtimeH2Cost( register cost_t *cost, register int* set )
+runtimeH2Cost( cost_t *cost, int* set )
 {
-  register int *p, *q;
-
   /* go over all pairs: compute max cost & build PQ with plus costs */
   cost->max = 0;
   cost->plus = 0;
-  for( p = set; *p != 0; ++p )
-    for( q = p; *q != 0; ++q )
-      cost->max = MAX( PAIR( *p, *q ).max, cost->max );
+  for( int* p = set; *p != 0; ++p )
+    for( int* q = p; *q != 0; ++q )
+      cost->max = max( PAIR( *p, *q ).max, cost->max );
 }
 
 
 void
-H2Heuristics( register cost_t *cost, register atom_t *state )
+H2Heuristics( cost_t *cost, atom_t *state )
 {
-  register int i, *s;
   static int atomSet[ATOMSPERPACK*MAXATOMPACKS+1];
 
   if( !(_low_requirements & REQ_ADL) )
     {
       /* build set of atoms */
-      s = atomSet;
-      for( i = 1; i < SIZE_ATOMS; ++i )
+      int* s = atomSet;
+      for( size_t i = 1; i < SIZE_ATOMS; ++i )
         if( asserted( state, i ) )
           *s++ = i;
       *s = 0;
@@ -1268,9 +1269,8 @@ H2Heuristics( register cost_t *cost, register atom_t *state )
 
 
 void
-heuristics( register node_t *node )
+heuristics( node_t *node )
 {
-  register int i, p, *g;
   cost_t tmpCost;
 
   /* initialization */
@@ -1289,7 +1289,7 @@ heuristics( register node_t *node )
       H1ESetup( node->state );
 
       /* add/max the costs for atoms in goal */
-      for( g = _low_goalAtoms; *g != 0; ++g )
+      for( int* g = _low_goalAtoms; *g != 0; ++g )
         if( H1Cost[*g].plus == INT_MAX )
           {
             node->h1_plus = -1;
@@ -1303,19 +1303,19 @@ heuristics( register node_t *node )
         else
           {
             node->h1_plus = PLUSSUM( node->h1_plus, H1Cost[*g].plus );
-            node->h1_max = MAX( node->h1_max, H1Cost[*g].max );
+            node->h1_max = max( node->h1_max, H1Cost[*g].max );
             node->h1e_plus = PLUSSUM( node->h1e_plus, H1ECost[*g].plus);
-            node->h1e_max = MAX( node->h1e_max, H1ECost[*g].max );
+            node->h1e_max = max( node->h1e_max, H1ECost[*g].max );
           }
       
       node->h1e_plus *= experienceWeight;
       node->h1e_max *= experienceWeight;
-      for ( i = 0; i < eNodeSize; ++i )
+      for ( size_t i = 0; i < eNode.size(); ++i )
       if ( eDist[i][0].plus < node->h1e_plus || eDist[i][0].max < node->h1e_max )
         {
           cost_t saDist;
           saDist.plus = saDist.max = 0;
-          for( p = 1; p < SIZE_ATOMS; ++p )
+          for( size_t p = 1; p < SIZE_ATOMS; ++p )
           if( asserted( eNode[i], p ) )
             { 
               if( H1ECost[p].plus == INT_MAX )
@@ -1327,13 +1327,13 @@ heuristics( register node_t *node )
               else
                 {
                   saDist.plus = PLUSSUM( saDist.plus, H1ECost[p].plus );
-                  saDist.max = MAX( saDist.max, H1ECost[p].max );
+                  saDist.max = max( saDist.max, H1ECost[p].max );
                 }
             }
           if (saDist.plus != INT_MAX)
           {
-            node->h1e_plus = MIN(node->h1e_plus, experienceWeight*saDist.plus + eDist[i][0].plus);
-            node->h1e_max = MIN(node->h1e_max, experienceWeight*saDist.max + eDist[i][0].max);
+            node->h1e_plus = min(node->h1e_plus, (unsigned long) experienceWeight*saDist.plus + eDist[i][0].plus);
+            node->h1e_max = min(node->h1e_max, (unsigned long) experienceWeight*saDist.max + eDist[i][0].max);
           }
         }
       
@@ -1362,7 +1362,7 @@ heuristics( register node_t *node )
   else
     {
       /* add/max the costs for atoms in node */
-      for( i = 1; i < SIZE_ATOMS; ++i )
+      for( size_t i = 1; i < SIZE_ATOMS; ++i )
         if( asserted( node->state, i ) )
           {
             if( backwardH1Cost[i].plus == INT_MAX )
@@ -1377,9 +1377,9 @@ heuristics( register node_t *node )
             else
               {
                 node->h1_plus = PLUSSUM( node->h1_plus, backwardH1Cost[i].plus );
-                node->h1_max = MAX( node->h1_max, backwardH1Cost[i].max );
+                node->h1_max = max( node->h1_max, backwardH1Cost[i].max );
                 node->h1e_plus = PLUSSUM( node->h1e_plus, backwardH1ECost[i].plus );
-                node->h1e_max = MAX( node->h1e_max, backwardH1ECost[i].max );
+                node->h1e_max = max( node->h1e_max, backwardH1ECost[i].max );
               }
           }
 
@@ -1408,9 +1408,9 @@ heuristics( register node_t *node )
 **/
 
 char *
-operatorName( register int *parameters, register int schema )
+operatorName( int *parameters, int schema )
 {
-  register int *ip;
+  int *ip;
   static char name[128];
 
   name[0] = '(';
@@ -1427,9 +1427,8 @@ operatorName( register int *parameters, register int schema )
 
 
 char *
-atomName( register int *parameters )
+atomName( int *parameters )
 {
-  register int *ip;
   static char name[1024];
 
   if( parameters[0] <= _low_numberPredicates )
@@ -1437,7 +1436,7 @@ atomName( register int *parameters )
       name[0] = '(';
       name[1] = '\0';
       strcat( name, _low_predicateName[parameters[0] - 1] );
-      for( ip = &parameters[1]; *ip != -1; ++ip )
+      for( int* ip = &parameters[1]; *ip != -1; ++ip )
         {
           strcat( name, " " );
           strcat( name, _low_objectName[*ip - 1] );
@@ -1449,7 +1448,7 @@ atomName( register int *parameters )
       name[0] = '\0';
       strcat( name, "(NOT-" );
       strcat( name, _low_predicateName[parameters[0] - (_low_numberPredicates + 1) - 1] );
-      for( ip = &parameters[1]; *ip != -1; ++ip )
+      for( int* ip = &parameters[1]; *ip != -1; ++ip )
         {
           strcat( name, " " );
           strcat( name, _low_objectName[*ip - 1] );
@@ -1461,14 +1460,14 @@ atomName( register int *parameters )
 
 
 int
-atomCmp( register const void *a1, register const void *a2 )
+atomCmp( const void *a1, const void *a2 )
 {
   return( (*(int*)a1) - (*(int*)a2) );
 }
 
 
 void
-orderAtomList( register int *atomList, register int size )
+orderAtomList( int *atomList, int size )
 {
   qsort( atomList, size, sizeof( int ), &atomCmp );
 }
@@ -1483,29 +1482,24 @@ orderAtomList( register int *atomList, register int size )
 **/
 
 unsigned
-atomHashFunction( register int *parameters )
+atomHashFunction( int *parameters )
 {
-  register int *ip;
-  register unsigned index;
-
-  index = 0;
-  for( ip = parameters; *ip != -1; ++ip )
+  unsigned index = 0;
+  for( int* ip = parameters; *ip != -1; ++ip )
     index += *ip;
   return( index < ATOMHASHSIZE ? index : index % ATOMHASHSIZE );
 }
 
 
 iatom_t *
-insertIntoAtomHash( register int *parameters )
+insertIntoAtomHash( int *parameters )
 {
-  register unsigned index;
-  register iatom_t *iatom;
   static int currentAtom = 0;
 
   if( numberAtoms == ATOMSPERPACK * MAXATOMPACKS - 1 )
     fatal( maxAtoms );
 
-  index = atomHashFunction( parameters );
+  unsigned index = atomHashFunction( parameters );
   if( currentAtom >= atomHashClaimSize )
     {
       atomHashClaimSize = (atomHashClaimSize == 0 ? 1024 : INCRATE * atomHashClaimSize);
@@ -1514,7 +1508,7 @@ insertIntoAtomHash( register int *parameters )
         fatal( noMoreMemory );
       currentAtom = 0;
     }
-  iatom = &atomHashPool[currentAtom++];
+  iatom_t* iatom = &atomHashPool[currentAtom++];
   memcpy( iatom->parameters, parameters, MAXPARAMETERS * sizeof( int ) );
   strcpy( iatom->name, atomName( parameters ) );
   iatom->idx = ++numberAtoms;
@@ -1525,13 +1519,11 @@ insertIntoAtomHash( register int *parameters )
 
 
 iatom_t *
-readAtomHash( register int *parameters )
+readAtomHash( int *parameters )
 {
-  register iatom_t *iatom;
-  register int *ip, *jp;
-
-  for( iatom = atomHashTable[atomHashFunction( parameters )]; iatom != NULL; iatom = iatom->next )
+  for( iatom_t* iatom = atomHashTable[atomHashFunction( parameters )]; iatom != nullptr; iatom = iatom->next )
     {
+      int *ip, *jp;
       for( ip = parameters, jp = iatom->parameters; (*ip != -1) && (*ip == *jp); ++ip, ++jp);
       if( (*ip == -1) && (*jp == -1) )
         return( iatom );
@@ -1543,15 +1535,14 @@ readAtomHash( register int *parameters )
 
 
 iatom_t *
-readAtomByNumber( register int index )
+readAtomByNumber( int index )
 {
-  register int i;
-  register iatom_t *iatom = NULL;
-
+  iatom_t *iatom = nullptr;
+  size_t i;
   for( i = 0; i < ATOMHASHSIZE; ++i )
     {
-      for( iatom = atomHashTable[i]; (iatom != NULL) && (iatom->idx != index); iatom = iatom->next );
-      if( iatom != NULL )
+      for( iatom = atomHashTable[i]; (iatom != nullptr) && (iatom->idx != index); iatom = iatom->next );
+      if( iatom != nullptr )
         break;
     }
   assert( i != ATOMHASHSIZE );
@@ -1560,14 +1551,14 @@ readAtomByNumber( register int index )
 
 
 char *
-readAtomName( register int index )
+readAtomName( int index )
 {
   return( atomName( readAtomByNumber( index )->parameters ) );
 }
 
 
 int
-positiveAtom( register int index )
+positiveAtom( int index )
 {
   return( readAtomByNumber( index )->parameters[0] <= _low_numberPredicates );
 }
@@ -1592,16 +1583,14 @@ initializeMemoryMgmt( void )
 node_t *
 getNode( void )
 {
-  register int oldSize;
-  register node_t *result;
-  register char **newNodePoolTable;
-  register int *newNodePoolSize;
-  register char *newNodePoolUsed;
+  char **newNodePoolTable;
+  int *newNodePoolSize;
+  char *newNodePoolUsed;
 
   /* check if we have enough pool areas */
   if( currentNodePool + 1 >= nodePoolTableSize )
     {
-      oldSize = nodePoolTableSize;
+      int oldSize = nodePoolTableSize;
       nodePoolTableSize = (nodePoolTableSize == 0 ? 1024 : INCRATE * nodePoolTableSize);
       newNodePoolTable = (char**)realloc( nodePoolTable, nodePoolTableSize * sizeof( char* ) );
       newNodePoolSize = (int*)realloc( nodePoolSize, nodePoolTableSize * sizeof( int ) );
@@ -1617,7 +1606,7 @@ getNode( void )
     }
 
   /* check if we have enough space in pool area */
-  if( (nodePool == NULL) ||
+  if( (nodePool == nullptr) ||
       (nodePool == nodePoolTable[currentNodePool] + nodePoolSize[currentNodePool]) )
     {
       /* get new pool area */
@@ -1642,7 +1631,7 @@ getNode( void )
     }
 
   /* claim node from current pool */
-  result = (node_t*) nodePool;
+  node_t* result = (node_t*) nodePool;
   result->state = (atom_t*) ((char*)result + sizeof( node_t ));
   nodePool += NODESIZE;
 
@@ -1657,7 +1646,7 @@ getNode( void )
 
 
 void
-freeLastNodes( register int number )
+freeLastNodes( int number )
 {
   nodePool -= number * NODESIZE;
 }
@@ -1668,7 +1657,7 @@ freeAllSpace( void )
 {
   nodeMemoryUsed = 0;
   currentNodePool = -1;
-  nodePool = NULL;
+  nodePool = nullptr;
 }
 
 
@@ -1680,37 +1669,35 @@ freeAllSpace( void )
 **
 **/
 
-int
-stateDiff( register atom_t *state1, register atom_t *state2 )
+/*int
+stateDiff( atom_t *state1, atom_t *state2 )
 {
-  register atom_t *lp1, *lp2;
-  int i, diff = 0;
+  int diff = 0;
 
   assert( globalInitialized );
-  for( lp1 = state1, lp2 = state2; (lp1 < &state1[SIZE_PACKS]); ++lp1, ++lp2 )
-  for( i = 1; i < SIZE_ATOMS; ++i )
+  for( atom_t *lp1 = state1, *lp2 = state2; (lp1 < &state1[SIZE_PACKS]); ++lp1, ++lp2 )
+  for( int i = 1; i < SIZE_ATOMS; ++i )
     if( asserted( state1, i ) != asserted( state2, i ) )
       ++diff;
   return diff;
-}
+}*/
 
 
 int
-stateCmp( register atom_t *state1, register atom_t *state2 )
+stateCmp( atom_t *state1, atom_t *state2 )
 {
-  register atom_t *lp1, *lp2;
-
   assert( globalInitialized );
+  atom_t *lp1, *lp2;
   for( lp1 = state1, lp2 = state2; (lp1 < &state1[SIZE_PACKS]) && (lp1->pack == lp2->pack); ++lp1, ++lp2 );
   return( !(lp1 == &state1[SIZE_PACKS]) );
 }
 
 
 unsigned
-nodeHashFunction( register atom_t *state )
+nodeHashFunction( atom_t *state )
 {
-  register int i;
-  register unsigned val, *hp;
+  int i;
+  unsigned val, *hp;
 
   /* xxxx: the ideal thing to do here is to loop MAXATOMPACKS times instead of SIZE_ATOMS */
   assert( globalInitialized );
@@ -1721,29 +1708,24 @@ nodeHashFunction( register atom_t *state )
 
 
 node_t *
-readNodeHash( register atom_t *state )
+readNodeHash( atom_t *state )
 {
-  register unsigned index;
-  register node_t *node;
-
-  index = nodeHashFunction( state );
-  for( node = nodeHashTable[index]; node != NULL; node = node->hashNext )
+  unsigned index = nodeHashFunction( state );
+  for( node_t* node = nodeHashTable[index]; node != nullptr; node = node->hashNext )
     if( !stateCmp( state, node->state ) )
       return( node );
-  return( NULL );
+  return( nullptr );
 }
 
 
 void
-insertIntoNodeHash( register node_t *node )
+insertIntoNodeHash( node_t *node )
 {
-  register unsigned index;
-
-  index = nodeHashFunction( node->state );
+  unsigned index = nodeHashFunction( node->state );
   node->hashNext = nodeHashTable[index];
-  node->hashPrev = NULL;
+  node->hashPrev = nullptr;
   nodeHashTable[index] = node;
-  if( node->hashNext != NULL )
+  if( node->hashNext != nullptr )
     node->hashNext->hashPrev = node;
   ++nodeHashNumElem;
   ++(nodeHashDiameter[index]);
@@ -1751,23 +1733,21 @@ insertIntoNodeHash( register node_t *node )
 
 
 void
-removeNodeFromHash( register node_t *node )
+removeNodeFromHash( node_t *node )
 {
-  register unsigned index;
-
-  index = nodeHashFunction( node->state );
+  unsigned index = nodeHashFunction( node->state );
   if( nodeHashTable[index] == node )
     {
-      assert( node->hashPrev == NULL );
+      assert( node->hashPrev == nullptr );
       nodeHashTable[index] = node->hashNext;
     }
   else
     {
-      assert( node->hashPrev != NULL );
+      assert( node->hashPrev != nullptr );
       node->hashPrev->hashNext = node->hashNext;
     }
 
-  if( node->hashNext != NULL )
+  if( node->hashNext != nullptr )
     node->hashNext->hashPrev = node->hashPrev;
 }
 
@@ -1784,14 +1764,12 @@ cleanNodeHash( void )
 void
 nodeHashStatistics( void )
 {
-  register int index, diameter, sum, n;
-
-  n = 0;
-  sum = 0;
-  diameter = 0;
-  for( index = 0; index < NODEHASHSIZE; ++index )
+  int n = 0;
+  int sum = 0;
+  int diameter = 0;
+  for( int index = 0; index < NODEHASHSIZE; ++index )
     {
-      diameter = MAX( diameter, nodeHashDiameter[index] );
+      diameter = max( diameter, nodeHashDiameter[index] );
       sum += nodeHashDiameter[index];
       n += (nodeHashDiameter[index] > 0);
     }
@@ -1812,9 +1790,9 @@ nodeHashStatistics( void )
 **/
 
 int
-nodeBucket( register node_t *node )
+nodeBucket( node_t *node )
 {
-  register int result = 0;
+  int result = 0;
 
   switch( searchHeuristic )
     {
@@ -1842,18 +1820,16 @@ nodeBucket( register node_t *node )
 
 
 void
-setInitialOPEN( register node_t *node )
+setInitialOPEN( node_t *node )
 {
-  register int bucket;
-
-  bucket = nodeBucket( node );
+  int bucket = nodeBucket( node );
   if( bucket >= bucketTableSize )
     resizeBucketTable(bucket);
 
   minBucket = maxBucket = bucket;
   node->bucket = bucket;
-  node->bucketNext = NULL;
-  node->bucketPrev = NULL;
+  node->bucketNext = nullptr;
+  node->bucketPrev = nullptr;
   firstNodeInBucket[bucket] = node;
   lastNodeInBucket[bucket] = node;
   headOPEN = node;
@@ -1870,18 +1846,16 @@ getFirstOPEN( void )
 
 
 void
-removeNodeFromOPEN( register node_t *node )
+removeNodeFromOPEN( node_t *node )
 {
-  register int bucket;
-
-  bucket = node->bucket;
+  int bucket = node->bucket;
   assert( nodesInOPEN > 0 );
   --nodesInOPEN;
 
   /* link update */
-  if( node->bucketPrev != NULL )
+  if( node->bucketPrev != nullptr )
     node->bucketPrev->bucketNext = node->bucketNext;
-  if( node->bucketNext != NULL )
+  if( node->bucketNext != nullptr )
     node->bucketNext->bucketPrev = node->bucketPrev;
 
   /* bucket update */
@@ -1889,20 +1863,20 @@ removeNodeFromOPEN( register node_t *node )
     {
       if( lastNodeInBucket[bucket] != node )
         {
-          assert( node->bucketNext != NULL );
-          assert( lastNodeInBucket[bucket] != NULL );
+          assert( node->bucketNext != nullptr );
+          assert( lastNodeInBucket[bucket] != nullptr );
           firstNodeInBucket[bucket] = node->bucketNext;
         }
       else
         {
-          firstNodeInBucket[bucket] = NULL;
-          lastNodeInBucket[bucket] = NULL;
+          firstNodeInBucket[bucket] = nullptr;
+          lastNodeInBucket[bucket] = nullptr;
           needRethreading = 1;
         }
     }
   else if( node == lastNodeInBucket[bucket] )
     {
-      assert( node->bucketPrev != NULL );
+      assert( node->bucketPrev != nullptr );
       lastNodeInBucket[bucket] = node->bucketPrev;
     }
 
@@ -1910,7 +1884,7 @@ removeNodeFromOPEN( register node_t *node )
   if( node == headOPEN )
     {
       headOPEN = node->bucketNext;
-      if( headOPEN != NULL )
+      if( headOPEN != nullptr )
         {
           minBucket = headOPEN->bucket;
         }
@@ -1926,7 +1900,7 @@ removeNodeFromOPEN( register node_t *node )
   if( node == tailOPEN )
     {
       tailOPEN = node->bucketPrev;
-      if( tailOPEN != NULL )
+      if( tailOPEN != nullptr )
         {
           maxBucket = tailOPEN->bucket;
         }
@@ -1943,7 +1917,7 @@ removeNodeFromOPEN( register node_t *node )
   /* CLOSE update */
   node->open = 0;
   node->bucketNext = CLOSE;
-  if( CLOSE != NULL )
+  if( CLOSE != nullptr )
     CLOSE->bucketPrev = node;
   CLOSE = node;
   ++nodesInCLOSE;
@@ -1952,21 +1926,21 @@ removeNodeFromOPEN( register node_t *node )
 
 #if 0
 node_t *
-removeLastFromOPEN( register node_t *father )
+removeLastFromOPEN( node_t *father )
 {
-  register int bucket;
-  register node_t *node;
+  int bucket;
+  node_t *node;
 
-  for( node = tailOPEN; (node != NULL) && (node->father == father); node = node->bucketPrev );
-  if( node == NULL )
-    return( NULL );
+  for( node = tailOPEN; (node != nullptr) && (node->father == father); node = node->bucketPrev );
+  if( node == nullptr )
+    return( nullptr );
   else
     bucket = node->bucket;
 
   /* link update */
-  if( node->bucketPrev != NULL )
+  if( node->bucketPrev != nullptr )
     node->bucketPrev->bucketNext = node->bucketNext;
-  if( node->bucketNext != NULL )
+  if( node->bucketNext != nullptr )
     node->bucketNext->bucketPrev = node->bucketPrev;
 
   /* bucket update */
@@ -1976,13 +1950,13 @@ removeLastFromOPEN( register node_t *father )
         firstNodeInBucket[bucket] = node->bucketNext;
       else
         {
-          firstNodeInBucket[bucket] = NULL;
-          lastNodeInBucket[bucket] = NULL;
+          firstNodeInBucket[bucket] = nullptr;
+          lastNodeInBucket[bucket] = nullptr;
         }
     }
   else if( node == lastNodeInBucket[bucket] )
     {
-      assert( node->bucketPrev != NULL );
+      assert( node->bucketPrev != nullptr );
       lastNodeInBucket[bucket] = node->bucketPrev;
     }
 
@@ -1990,7 +1964,7 @@ removeLastFromOPEN( register node_t *father )
   if( node == headOPEN )
     {
       headOPEN = node->bucketNext;
-      if( headOPEN != NULL )
+      if( headOPEN != nullptr )
         minBucket = headOPEN->bucket;
       else
         {
@@ -2002,7 +1976,7 @@ removeLastFromOPEN( register node_t *father )
   if( node == tailOPEN )
     {
       tailOPEN = node->bucketPrev;
-      if( tailOPEN != NULL )
+      if( tailOPEN != nullptr )
         maxBucket = tailOPEN->bucket;
       else
         {
@@ -2024,15 +1998,13 @@ removeLastFromOPEN( register node_t *father )
 node_t *
 removeNodeFromCLOSE( void )
 {
-  register node_t *node;
-
   --nodesInCLOSE;
-  node = CLOSE;
+  node_t* node = CLOSE;
 
   /* CLOSE update */
   CLOSE = CLOSE->bucketNext;
-  if( CLOSE != NULL )
-    CLOSE->bucketPrev = NULL;
+  if( CLOSE != nullptr )
+    CLOSE->bucketPrev = nullptr;
 
   /* hash update */
   removeNodeFromHash( node );
@@ -2043,7 +2015,7 @@ removeNodeFromCLOSE( void )
 
 
 void
-resizeBucketTable( register int min_size )
+resizeBucketTable( int min_size )
 {
   node_t **new_table = 0;
   int new_size = bucketTableSize == 0 ? MINBUCKETTABLESIZE : bucketTableSize<<1;
@@ -2068,9 +2040,9 @@ resizeBucketTable( register int min_size )
 }
 
 void
-insertNodeIntoBucket( register node_t *node, register int bucket )
+insertNodeIntoBucket( node_t *node, int bucket )
 {
-  register node_t * n;
+  node_t* n;
 
   if( bucket >= bucketTableSize )
     resizeBucketTable(bucket);
@@ -2083,7 +2055,7 @@ insertNodeIntoBucket( register node_t *node, register int bucket )
       break;
 
   /* check if rethreading is needed */
-  if( firstNodeInBucket[bucket] == NULL ) {
+  if( firstNodeInBucket[bucket] == nullptr ) {
     needRethreading = 1;
     if( (bucket < minBucket) || (bucket > maxBucket) ) {
       minBucket = INT_MIN;
@@ -2095,10 +2067,10 @@ insertNodeIntoBucket( register node_t *node, register int bucket )
   ++nodesInOPEN;
   node->bucket = bucket;
   node->bucketNext = n;
-  node->bucketPrev = NULL;
+  node->bucketPrev = nullptr;
   if( n == firstNodeInBucket[bucket] )
     {
-      if( n == NULL )
+      if( n == nullptr )
         lastNodeInBucket[bucket] = node;
       else
         n->bucketPrev = node;
@@ -2106,7 +2078,7 @@ insertNodeIntoBucket( register node_t *node, register int bucket )
     }
   else
     {
-      assert( n != NULL );
+      assert( n != nullptr );
       node->bucketPrev = n->bucketPrev;
       n->bucketPrev->bucketNext = node;
       n->bucketPrev = node;
@@ -2115,20 +2087,20 @@ insertNodeIntoBucket( register node_t *node, register int bucket )
 
 
 void
-nodeOrdering( register node_t **buffer, register int size )
+nodeOrdering( node_t **buffer, int size )
 {
-  register int i, bucket;
-  register node_t *invalidNodes, *lastNodeInPrevBucket;
+  int bucket;
+  node_t *invalidNodes, *lastNodeInPrevBucket;
 
   /* bucket sorting */
-  invalidNodes = NULL;
-  for( i = 0; i < size; ++i )
+  invalidNodes = nullptr;
+  for( size_t i = 0; i < size; ++i )
     if( buffer[i]->valid == 1 )
       {
         /* registry used buckets */
         bucket = nodeBucket( buffer[i] );
-        if( minBucket != -1 ) minBucket = MIN( minBucket, bucket );
-        if( maxBucket != -1 ) maxBucket = MAX( maxBucket, bucket );
+        if( minBucket != -1 ) minBucket = min( minBucket, bucket );
+        if( maxBucket != -1 ) maxBucket = max( maxBucket, bucket );
         insertNodeIntoBucket( buffer[i], bucket );
       }
     else
@@ -2144,11 +2116,11 @@ nodeOrdering( register node_t **buffer, register int size )
       int upperLimit = maxBucket == INT_MAX ? bucketTableSize : 1 + maxBucket;
       minBucket = INT_MAX;
       maxBucket = INT_MIN;
-      for( bucket = lowerLimit, lastNodeInPrevBucket = NULL; bucket < upperLimit; ++bucket )
+      for( bucket = lowerLimit, lastNodeInPrevBucket = nullptr; bucket < upperLimit; ++bucket )
         {
-          if( firstNodeInBucket[bucket] != NULL )
+          if( firstNodeInBucket[bucket] != nullptr )
             {
-              if( lastNodeInPrevBucket != NULL )
+              if( lastNodeInPrevBucket != nullptr )
                 {
                   lastNodeInPrevBucket->bucketNext = firstNodeInBucket[bucket];
                   firstNodeInBucket[bucket]->bucketPrev = lastNodeInPrevBucket;
@@ -2163,16 +2135,16 @@ nodeOrdering( register node_t **buffer, register int size )
   /* compute new openList head and tail */
   headOPEN = minBucket == INT_MAX ? 0 : firstNodeInBucket[minBucket];
   tailOPEN = maxBucket == INT_MIN ? 0 : lastNodeInBucket[maxBucket];
-  assert( (nodesInOPEN == 0) || (headOPEN != NULL) );
+  assert( (nodesInOPEN == 0) || (headOPEN != nullptr) );
 }
 
 
 void
 cleanLists( void )
 {
-  headOPEN = NULL;
-  tailOPEN = NULL;
-  CLOSE = NULL;
+  headOPEN = nullptr;
+  tailOPEN = nullptr;
+  CLOSE = nullptr;
   memset( firstNodeInBucket, 0, bucketTableSize * sizeof( node_t* ) );
   memset( lastNodeInBucket, 0, bucketTableSize * sizeof( node_t* ) );
 }
@@ -2181,14 +2153,12 @@ cleanLists( void )
 void
 printLists( void )
 {
-  register node_t *node;
-
   fprintf( stderr, "OPEN LIST =" );
-  for( node = headOPEN; node != NULL; node = node->bucketNext )
+  for( node_t* node = headOPEN; node != nullptr; node = node->bucketNext )
     fprintf( stderr, " %p", node );
   fprintf( stderr, "\n" );
   fprintf( stderr, "CLOSE LIST =" );
-  for( node = CLOSE; node != NULL; node = node->bucketNext )
+  for( node_t* node = CLOSE; node != nullptr; node = node->bucketNext )
     fprintf( stderr, " %p", node );
   fprintf( stderr, "\n" );
 }
@@ -2203,13 +2173,8 @@ printLists( void )
 **/
 
 int
-forwardNodeExpansion( register node_t *node, register node_t ***result )
+forwardNodeExpansion( node_t *node, node_t ***result )
 {
-  register int *p, *a, *d, *alpha;
-  register int child;
-  register node_t *tmp;
-  register suboperator_t *sub;
-
   static int initialized = 0;
   static node_t **buffer;
 
@@ -2223,7 +2188,7 @@ forwardNodeExpansion( register node_t *node, register node_t ***result )
     }
   // TODO remove debug code
   /*fprintf( stdout, "EXPAND node with h=%d:\t", node->h1e_max );
-  register int i;
+  int i;
   for( i = 1; i < SIZE_ATOMS; ++i )
     if( asserted( node->state, i ) )
     {
@@ -2235,13 +2200,14 @@ forwardNodeExpansion( register node_t *node, register node_t ***result )
   ++expandedNodes;
 
   /* get some initial space */
-  child = 0;
+  int child = 0;
   buffer[child] = getNode();
 
   /* node expansion */
-  for( alpha = validOperators; *alpha != -1; ++alpha )
+  for( int* alpha = validOperators; *alpha != -1; ++alpha )
     {
       /* preconditions */
+      int* p;
       for( p = operatorTable[*alpha].prec; (*p != 0) && asserted( node->state, *p ); ++p );
       if( *p == 0 )
         {
@@ -2249,33 +2215,33 @@ forwardNodeExpansion( register node_t *node, register node_t ***result )
           memcpy( buffer[child]->state, node->state, SIZE_PACKS * sizeof( atom_t ) );
 
           /* operators effects */
-          for( a = operatorTable[*alpha].add; *a != 0; ++a )
+          for( int* a = operatorTable[*alpha].add; *a != 0; ++a )
             set( buffer[child]->state, *a );
-          for( d = operatorTable[*alpha].del; *d != 0; ++d )
+          for( int* d = operatorTable[*alpha].del; *d != 0; ++d )
             clear( buffer[child]->state, *d );
 
           /* suboperators effects */
-          for( sub = operatorTable[*alpha].suboperators; sub != NULL; sub = sub->next )
+          for( suboperator_t* sub = operatorTable[*alpha].suboperators; sub != nullptr; sub = sub->next )
             {
               for( p = sub->prec; (*p != 0) && asserted( node->state, *p ); ++p );
               if( *p == 0 )
                 {
-                  for( a = sub->add; *a != 0; ++a )
+                  for( int* a = sub->add; *a != 0; ++a )
                     set( buffer[child]->state, *a );
-                  for( d = sub->del; *d != 0; ++d )
+                  for( int* d = sub->del; *d != 0; ++d )
                     clear( buffer[child]->state, *d );
                 }
             }
 
           /* get cached node */
-          tmp = readNodeHash( buffer[child]->state );
-          if( (tmp == NULL) ||
+          node_t* tmp = readNodeHash( buffer[child]->state );
+          if( (tmp == nullptr) ||
               (node->cost + 1 < tmp->cost) )
             {
               ++generatedNodes;
 
               /* check for tmp in OPEN */
-              if( tmp != NULL )
+              if( tmp != nullptr )
                 {
                   if( verbose >= 6 )
                     {
@@ -2331,15 +2297,12 @@ forwardNodeExpansion( register node_t *node, register node_t ***result )
 
 
 int
-backwardNodeExpansion( register node_t *node, register node_t ***result )
+backwardNodeExpansion( node_t *node, node_t ***result )
 {
-  register int *p, *a, *d, *alpha;
-  register int i, atom, child;
-  register node_t *tmp;
-
+  
 #if defined(USE_MUTEX)
-  register mutex_t *mutex;
-  register mutexSet_t *set;
+  mutex_t *mutex;
+  mutexSet_t *set;
 #endif
 
   static int initialized = 0;
@@ -2360,23 +2323,24 @@ backwardNodeExpansion( register node_t *node, register node_t ***result )
   ++expandedNodes;
 
   /* get applicable operators using admissibility information */
-  for( i = 0; i < numberOperators; ++i )
+  for( size_t i = 0; i < numberOperators; ++i )
     operatorDisplay[i] = 1;
 
   /* check admissibility */
-  for( atom = 1; atom < SIZE_ATOMS; ++atom )
+  for( size_t atom = 1; atom < SIZE_ATOMS; ++atom )
     if( asserted( node->state, atom ) )
-      for( p = notAdmissible[atom]; (p != NULL) && (*p != 0); operatorDisplay[*p++] = 0 );
+      for( int* p = notAdmissible[atom]; (p != nullptr) && (*p != 0); operatorDisplay[*p++] = 0 );
 
   /* get some initial space */
-  child = 0;
+  int child = 0;
   buffer[child] = getNode();
 
   /* node expansion */
-  for( alpha = validOperators; *alpha != -1; ++alpha )
+  for( int* alpha = validOperators; *alpha != -1; ++alpha )
     if( operatorDisplay[*alpha] == 1 )
       {
         /* preconditions: S must has some add but no del */
+        int *a, *d;
         for( a = operatorTable[*alpha].add; (*a != 0) && !asserted(node->state,*a); ++a );
         for( d = operatorTable[*alpha].del; (*d != 0) && !asserted(node->state,*d); ++d );
         if( (*a != 0) && (*d == 0) )
@@ -2394,7 +2358,7 @@ backwardNodeExpansion( register node_t *node, register node_t ***result )
 #endif
                 clear( buffer[child]->state, *a );
               }
-            for( p = operatorTable[*alpha].prec; *p != 0; ++p )
+            for( int* p = operatorTable[*alpha].prec; *p != 0; ++p )
               {
 #if defined(USE_MUTEX)
                 set( staticState, *p );
@@ -2413,30 +2377,30 @@ backwardNodeExpansion( register node_t *node, register node_t ***result )
 
 #if defined(USE_MUTEX)
             /* check mutexes in the regressed and projected states */
-            for( set = mutexSetList; set != NULL; set = set->next )
+            for( set = mutexSetList; set != nullptr; set = set->next )
               if( asserted( staticState, set->x ) || asserted( buffer[child]->state, set->x ) )
                 {
-                  for( mutex = set->set; mutex != NULL; mutex = mutex->next )
+                  for( mutex = set->set; mutex != nullptr; mutex = mutex->next )
                     if( (asserted( staticState, mutex->x ) && asserted( staticState, mutex->y )) ||
                         (asserted( buffer[child]->state, mutex->x ) && asserted( buffer[child]->state, mutex->y )) )
                       break;
-                  if( mutex != NULL )
+                  if( mutex != nullptr )
                     break;
                 }
-            if( set != NULL )
+            if( set != nullptr )
               continue;
 #endif
 
             /* get cached node */
-            tmp = readNodeHash( buffer[child]->state );
-            if( (tmp == NULL) ||
+            node_t* tmp = readNodeHash( buffer[child]->state );
+            if( (tmp == nullptr) ||
                 (node->cost + 1 < tmp->cost) )
               {
                 /* statistics */
                 ++generatedNodes;
 
                 /* check for tmp in OPEN */
-                if( tmp != NULL )
+                if( tmp != nullptr )
                   {
                     if( verbose >= 6 )
                       {
@@ -2489,26 +2453,25 @@ backwardNodeExpansion( register node_t *node, register node_t ***result )
 void
 staticAtomCompilation( void )
 {
-  register int i, j, *a, *p, res;
-  register suboperator_t *sub;
-
   /* register entry */
   registerEntry( "staticAtomCompilation( void )" );
-
-  p = staticAtomsList;
+  
+  int res;
+  int* p = staticAtomsList;
   numberStaticAtoms = 0;
   memset( staticAtom, 0, MAXATOMPACKS * sizeof( atom_t ) );
-  for( i = 1; i < SIZE_ATOMS; ++i )
+  for( size_t i = 1; i < SIZE_ATOMS; ++i )
     {
       res = 1;
-      for( j = 0; (j < numberOperators) && (res == 1); ++j )
+      for( size_t j = 0; (j < numberOperators) && (res == 1); ++j )
         if( operatorTable[j].valid == 1 )
           {
+            int* a;
             if( asserted( staticInitialState, i ) )
               {
                 for( a = operatorTable[j].del; (*a != 0) && (*a != i); ++a );
                 res = res && (*a == 0);
-                for( sub = operatorTable[j].suboperators; (sub != NULL) && (res == 1); sub = sub->next )
+                for( suboperator_t* sub = operatorTable[j].suboperators; (sub != nullptr) && (res == 1); sub = sub->next )
                   {
                     for( a = sub->del; (*a != 0) && (*a != i); ++a );
                     res = res && (*a == 0);
@@ -2518,7 +2481,7 @@ staticAtomCompilation( void )
               {
                 for( a = operatorTable[j].add; (*a != 0) && (*a != i); ++a );
                 res = res && (*a == 0);
-                for( sub = operatorTable[j].suboperators; (sub != NULL) && (res == 1); sub = sub->next )
+                for( suboperator_t* sub = operatorTable[j].suboperators; (sub != nullptr) && (res == 1); sub = sub->next )
                   {
                     for( a = sub->add; (*a != 0) && (*a != i); ++a );
                     res = res && (*a == 0);
@@ -2553,10 +2516,6 @@ staticAtomCompilation( void )
 void
 operatorCompilation( void )
 {
-  register int i, j, k, *p, *a, *d, *t;
-  register iatom_t *entry;
-  register suboperator_t *sub, *subNext, *subPrev;
-
   /* register entry */
   registerEntry( "operatorCompilation()" );
 
@@ -2575,8 +2534,9 @@ operatorCompilation( void )
     {
       if( verbose >= 5 )
         fprintf( stderr, "completing initial state with: " );
+      int* a;
       for( a = _low_initialAtoms; *a != 0; ++a );
-      for( i = 1; i < SIZE_ATOMS; ++i )
+      for( size_t i = 1; i < SIZE_ATOMS; ++i )
         if( positiveAtom( i ) && !asserted( staticInitialState, i ) && (_low_negatedAtom[i] != 0 ) )
           {
             if( verbose >= 5 )
@@ -2602,7 +2562,7 @@ operatorCompilation( void )
   if( staticCompilation == 1 ) {
     int first_static, last_non_static;
     static int permutation[ATOMSPERPACK*MAXATOMPACKS];
-    for( i = 0; i < ATOMSPERPACK*MAXATOMPACKS; ++i )
+    for( size_t i = 0; i < ATOMSPERPACK*MAXATOMPACKS; ++i )
       permutation[i] = i;
 
     /* permute atoms so that static appear last */
@@ -2628,9 +2588,10 @@ operatorCompilation( void )
 
 
     /* update operators wrt to new partition */
-    for( i = 0; i < numberOperators; ++i ) {
+    for( size_t i = 0; i < numberOperators; ++i ) {
       if( operatorTable[i].valid == 1 ) {
         /* precondition list */
+        int *p, *a;
         for( p = operatorTable[i].prec, a = p; *p != 0; ++p ) {
           if( asserted(staticAtom,*p) )
             --operatorTable[i].precSize;
@@ -2661,8 +2622,8 @@ operatorCompilation( void )
         *a = 0;
 
         /* suboperators */
-        subPrev = NULL;
-        for( sub = operatorTable[i].suboperators; sub != NULL; sub = subNext ) {
+        suboperator_t* subPrev = nullptr;
+        for( suboperator_t *subNext, *sub = operatorTable[i].suboperators; sub != nullptr; sub = subNext ) {
           subNext = sub->next;
 
           /* If prec has a false static atom, remove the whole suboperator */
@@ -2681,7 +2642,7 @@ operatorCompilation( void )
             free(sub->add);
             free(sub->del);
             free(sub);
-            if( subPrev == NULL )
+            if( subPrev == nullptr )
               operatorTable[i].suboperators = subNext;
             else
               subPrev->next = subNext;
@@ -2714,57 +2675,61 @@ operatorCompilation( void )
 
     /* update initial state */
     memset(staticInitialState,0,MAXATOMPACKS*sizeof(atom_t));
-    for( p = _low_initialAtoms; *p != 0; ++p )
+    for( int* p = _low_initialAtoms; *p != 0; ++p )
       set(staticInitialState,permutation[*p]);
 
     /* update goal state */
     memset(staticGoalState,0,MAXATOMPACKS*sizeof(atom_t));
-    for( p = _low_goalAtoms; *p != 0; ++p ) {
+    for( int* p = _low_goalAtoms; *p != 0; ++p ) {
       if( !asserted(staticAtom,*p) ) {
         set(staticGoalState,permutation[*p]);
       }
     }
 
     /* update goal atoms */
-    for( p = _low_goalAtoms, a = p; *p != 0; ++p ) {
-      if( !asserted(staticAtom,*p) ) {
-        *a++ = permutation[*p];
+    {
+      int *p, *a;
+      for( p = _low_goalAtoms, a = p; *p != 0; ++p ) {
+        if( !asserted(staticAtom,*p) ) {
+          *a++ = permutation[*p];
+        }
       }
+      *a = 0;
     }
-    *a = 0;
+    
 
     /* update relevant, reachable and static atoms */
     memcpy(dummyAtom,relevantAtom,MAXATOMPACKS*sizeof(atom_t));
     memset(relevantAtom,0,MAXATOMPACKS*sizeof(atom_t));
-    for( i = 1; i < SIZE_ATOMS; ++i ) {
+    for( size_t i = 1; i < SIZE_ATOMS; ++i ) {
       if( asserted(dummyAtom,i) )
         set(relevantAtom,permutation[i]);
     }
 
     memcpy(dummyAtom,reachableAtom,MAXATOMPACKS*sizeof(atom_t));
     memset(reachableAtom,0,MAXATOMPACKS*sizeof(atom_t));
-    for( i = 1; i < SIZE_ATOMS; ++i ) {
+    for( size_t i = 1; i < SIZE_ATOMS; ++i ) {
       if( asserted(dummyAtom,i) )
         set(reachableAtom,permutation[i]);
     }
 
     memcpy(dummyAtom,staticAtom,MAXATOMPACKS*sizeof(atom_t));
     memset(staticAtom,0,MAXATOMPACKS*sizeof(atom_t));
-    for( i = 1; i < SIZE_ATOMS; ++i ) {
+    for( size_t i = 1; i < SIZE_ATOMS; ++i ) {
       if( asserted(dummyAtom,i) )
         set(staticAtom,permutation[i]);
     }
 
     /* update atom hash */
-    for( i = 0; i < ATOMHASHSIZE; ++i ) {
-      for( entry = atomHashTable[i]; entry != NULL; entry = entry->next )
+    for( size_t i = 0; i < ATOMHASHSIZE; ++i ) {
+      for( iatom_t* entry = atomHashTable[i]; entry != nullptr; entry = entry->next )
         entry->idx = permutation[entry->idx];
     }
 
     /* update low level */
-    for( p = _low_initialAtoms; *p != 0; ++p )
+    for( int* p = _low_initialAtoms; *p != 0; ++p )
       *p = permutation[*p];
-    for( p = _low_copyGoalAtoms; *p != 0; ++p )
+    for( int* p = _low_copyGoalAtoms; *p != 0; ++p )
       *p = permutation[*p];
 
     /* shrink state. After this everything should be ok */
@@ -2796,14 +2761,14 @@ operatorCompilation( void )
     }
 
   /* inverse table fill */
-  for( i = 0; i < numberOperators; ++i )
+  for( size_t i = 0; i < numberOperators; ++i )
     if( operatorTable[i].valid == 1 )
       {
         /* inverse table for preconditions */
-        for( p = operatorTable[i].prec; *p != 0; ++p )
+        for( int* p = operatorTable[i].prec; *p != 0; ++p )
           {
-            k = invPrecTableSize[*p];
-            t = invPrecTable[*p];
+            int j, k = invPrecTableSize[*p];
+            int* t = invPrecTable[*p];
             for( j = 0; (j < k) && (*(t+j) != 0) && (*(t+j) != i + 1); ++j );
             if( (j == k) || (*(t+j) == 0) )
               {
@@ -2823,10 +2788,10 @@ operatorCompilation( void )
           }
 
         /* inverse table for add */
-        for( a = operatorTable[i].add; *a != 0; ++a )
+        for( int* a = operatorTable[i].add; *a != 0; ++a )
           {
-            k = invAddTableSize[*a];
-            t = invAddTable[*a];
+            int j, k = invAddTableSize[*a];
+            int* t = invAddTable[*a];
             for( j = 0; (j < k) && (*(t+j) != 0) && (*(t+j) != i + 1); ++j );
             if( (j == k) || (*(t+j) == 0) )
               {
@@ -2846,10 +2811,10 @@ operatorCompilation( void )
           }
 
         /* inverse table for del */
-        for( d = operatorTable[i].del; *d != 0; ++d )
+        for( int* d = operatorTable[i].del; *d != 0; ++d )
           {
-            k = invDelTableSize[*d];
-            t = invDelTable[*d];
+            int j, k = invDelTableSize[*d];
+            int* t = invDelTable[*d];
             for( j = 0; (j < k) && (*(t+j) != 0) && (*(t+j) != i + 1); ++j );
             if( (j == k) || (*(t+j) == 0) )
               {
@@ -2870,14 +2835,14 @@ operatorCompilation( void )
       }
 
   /* H inverse table fill */
-  for( i = 0; i < numberHOperators; ++i )
+  for( size_t i = 0; i < numberHOperators; ++i )
     if( HOperatorTable[i].valid == 1 )
       {
         /* inverse table for preconditions */
-        for( p = HOperatorTable[i].prec; *p != 0; ++p )
+        for( int* p = HOperatorTable[i].prec; *p != 0; ++p )
           {
-            k = HInvPrecTableSize[*p];
-            t = HInvPrecTable[*p];
+            int j, k = HInvPrecTableSize[*p];
+            int* t = HInvPrecTable[*p];
             for( j = 0; (j < k) && (*(t+j) != 0) && (*(t+j) != i + 1); ++j );
             if( (j == k) || (*(t+j) == 0) )
               {
@@ -2897,10 +2862,10 @@ operatorCompilation( void )
           }
 
         /* inverse table for add */
-        for( a = HOperatorTable[i].add; *a != 0; ++a )
+        for( int* a = HOperatorTable[i].add; *a != 0; ++a )
           {
-            k = HInvAddTableSize[*a];
-            t = HInvAddTable[*a];
+            int j, k = HInvAddTableSize[*a];
+            int* t = HInvAddTable[*a];
             for( j = 0; (j < k) && (*(t+j) != 0) && (*(t+j) != i + 1); ++j );
             if( (j == k) || (*(t+j) == 0) )
               {
@@ -2934,9 +2899,6 @@ operatorCompilation( void )
 void
 admissibleOperatorCompilation( void )
 {
-  register int x, exists, op, last;
-  register int *p, *a;
-
   /* register entry */
   registerEntry( "admissibleOperatorCompilation()" );
 
@@ -2947,20 +2909,21 @@ admissibleOperatorCompilation( void )
     fatal( noMoreMemory );
 
   /* compilation */
-  for( x = 1; x < SIZE_ATOMS; ++x )
+  for( int x = 1; x < SIZE_ATOMS; ++x )
     {
-      last = 0;
-      for( op = 0; op < numberOperators; ++op )
+      int last = 0;
+      for( size_t op = 0; op < numberOperators; ++op )
         if( operatorTable[op].valid == 1 )
           {
-            exists = 0;
-            for( p = operatorTable[op].prec; (*p != 0) && (exists == 0); ++p )
+            int exists = 0;
+            for( int* p = operatorTable[op].prec; (*p != 0) && (exists == 0); ++p )
 #if !defined(USE_MUTEX)
               if( PAIR( x, *p ).max == INT_MAX )
 #else
               if( MUTEX( x, *p ) )
 #endif
                 {
+                  int* a;
                   for( a = operatorTable[op].add; (*a != 0) && (*a != x) && (*a != *p); ++a );
                   exists = (*a == 0);
                 }
@@ -2986,12 +2949,11 @@ admissibleOperatorCompilation( void )
 
 
 void
-addParents( register int atom, register int *parentList )
+addParents( int atom, int *parentList )
 {
-  register int *ip, *jp, i;
-
-  for( ip = parentList; *ip != 0; ++ip )
+  for( int* ip = parentList; *ip != 0; ++ip )
     {
+      int i, *jp;
       for( jp = parents[atom], i = 0; (jp != 0) && (*jp != 0); ++jp, ++i )
         if( *ip == *jp )
           break;
@@ -3012,12 +2974,10 @@ addParents( register int atom, register int *parentList )
 
 
 void
-identifyGoalParents( register int *atoms )
+identifyGoalParents( int *atoms )
 {
-  register int *ip;
-
-  if( atoms != NULL )
-    for( ip = atoms; *ip != 0; ++ip )
+  if( atoms != nullptr )
+    for( int* ip = atoms; *ip != 0; ++ip )
       if( !asserted( relevantAtom, *ip ) )
         {
           ++numberRelevantAtoms;
@@ -3038,10 +2998,6 @@ identifyGoalParents( register int *atoms )
 void
 generateHOperators( void )
 {
-  register int op, psize, asize, dsize;
-  register int k, j, *s;
-  register suboperator_t *sub;
-
   /* space allocation */
   HSubTableSize = (int*)calloc( numberOperators, sizeof( int ) );
   HSubTable = (int**)calloc( numberOperators, sizeof( int* ) );
@@ -3049,7 +3005,7 @@ generateHOperators( void )
     fatal( noMoreMemory );
 
   /* go! */
-  for( op = 0; op < numberOperators; ++op )
+  for( size_t op = 0; op < numberOperators; ++op )
     {
       /* resize HOperatorTable */
       if( numberHOperators == HOperatorTableSize )
@@ -3081,7 +3037,7 @@ generateHOperators( void )
       ++numberHOperators;
 
       /* now, the suboperators */
-      for( sub = operatorTable[op].suboperators; sub != NULL; sub = sub->next )
+      for( suboperator_t* sub = operatorTable[op].suboperators; sub != nullptr; sub = sub->next )
         {
           /* resize HOperatorTable */
           if( numberHOperators == HOperatorTableSize )
@@ -3098,9 +3054,9 @@ generateHOperators( void )
           HOperatorTable[numberHOperators].valid = 1;
 
           /* space allocation for precondition, add, del lists */
-          psize = operatorTable[op].precSize + sub->precSize;
-          asize = operatorTable[op].addSize + sub->addSize;
-          dsize = operatorTable[op].delSize + sub->delSize;
+          int psize = operatorTable[op].precSize + sub->precSize;
+          int asize = operatorTable[op].addSize + sub->addSize;
+          int dsize = operatorTable[op].delSize + sub->delSize;
           HOperatorTable[numberHOperators].prec = (int*)calloc( psize + 1, sizeof( int ) );
           HOperatorTable[numberHOperators].add = (int*)calloc( asize + 1, sizeof( int ) );
           HOperatorTable[numberHOperators].del = (int*)calloc( dsize + 1, sizeof( int ) );
@@ -3138,8 +3094,8 @@ generateHOperators( void )
             }
 
           /* fill HSub table */
-          k = HSubTableSize[op];
-          s = HSubTable[op];
+          int j, k = HSubTableSize[op];
+          int *s = HSubTable[op];
           for( j = 0; (j < k) && (*(s+j) != 0) && (*(s+j) != numberHOperators + 1); ++j );
           if( (j == k) || (*(s+j) == 0) )
             {
@@ -3173,10 +3129,6 @@ generateHOperators( void )
 void
 mutexCompilation( void )
 {
-  register int i, j, *p, *a, *d, *op;
-  register int change, deleteCondition;
-  struct mutex_s *mutex, *tmpMutex, *tmpList;
-
   /* register entry */
   registerEntry( "mutexCompilation()" );
 
@@ -3190,8 +3142,8 @@ mutexCompilation( void )
     {
       /* bootstrap mutex set. Another method: add all pairs <p,q> of atoms.
        */
-      for( i = 1; i < SIZE_ATOMS; ++i )
-        for( j = 1; j < i; ++j )
+      for( int i = 1; i < SIZE_ATOMS; ++i )
+        for( int j = 1; j < i; ++j )
           {
             /* if the staticCompilation flag is set, then all static atoms
                were removed. In other case, don't consider them when building
@@ -3210,43 +3162,44 @@ mutexCompilation( void )
          mutex <p,q> with a mutexes <p,r> (correspondngly <q,r>) for r in PREC(op')
          where op' is an operator with q in ADD(op') (correspondingly p).
       */
-      for( i = 0; i < numberOperators; ++i )
+      for( size_t i = 0; i < numberOperators; ++i )
         if( operatorTable[i].valid == 1 )
           {
             /* I have no checked the proper use of staticAtom detection for
                this part, so don't use that information.
             */
-            for( a = operatorTable[i].add; *a != 0; ++a )
-              for( d = operatorTable[i].del; *d != 0; ++d )
+            for( int* a = operatorTable[i].add; *a != 0; ++a )
+              for( int* d = operatorTable[i].del; *d != 0; ++d )
                 if( !asserted( staticInitialState, *a ) || !asserted( staticInitialState, *d ) )
                   newMutex( *a, *d, &mutexList );
           }
 
       /* go over all mutex <p,q> and "protect" them */
-      tmpList = NULL;
-      for( mutex = mutexList; mutex != NULL; mutex = mutex->next )
+      mutex_t* tmpList = nullptr;
+      for( mutex_t* mutex = mutexList; mutex != nullptr; mutex = mutex->next )
         {
           /* add protection using operators op with p in ADD(op) */
-          if( invAddTable[mutex->x] != NULL )
-            for( op = invAddTable[mutex->x]; *op != 0; ++op )
-              for( p = operatorTable[(*op)-1].prec; *p != 0; ++p )
+          if( invAddTable[mutex->x] != nullptr )
+            for( int* op = invAddTable[mutex->x]; *op != 0; ++op )
+              for( int* p = operatorTable[(*op)-1].prec; *p != 0; ++p )
                 if( !MUTEX( mutex->y, *p ) &&
                     (!asserted( staticInitialState, mutex->y ) || !asserted( staticInitialState, *p )) )
                   newMutex( mutex->y, *p, &tmpList );
 
           /* add protection using operators op with q in ADD(op) */
-          if( invAddTable[mutex->y] != NULL )
-            for( op = invAddTable[mutex->y]; *op != 0; ++op )
-              for( p = operatorTable[(*op)-1].prec; *p != 0; ++p )
+          if( invAddTable[mutex->y] != nullptr )
+            for( int* op = invAddTable[mutex->y]; *op != 0; ++op )
+              for( int* p = operatorTable[(*op)-1].prec; *p != 0; ++p )
                 if( !MUTEX( mutex->x, *p ) &&
                     (!asserted( staticInitialState, mutex->x ) || !asserted( staticInitialState, *p )) )
                   newMutex( mutex->x, *p, &tmpList );
         }
 
       /* fusion the initial mutex set with "protectors" */
-      if( tmpList != NULL )
+      if( tmpList != nullptr )
         {
-          for( mutex = tmpList; mutex->next != NULL; mutex = mutex->next );
+          mutex_t* mutex;
+          for( mutex = tmpList; mutex->next != nullptr; mutex = mutex->next );
           mutex->next = mutexList;
           mutexList = tmpList;
         }
@@ -3256,23 +3209,25 @@ mutexCompilation( void )
      First condition was already tested in the mutex set bootstrap, so check only
      for second, and third condition.
   */
+  int change;
   do {
     change = 0;
-    tmpList = NULL;
-    for( mutex = mutexList; mutex != NULL; mutex = tmpMutex )
+    for( mutex_t *tmpMutex, *tmpList = nullptr, *mutex = mutexList; mutex != nullptr; mutex = tmpMutex )
       {
-        tmpMutex = mutex->next;
-        deleteCondition = 0;
+        mutex_t* tmpMutex = mutex->next;
+        int deleteCondition = 0;
 
         /* second condition: exists an operator op st p \in ADD(op) and
            q \not\in DEL(op) and (q \in ADD(op) or for all r \in PREC(op),
            (r,q) is not a mutex).
         */
-        if( (deleteCondition == 0) && (invAddTable[mutex->x] != NULL) )
+        if( (deleteCondition == 0) && (invAddTable[mutex->x] != nullptr) )
           {
             /* look for a witness */
+            int* op;
             for( op = invAddTable[mutex->x]; *op != 0; ++op )
               {
+                int *d, *a, *p;
                 /* q \not\in DEL(op) */
                 for( d = operatorTable[(*op)-1].del; (*d != 0) && (*d != mutex->y); ++d );
                 if( *d != 0 )
@@ -3303,11 +3258,13 @@ mutexCompilation( void )
            p \not\in DEL(op) and (p \in ADD(op) or for all r \in PREC(op),
            (r,p) is not a mutex).
         */
-        if( (deleteCondition == 0) && (invAddTable[mutex->y] != NULL) )
+        if( (deleteCondition == 0) && (invAddTable[mutex->y] != nullptr) )
           {
             /* look for a witness */
+            int* op;
             for( op = invAddTable[mutex->y]; *op != 0; ++op )
               {
+                int *d, *a, *p;
                 /* p \not\in DEL(op) */
                 for( d = operatorTable[(*op)-1].del; (*d != 0) && (*d != mutex->x); ++d );
                 if( *d != 0 )
@@ -3345,7 +3302,7 @@ mutexCompilation( void )
 
   /* print mutexes */
   if( verbose >= 5 )
-    for( mutex = mutexList; mutex != NULL; mutex = mutex->next )
+    for( mutex_t* mutex = mutexList; mutex != nullptr; mutex = mutex->next )
       {
         fprintf( stderr, "mutex <%s,", readAtomName( mutex->x ) );
         fprintf( stderr, "%s>\n", readAtomName( mutex->y ) );
@@ -3362,20 +3319,16 @@ mutexCompilation( void )
 void
 mutexSetCompilation( void )
 {
-  register int i;
-  register mutex_t *m, *tm;
-  register mutexSet_t *s;
-
   /* register entry */
   registerEntry( "mutexSetCompilation()" );
 
   /* mutexSet creation */
-  for( i = 1; i < SIZE_ATOMS; ++i )
+  for( size_t i = 1; i < SIZE_ATOMS; ++i )
     if( mutexSet[i].size > 0 )
       newMutexSet( i );
 
   /* mutexSet fill */
-  for( m = mutexList; m != NULL; m = tm )
+  for( mutex_t *tm, *m = mutexList; m != nullptr; m = tm )
     {
       tm = m->next;
       delMutex( m );
@@ -3394,12 +3347,12 @@ mutexSetCompilation( void )
     }
 
   /* calculation of set sizes */
-  for( s = mutexSetList; s != NULL; s = s->next )
+  for( mutexSet_t* s = mutexSetList; s != nullptr; s = s->next )
     {
       s->size = 0;
-      for( m = s->set; m != NULL; ++s->size, m = m->next );
+      for( mutex_t* m = s->set; m != nullptr; ++s->size, m = m->next );
     }
-  assert( mutexList == NULL );
+  assert( mutexList == nullptr );
 
   /* register exit */
   registerExit();
@@ -3407,9 +3360,9 @@ mutexSetCompilation( void )
 
 
 void
-newMutex( register int x, register int y, register mutex_t **mutexList )
+newMutex( int x, int y, mutex_t **mutexList )
 {
-  register mutex_t *mutex;
+  mutex_t *mutex;
 
   if( MUTEX( x, y ) == 0 )
     {
@@ -3417,9 +3370,9 @@ newMutex( register int x, register int y, register mutex_t **mutexList )
         fatal( noMoreMemory );
       mutex->x = x;
       mutex->y = y;
-      mutex->prev = NULL;
+      mutex->prev = nullptr;
       mutex->next = *mutexList;
-      if( *mutexList != NULL )
+      if( *mutexList != nullptr )
         (*mutexList)->prev = mutex;
       (*mutexList) = mutex;
       MUTEX( x, y ) = 1;
@@ -3431,14 +3384,14 @@ newMutex( register int x, register int y, register mutex_t **mutexList )
 
 
 void
-delMutex( register mutex_t *mutex )
+delMutex( mutex_t *mutex )
 {
-  if( mutex->prev != NULL )
+  if( mutex->prev != nullptr )
     mutex->prev->next = mutex->next;
   else
     mutexList = mutex->next;
 
-  if( mutex->next != NULL )
+  if( mutex->next != nullptr )
     mutex->next->prev = mutex->prev;
 
   MUTEX( mutex->x, mutex->y ) = 0;
@@ -3449,25 +3402,25 @@ delMutex( register mutex_t *mutex )
 
 
 void
-newMutexSet( register int x )
+newMutexSet( int x )
 {
-  register mutexSet_t *set, *prev;
+  mutexSet_t *set, *prev;
 
   mutexSet[x].x = x;
-  mutexSet[x].set = NULL;
-  mutexSet[x].next = NULL;
-  for( set = mutexSetList, prev = NULL; (set != NULL) && (set->size > mutexSet[x].size);
+  mutexSet[x].set = nullptr;
+  mutexSet[x].next = nullptr;
+  for( set = mutexSetList, prev = nullptr; (set != nullptr) && (set->size > mutexSet[x].size);
        prev = set, set = set->next );
-  if( set == NULL )
+  if( set == nullptr )
     {
-      if( prev == NULL )
+      if( prev == nullptr )
         mutexSetList = &mutexSet[x];
       else
         prev->next = &mutexSet[x];
     }
   else
     {
-      if( prev == NULL )
+      if( prev == nullptr )
         {
           mutexSet[x].next = mutexSetList;
           mutexSetList = &mutexSet[x];
@@ -3492,8 +3445,6 @@ newMutexSet( register int x )
 void
 initialize( void )
 {
-  register int i, *a, *p, *op;
-  int table_size;
   extern void generateVarsAndValues( void );
 
   /* register entry */
@@ -3510,12 +3461,12 @@ initialize( void )
   generateVarsAndValues();
 
   /* initial state */
-  for( a = _low_initialAtoms; *a != 0; ++a )
+  for( int* a = _low_initialAtoms; *a != 0; ++a )
     set( staticInitialState, *a );
 
   /* goal state */
-  p = _low_copyGoalAtoms;
-  for( a = _low_goalAtoms; *a != 0; ++a )
+  int* p = _low_copyGoalAtoms;
+  for( int* a = _low_goalAtoms; *a != 0; ++a )
     {
       set( staticGoalState, *a );
       *p++ = *a;
@@ -3529,7 +3480,8 @@ initialize( void )
   validOperators = (int*)malloc( (numberOperators + 1) * sizeof( int ) );
   if( !validOperators )
     fatal( noMoreMemory );
-  for( op = validOperators, i = 0; i < numberOperators; *op++ = i++ );
+  int* op = validOperators;
+  for( size_t i = 0; i < numberOperators; *op++ = i++ );
   *op = -1;
 
   /* some general info */
@@ -3551,17 +3503,17 @@ initialize( void )
     fprintf( stderr, "GENERAL: number of H operators = %d\n", numberHOperators );
 
   /* guess an upper bound for bucketTableSize and allocate memory for proper structures */
-  table_size = 0;
-  for( i = 1; i < SIZE_ATOMS; ++i )
+  int table_size = 0;
+  for( size_t i = 1; i < SIZE_ATOMS; ++i )
     if( backwardH1Cost[i].plus < INT_MAX )
       table_size += backwardH1Cost[i].plus; // TODO egraph: backwardH1ECost?
-  table_size = MAX( table_size, MINBUCKETTABLESIZE );
+  table_size = max( table_size, MINBUCKETTABLESIZE );
   resizeBucketTable(table_size);
 
   /* nodeHashTable initialization */
   if( !(nodeHashValues = (unsigned*)malloc( SIZE_ATOMS * sizeof( unsigned ) )) )
     fatal( noMoreMemory );
-  for( i = 0; i < SIZE_ATOMS; ++i )
+  for( size_t i = 0; i < SIZE_ATOMS; ++i )
     nodeHashValues[i] = lrand48() % NODEHASHSIZE;
   memset( nodeHashDiameter, 0, NODEHASHSIZE * sizeof( int ) );
   memset( nodeHashTable, 0, NODEHASHSIZE * sizeof( node_t* ) );
@@ -3575,9 +3527,8 @@ initialize( void )
 
 
 void
-backwardSearchInitialization( register schedule_t *schedule )
+backwardSearchInitialization( schedule_t *schedule )
 {
-  register int *p, *q, *op;
   static int initialized = 0;
 
   if( (schedule->searchDirection == BACKWARD) && (initialized == 0) )
@@ -3589,7 +3540,7 @@ backwardSearchInitialization( register schedule_t *schedule )
       H2Setup( staticInitialState );
 
       /* further operator prunning */
-      for( op = validOperators; *op != -1; ++op )
+      for( int *p, *q, *op = validOperators; *op != -1; ++op )
         {
           for( p = operatorTable[*op].prec; *p != 0; ++p )
             {
@@ -3606,7 +3557,7 @@ backwardSearchInitialization( register schedule_t *schedule )
             }
 
           /* need to remove it? */
-          if( (p != NULL) && (*p != 0) )
+          if( (p != nullptr) && (*p != 0) )
             for( p = op; *p != -1; ++p )
               *p = *(p+1);
         }
@@ -3633,10 +3584,9 @@ backwardSearchInitialization( register schedule_t *schedule )
 **/
 
 int
-goalState( register atom_t *state )
+goalState( atom_t *state )
 {
-  register int *g;
-
+  int* g;
   for( g = _low_goalAtoms; *g != 0; ++g )
     if( !asserted( state, *g ) )
       break;
@@ -3645,56 +3595,54 @@ goalState( register atom_t *state )
 
 
 int
-checkSolution( register node_t *node )
+checkSolution( node_t *node )
 {
-  register int *atom;
-
   if( searchDirection == FORWARD )
-    {
-      return( goalState( node->state ) );
-    }
+  {
+    return( goalState( node->state ) );
+  }
   else
+  {
+    /* set initial state */
+    memcpy( staticState, staticInitialState, MAXATOMPACKS * sizeof( atom_t ) );
+
+    /* apply operators */
+    while( (node != nullptr) && (node->father != nullptr) )
     {
-      /* set initial state */
-      memcpy( staticState, staticInitialState, MAXATOMPACKS * sizeof( atom_t ) );
+      int* atom;
+      /* check preconditions */
+      for( atom = operatorTable[node->operatorId].prec; (*atom != 0) && asserted( staticState, *atom ); ++atom );
+      if( *atom != 0 )
+      {
+        /* fprintf( stderr, "****** TENTATIVE SOLUTION IS NOT **********\n" ); */
+        return( 0 );
+      }
 
-      /* apply operators */
-      while( (node != NULL) && (node->father != NULL) )
-        {
-          /* check preconditions */
-          for( atom = operatorTable[node->operatorId].prec; (*atom != 0) && asserted( staticState, *atom ); ++atom );
-          if( *atom != 0 )
-            {
-              /* fprintf( stderr, "****** TENTATIVE SOLUTION IS NOT **********\n" ); */
-              return( 0 );
-            }
+      /* apply add-list */
+      for( atom = operatorTable[node->operatorId].add; *atom != 0; ++atom )
+        set( staticState, *atom );
 
-          /* apply add-list */
-          for( atom = operatorTable[node->operatorId].add; *atom != 0; ++atom )
-            set( staticState, *atom );
+      /* apply del-list */
+      for( atom = operatorTable[node->operatorId].del; *atom != 0; ++atom )
+        clear( staticState, *atom );
 
-          /* apply del-list */
-          for( atom = operatorTable[node->operatorId].del; *atom != 0; ++atom )
-            clear( staticState, *atom );
-
-          /* next operator */
-          node = node->father;
-        }
-
-      /* check goal state */
-      return( goalState( staticState ) );
+      /* next operator */
+      node = node->father;
     }
+
+    /* check goal state */
+    return( goalState( staticState ) );
+  }
 }
 
 
 int
 checkProblem()
 {
-  register int *p, *q;
   // TODO egraph: check H1ECost
 
   /* check H1Costs for atoms in goal */
-  for( p = _low_copyGoalAtoms; *p != 0; ++p ) {
+  for( int* p = _low_copyGoalAtoms; *p != 0; ++p ) {
     if( asserted(staticAtom,*p) ) {
       if( !asserted(staticInitialState,*p) ) {
         fprintf(stderr, "SOLUTION: goal atom %s is static but not in initial situation\n", readAtomName(*p));
@@ -3709,7 +3657,7 @@ checkProblem()
   }
 
   /* check H1Costs for atoms in goal */
-  for( p = _low_goalAtoms; *p != 0; ++p ) {
+  for( int* p = _low_goalAtoms; *p != 0; ++p ) {
     if( backwardH1Cost[*p].max == INT_MAX ) {
       fprintf(stderr, "SOLUTION: goal atom %s has infinite backward h1-cost\n", readAtomName(*p));
       return(0);
@@ -3718,8 +3666,8 @@ checkProblem()
 
   /* check H2Costs for atoms in goal */
   if( H2Computed == 1 ) {
-    for( p = _low_goalAtoms; *p != 0; ++p ) {
-      for( q = p; *q != 0; ++q ) {
+    for( int* p = _low_goalAtoms; *p != 0; ++p ) {
+      for( int* q = p; *q != 0; ++q ) {
         if( PAIR(*p,*q).max == INT_MAX ) {
           fprintf(stderr, "SOLUTION: pair of goal atoms (%s,%s) has infinite h2-cost\n", readAtomName(*p), readAtomName(*q));
           return(0);
@@ -3734,99 +3682,100 @@ checkProblem()
 
 
 bool
-readEGraph(const char* fileName)
+readEGraph(string fileName)
 {
-  while (experienceSize)
+  for (auto& exper : experience)
   {
-    --experienceSize;
-    free(experience[experienceSize].tailState);
-    free(experience[experienceSize].headState);
+    free(exper.tailState);
+    free(exper.headState);
   }
-  eNode[0] = staticGoalState;
-  eNodeSize = 1;
-  memset(eDist, 0x3f3f3f3f, sizeof eDist);
+  experience.clear();
+  eNode = { staticGoalState };
   
-  FILE *file = fopen( fileName, "r" );
-  if (file == NULL)
+  FILE *file = fopen( fileName.c_str(), "r" );
+  if (file == nullptr)
     {
       perror( "ERROR: could not read Egraph from file" );
       return false;
     }
   
   fprintf(stdout, "readEGraph:");
-  char name[128];
-  register int i, j, k, p;
-  while (fgets(name, 128, file) != NULL && name[0] != '\0')
+  char* name;
+  while (fgets(name, 128, file) != nullptr && name[0] != '\0')
+  {
+    name[strlen(name)-1] = '\0';
+    fprintf(stdout, " %s", name);
+    experience.push_back(experience_t());
+    experience_t& exper = experience.back();
+    strcpy(exper.opName, name);
+    exper.tailState = (atom_t*) malloc( SIZE_PACKS * sizeof(atom_t) );
+    exper.headState = (atom_t*) malloc( SIZE_PACKS * sizeof(atom_t) );
+    for (size_t i = 0; i < SIZE_PACKS; ++i)
     {
-      name[strlen(name)-1] = '\0';
-      fprintf(stdout, " %s", name);
-      strcpy(experience[experienceSize].opName, name);
-      experience[experienceSize].tailState = (atom_t*) malloc( SIZE_PACKS * sizeof(atom_t) );
-      experience[experienceSize].headState = (atom_t*) malloc( SIZE_PACKS * sizeof(atom_t) );
-      for (i = 0; i < SIZE_PACKS; ++i)
-      {
-        fscanf( file, " %u ", &experience[experienceSize].tailState[i].pack );
-      }
-      for (i = 0; i < SIZE_PACKS; ++i)
-      {
-        fscanf( file, " %u ", &experience[experienceSize].headState[i].pack );
-      }
-      int idxT, idxH;
-      for (idxT = 0; idxT < eNodeSize; ++idxT)
-        if (!stateCmp(eNode[idxT], experience[experienceSize].tailState))
-          break;
-      if (idxT == eNodeSize)
-        eNode[eNodeSize++] = experience[experienceSize].tailState;
-      for (idxH = 0; idxH < eNodeSize; ++idxH)
-        if (!stateCmp(eNode[idxH], experience[experienceSize].headState))
-          break;
-      if (idxH == eNodeSize)
-        eNode[eNodeSize++] = experience[experienceSize].headState;
-      eDist[idxT][idxH].plus = eDist[idxT][idxH].max = 1;
-      
-      ++experienceSize;
+      fscanf( file, " %u ", &exper.tailState[i].pack );
     }
+    for (size_t i = 0; i < SIZE_PACKS; ++i)
+    {
+      fscanf( file, " %u ", &exper.headState[i].pack );
+    }
+    int idxT, idxH;
+    for (idxT = 0; idxT < eNode.size(); ++idxT)
+      if (!stateCmp(eNode[idxT], exper.tailState))
+        break;
+    if (idxT == eNode.size())
+      eNode.push_back(exper.tailState);
+    for (idxH = 0; idxH < eNode.size(); ++idxH)
+      if (!stateCmp(eNode[idxH], exper.headState))
+        break;
+    if (idxH == eNode.size())
+      eNode.push_back(exper.headState);
+    eDist[idxT][idxH].plus = eDist[idxT][idxH].max = 1;
+  }
   fprintf(stdout, "\n");
   fclose( file );
   
-  for (i = 0; i < eNodeSize; ++i)
+  cost_t costInfinity;
+  costInfinity.plus = costInfinity.max = INT_MAX / 2;
+  eDist = vector<vector<cost_t> >(eNode.size(), vector<cost_t>(eNode.size(), costInfinity));
+  
+  for (size_t i = 0; i < eNode.size(); ++i)
   {
     H1Setup( eNode[i] );
     
-    for (j = 0; j < eNodeSize; ++j)
+    for (size_t j = 0; j < eNode.size(); ++j)
     {
       cost_t dist;
       dist.plus = dist.max = 0;
-      for( p = 1; p < SIZE_ATOMS; ++p )
-      if( asserted( eNode[j], p ) )
+      for (size_t p = 1; p < SIZE_ATOMS; ++p)
+      if ( asserted( eNode[j], p ) )
         { 
           if( H1Cost[p].plus == INT_MAX )
-            {
-              dist.plus = INT_MAX;
-              dist.max = INT_MAX;
-              break;
-            }
+          {
+            dist.plus = INT_MAX;
+            dist.max = INT_MAX;
+            break;
+          }
           else
-            {
-              dist.plus = PLUSSUM( dist.plus, H1Cost[p].plus );
-              dist.max = MAX( dist.max, H1Cost[p].max );
-            }
+          {
+            dist.plus = PLUSSUM( dist.plus, H1Cost[p].plus );
+            dist.max = max( dist.max, H1Cost[p].max );
+          }
         }
       if (dist.plus != INT_MAX)
       {
-        eDist[i][j].plus = MIN(eDist[i][j].plus, experienceWeight*dist.plus);
-        eDist[i][j].max = MIN(eDist[i][j].max, experienceWeight*dist.max);
+        eDist[i][j].plus = min(eDist[i][j].plus, (unsigned long) experienceWeight*dist.plus);
+        eDist[i][j].max = min(eDist[i][j].max, (unsigned long) experienceWeight*dist.max);
       }
     }
   }
   
   // Floyd-Warshall
-  for (k = 0; k < eNodeSize; ++k)
-    for (i = 0; i < eNodeSize; ++i)
-      for (j = 0; j < eNodeSize; ++j)
+  for (size_t k = 0; k < eNode.size(); ++k)
+    for (size_t i = 0; i < eNode.size(); ++i)
+      for (size_t j = 0; j < eNode.size(); ++j)
       {
-        eDist[i][j].plus = MIN(eDist[i][j].plus, eDist[i][k].plus + eDist[k][j].plus);
-        eDist[i][j].max = MIN(eDist[i][j].max, eDist[i][k].max + eDist[k][j].max);
+        eDist[i][j].plus = min(eDist[i][j].plus, eDist[i][k].plus + eDist[k][j].plus);
+        eDist[i][j].max = min(eDist[i][j].max, eDist[i][k].max + eDist[k][j].max);
       }
   // TODO remove debug code
   /*for (i = 0; i < eNodeSize; ++i)
@@ -3844,56 +3793,53 @@ readEGraph(const char* fileName)
 
 
 bool
-printEGraph(const char* fileName)
+printEGraph(string fileName)
 {
-  FILE *file = fopen( fileName, "w" );
-  if (file == NULL)
-    {
-      perror( "ERROR: could not write EGraph to file" );
-      return false;
-    }
+  FILE *file = fopen( fileName.c_str(), "w" );
+  if (file == nullptr)
+  {
+    perror( "ERROR: could not write EGraph to file" );
+    return false;
+  }
   
-  register int p, i;
-  for( p = 0; p < experienceSize; ++p)
-    {
-      fprintf( file, "%s\n", experience[p].opName );
-      for (i = 0; i < SIZE_PACKS; ++i)
-        fprintf( file, " %u", experience[p].tailState[i].pack );
-      for (i = 0; i < SIZE_PACKS; ++i)
-        fprintf( file, " %u", experience[p].headState[i].pack );
-      fprintf( file, "\n" );
-    }
+  for (size_t p = 0; p < experience.size(); ++p)
+  {
+    fprintf( file, "%s\n", experience[p].opName );
+    for (size_t i = 0; i < SIZE_PACKS; ++i)
+      fprintf( file, " %u", experience[p].tailState[i].pack );
+    for (size_t i = 0; i < SIZE_PACKS; ++i)
+      fprintf( file, " %u", experience[p].headState[i].pack );
+    fprintf( file, "\n" );
+  }
   fclose( file );
   return true;
 }
 
 
 void
-printOperator( register FILE *file, register int alpha )
+printOperator( FILE *file, int alpha )
 {
-  register int *p;
-
   fprintf( file, "operator %d \"%s\":\n", alpha, operatorTable[alpha].name );
   fprintf( file, "\tprec = " );
-  for( p = operatorTable[alpha].prec; *p != 0; ++p )
+  for( int* p = operatorTable[alpha].prec; *p != 0; ++p )
     fprintf( file, "%s ", readAtomByNumber( *p )->name );
   fprintf( file, "\n\tadd = " );
-  for( p = operatorTable[alpha].add; *p != 0; ++p )
+  for( int* p = operatorTable[alpha].add; *p != 0; ++p )
     fprintf( file, "%s ", readAtomByNumber( *p )->name );
   fprintf( file, "\n\tdel = " );
-  for( p = operatorTable[alpha].del; *p != 0; ++p )
+  for( int* p = operatorTable[alpha].del; *p != 0; ++p )
     fprintf( file, "%s ", readAtomByNumber( *p )->name );
   fprintf( file, "\n" );
 }
 
 
 void
-printState( register FILE *file, register atom_t *state )
+printState( FILE *file, atom_t *state )
 {
-  register int i;
+  int i;
 
   fprintf( file, "====>" );
-  for( i = 1; i < SIZE_ATOMS; ++i )
+  for( size_t i = 1; i < SIZE_ATOMS; ++i )
     if( asserted( state, i ) )
       fprintf( file, " %s[%d]", readAtomName( i ), i );
   fprintf( file, "\n" );
@@ -3901,7 +3847,7 @@ printState( register FILE *file, register atom_t *state )
 
 
 void
-printNode( register FILE *file, register char *prefix, register node_t *node )
+printNode( FILE *file, char *prefix, node_t *node )
 {
   fprintf( file, "%s: node %p (cost = %d, h1plus = %d, h1max = %d, h2plus = %d, h2max = %d, h1eplus = %d, h1emax = %d)\n",
            prefix, node, node->cost, node->h1_plus, node->h1_max, node->h2_plus, node->h2_max, node->h1e_plus, node->h1e_max );
@@ -3915,90 +3861,91 @@ printNode( register FILE *file, register char *prefix, register node_t *node )
 
 
 void
-printPath( register FILE *file, register node_t *node, register char *prefix, register char *suffix )
+printPath( FILE *file, node_t *node, char *prefix, char *suffix )
 {
   if( searchDirection == FORWARD )
+  {
+    if( node->father != nullptr )
     {
-      if( node->father != NULL )
-        {
-          printPath( file, node->father, prefix, suffix );
-          fprintf( file, "%s%s%s", prefix, operatorTable[node->operatorId].name, suffix );
-        }
+      printPath( file, node->father, prefix, suffix );
+      fprintf( file, "%s%s%s", prefix, operatorTable[node->operatorId].name, suffix );
     }
+  }
   else
+  {
+    while( node != nullptr )
     {
-      while( node != NULL )
-        {
-          if( node->father != NULL )
-            fprintf( file, "%s%s%s", prefix, operatorTable[node->operatorId].name, suffix );
-          node = node->father;
-        }
+      if( node->father != nullptr )
+        fprintf( file, "%s%s%s", prefix, operatorTable[node->operatorId].name, suffix );
+      node = node->father;
     }
+  }
 }
 
 
 void
-memorizePath( register node_t *node )
+memorizePath( node_t *node )
 {
-  assert( node != NULL );
+  assert( node != nullptr );
   fprintf(stderr, "memorizePath ");
-  register int i;
   if( searchDirection == FORWARD )
     {
       fprintf(stderr, "Forward:");
-      while( node->father != NULL )
-        {
-          experience[experienceSize].tailState = (atom_t*) malloc( SIZE_PACKS * sizeof(atom_t) );
-          experience[experienceSize].headState = (atom_t*) malloc( SIZE_PACKS * sizeof(atom_t) );
-          for (i = 0; i < SIZE_PACKS; ++i)
-            experience[experienceSize].tailState[i].pack = node->father->state[i].pack;
-          for (i = 0; i < SIZE_PACKS; ++i)
-            experience[experienceSize].headState[i].pack = node->state[i].pack;
-          
-          strcpy(experience[experienceSize].opName, operatorTable[node->operatorId].name);
-          fprintf(stderr, " %d-%s", experienceSize, experience[experienceSize].opName);
-          
-          for (i = 0; i < experienceSize; ++i)
-          if (!stateCmp(experience[i].tailState, experience[experienceSize].tailState)
-            && !strcmp(experience[i].opName, experience[experienceSize].opName))
-            {
-              free(experience[experienceSize].tailState);
-              free(experience[experienceSize].headState);
-              --experienceSize;
-              break;
-            }
-          ++experienceSize;
-          node = node->father;
-        }
+      while( node->father != nullptr )
+      {
+        experience.push_back(experience_t());
+        experience_t& exper = experience.back();
+        exper.tailState = (atom_t*) malloc( SIZE_PACKS * sizeof(atom_t) );
+        exper.headState = (atom_t*) malloc( SIZE_PACKS * sizeof(atom_t) );
+        for (size_t i = 0; i < SIZE_PACKS; ++i)
+          exper.tailState[i].pack = node->father->state[i].pack;
+        for (size_t i = 0; i < SIZE_PACKS; ++i)
+          exper.headState[i].pack = node->state[i].pack;
+        
+        strcpy(exper.opName, operatorTable[node->operatorId].name);
+        fprintf(stderr, " %d-%s", experience.size(), exper.opName);
+        
+        for (size_t i = 0; i < experience.size(); ++i)
+        if (!stateCmp(experience[i].tailState, exper.tailState)
+          && !strcmp(experience[i].opName, exper.opName))
+          {
+            free(exper.tailState);
+            free(exper.headState);
+            experience.pop_back();
+            break;
+          }
+        node = node->father;
+      }
     }
   else
     {
       fprintf(stderr, "Backward:");
-      while( node->father != NULL )
-        {
-          // TODO egraph: backward edges memorize which endpoint?
-          experience[experienceSize].tailState = (atom_t*) malloc( SIZE_PACKS * sizeof(atom_t) );
-          experience[experienceSize].headState = (atom_t*) malloc( SIZE_PACKS * sizeof(atom_t) );
-          for (i = 0; i < SIZE_PACKS; ++i)
-            experience[experienceSize].tailState[i].pack = node->father->state[i].pack;
-          for (i = 0; i < SIZE_PACKS; ++i)
-            experience[experienceSize].headState[i].pack = node->state[i].pack;
-          
-          strcpy(experience[experienceSize].opName, operatorTable[node->operatorId].name);
-          fprintf(stderr, " %d-%s", experienceSize, experience[experienceSize].opName);
-          
-          for (i = 0; i < experienceSize; ++i)
-          if (!stateCmp(experience[i].tailState, experience[experienceSize].tailState)
-            && !strcmp(experience[i].opName, experience[experienceSize].opName))
-            {
-              free(experience[experienceSize].tailState);
-              free(experience[experienceSize].headState);
-              --experienceSize;
-              break;
-            }
-          ++experienceSize;
-          node = node->father;
-        }
+      while( node->father != nullptr )
+      {
+        // TODO egraph: backward edges memorize which endpoint?
+        experience.push_back(experience_t());
+        experience_t& exper = experience.back();
+        exper.tailState = (atom_t*) malloc( SIZE_PACKS * sizeof(atom_t) );
+        exper.headState = (atom_t*) malloc( SIZE_PACKS * sizeof(atom_t) );
+        for (size_t i = 0; i < SIZE_PACKS; ++i)
+          exper.tailState[i].pack = node->father->state[i].pack;
+        for (size_t i = 0; i < SIZE_PACKS; ++i)
+          exper.headState[i].pack = node->state[i].pack;
+        
+        strcpy(exper.opName, operatorTable[node->operatorId].name);
+        fprintf(stderr, " %d-%s", experience.size(), exper.opName);
+        
+        for (size_t i = 0; i < experience.size(); ++i)
+        if (!stateCmp(experience[i].tailState, exper.tailState)
+          && !strcmp(experience[i].opName, exper.opName))
+          {
+            free(exper.tailState);
+            free(exper.headState);
+            experience.pop_back();
+            break;
+          }
+        node = node->father;
+      }
     }
     fprintf(stderr, "\n");
 }
@@ -4034,8 +3981,6 @@ cleanStatistics( void )
 node_t *
 startBFS( schedule_t *schedule )
 {
-  register node_t *result, *node;
-
   /* register entry */
   registerEntry( "startBFS()" );
 
@@ -4045,11 +3990,11 @@ startBFS( schedule_t *schedule )
   cleanLists();
 
   /* initialization */
-  node = getNode();
+  node_t* node = getNode();
   memset( firstNodeInBucket, 0, bucketTableSize * sizeof( node_t* ) );
   memset( lastNodeInBucket, 0, bucketTableSize * sizeof( node_t* ) );
   node->operatorId = -1;
-  node->father = NULL;
+  node->father = nullptr;
   node->cost = 0;
 
   /* initial state setup */
@@ -4066,7 +4011,7 @@ startBFS( schedule_t *schedule )
     printState( stderr, node->state );
 
   /* search */
-  result = BFS( schedule );
+  node_t* result = BFS( schedule );
 
   /* register exit */
   registerExit();
@@ -4079,12 +4024,10 @@ startBFS( schedule_t *schedule )
 node_t *
 BFS( schedule_t *schedule )
 {
-  register int i, children;
-  register node_t *currentNode;
   node_t **buffer;
 
   /* get first node */
-  currentNode = getFirstOPEN();
+  node_t* currentNode = getFirstOPEN();
 
   /* check for goal */
   if( (currentNode->h1_plus == 0) && checkSolution( currentNode ) )
@@ -4100,18 +4043,19 @@ BFS( schedule_t *schedule )
     memoryConstraint = -1;
 
   /* loop */
-  while( currentNode != NULL )
+  while( currentNode != nullptr )
     {
       /* check constraints */
       if( timeExpired || memoryExpired )
         {
           fprintf( stderr, "CONSTRAINT: %s.\n", (timeExpired ? "time" : "memory") );
-          return( NULL );
+          return( nullptr );
         }
 
       /* basic assertion */
       assert( currentNode->valid == 1 );
-
+      
+      int children;
       /* expand situation */
       if( searchDirection == FORWARD )
         children = forwardNodeExpansion( currentNode, &buffer );
@@ -4132,12 +4076,12 @@ BFS( schedule_t *schedule )
 
       /* print child */
       if( verbose >= 6 )
-        for( i = 0; i < children; ++i )
+        for( size_t i = 0; i < children; ++i )
           if( buffer[i]->valid == 1 )
             printNode( stderr, "child", buffer[i] );
 
       /* test for goal */
-      for( i = 0; i < children; ++i )
+      for( size_t i = 0; i < children; ++i )
         if( (buffer[i]->valid == 1) && (buffer[i]->h1_plus == 0) && checkSolution( buffer[i] ) )
           return( buffer[i] );
 
@@ -4151,7 +4095,7 @@ BFS( schedule_t *schedule )
       /* next node */
       currentNode = getFirstOPEN();
     }
-  return( NULL );
+  return( nullptr );
 }
 
 
@@ -4166,8 +4110,6 @@ BFS( schedule_t *schedule )
 node_t *
 startGBFS( schedule_t *schedule )
 {
-  register node_t *result, *node;
-
   /* register entry */
   registerEntry( "startGBFS()" );
 
@@ -4177,11 +4119,11 @@ startGBFS( schedule_t *schedule )
   cleanLists();
 
   /* initialization */
-  node = getNode();
+  node_t* node = getNode();
   memset( firstNodeInBucket, 0, bucketTableSize * sizeof( node_t* ) );
   memset( lastNodeInBucket, 0, bucketTableSize * sizeof( node_t* ) );
   node->operatorId = -1;
-  node->father = NULL;
+  node->father = nullptr;
   node->cost = 0;
 
   /* initial state setup */
@@ -4198,7 +4140,7 @@ startGBFS( schedule_t *schedule )
     printState( stderr, node->state );
 
   /* search */
-  result = GBFS( schedule );
+  node_t* result = GBFS( schedule );
 
   /* register exit */
   registerExit();
@@ -4211,12 +4153,10 @@ startGBFS( schedule_t *schedule )
 node_t *
 GBFS( schedule_t *schedule )
 {
-  register int i, children;
-  register node_t *currentNode, *nextNode;
   node_t **buffer;
 
   /* get first node */
-  currentNode = getFirstOPEN();
+  node_t* currentNode = getFirstOPEN();
 
   /* check for goal */
   if( (currentNode->h1_plus == 0) && checkSolution( currentNode ) )
@@ -4233,19 +4173,20 @@ GBFS( schedule_t *schedule )
 
   /* loop */
   assert( nodesInOPEN > 0 );
-  while( currentNode != NULL )
+  while( currentNode != nullptr )
     {
       assert( nodesInOPEN > 0 );
       /* check constraints */
       if( timeExpired || memoryExpired )
         {
           fprintf( stderr, "CONSTRAINT: %s.\n", (timeExpired ? "time" : "memory") );
-          return( NULL );
+          return( nullptr );
         }
 
       /* basic assertion */
       assert( currentNode->valid == 1 );
-
+      
+      int children;
       /* expand node */
       if( searchDirection == FORWARD )
         children = forwardNodeExpansion( currentNode, &buffer );
@@ -4262,12 +4203,12 @@ GBFS( schedule_t *schedule )
 
       /* print child */
       if( verbose >= 6 )
-        for( i = 0; i < children; ++i )
+        for( size_t i = 0; i < children; ++i )
           if( buffer[i]->valid == 1 )
             printNode( stderr, "child", buffer[i] );
 
       /* test for goal */
-      for( i = 0; i < children; ++i )
+      for( size_t i = 0; i < children; ++i )
         if( (buffer[i]->valid == 1) && (buffer[i]->h1_plus == 0) && checkSolution( buffer[i] ) )
           return( buffer[i] );
 
@@ -4281,27 +4222,27 @@ GBFS( schedule_t *schedule )
       assert( nodesInOPEN > 0 );
 
       /* next node: first try a probe */
-      nextNode = NULL; // TODO egraph: why h1plus? This will not necessarily choose the best f-value
-      for( i = 0; i < children; ++i )
+      node_t* nextNode = nullptr; // TODO egraph: why h1plus? This will not necessarily choose the best f-value
+      for( size_t i = 0; i < children; ++i )
         if( (buffer[i]->valid == 1) &&
-            ((nextNode == NULL) ||
+            ((nextNode == nullptr) ||
              (buffer[i]->h1_plus < nextNode->h1_plus) ||
              ((buffer[i]->h1_plus == nextNode->h1_plus) && (buffer[i]->h1_max < nextNode->h1_max))) )
           nextNode = buffer[i];
 
-      if( (nextNode != NULL) &&
+      if( (nextNode != nullptr) &&
           ((nextNode->h1_plus > currentNode->h1_plus) ||
            ((nextNode->h1_plus == currentNode->h1_plus) && (nextNode->h1_max >= currentNode->h1_max))) )
-        nextNode = NULL;
+        nextNode = nullptr;
 
       /* next node: if nothing, select by BFS */
-      if( nextNode == NULL )
+      if( nextNode == nullptr )
         currentNode = getFirstOPEN();
       else
         currentNode = nextNode;
       assert( currentNode->open == 1 );
     }
-  return( NULL );
+  return( nullptr );
 }
 
 
@@ -4314,9 +4255,9 @@ GBFS( schedule_t *schedule )
 **/
 
 void
-registerEntry( register char *procedure )
+registerEntry( char *procedure )
 {
-  register procRegister_t *proc;
+  procRegister_t* proc;
 
   if( !(proc = (procRegister_t*)malloc( sizeof( procRegister_t ) )) )
     fatal( noMoreMemory );
@@ -4329,12 +4270,11 @@ registerEntry( register char *procedure )
 int
 registerExit( void )
 {
-  register procRegister_t *proc;
   struct rusage r_usage;
 
-  if( procStackTop != NULL )
+  if( procStackTop != nullptr )
     {
-      proc = procStackTop;
+      procRegister_t* proc = procStackTop;
       getrusage( RUSAGE_SELF, &r_usage );
       proc->diffTime = (float)r_usage.ru_utime.tv_sec + (float)r_usage.ru_stime.tv_sec +
         (float)r_usage.ru_utime.tv_usec / (float)1000000 + (float)r_usage.ru_stime.tv_usec / (float)1000000;
@@ -4408,7 +4348,7 @@ setTimer( unsigned long msecs )
   itv.it_interval.tv_usec = 0;
   itv.it_value.tv_sec = msecs/1000;
   itv.it_value.tv_usec = (msecs%1000)*1000;
-  setitimer( ITIMER_VIRTUAL, &itv, NULL );
+  setitimer( ITIMER_VIRTUAL, &itv, nullptr );
 }
 
 
@@ -4423,10 +4363,8 @@ setTimer( unsigned long msecs )
 node_t *
 scheduler( schedule_t *schedule )
 {
-  register node_t *result;
-
-  result = NULL;
-  while( (result == 0) && (schedule != NULL) )
+  node_t* result = nullptr;
+  while( (result == 0) && (schedule != nullptr) )
     {
       /* check implementation */
       if( (schedule->searchHeuristic == H2PLUS) ||
@@ -4477,7 +4415,7 @@ scheduler( schedule_t *schedule )
         }
 
       /* print search results and some statistics */
-      if( result == NULL )
+      if( result == nullptr )
         {
           fprintf( stderr, "SOLUTION: no solution found\n" );
         }
@@ -4508,10 +4446,8 @@ scheduler( schedule_t *schedule )
 int
 readSymbolicParameter( char *s, char **table, int tableSize )
 {
-  register int i;
-
   /* lookup table */
-  for( i = 0; i < tableSize; ++i )
+  for( size_t i = 0; i < tableSize; ++i )
     if( !strcasecmp( s, table[i] ) )
       return( i );
   return( -1 );
@@ -4521,58 +4457,56 @@ readSymbolicParameter( char *s, char **table, int tableSize )
 void
 parseSchedule( char *s )
 {
-  char *option, *p, *direction, *heuristic, *time;
-  schedule_t *schedule, *sp;
-
   /* free resources */
-  if( globalSchedule != NULL )
+  if( globalSchedule != nullptr )
     free( globalSchedule );
 
   /* go over all options */
-  option = strtok( s, ":" );
-  while( option != NULL )
+  char* option = strtok( s, ":" );
+  while( option != nullptr )
     {
       /* check option syntax */
       if( (option[0] != '[') || (option[strlen(option)-1] != ']') )
         fatal( optionSyntax );
 
       /* extract info */
-      p = option + 1;
-      direction = p;
+      char* p = option + 1;
+      char* direction = p;
       p = strchr( p, ',' );
       *p++ = '\0';
-      heuristic = p;
+      char* heuristic = p;
       p = strchr( p, ',' );
       *p++ = '\0';
-      time = p;
+      char* time = p;
       p = strchr( p, ']' );
       *p++ = '\0';
-      if( (direction == NULL) || (heuristic == NULL) || (time == NULL) )
+      if( (direction == nullptr) || (heuristic == nullptr) || (time == nullptr) )
         fatal( optionSyntax );
 
       /* build schedule */
-      schedule = (schedule_t*)malloc( sizeof( schedule_t ) );
+      schedule_t* schedule = (schedule_t*)malloc( sizeof( schedule_t ) );
       schedule->memory = 0;
       schedule->time = atoi( time );
       schedule->constraintType = (schedule->time <= 0 ? 0 : TIME);
       schedule->searchAlgorithm = _BFS;
       schedule->searchDirection = readSymbolicParameter( direction, searchDirectionName, numberDirections );
       schedule->searchHeuristic = readSymbolicParameter( heuristic, searchHeuristicName, numberHeuristics );
-      schedule->next = NULL;
+      schedule->next = nullptr;
 
       /* check parameters */
       if( (schedule->searchDirection == -1) || (schedule->searchHeuristic == -1) )
         fatal( searchParameter );
 
       /* insert schedule */
-      for( sp = globalSchedule; (sp != NULL) && (sp->next != NULL); sp = sp->next );
-      if( sp == NULL )
+      schedule_t* sp;
+      for( sp = globalSchedule; (sp != nullptr) && (sp->next != nullptr); sp = sp->next );
+      if( sp == nullptr )
         globalSchedule = schedule;
       else
         sp->next = schedule;
 
       /* next option */
-      option = strtok( NULL, ":" );
+      option = strtok( nullptr, ":" );
     }
 }
 
@@ -4586,7 +4520,7 @@ parseSchedule( char *s )
 **/
 
 void
-_fatal( register int returnCode, register char *s, register char *file, register int line )
+_fatal( int returnCode, char *s, char *file, int line )
 {
   switch( returnCode )
     {
@@ -4655,10 +4589,8 @@ notYetImplemented( schedule_t *schedule )
 void
 parseArguments( int argc, char **argv )
 {
-  char *progname;
-
   /* set some defaults */
-  progname = argv[0];
+  string progname = argv[0];
   verbose = 1;
   mutexesAllPairs = 1;
 
@@ -4669,8 +4601,8 @@ parseArguments( int argc, char **argv )
   searchAlgorithm = _GBFS;
   searchDirection = BACKWARD;
   searchHeuristic = H1PLUS;
-  strcpy(EGraphIn, "EGraph.txt");
-  strcpy(EGraphOut, "EGraph.txt");
+  EGraphIn = "EGraph.txt";
+  EGraphOut = "EGraph.txt";
 
   /* parse options */
   while( argc > 1 && *(*++argv) == '-' )
@@ -4690,8 +4622,8 @@ parseArguments( int argc, char **argv )
           --argc;
           break;
         case 'f': // specify filenames for E-graph
-          strcpy( EGraphIn, *++argv );
-          strcpy( EGraphOut, *++argv );
+          EGraphIn = *++argv;
+          EGraphOut = *++argv;
           argc -= 2;
           break;
         case 'v':
@@ -4728,19 +4660,19 @@ parseArguments( int argc, char **argv )
     }
 
   /* set default schedule if empty one (i.e. if no "-S" parameter) */
-  if( globalSchedule == NULL )
+  if( globalSchedule == nullptr )
     {
       globalSchedule = (schedule_t*)malloc( sizeof( schedule_t ) );
       globalSchedule->constraintType = 0;
       globalSchedule->searchDirection = searchDirection;
       globalSchedule->searchAlgorithm = searchAlgorithm;
       globalSchedule->searchHeuristic = searchHeuristic;
-      globalSchedule->next = NULL;
+      globalSchedule->next = nullptr;
     }
 
   /* print parameters */
   fprintf( stderr, "PROBLEM: solving problem: %s %s\n", problemFile, domainFile );
-  if( scheduleString != NULL )
+  if( scheduleString != nullptr )
     fprintf( stderr, "PARAMETERS: -S %s -w %f -v %d\n", scheduleString, heuristicWeight, verbose );
   else
     fprintf( stderr, "PARAMETERS: -a %s -d %s -h %s -w %f -v %d\n",
@@ -4752,17 +4684,15 @@ parseArguments( int argc, char **argv )
 int
 parseProblem( void )
 {
-  int rv, fd, file;
-
-  static char *files[2];
+  string files[2];
   extern int yyparse( void );
   extern int lineno;
 
-  rv = 0;
+  int rv = 0;
   files[0] = problemFile;
   files[1] = domainFile;
-  for( file = 0; file < 2; ++file )
-    if( (fd = open( files[file], O_RDONLY )) == -1 )
+  for( int fd, file = 0; file < 2; ++file )
+    if( (fd = open( files[file].c_str(), O_RDONLY )) == -1 )
       {
         perror( "ERROR: parsing files" );
         exit( -1 );
@@ -4775,7 +4705,7 @@ parseProblem( void )
         else
           clearerr( stdin );
         dup( fd );
-        _low_yyfile = files[file];
+        strcpy(_low_yyfile, files[file].c_str());
         lineno = 1;
         rv += yyparse();
         close( fileno( stdin ) );
@@ -4788,9 +4718,6 @@ parseProblem( void )
 int
 main( int argc, char **argv )
 {
-  int rv;
-  node_t *result;
-
   /* set signal handler */
   signal( SIGHUP, &SIGHUPHandler );
 
@@ -4801,8 +4728,8 @@ main( int argc, char **argv )
   parseArguments( argc, argv );
 
   /* parse problem */
-  result = NULL;
-  rv = parseProblem();
+  node_t* result = nullptr;
+  int rv = parseProblem();
   if( rv == noError )
     {
       /* initialize planner */
@@ -4811,7 +4738,7 @@ main( int argc, char **argv )
 
       /* go! */
       result = scheduler( globalSchedule );
-      rv = (result == NULL);
+      rv = (result == nullptr);
     }
   else
     {
@@ -4821,7 +4748,7 @@ main( int argc, char **argv )
   /* register exit */
   registerExit();
 #if defined(COMPETITION_OUTPUT)
-  if( result != NULL )
+  if( result != nullptr )
     {
       fprintf( stdout, "%s,%.4f,%d", _low_problemName, currentElapsedTime(), result->cost );
       printPath( stdout, result, ",", "" );
