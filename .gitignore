@@ -1,6 +1,6 @@
 *~
+*.o
 .kdev4
 .svn
-*.o
 /planner/parser.c
 /planner/pddl.c
