@@ -1310,6 +1310,7 @@ heuristics( node_t *node )
       
       node->h1e_plus *= experienceWeight;
       node->h1e_max *= experienceWeight;
+      
       for ( size_t i = 0; i < eNode.size(); ++i )
       if ( eDist[i][0].plus < node->h1e_plus || eDist[i][0].max < node->h1e_max )
         {
@@ -1589,57 +1590,57 @@ getNode( void )
 
   /* check if we have enough pool areas */
   if( currentNodePool + 1 >= nodePoolTableSize )
-    {
-      int oldSize = nodePoolTableSize;
-      nodePoolTableSize = (nodePoolTableSize == 0 ? 1024 : INCRATE * nodePoolTableSize);
-      newNodePoolTable = (char**)realloc( nodePoolTable, nodePoolTableSize * sizeof( char* ) );
-      newNodePoolSize = (int*)realloc( nodePoolSize, nodePoolTableSize * sizeof( int ) );
-      newNodePoolUsed = (char*)realloc( nodePoolUsed, nodePoolTableSize * sizeof( char ) );
-      if( !newNodePoolTable || !newNodePoolSize || !newNodePoolUsed )
-        fatal( noMoreMemory );
+  {
+    int oldSize = nodePoolTableSize;
+    nodePoolTableSize = (nodePoolTableSize == 0 ? 1024 : INCRATE * nodePoolTableSize);
+    newNodePoolTable = (char**)realloc( nodePoolTable, nodePoolTableSize * sizeof( char* ) );
+    newNodePoolSize = (int*)realloc( nodePoolSize, nodePoolTableSize * sizeof( int ) );
+    newNodePoolUsed = (char*)realloc( nodePoolUsed, nodePoolTableSize * sizeof( char ) );
+    if( !newNodePoolTable || !newNodePoolSize || !newNodePoolUsed )
+      fatal( noMoreMemory );
 
-      /* prepare new pool areas */
-      nodePoolTable = newNodePoolTable;
-      nodePoolSize = newNodePoolSize;
-      nodePoolUsed = newNodePoolUsed;
-      memset( &nodePoolUsed[oldSize], 0, (nodePoolTableSize - oldSize) * sizeof( char ) );
-    }
+    /* prepare new pool areas */
+    nodePoolTable = newNodePoolTable;
+    nodePoolSize = newNodePoolSize;
+    nodePoolUsed = newNodePoolUsed;
+    memset( &nodePoolUsed[oldSize], 0, (nodePoolTableSize - oldSize) * sizeof( char ) );
+  }
 
   /* check if we have enough space in pool area */
   if( (nodePool == nullptr) ||
       (nodePool == nodePoolTable[currentNodePool] + nodePoolSize[currentNodePool]) )
+  {
+    /* get new pool area */
+    ++currentNodePool;
+    if( nodePoolUsed[currentNodePool] == 0 )
     {
-      /* get new pool area */
-      ++currentNodePool;
-      if( nodePoolUsed[currentNodePool] == 0 )
-        {
-          nodePoolClaimSize = (nodePoolClaimSize == 0 ? 1024 : (int) (INCRATE * nodePoolClaimSize));
-          nodePoolSize[currentNodePool] = nodePoolClaimSize * NODESIZE;
-          fprintf( stderr, "HEAPMGMT: allocating memory for %d nodes (%d bytes)... ",
-                   nodePoolClaimSize, nodePoolSize[currentNodePool] );
-          fflush( stderr );
-          nodePoolTable[currentNodePool] = (char*)malloc( nodePoolSize[currentNodePool] );
-          if( !nodePoolTable[currentNodePool] )
-            fatal( noMoreMemory );
-          else
-            {
-              fprintf( stderr, "done!\n" );
-              nodePoolUsed[currentNodePool] = 1;
-            }
-        }
-      nodePool = &nodePoolTable[currentNodePool][0];
+      nodePoolClaimSize = (nodePoolClaimSize == 0 ? 1024 : (int) (INCRATE * nodePoolClaimSize));
+      nodePoolSize[currentNodePool] = nodePoolClaimSize * NODESIZE;
+      fprintf( stderr, "HEAPMGMT: allocating memory for %d nodes (%d bytes)... ",
+                nodePoolClaimSize, nodePoolSize[currentNodePool] );
+      fflush( stderr );
+      nodePoolTable[currentNodePool] = (char*)malloc( nodePoolSize[currentNodePool] );
+      if( !nodePoolTable[currentNodePool] )
+        fatal( noMoreMemory );
+      else
+      {
+        fprintf( stderr, "done!\n" );
+        nodePoolUsed[currentNodePool] = 1;
+      }
     }
-
+    nodePool = &nodePoolTable[currentNodePool][0];
+  }
+    
   /* claim node from current pool */
   node_t* result = (node_t*) nodePool;
   result->state = (atom_t*) ((char*)result + sizeof( node_t ));
   nodePool += NODESIZE;
-
+  
   /* update memory usage & check constraint */
   nodeMemoryUsed += NODESIZE;
   if( (memoryConstraint > 0) && ((nodeMemoryUsed) / MEGABYTE >= memoryConstraint) )
     memoryExpired = 1;
-
+  
   /* return */
   return( result );
 }
@@ -3684,6 +3685,9 @@ checkProblem()
 bool
 readEGraph(string fileName)
 {
+  cost_t costInfty, costUnit;
+  costInfty.plus = costInfty.max = INT_MAX / 2;
+  costUnit.plus = costUnit.max = 1;
   for (auto& exper : experience)
   {
     free(exper.tailState);
@@ -3696,11 +3700,13 @@ readEGraph(string fileName)
   if (file == nullptr)
     {
       perror( "ERROR: could not read Egraph from file" );
+      eDist = { { costUnit } };
       return false;
     }
   
   fprintf(stdout, "readEGraph:");
-  char* name;
+  vector<std::pair<int,int> > edges;
+  char name[128];
   while (fgets(name, 128, file) != nullptr && name[0] != '\0')
   {
     name[strlen(name)-1] = '\0';
@@ -3729,14 +3735,14 @@ readEGraph(string fileName)
         break;
     if (idxH == eNode.size())
       eNode.push_back(exper.headState);
-    eDist[idxT][idxH].plus = eDist[idxT][idxH].max = 1;
+    edges.push_back(std::make_pair(idxT, idxH));
   }
   fprintf(stdout, "\n");
   fclose( file );
   
-  cost_t costInfinity;
-  costInfinity.plus = costInfinity.max = INT_MAX / 2;
-  eDist = vector<vector<cost_t> >(eNode.size(), vector<cost_t>(eNode.size(), costInfinity));
+  eDist = vector<vector<cost_t> >(eNode.size(), vector<cost_t>(eNode.size(), costInfty));
+  for (auto& edge : edges)
+    eDist[edge.first][edge.second] = costUnit;
   
   for (size_t i = 0; i < eNode.size(); ++i)
   {
@@ -3905,7 +3911,7 @@ memorizePath( node_t *node )
         strcpy(exper.opName, operatorTable[node->operatorId].name);
         fprintf(stderr, " %d-%s", experience.size(), exper.opName);
         
-        for (size_t i = 0; i < experience.size(); ++i)
+        for (size_t i = 0; i+1 < experience.size(); ++i)
         if (!stateCmp(experience[i].tailState, exper.tailState)
           && !strcmp(experience[i].opName, exper.opName))
           {
@@ -3935,7 +3941,7 @@ memorizePath( node_t *node )
         strcpy(exper.opName, operatorTable[node->operatorId].name);
         fprintf(stderr, " %d-%s", experience.size(), exper.opName);
         
-        for (size_t i = 0; i < experience.size(); ++i)
+        for (size_t i = 0; i+1 < experience.size(); ++i)
         if (!stateCmp(experience[i].tailState, exper.tailState)
           && !strcmp(experience[i].opName, exper.opName))
           {
@@ -4684,7 +4690,7 @@ parseArguments( int argc, char **argv )
 int
 parseProblem( void )
 {
-  string files[2];
+  static char* files[2];
   extern int yyparse( void );
   extern int lineno;
 
@@ -4692,25 +4698,25 @@ parseProblem( void )
   files[0] = problemFile;
   files[1] = domainFile;
   for( int fd, file = 0; file < 2; ++file )
-    if( (fd = open( files[file].c_str(), O_RDONLY )) == -1 )
-      {
-        perror( "ERROR: parsing files" );
-        exit( -1 );
-      }
+    if( (fd = open( files[file], O_RDONLY )) == -1 )
+    {
+      perror( "ERROR: parsing files" );
+      exit( -1 );
+    }
     else
-      {
-        /* redirection of fd to stdin */
-        if( file == 0 )
-          close( fileno( stdin ) );
-        else
-          clearerr( stdin );
-        dup( fd );
-        strcpy(_low_yyfile, files[file].c_str());
-        lineno = 1;
-        rv += yyparse();
+    {
+      /* redirection of fd to stdin */
+      if( file == 0 )
         close( fileno( stdin ) );
-        close( fd );
-      }
+      else
+        clearerr( stdin );
+      dup( fd );
+      _low_yyfile = files[file];
+      lineno = 1;
+      rv += yyparse();
+      close( fileno( stdin ) );
+      close( fd );
+    }
   return( rv );
 }
 
@@ -4720,40 +4726,40 @@ main( int argc, char **argv )
 {
   /* set signal handler */
   signal( SIGHUP, &SIGHUPHandler );
-
+  
   /* register entry */
   registerEntry( "main()" );
-
+  
   /* initialize */
   parseArguments( argc, argv );
-
+  
   /* parse problem */
   node_t* result = nullptr;
   int rv = parseProblem();
   if( rv == noError )
-    {
-      /* initialize planner */
-      initializeMemoryMgmt();
-      initialize();
+  {
+    /* initialize planner */
+    initializeMemoryMgmt();
+    initialize();
 
-      /* go! */
-      result = scheduler( globalSchedule );
-      rv = (result == nullptr);
-    }
+    /* go! */
+    result = scheduler( globalSchedule );
+    rv = (result == nullptr);
+  }
   else
-    {
-      fprintf( stderr, "PARSE: parse error.\n" );
-    }
-
+  {
+    fprintf( stderr, "PARSE: parse error.\n" );
+  }
+  
   /* register exit */
   registerExit();
 #if defined(COMPETITION_OUTPUT)
   if( result != nullptr )
-    {
-      fprintf( stdout, "%s,%.4f,%d", _low_problemName, currentElapsedTime(), result->cost );
-      printPath( stdout, result, ",", "" );
-      fprintf( stdout, "\n" );
-    }
+  {
+    fprintf( stdout, "%s,%.4f,%d", _low_problemName, currentElapsedTime(), result->cost );
+    printPath( stdout, result, ",", "" );
+    fprintf( stdout, "\n" );
+  }
 #endif
 
   return( rv );
