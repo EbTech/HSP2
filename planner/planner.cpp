@@ -1278,8 +1278,8 @@ heuristics( node_t *node )
   node->h2_plus = 0;
   node->h1_max = 0;
   node->h2_max = 0;
-  node->h1e_plus = 0;
-  node->h1e_max = 0;
+  node->h1e_plus = INT_MAX;
+  node->h1e_max = INT_MAX;
   node->valid = 1;
 
   if( searchDirection == FORWARD )
@@ -1295,8 +1295,6 @@ heuristics( node_t *node )
             node->h1_plus = -1;
             node->h1_max = -1;
             node->h2_max = -1;
-            node->h1e_plus = -1;
-            node->h1e_max = -1;
             node->valid = 0;
             return;
           }
@@ -1304,8 +1302,6 @@ heuristics( node_t *node )
           {
             node->h1_plus = PLUSSUM( node->h1_plus, H1Cost[*g].plus );
             node->h1_max = max( node->h1_max, H1Cost[*g].max );
-            node->h1e_plus = PLUSSUM( node->h1e_plus, H1ECost[*g].plus);
-            node->h1e_max = max( node->h1e_max, H1ECost[*g].max );
           }
       
       node->h1e_plus *= experienceWeight;
@@ -1339,13 +1335,13 @@ heuristics( node_t *node )
         }
       
       // TODO remove debug code
-      /*fprintf( stdout, "GENERATE node with h=%d:\t", node->h1e_max );
-      for( p = 1; p < SIZE_ATOMS; ++p )
+      fprintf( stdout, "GENERATE node with h=%d:\t", node->h1e_max );
+      for( size_t p = 1; p < SIZE_ATOMS; ++p )
         if( asserted( node->state, p ) )
         {
           fprintf( stdout, "%s ", readAtomName(p) );
         }
-      fprintf( stdout, "\n" );*/
+      fprintf( stdout, "\n" );
 
       /* H2 heuristics are too expensice for forward search */
       if( (_low_requirements & REQ_ADL) && (searchHeuristic == H2MAX) )
@@ -2188,14 +2184,13 @@ forwardNodeExpansion( node_t *node, node_t ***result )
         fatal( noMoreMemory );
     }
   // TODO remove debug code
-  /*fprintf( stdout, "EXPAND node with h=%d:\t", node->h1e_max );
-  int i;
-  for( i = 1; i < SIZE_ATOMS; ++i )
+  fprintf( stdout, "EXPAND node with h=%d:\t", node->h1e_max );
+  for( size_t i = 1; i < SIZE_ATOMS; ++i )
     if( asserted( node->state, i ) )
     {
       fprintf( stdout, "%s ", readAtomName(i) );
     }
-  fprintf( stdout, "\n" );*/
+  fprintf( stdout, "\n" );
 
   /* update problem data */
   ++expandedNodes;
@@ -3696,6 +3691,14 @@ readEGraph(string fileName)
   experience.clear();
   eNode = { staticGoalState };
   
+  // TODO remove debug code
+  fprintf( stdout, "ALL ATOM NAMES\n" );
+  for( size_t p = 1; p < SIZE_ATOMS; ++p )
+  {
+    fprintf( stdout, "%s ", readAtomName(p) );
+  }
+  fprintf( stdout, "\n" );
+  
   FILE *file = fopen( fileName.c_str(), "r" );
   if (file == nullptr)
     {
@@ -3784,16 +3787,16 @@ readEGraph(string fileName)
         eDist[i][j].max = min(eDist[i][j].max, eDist[i][k].max + eDist[k][j].max);
       }
   // TODO remove debug code
-  /*for (i = 0; i < eNodeSize; ++i)
+  for (size_t i = 0; i < eNode.size(); ++i)
   {
       fprintf( stdout, "%d'th distance to goal is %d:\t", i, eDist[i][0].max );
-      for( p = 1; p < SIZE_ATOMS; ++p )
+      for( size_t p = 1; p < SIZE_ATOMS; ++p )
         if( asserted( eNode[i], p ) )
         {
           fprintf( stdout, "%s ", readAtomName(p) );
         }
       fprintf( stdout, "\n" );
-  }*/
+  }
   return true;
 }
 
