@@ -1335,13 +1335,13 @@ heuristics( node_t *node )
         }
       
       // TODO remove debug code
-      fprintf( stdout, "GENERATE node with h=%d:\t", node->h1e_max );
+      /*fprintf( stdout, "GENERATE node with h=%d:\t", node->h1e_max );
       for( size_t p = 1; p < SIZE_ATOMS; ++p )
         if( asserted( node->state, p ) )
         {
           fprintf( stdout, "%s ", readAtomName(p) );
         }
-      fprintf( stdout, "\n" );
+      fprintf( stdout, "\n" );*/
 
       /* H2 heuristics are too expensice for forward search */
       if( (_low_requirements & REQ_ADL) && (searchHeuristic == H2MAX) )
@@ -2184,13 +2184,13 @@ forwardNodeExpansion( node_t *node, node_t ***result )
         fatal( noMoreMemory );
     }
   // TODO remove debug code
-  fprintf( stdout, "EXPAND node with h=%d:\t", node->h1e_max );
+  /*fprintf( stdout, "EXPAND node with h=%d:\t", node->h1e_max );
   for( size_t i = 1; i < SIZE_ATOMS; ++i )
     if( asserted( node->state, i ) )
     {
       fprintf( stdout, "%s ", readAtomName(i) );
     }
-  fprintf( stdout, "\n" );
+  fprintf( stdout, "\n" );*/
 
   /* update problem data */
   ++expandedNodes;
@@ -3719,14 +3719,37 @@ readEGraph(string fileName)
     strcpy(exper.opName, name);
     exper.tailState = (atom_t*) malloc( SIZE_PACKS * sizeof(atom_t) );
     exper.headState = (atom_t*) malloc( SIZE_PACKS * sizeof(atom_t) );
-    for (size_t i = 0; i < SIZE_PACKS; ++i)
+    
+    /*for (size_t i = 0; i < SIZE_PACKS; ++i)
     {
       fscanf( file, " %u ", &exper.tailState[i].pack );
     }
     for (size_t i = 0; i < SIZE_PACKS; ++i)
     {
       fscanf( file, " %u ", &exper.headState[i].pack );
+    }*/
+    for (size_t i = 0; i < SIZE_PACKS; ++i)
+      exper.tailState[i].pack = exper.headState[i].pack = 0;
+    int atomsToRead;
+    fscanf(file, " %u ", &atomsToRead);
+    while (atomsToRead--)
+    {
+      fgets(name, 128, file);
+      name[strlen(name)-1] = '\0';
+      for (size_t p = 1; p < SIZE_ATOMS; ++p)
+        if (!strcmp(name, readAtomName(p)))
+          set(exper.tailState, p);
     }
+    fscanf(file, " %u ", &atomsToRead);
+    while (atomsToRead--)
+    {
+      fgets(name, 128, file);
+      name[strlen(name)-1] = '\0';
+      for (size_t p = 1; p < SIZE_ATOMS; ++p)
+        if (!strcmp(name, readAtomName(p)))
+          set(exper.headState, p);
+    }
+    
     int idxT, idxH;
     for (idxT = 0; idxT < eNode.size(); ++idxT)
       if (!stateCmp(eNode[idxT], exper.tailState))
@@ -3787,7 +3810,7 @@ readEGraph(string fileName)
         eDist[i][j].max = min(eDist[i][j].max, eDist[i][k].max + eDist[k][j].max);
       }
   // TODO remove debug code
-  for (size_t i = 0; i < eNode.size(); ++i)
+  /*for (size_t i = 0; i < eNode.size(); ++i)
   {
       fprintf( stdout, "%d'th distance to goal is %d:\t", i, eDist[i][0].max );
       for( size_t p = 1; p < SIZE_ATOMS; ++p )
@@ -3796,7 +3819,7 @@ readEGraph(string fileName)
           fprintf( stdout, "%s ", readAtomName(p) );
         }
       fprintf( stdout, "\n" );
-  }
+  }*/
   return true;
 }
 
@@ -3811,14 +3834,30 @@ printEGraph(string fileName)
     return false;
   }
   
-  for (size_t p = 0; p < experience.size(); ++p)
+  for (auto& exper: experience)
   {
-    fprintf( file, "%s\n", experience[p].opName );
+    fprintf( file, "%s\n", exper.opName );
+    /*for (size_t i = 0; i < SIZE_PACKS; ++i)
+      fprintf( file, " %u", exper.tailState[i].pack );
     for (size_t i = 0; i < SIZE_PACKS; ++i)
-      fprintf( file, " %u", experience[p].tailState[i].pack );
-    for (size_t i = 0; i < SIZE_PACKS; ++i)
-      fprintf( file, " %u", experience[p].headState[i].pack );
-    fprintf( file, "\n" );
+      fprintf( file, " %u", exper.headState[i].pack );
+    fprintf( file, "\n" );*/
+    int atomsToPrint = 0;
+    for (size_t p = 1; p < SIZE_ATOMS; ++p)
+      if (asserted(exper.tailState, p))
+        ++atomsToPrint;
+    fprintf( file, "%u\n", atomsToPrint );
+    for (size_t p = 1; p < SIZE_ATOMS; ++p)
+      if (asserted(exper.tailState, p))
+        fprintf( file, "%s\n", readAtomName(p) );
+    atomsToPrint = 0;
+    for (size_t p = 1; p < SIZE_ATOMS; ++p)
+      if (asserted(exper.headState, p))
+        ++atomsToPrint;
+    fprintf( file, "%u\n", atomsToPrint );
+    for (size_t p = 1; p < SIZE_ATOMS; ++p)
+      if (asserted(exper.headState, p))
+        fprintf( file, "%s\n", readAtomName(p) );
   }
   fclose( file );
   return true;
