@@ -57,6 +57,7 @@
 #include <string>
 #include <vector>
 #include <algorithm>
+#include <random>
 
 extern "C"
 {
@@ -143,6 +144,7 @@ int                 _low_groundingOperators;
 int                 _low_negatedAtom[ATOMSPERPACK*MAXATOMPACKS];
 
 /* for E-graphs */
+string               StatisticsOut;
 string               EGraphIn;
 string               EGraphOut;
 vector<experience_t> experience;
@@ -275,6 +277,10 @@ static char *       scheduleString = nullptr;
 
 /* procedure registration stack */
 static procRegister_t *procStackTop = nullptr;
+
+/* random number generator */
+std::random_device randomDevice;
+std::mt19937_64 rng(randomDevice());
 
 
 
@@ -3692,12 +3698,12 @@ readEGraph(string fileName)
   eNode = { staticGoalState };
   
   // TODO remove debug code
-  fprintf( stdout, "ALL ATOM NAMES\n" );
+  /*fprintf( stdout, "ALL ATOM NAMES\n" );
   for( size_t p = 1; p < SIZE_ATOMS; ++p )
   {
     fprintf( stdout, "%s ", readAtomName(p) );
   }
-  fprintf( stdout, "\n" );
+  fprintf( stdout, "\n" );*/
   
   FILE *file = fopen( fileName.c_str(), "r" );
   if (file == nullptr)
@@ -3834,7 +3840,9 @@ printEGraph(string fileName)
     return false;
   }
   
+  std::uniform_real_distribution<double> dist(0, 1);
   for (auto& exper: experience)
+  if (dist(rng) < 0.5) // TODO debug: randomly remember edges
   {
     fprintf( file, "%s\n", exper.opName );
     /*for (size_t i = 0; i < SIZE_PACKS; ++i)
@@ -4007,6 +4015,17 @@ printStatistics( void )
   fprintf( stdout, "STATISTICS: number expanded nodes = %d\n", expandedNodes );
   fprintf( stdout, "STATISTICS: number generated nodes = %d\n", generatedNodes );
   fprintf( stdout, "STATISTICS: average branching factor = %f\n", (float)generatedNodes / (float)expandedNodes );
+  
+  // TODO debug remove extra prints
+  FILE *file = fopen( std::string(StatisticsOut).c_str(), "a" );
+  if (file != nullptr)
+  {
+   if (EGraphIn[EGraphIn.size()-1] == '0')
+      fprintf( file, "%d ", generatedNodes );
+    else
+      fprintf( file, "%d\t%s\n", generatedNodes, problemFile );
+    fclose( file );
+  }
 }
 
 
@@ -4413,73 +4432,78 @@ scheduler( schedule_t *schedule )
 {
   node_t* result = nullptr;
   while( (result == 0) && (schedule != nullptr) )
+  {
+    /* check implementation */
+    if( (schedule->searchHeuristic == H2PLUS) ||
+        ((schedule->searchHeuristic == H2MAX) && (schedule->searchDirection == FORWARD)) ||
+        ((_low_requirements & REQ_ADL) && (schedule->searchDirection == BACKWARD)) )
+      notYetImplemented( schedule );
+
+    /* setup search parameters */
+    searchAlgorithm = schedule->searchAlgorithm;
+    searchDirection = schedule->searchDirection;
+    searchHeuristic = schedule->searchHeuristic;
+
+    /* additional initializations */
+    backwardSearchInitialization( schedule );
+    
+    /* E-graph initialization */
+    readEGraph(EGraphIn);
+
+    /* weak check if problem has solution */
+    if( checkProblem() == 0 )
     {
-      /* check implementation */
-      if( (schedule->searchHeuristic == H2PLUS) ||
-          ((schedule->searchHeuristic == H2MAX) && (schedule->searchDirection == FORWARD)) ||
-          ((_low_requirements & REQ_ADL) && (schedule->searchDirection == BACKWARD)) )
-        notYetImplemented( schedule );
-
-      /* setup search parameters */
-      searchAlgorithm = schedule->searchAlgorithm;
-      searchDirection = schedule->searchDirection;
-      searchHeuristic = schedule->searchHeuristic;
-
-      /* additional initializations */
-      backwardSearchInitialization( schedule );
-      
-      /* E-graph initialization */
-      readEGraph(EGraphIn);
-
-      /* weak check if problem has solution */
-      if( checkProblem() == 0 )
-        {
-          fprintf( stderr, "SOLUTION: problem has no solution.\n" );
-          break;
-        }
-
-      /* print current schedule */
-      fprintf( stderr, "SCHEDULE: %s %s with %s and W = %.1f\n",
-               searchDirectionName[searchDirection],
-               searchAlgorithmName[searchAlgorithm],
-               searchHeuristicName[searchHeuristic],
-               heuristicWeight );
-      if( schedule->constraintType != 0 )
-        fprintf( stderr, "SCHEDULE: constraints are time = %ld (msecs) and memory = %ld (Mbytes).\n",
-                 (schedule->constraintType & TIME ? schedule->time : -1),
-                 (schedule->constraintType & MEMORY ? schedule->memory : -1) );
-      else
-        fprintf( stderr, "SCHEDULE: unconstrained.\n" );
-
-      /* make the search */
-      switch( searchAlgorithm )
-        {
-        case _GBFS:
-          result = startGBFS( schedule );
-          break;
-        case _BFS:
-          result = startBFS( schedule );
-          break;
-        }
-
-      /* print search results and some statistics */
-      if( result == nullptr )
-        {
-          fprintf( stderr, "SOLUTION: no solution found\n" );
-        }
-      else
-        {
-          fprintf( stderr, "SOLUTION: solution found (length = %d)\n", result->cost );
-          if( verbose > 0 )
-            printPath( stderr, result, "+  ", "\n" );
-          memorizePath(result);
-          printEGraph(EGraphOut);
-        }
-      printStatistics();
-
-      /* next option */
-      schedule = schedule->next;
+      fprintf( stderr, "SOLUTION: problem has no solution.\n" );
+      break;
     }
+
+    /* print current schedule */
+    fprintf( stderr, "SCHEDULE: %s %s with %s and W = %.1f\n",
+              searchDirectionName[searchDirection],
+              searchAlgorithmName[searchAlgorithm],
+              searchHeuristicName[searchHeuristic],
+              heuristicWeight );
+    if( schedule->constraintType != 0 )
+      fprintf( stderr, "SCHEDULE: constraints are time = %ld (msecs) and memory = %ld (Mbytes).\n",
+                (schedule->constraintType & TIME ? schedule->time : -1),
+                (schedule->constraintType & MEMORY ? schedule->memory : -1) );
+    else
+      fprintf( stderr, "SCHEDULE: unconstrained.\n" );
+
+    /* make the search */
+    switch( searchAlgorithm )
+    {
+      case _GBFS:
+        result = startGBFS( schedule );
+        break;
+      case _BFS:
+        result = startBFS( schedule );
+        break;
+    }
+
+    /* print search results and some statistics */
+    if( result == nullptr )
+    {
+      fprintf( stderr, "SOLUTION: no solution found\n" );
+    }
+    else
+    {
+      fprintf( stderr, "SOLUTION: solution found (length = %d)\n", result->cost );
+      if( verbose > 0 )
+        printPath( stderr, result, "+  ", "\n" );
+      memorizePath(result);
+      printEGraph(EGraphOut);
+    }
+    // TODO debug remove extra prints
+    FILE *file = fopen( std::string(StatisticsOut).c_str(), "a" );
+    if (file != nullptr && result == nullptr )
+        fprintf( file, "!" );
+      
+    printStatistics();
+
+    /* next option */
+    schedule = schedule->next;
+  }
   return( result );
 }
 
@@ -4651,6 +4675,7 @@ parseArguments( int argc, char **argv )
   searchHeuristic = H1PLUS;
   EGraphIn = "EGraph.txt";
   EGraphOut = "EGraph.txt";
+  StatisticsOut = "Test/Stats.txt";
 
   /* parse options */
   while( argc > 1 && *(*++argv) == '-' )
