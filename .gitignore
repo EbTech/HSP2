@@ -1,5 +1,6 @@
 *~
 *.o
+*.eg
 .kdev4
 .svn
 /planner/parser.c

@@ -4020,7 +4020,7 @@ printStatistics( void )
   FILE *file = fopen( std::string(StatisticsOut).c_str(), "a" );
   if (file != nullptr)
   {
-   if (EGraphIn[EGraphIn.size()-1] == '0')
+   if (EGraphIn == "Test/none.eg")
       fprintf( file, "%d ", generatedNodes );
     else
       fprintf( file, "%d\t%s\n", generatedNodes, problemFile );
@@ -4485,6 +4485,10 @@ scheduler( schedule_t *schedule )
     if( result == nullptr )
     {
       fprintf( stderr, "SOLUTION: no solution found\n" );
+      // TODO debug remove extra prints
+      FILE *file = fopen( std::string(StatisticsOut).c_str(), "a" );
+      if (file != nullptr )
+          fprintf( file, ">" );
     }
     else
     {
@@ -4494,10 +4498,6 @@ scheduler( schedule_t *schedule )
       memorizePath(result);
       printEGraph(EGraphOut);
     }
-    // TODO debug remove extra prints
-    FILE *file = fopen( std::string(StatisticsOut).c_str(), "a" );
-    if (file != nullptr && result == nullptr )
-        fprintf( file, "!" );
       
     printStatistics();
 

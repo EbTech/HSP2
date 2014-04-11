@@ -1,6 +1,5 @@
 #!/bin/sh
-rm -r Test
-mkdir Test
+rm -r Test/*
 
 #for prob in "6-0" "7-0" "8-0" "9-0" "10-0" "11-0" "12-0" "13-0" "14-0" "14-1" "15-0" "15-1" "16-1" "16-2" "17-0"
 #do
@@ -17,13 +16,14 @@ mkdir Test
 
 for dir in examples/*/
 do
+	mkdir -p Test/${dir}
 	for filename in ${dir}p*.pddl
 	do
 	if [ "${filename}" != "${dir}p*.pddl" ]
 	then
-		echo ${filename}
-		./bin/hsp2 -v 0 -w 1 -e 5 -f Test/$(basename "$filename" .pddl).eg0 Test/$(basename "$filename" .pddl).eg1 -S [forward,h1eplus,2000] ${filename} ${dir}domain.pddl
-		./bin/hsp2 -v 0 -w 1 -e 5 -f Test/$(basename "$filename" .pddl).eg1 Test/$(basename "$filename" .pddl).eg2 -S [forward,h1eplus,2000] ${filename} ${dir}domain.pddl
+		#without file extension: Test/$(basename "$filename" .pddl).eg
+		./bin/hsp2 -v 0 -w 1 -e 5 -f Test/none.eg Test/${filename}.eg -S [forward,h1eplus,2000] ${filename} ${dir}domain.pddl
+		./bin/hsp2 -v 0 -w 1 -e 5 -f Test/${filename}.eg Test/trash.eg -S [forward,h1eplus,2000] ${filename} ${dir}domain.pddl
 	fi
 	done
 done
