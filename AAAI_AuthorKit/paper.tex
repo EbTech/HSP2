@@ -32,5 +32,8 @@ A* and variants are regularly applied to plan paths in a graph. Rather than plan
 asdf
 
 \section{Algorithm}
+When planning over possible states of the world, it's typically more efficient to describe the states in terms of a set of features. The set of states is exponential in the number of features, so even a small problem description may imply a large graph. In general, planning over such a large space is computationally infeasible.
+
+We may view planning as a process that generates distance-to-goal labels for each node of a graph. Given these distance labels, it's a simple matter to generate a plan by successively moving to the cheapest neighbour. Since there is no deterministic polynomial-time algorithm that can solve the shortest-paths problem in STRIPS (recall the graph is exponential-sized), we may try an approximation algorithm. The resulting labels we call \textbf{heuristics}, and we use them in hopes of achieving optimal or near-optimal plans more efficiently. If the heuristic precisely reflects the true distances, we find a path immediately. Algorithms such as A* are designed to find solutions quickly whenever the heuristic is reasonably tight and \textbf{$\epsilon$-consistent}. Note that in practice any subexponential algorithm can only afford to look at a subset of the nodes, so it is only for these that we compute the heuristic. If the heuristic is good, we hope not to have to look at (i.e. generate) too many nodes. Thus, there is a tradeoff between spending more time to get a tight heuristic, vs evaluating a weaker heuristic more quickly but also more frequently.
 
 \end{document}
