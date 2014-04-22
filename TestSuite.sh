@@ -1,5 +1,5 @@
 #!/bin/sh
-rm -r Test/*
+#rm -r Test/*
 
 #for prob in "6-0" "7-0" "8-0" "9-0" "10-0" "11-0" "12-0" "13-0" "14-0" "14-1" "15-0" "15-1" "16-1" "16-2" "17-0"
 #do
@@ -14,7 +14,8 @@ rm -r Test/*
 #  echo "--------------------------------------------------------------------------------"
 #done
 
-for dir in examples/*/
+#for dir in examples/*/
+for dir in "examples/pipesworld-notankage/" "examples/pipesworld-tankage/" "examples/rovers/" "examples/satellite/" "examples/scananalyzer/" "examples/sokoban/" "examples/tpp/" "examples/transport/" "examples/zenotravel/"
 do
 	mkdir -p Test/${dir}
 	for filename in ${dir}p*.pddl

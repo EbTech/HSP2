@@ -1,183 +1,524 @@
-412 146	examples/blocks/probBLOCKS-10-0.pddl
-645 582	examples/blocks/probBLOCKS-10-1.pddl
-737 1153	examples/blocks/probBLOCKS-10-2.pddl
-1268 251	examples/blocks/probBLOCKS-11-0.pddl
-2412 434	examples/blocks/probBLOCKS-11-1.pddl
-1294 499	examples/blocks/probBLOCKS-11-2.pddl
-3333 748	examples/blocks/probBLOCKS-12-0.pddl
-1242 519	examples/blocks/probBLOCKS-12-1.pddl
-3292 514	examples/blocks/probBLOCKS-13-0.pddl
-1352 606	examples/blocks/probBLOCKS-13-1.pddl
-28293 2387	examples/blocks/probBLOCKS-14-0.pddl
-7062 1906	examples/blocks/probBLOCKS-14-1.pddl
-2895 2018	examples/blocks/probBLOCKS-15-0.pddl
-6183 790	examples/blocks/probBLOCKS-15-1.pddl
-3917 1409	examples/blocks/probBLOCKS-16-1.pddl
-3607 715	examples/blocks/probBLOCKS-16-2.pddl
-12405 11159	examples/blocks/probBLOCKS-17-0.pddl
-22 19	examples/blocks/probBLOCKS-4-0.pddl
-20 16	examples/blocks/probBLOCKS-4-1.pddl
-15 15	examples/blocks/probBLOCKS-4-2.pddl
-89 82	examples/blocks/probBLOCKS-5-0.pddl
-38 32	examples/blocks/probBLOCKS-5-1.pddl
-89 54	examples/blocks/probBLOCKS-5-2.pddl
-181 160	examples/blocks/probBLOCKS-6-0.pddl
-56 44	examples/blocks/probBLOCKS-6-1.pddl
-95 60	examples/blocks/probBLOCKS-6-2.pddl
-109 50	examples/blocks/probBLOCKS-7-0.pddl
-198 114	examples/blocks/probBLOCKS-7-1.pddl
-387 145	examples/blocks/probBLOCKS-7-2.pddl
-292 127	examples/blocks/probBLOCKS-8-0.pddl
-333 290	examples/blocks/probBLOCKS-8-1.pddl
-294 76	examples/blocks/probBLOCKS-8-2.pddl
-647 185	examples/blocks/probBLOCKS-9-0.pddl
-872 359	examples/blocks/probBLOCKS-9-1.pddl
-465 412	examples/blocks/probBLOCKS-9-2.pddl
-193 168	examples/elevators/p01.pddl
-153 153	examples/elevators/p02.pddl
-301 322	examples/elevators/p03.pddl
-387 387	examples/elevators/p04.pddl
-1063 326	examples/elevators/p05.pddl
-1173 1028	examples/elevators/p06.pddl
-1035 683	examples/elevators/p07.pddl
-391 435	examples/elevators/p08.pddl
-765 552	examples/elevators/p09.pddl
-1373 580	examples/elevators/p10.pddl
-288 288	examples/elevators/p11.pddl
-1687 613	examples/elevators/p12.pddl
-229 227	examples/elevators/p13.pddl
-2027 540	examples/elevators/p14.pddl
-1445 569	examples/elevators/p15.pddl
-5486 1130	examples/elevators/p16.pddl
-647 466	examples/elevators/p17.pddl
-3472 551	examples/elevators/p18.pddl
-1903 1143	examples/elevators/p19.pddl
-7061 915	examples/elevators/p20.pddl
-373 404	examples/elevators/p21.pddl
-392 330	examples/elevators/p22.pddl
-407 411	examples/elevators/p23.pddl
-646 732	examples/elevators/p24.pddl
-668 501	examples/elevators/p25.pddl
-10439 >10358	examples/elevators/p26.pddl
->1518 723	examples/elevators/p27.pddl
-9023 >8833	examples/elevators/p28.pddl
->694 636	examples/elevators/p29.pddl
-1521 1133	examples/elevators/p30.pddl
-187 >179	examples/freecell/probfreecell-10-1.pddl
->179 >186	examples/freecell/probfreecell-10-2.pddl
->182 >182	examples/freecell/probfreecell-10-3.pddl
->178 >178	examples/freecell/probfreecell-10-4.pddl
->168 >168	examples/freecell/probfreecell-10-5.pddl
->152 >161	examples/freecell/probfreecell-11-1.pddl
->150 >150	examples/freecell/probfreecell-11-2.pddl
->151 >147	examples/freecell/probfreecell-11-3.pddl
->139 >134	examples/freecell/probfreecell-11-4.pddl
->136 >126	examples/freecell/probfreecell-11-5.pddl
->139 >139	examples/freecell/probfreecell-12-1.pddl
->133 >133	examples/freecell/probfreecell-12-2.pddl
->133 >133	examples/freecell/probfreecell-12-3.pddl
->124 >137	examples/freecell/probfreecell-12-4.pddl
->122 >122	examples/freecell/probfreecell-12-5.pddl
->134 >127	examples/freecell/probfreecell-13-1.pddl
->127 >134	examples/freecell/probfreecell-13-2.pddl
->110 >110	examples/freecell/probfreecell-13-3.pddl
->97 >108	examples/freecell/probfreecell-13-4.pddl
->99 >108	examples/freecell/probfreecell-13-5.pddl
->89 80	examples/freecell/probfreecell-2-1.pddl
-73 70	examples/freecell/probfreecell-2-2.pddl
-84 84	examples/freecell/probfreecell-2-3.pddl
-73 73	examples/freecell/probfreecell-2-4.pddl
-64 64	examples/freecell/probfreecell-2-5.pddl
-163 163	examples/freecell/probfreecell-3-1.pddl
-152 153	examples/freecell/probfreecell-3-2.pddl
-147 147	examples/freecell/probfreecell-3-3.pddl
-141 142	examples/freecell/probfreecell-3-4.pddl
-152 152	examples/freecell/probfreecell-3-5.pddl
-245 245	examples/freecell/probfreecell-4-1.pddl
-251 263	examples/freecell/probfreecell-4-2.pddl
-251 255	examples/freecell/probfreecell-4-3.pddl
-225 239	examples/freecell/probfreecell-4-4.pddl
-219 219	examples/freecell/probfreecell-4-5.pddl
-377 359	examples/freecell/probfreecell-5-1.pddl
-320 332	examples/freecell/probfreecell-5-2.pddl
-341 330	examples/freecell/probfreecell-5-3.pddl
-318 317	examples/freecell/probfreecell-5-4.pddl
-483 >483	examples/freecell/probfreecell-5-5.pddl
->384 >384	examples/freecell/probfreecell-6-1.pddl
->380 388	examples/freecell/probfreecell-6-2.pddl
-394 >396	examples/freecell/probfreecell-6-3.pddl
-388 >388	examples/freecell/probfreecell-6-4.pddl
->395 >395	examples/freecell/probfreecell-6-5.pddl
->308 >308	examples/freecell/probfreecell-7-1.pddl
->307 >307	examples/freecell/probfreecell-7-2.pddl
->294 >294	examples/freecell/probfreecell-7-3.pddl
->279 >290	examples/freecell/probfreecell-7-4.pddl
->278 >278	examples/freecell/probfreecell-7-5.pddl
->242 >242	examples/freecell/probfreecell-8-1.pddl
->256 >256	examples/freecell/probfreecell-8-2.pddl
->261 >261	examples/freecell/probfreecell-8-3.pddl
->235 >235	examples/freecell/probfreecell-8-4.pddl
->233 >233	examples/freecell/probfreecell-8-5.pddl
->200 >200	examples/freecell/probfreecell-9-1.pddl
->205 >205	examples/freecell/probfreecell-9-2.pddl
->203 >203	examples/freecell/probfreecell-9-3.pddl
->195 >195	examples/freecell/probfreecell-9-4.pddl
->189 >189	examples/freecell/probfreecell-9-5.pddl
->67 46	examples/grid/prob01.pddl
-393 87	examples/grid/prob02.pddl
-783 >770	examples/grid/prob03.pddl
->569 >566	examples/grid/prob04.pddl
->243 >258	examples/grid/prob05.pddl
->843 829	examples/logistics00/probLOGISTICS-10-0.pddl
-829 862	examples/logistics00/probLOGISTICS-10-1.pddl
-1610 1001	examples/logistics00/probLOGISTICS-11-0.pddl
-1855 1189	examples/logistics00/probLOGISTICS-11-1.pddl
-1429 838	examples/logistics00/probLOGISTICS-12-0.pddl
-1422 1282	examples/logistics00/probLOGISTICS-12-1.pddl
-2442 2365	examples/logistics00/probLOGISTICS-13-0.pddl
-1942 2137	examples/logistics00/probLOGISTICS-13-1.pddl
-2021 1801	examples/logistics00/probLOGISTICS-14-0.pddl
-2504 2047	examples/logistics00/probLOGISTICS-14-1.pddl
-2749 3184	examples/logistics00/probLOGISTICS-15-0.pddl
-2467 2078	examples/logistics00/probLOGISTICS-15-1.pddl
-165 146	examples/logistics00/probLOGISTICS-4-0.pddl
-164 159	examples/logistics00/probLOGISTICS-4-1.pddl
-89 94	examples/logistics00/probLOGISTICS-4-2.pddl
-236 236	examples/logistics00/probLOGISTICS-5-0.pddl
-155 137	examples/logistics00/probLOGISTICS-5-1.pddl
-67 61	examples/logistics00/probLOGISTICS-5-2.pddl
-256 255	examples/logistics00/probLOGISTICS-6-0.pddl
-105 102	examples/logistics00/probLOGISTICS-6-1.pddl
-185 170	examples/logistics00/probLOGISTICS-6-2.pddl
-174 179	examples/logistics00/probLOGISTICS-6-9.pddl
-1873 537	examples/logistics00/probLOGISTICS-7-0.pddl
-499 484	examples/logistics00/probLOGISTICS-7-1.pddl
-403 379	examples/logistics00/probLOGISTICS-8-0.pddl
-552 557	examples/logistics00/probLOGISTICS-8-1.pddl
-584 587	examples/logistics00/probLOGISTICS-9-0.pddl
-576 430	examples/logistics00/probLOGISTICS-9-1.pddl
-859 622	examples/logistics98/prob01.pddl
-4771 3422	examples/logistics98/prob02.pddl
-6169 >6169	examples/logistics98/prob03.pddl
->4151 >4151	examples/logistics98/prob04.pddl
->532 501	examples/logistics98/prob05.pddl
-2407 >2407	examples/logistics98/prob06.pddl
->7747 >7786	examples/logistics98/prob07.pddl
->1322 >1322	examples/logistics98/prob08.pddl
->2037 >2037	examples/logistics98/prob09.pddl
->2257 >2257	examples/logistics98/prob10.pddl
->3692 2999	examples/logistics98/prob11.pddl
-1582 >1582	examples/logistics98/prob12.pddl
->669 >669	examples/logistics98/prob13.pddl
->1202 >1202	examples/logistics98/prob14.pddl
->4879 >4911	examples/logistics98/prob15.pddl
->2922 >2922	examples/logistics98/prob16.pddl
->2819 >2819	examples/logistics98/prob17.pddl
->695 >695	examples/logistics98/prob18.pddl
->1153 >1153	examples/logistics98/prob19.pddl
->831 >831	examples/logistics98/prob20.pddl
->973 >973	examples/logistics98/prob21.pddl
->430 >430	examples/logistics98/prob22.pddl
->2979 >2979	examples/logistics98/prob23.pddl
->662 >662	examples/logistics98/prob24.pddl
->688 >
+ExpSize=46 SolSize=46 Gen=412 EgSize=26 ExpSize=45 SolSize=42 Gen=152	Prob=examples/blocks/probBLOCKS-10-0.pddl
+ExpSize=44 SolSize=44 Gen=645 EgSize=26 ExpSize=50 SolSize=44 Gen=273	Prob=examples/blocks/probBLOCKS-10-1.pddl
+ExpSize=48 SolSize=48 Gen=737 EgSize=28 ExpSize=46 SolSize=44 Gen=363	Prob=examples/blocks/probBLOCKS-10-2.pddl
+ExpSize=54 SolSize=54 Gen=1268 EgSize=27 ExpSize=53 SolSize=42 Gen=767	Prob=examples/blocks/probBLOCKS-11-0.pddl
+ExpSize=58 SolSize=58 Gen=2412 EgSize=26 ExpSize=55 SolSize=46 Gen=727	Prob=examples/blocks/probBLOCKS-11-1.pddl
+ExpSize=56 SolSize=56 Gen=1294 EgSize=23 ExpSize=56 SolSize=50 Gen=382	Prob=examples/blocks/probBLOCKS-11-2.pddl
+ExpSize=58 SolSize=58 Gen=3333 EgSize=25 ExpSize=58 SolSize=56 Gen=464	Prob=examples/blocks/probBLOCKS-12-0.pddl
+ExpSize=72 SolSize=72 Gen=1242 EgSize=34 ExpSize=72 SolSize=72 Gen=861	Prob=examples/blocks/probBLOCKS-12-1.pddl
+ExpSize=72 SolSize=72 Gen=3292 EgSize=40 ExpSize=73 SolSize=68 Gen=612	Prob=examples/blocks/probBLOCKS-13-0.pddl
+ExpSize=74 SolSize=74 Gen=1352 EgSize=34 ExpSize=76 SolSize=66 Gen=850	Prob=examples/blocks/probBLOCKS-13-1.pddl
+!Gen=27789 !Gen=28059	Prob=examples/blocks/probBLOCKS-14-0.pddl
+ExpSize=80 SolSize=80 Gen=7062 EgSize=46 ExpSize=87 SolSize=76 Gen=550	Prob=examples/blocks/probBLOCKS-14-1.pddl
+ExpSize=78 SolSize=78 Gen=2895 EgSize=35 ExpSize=87 SolSize=78 Gen=2150	Prob=examples/blocks/probBLOCKS-15-0.pddl
+ExpSize=80 SolSize=80 Gen=6183 EgSize=37 ExpSize=81 SolSize=80 Gen=1395	Prob=examples/blocks/probBLOCKS-15-1.pddl
+ExpSize=94 SolSize=94 Gen=3917 EgSize=46 ExpSize=97 SolSize=86 Gen=1311	Prob=examples/blocks/probBLOCKS-16-1.pddl
+ExpSize=86 SolSize=86 Gen=3607 EgSize=47 ExpSize=86 SolSize=82 Gen=627	Prob=examples/blocks/probBLOCKS-16-2.pddl
+ExpSize=102 SolSize=102 Gen=12405 EgSize=45 ExpSize=105 SolSize=90 Gen=4209	Prob=examples/blocks/probBLOCKS-17-0.pddl
+ExpSize=10 SolSize=10 Gen=22 EgSize=7 ExpSize=10 SolSize=6 Gen=18	Prob=examples/blocks/probBLOCKS-4-0.pddl
+ExpSize=10 SolSize=10 Gen=20 EgSize=3 ExpSize=10 SolSize=10 Gen=20	Prob=examples/blocks/probBLOCKS-4-1.pddl
+ExpSize=6 SolSize=6 Gen=15 EgSize=1 ExpSize=6 SolSize=6 Gen=12	Prob=examples/blocks/probBLOCKS-4-2.pddl
+ExpSize=18 SolSize=18 Gen=89 EgSize=14 ExpSize=18 SolSize=18 Gen=46	Prob=examples/blocks/probBLOCKS-5-0.pddl
+ExpSize=14 SolSize=14 Gen=38 EgSize=8 ExpSize=15 SolSize=10 Gen=30	Prob=examples/blocks/probBLOCKS-5-1.pddl
+ExpSize=20 SolSize=20 Gen=89 EgSize=10 ExpSize=18 SolSize=16 Gen=90	Prob=examples/blocks/probBLOCKS-5-2.pddl
+ExpSize=32 SolSize=32 Gen=181 EgSize=18 ExpSize=32 SolSize=32 Gen=113	Prob=examples/blocks/probBLOCKS-6-0.pddl
+ExpSize=14 SolSize=14 Gen=56 EgSize=4 ExpSize=12 SolSize=10 Gen=47	Prob=examples/blocks/probBLOCKS-6-1.pddl
+ExpSize=28 SolSize=28 Gen=95 EgSize=18 ExpSize=31 SolSize=24 Gen=73	Prob=examples/blocks/probBLOCKS-6-2.pddl
+ExpSize=22 SolSize=22 Gen=109 EgSize=9 ExpSize=23 SolSize=22 Gen=58	Prob=examples/blocks/probBLOCKS-7-0.pddl
+ExpSize=32 SolSize=32 Gen=198 EgSize=14 ExpSize=31 SolSize=28 Gen=190	Prob=examples/blocks/probBLOCKS-7-1.pddl
+ExpSize=28 SolSize=28 Gen=387 EgSize=17 ExpSize=33 SolSize=32 Gen=154	Prob=examples/blocks/probBLOCKS-7-2.pddl
+ExpSize=26 SolSize=26 Gen=292 EgSize=7 ExpSize=27 SolSize=26 Gen=282	Prob=examples/blocks/probBLOCKS-8-0.pddl
+ExpSize=40 SolSize=40 Gen=333 EgSize=20 ExpSize=41 SolSize=34 Gen=337	Prob=examples/blocks/probBLOCKS-8-1.pddl
+ExpSize=28 SolSize=28 Gen=294 EgSize=16 ExpSize=26 SolSize=24 Gen=85	Prob=examples/blocks/probBLOCKS-8-2.pddl
+ExpSize=48 SolSize=48 Gen=647 EgSize=28 ExpSize=48 SolSize=48 Gen=308	Prob=examples/blocks/probBLOCKS-9-0.pddl
+ExpSize=44 SolSize=44 Gen=872 EgSize=21 ExpSize=49 SolSize=42 Gen=1069	Prob=examples/blocks/probBLOCKS-9-1.pddl
+ExpSize=44 SolSize=44 Gen=465 EgSize=23 ExpSize=47 SolSize=36 Gen=160	Prob=examples/blocks/probBLOCKS-9-2.pddl
+ExpSize=14 SolSize=14 Gen=193 EgSize=6 ExpSize=20 SolSize=14 Gen=172	Prob=examples/elevators/p01.pddl
+ExpSize=9 SolSize=9 Gen=153 EgSize=4 ExpSize=13 SolSize=9 Gen=153	Prob=examples/elevators/p02.pddl
+ExpSize=19 SolSize=19 Gen=301 EgSize=10 ExpSize=30 SolSize=20 Gen=251	Prob=examples/elevators/p03.pddl
+ExpSize=22 SolSize=22 Gen=387 EgSize=13 ExpSize=35 SolSize=22 Gen=387	Prob=examples/elevators/p04.pddl
+ExpSize=23 SolSize=23 Gen=1063 EgSize=12 ExpSize=35 SolSize=23 Gen=316	Prob=examples/elevators/p05.pddl
+ExpSize=27 SolSize=27 Gen=1173 EgSize=10 ExpSize=37 SolSize=27 Gen=566	Prob=examples/elevators/p06.pddl
+ExpSize=30 SolSize=30 Gen=1035 EgSize=16 ExpSize=33 SolSize=30 Gen=429	Prob=examples/elevators/p07.pddl
+ExpSize=21 SolSize=21 Gen=391 EgSize=12 ExpSize=21 SolSize=21 Gen=393	Prob=examples/elevators/p08.pddl
+ExpSize=36 SolSize=36 Gen=765 EgSize=19 ExpSize=44 SolSize=37 Gen=569	Prob=examples/elevators/p09.pddl
+ExpSize=33 SolSize=33 Gen=1373 EgSize=18 ExpSize=34 SolSize=33 Gen=629	Prob=examples/elevators/p10.pddl
+ExpSize=19 SolSize=19 Gen=288 EgSize=6 ExpSize=25 SolSize=19 Gen=289	Prob=examples/elevators/p11.pddl
+ExpSize=21 SolSize=21 Gen=1687 EgSize=14 ExpSize=35 SolSize=21 Gen=831	Prob=examples/elevators/p12.pddl
+ExpSize=15 SolSize=15 Gen=229 EgSize=8 ExpSize=23 SolSize=15 Gen=229	Prob=examples/elevators/p13.pddl
+ExpSize=27 SolSize=27 Gen=2027 EgSize=17 ExpSize=44 SolSize=27 Gen=599	Prob=examples/elevators/p14.pddl
+ExpSize=31 SolSize=31 Gen=1445 EgSize=13 ExpSize=44 SolSize=31 Gen=497	Prob=examples/elevators/p15.pddl
+ExpSize=32 SolSize=32 Gen=5486 EgSize=15 ExpSize=47 SolSize=32 Gen=970	Prob=examples/elevators/p16.pddl
+ExpSize=26 SolSize=26 Gen=647 EgSize=13 ExpSize=43 SolSize=30 Gen=691	Prob=examples/elevators/p17.pddl
+ExpSize=27 SolSize=27 Gen=3472 EgSize=14 ExpSize=41 SolSize=27 Gen=560	Prob=examples/elevators/p18.pddl
+ExpSize=42 SolSize=42 Gen=1903 EgSize=25 ExpSize=67 SolSize=42 Gen=863	Prob=examples/elevators/p19.pddl
+ExpSize=38 SolSize=38 Gen=7061 EgSize=19 ExpSize=41 SolSize=38 Gen=1007	Prob=examples/elevators/p20.pddl
+ExpSize=19 SolSize=19 Gen=373 EgSize=6 ExpSize=24 SolSize=18 Gen=331	Prob=examples/elevators/p21.pddl
+ExpSize=14 SolSize=14 Gen=392 EgSize=3 ExpSize=17 SolSize=14 Gen=325	Prob=examples/elevators/p22.pddl
+ExpSize=22 SolSize=22 Gen=407 EgSize=12 ExpSize=34 SolSize=22 Gen=406	Prob=examples/elevators/p23.pddl
+ExpSize=25 SolSize=25 Gen=646 EgSize=15 ExpSize=40 SolSize=25 Gen=645	Prob=examples/elevators/p24.pddl
+ExpSize=27 SolSize=27 Gen=668 EgSize=14 ExpSize=41 SolSize=27 Gen=506	Prob=examples/elevators/p25.pddl
+!Gen=9781 !Gen=9801	Prob=examples/elevators/p26.pddl
+ExpSize=38 SolSize=38 Gen=1518 EgSize=24 ExpSize=62 SolSize=38 Gen=742	Prob=examples/elevators/p27.pddl
+!Gen=8427 !Gen=8567	Prob=examples/elevators/p28.pddl
+ExpSize=32 SolSize=32 Gen=694 EgSize=18 ExpSize=33 SolSize=32 Gen=633	Prob=examples/elevators/p29.pddl
+ExpSize=40 SolSize=40 Gen=1521 EgSize=20 ExpSize=55 SolSize=41 Gen=1628	Prob=examples/elevators/p30.pddl
+!Gen=170 !Gen=156	Prob=examples/freecell/probfreecell-10-1.pddl
+!Gen=179 !Gen=179	Prob=examples/freecell/probfreecell-10-2.pddl
+!Gen=144 !Gen=168	Prob=examples/freecell/probfreecell-10-3.pddl
+!Gen=169 !Gen=160	Prob=examples/freecell/probfreecell-10-4.pddl
+!Gen=152 !Gen=152	Prob=examples/freecell/probfreecell-10-5.pddl
+!Gen=146 !Gen=104	Prob=examples/freecell/probfreecell-11-1.pddl
+!Gen=133 !Gen=133	Prob=examples/freecell/probfreecell-11-2.pddl
+!Gen=116 !Gen=140	Prob=examples/freecell/probfreecell-11-3.pddl
+!Gen=134 !Gen=99	Prob=examples/freecell/probfreecell-11-4.pddl
+!Gen=126 !Gen=118	Prob=examples/freecell/probfreecell-11-5.pddl
+!Gen=139 !Gen=122	Prob=examples/freecell/probfreecell-12-1.pddl
+!Gen=115 !Gen=78	Prob=examples/freecell/probfreecell-12-2.pddl
+!Gen=86 !Gen=114	Prob=examples/freecell/probfreecell-12-3.pddl
+!Gen=107 !Gen=107	Prob=examples/freecell/probfreecell-12-4.pddl
+!Gen=105 !Gen=105	Prob=examples/freecell/probfreecell-12-5.pddl
+!Gen=78 !Gen=78	Prob=examples/freecell/probfreecell-13-1.pddl
+!Gen=80 !Gen=119	Prob=examples/freecell/probfreecell-13-2.pddl
+!Gen=99 !Gen=99	Prob=examples/freecell/probfreecell-13-3.pddl
+!Gen=82 !Gen=82	Prob=examples/freecell/probfreecell-13-4.pddl
+!Gen=84 !Gen=84	Prob=examples/freecell/probfreecell-13-5.pddl
+ExpSize=9 SolSize=9 Gen=89 EgSize=4 ExpSize=9 SolSize=9 Gen=89	Prob=examples/freecell/probfreecell-2-1.pddl
+ExpSize=8 SolSize=8 Gen=73 EgSize=4 ExpSize=8 SolSize=8 Gen=73	Prob=examples/freecell/probfreecell-2-2.pddl
+ExpSize=9 SolSize=9 Gen=84 EgSize=5 ExpSize=11 SolSize=9 Gen=87	Prob=examples/freecell/probfreecell-2-3.pddl
+ExpSize=8 SolSize=8 Gen=73 EgSize=4 ExpSize=8 SolSize=8 Gen=73	Prob=examples/freecell/probfreecell-2-4.pddl
+ExpSize=9 SolSize=9 Gen=64 EgSize=3 ExpSize=9 SolSize=9 Gen=64	Prob=examples/freecell/probfreecell-2-5.pddl
+ExpSize=15 SolSize=15 Gen=163 EgSize=10 ExpSize=15 SolSize=15 Gen=163	Prob=examples/freecell/probfreecell-3-1.pddl
+ExpSize=14 SolSize=14 Gen=152 EgSize=5 ExpSize=15 SolSize=14 Gen=144	Prob=examples/freecell/probfreecell-3-2.pddl
+ExpSize=13 SolSize=13 Gen=147 EgSize=9 ExpSize=13 SolSize=13 Gen=147	Prob=examples/freecell/probfreecell-3-3.pddl
+ExpSize=12 SolSize=12 Gen=141 EgSize=6 ExpSize=13 SolSize=12 Gen=142	Prob=examples/freecell/probfreecell-3-4.pddl
+ExpSize=13 SolSize=13 Gen=152 EgSize=9 ExpSize=13 SolSize=13 Gen=152	Prob=examples/freecell/probfreecell-3-5.pddl
+ExpSize=21 SolSize=21 Gen=245 EgSize=6 ExpSize=21 SolSize=21 Gen=239	Prob=examples/freecell/probfreecell-4-1.pddl
+ExpSize=19 SolSize=19 Gen=251 EgSize=11 ExpSize=20 SolSize=19 Gen=255	Prob=examples/freecell/probfreecell-4-2.pddl
+ExpSize=20 SolSize=20 Gen=251 EgSize=6 ExpSize=21 SolSize=20 Gen=253	Prob=examples/freecell/probfreecell-4-3.pddl
+ExpSize=20 SolSize=20 Gen=225 EgSize=9 ExpSize=20 SolSize=20 Gen=237	Prob=examples/freecell/probfreecell-4-4.pddl
+ExpSize=18 SolSize=18 Gen=219 EgSize=10 ExpSize=21 SolSize=18 Gen=229	Prob=examples/freecell/probfreecell-4-5.pddl
+!Gen=335 !Gen=346	Prob=examples/freecell/probfreecell-5-1.pddl
+ExpSize=25 SolSize=25 Gen=320 EgSize=11 ExpSize=26 SolSize=25 Gen=321	Prob=examples/freecell/probfreecell-5-2.pddl
+ExpSize=26 SolSize=26 Gen=341 EgSize=11 !Gen=330	Prob=examples/freecell/probfreecell-5-3.pddl
+ExpSize=26 SolSize=26 Gen=318 EgSize=14 ExpSize=27 SolSize=25 Gen=301	Prob=examples/freecell/probfreecell-5-4.pddl
+!Gen=470 !Gen=470	Prob=examples/freecell/probfreecell-5-5.pddl
+!Gen=359 !Gen=372	Prob=examples/freecell/probfreecell-6-1.pddl
+!Gen=300 !Gen=285	Prob=examples/freecell/probfreecell-6-2.pddl
+!Gen=275 !Gen=275	Prob=examples/freecell/probfreecell-6-3.pddl
+!Gen=262 !Gen=262	Prob=examples/freecell/probfreecell-6-4.pddl
+!Gen=271 !Gen=271	Prob=examples/freecell/probfreecell-6-5.pddl
+!Gen=217 !Gen=217	Prob=examples/freecell/probfreecell-7-1.pddl
+!Gen=321 !Gen=321	Prob=examples/freecell/probfreecell-7-2.pddl
+!Gen=294 !Gen=309	Prob=examples/freecell/probfreecell-7-3.pddl
+!Gen=298 !Gen=298	Prob=examples/freecell/probfreecell-7-4.pddl
+!Gen=278 !Gen=278	Prob=examples/freecell/probfreecell-7-5.pddl
+!Gen=191 !Gen=242	Prob=examples/freecell/probfreecell-8-1.pddl
+!Gen=256 !Gen=177	Prob=examples/freecell/probfreecell-8-2.pddl
+!Gen=244 !Gen=261	Prob=examples/freecell/probfreecell-8-3.pddl
+!Gen=235 !Gen=235	Prob=examples/freecell/probfreecell-8-4.pddl
+!Gen=222 !Gen=233	Prob=examples/freecell/probfreecell-8-5.pddl
+!Gen=200 !Gen=200	Prob=examples/freecell/probfreecell-9-1.pddl
+!Gen=205 !Gen=205	Prob=examples/freecell/probfreecell-9-2.pddl
+!Gen=138 !Gen=203	Prob=examples/freecell/probfreecell-9-3.pddl
+!Gen=195 !Gen=186	Prob=examples/freecell/probfreecell-9-4.pddl
+!Gen=189 !Gen=189	Prob=examples/freecell/probfreecell-9-5.pddl
+ExpSize=14 SolSize=14 Gen=67 EgSize=8 ExpSize=14 SolSize=14 Gen=46	Prob=examples/grid/prob01.pddl
+ExpSize=26 SolSize=26 Gen=393 EgSize=17 ExpSize=27 SolSize=26 Gen=88	Prob=examples/grid/prob02.pddl
+!Gen=718 !Gen=672	Prob=examples/grid/prob03.pddl
+!Gen=551 !Gen=547	Prob=examples/grid/prob04.pddl
+!Gen=253 !Gen=253	Prob=examples/grid/prob05.pddl
+ExpSize=59 SolSize=59 Gen=843 EgSize=33 ExpSize=61 SolSize=59 Gen=735	Prob=examples/logistics00/probLOGISTICS-10-0.pddl
+ExpSize=57 SolSize=57 Gen=829 EgSize=29 ExpSize=89 SolSize=60 Gen=757	Prob=examples/logistics00/probLOGISTICS-10-1.pddl
+ExpSize=69 SolSize=69 Gen=1610 EgSize=34 ExpSize=99 SolSize=71 Gen=1127	Prob=examples/logistics00/probLOGISTICS-11-0.pddl
+ExpSize=86 SolSize=86 Gen=1855 EgSize=39 ExpSize=120 SolSize=91 Gen=1248	Prob=examples/logistics00/probLOGISTICS-11-1.pddl
+ExpSize=57 SolSize=57 Gen=1429 EgSize=20 ExpSize=70 SolSize=58 Gen=844	Prob=examples/logistics00/probLOGISTICS-12-0.pddl
+ExpSize=98 SolSize=98 Gen=1422 EgSize=49 ExpSize=125 SolSize=101 Gen=1245	Prob=examples/logistics00/probLOGISTICS-12-1.pddl
+ExpSize=102 SolSize=102 Gen=2442 EgSize=52 ExpSize=119 SolSize=102 Gen=2070	Prob=examples/logistics00/probLOGISTICS-13-0.pddl
+ExpSize=82 SolSize=82 Gen=1942 EgSize=47 ExpSize=105 SolSize=84 Gen=1780	Prob=examples/logistics00/probLOGISTICS-13-1.pddl
+ExpSize=82 SolSize=82 Gen=2021 EgSize=43 ExpSize=113 SolSize=82 Gen=1866	Prob=examples/logistics00/probLOGISTICS-14-0.pddl
+ExpSize=98 SolSize=98 Gen=2504 EgSize=55 ExpSize=142 SolSize=108 Gen=2557	Prob=examples/logistics00/probLOGISTICS-14-1.pddl
+ExpSize=107 SolSize=107 Gen=2749 EgSize=48 ExpSize=150 SolSize=109 Gen=2376	Prob=examples/logistics00/probLOGISTICS-15-0.pddl
+ExpSize=98 SolSize=98 Gen=2467 EgSize=50 ExpSize=156 SolSize=107 Gen=2532	Prob=examples/logistics00/probLOGISTICS-15-1.pddl
+ExpSize=26 SolSize=26 Gen=165 EgSize=9 ExpSize=33 SolSize=26 Gen=175	Prob=examples/logistics00/probLOGISTICS-4-0.pddl
+ExpSize=25 SolSize=25 Gen=164 EgSize=17 ExpSize=25 SolSize=25 Gen=157	Prob=examples/logistics00/probLOGISTICS-4-1.pddl
+ExpSize=15 SolSize=15 Gen=89 EgSize=10 ExpSize=15 SolSize=15 Gen=89	Prob=examples/logistics00/probLOGISTICS-4-2.pddl
+ExpSize=36 SolSize=36 Gen=236 EgSize=17 ExpSize=47 SolSize=38 Gen=226	Prob=examples/logistics00/probLOGISTICS-5-0.pddl
+ExpSize=21 SolSize=21 Gen=155 EgSize=13 ExpSize=21 SolSize=21 Gen=146	Prob=examples/logistics00/probLOGISTICS-5-1.pddl
+ExpSize=10 SolSize=10 Gen=67 EgSize=6 ExpSize=18 SolSize=12 Gen=72	Prob=examples/logistics00/probLOGISTICS-5-2.pddl
+ExpSize=34 SolSize=34 Gen=256 EgSize=21 ExpSize=35 SolSize=34 Gen=254	Prob=examples/logistics00/probLOGISTICS-6-0.pddl
+ExpSize=16 SolSize=16 Gen=105 EgSize=8 ExpSize=16 SolSize=16 Gen=114	Prob=examples/logistics00/probLOGISTICS-6-1.pddl
+ExpSize=32 SolSize=32 Gen=185 EgSize=13 ExpSize=37 SolSize=33 Gen=190	Prob=examples/logistics00/probLOGISTICS-6-2.pddl
+ExpSize=28 SolSize=28 Gen=174 EgSize=15 ExpSize=28 SolSize=28 Gen=171	Prob=examples/logistics00/probLOGISTICS-6-9.pddl
+ExpSize=52 SolSize=52 Gen=1873 EgSize=34 ExpSize=53 SolSize=52 Gen=505	Prob=examples/logistics00/probLOGISTICS-7-0.pddl
+ExpSize=56 SolSize=56 Gen=499 EgSize=30 ExpSize=57 SolSize=56 Gen=483	Prob=examples/logistics00/probLOGISTICS-7-1.pddl
+ExpSize=40 SolSize=40 Gen=403 EgSize=21 ExpSize=45 SolSize=40 Gen=373	Prob=examples/logistics00/probLOGISTICS-8-0.pddl
+ExpSize=60 SolSize=60 Gen=552 EgSize=29 ExpSize=82 SolSize=64 Gen=595	Prob=examples/logistics00/probLOGISTICS-8-1.pddl
+ExpSize=51 SolSize=51 Gen=584 EgSize=26 ExpSize=51 SolSize=51 Gen=553	Prob=examples/logistics00/probLOGISTICS-9-0.pddl
+ExpSize=43 SolSize=43 Gen=576 EgSize=18 ExpSize=50 SolSize=45 Gen=472	Prob=examples/logistics00/probLOGISTICS-9-1.pddl
+ExpSize=31 SolSize=31 Gen=859 EgSize=14 ExpSize=31 SolSize=31 Gen=671	Prob=examples/logistics98/prob01.pddl
+ExpSize=34 SolSize=34 Gen=4771 EgSize=16 ExpSize=38 SolSize=34 Gen=2517	Prob=examples/logistics98/prob02.pddl
+!Gen=5887 !Gen=5887	Prob=examples/logistics98/prob03.pddl
+!Gen=4021 !Gen=4021	Prob=examples/logistics98/prob04.pddl
+ExpSize=25 SolSize=25 Gen=532 EgSize=13 ExpSize=34 SolSize=27 Gen=529	Prob=examples/logistics98/prob05.pddl
+!Gen=2290 !Gen=2290	Prob=examples/logistics98/prob06.pddl
+!Gen=7561 !Gen=7509	Prob=examples/logistics98/prob07.pddl
+!Gen=1322 !Gen=1322	Prob=examples/logistics98/prob08.pddl
+!Gen=2037 !Gen=1475	Prob=examples/logistics98/prob09.pddl
+!Gen=1390 !Gen=1390	Prob=examples/logistics98/prob10.pddl
+ExpSize=31 SolSize=31 Gen=3692 EgSize=11 ExpSize=44 SolSize=35 Gen=3357	Prob=examples/logistics98/prob11.pddl
+!Gen=1582 !Gen=1582	Prob=examples/logistics98/prob12.pddl
+!Gen=348 !Gen=348	Prob=examples/logistics98/prob13.pddl
+!Gen=803 !Gen=1202	Prob=examples/logistics98/prob14.pddl
+!Gen=4741 !Gen=4741	Prob=examples/logistics98/prob15.pddl
+!Gen=2679 !Gen=2679	Prob=examples/logistics98/prob16.pddl
+!Gen=2657 !Gen=2657	Prob=examples/logistics98/prob17.pddl
+!Gen=362 !Gen=362	Prob=examples/logistics98/prob18.pddl
+!Gen=1153 !Gen=866	Prob=examples/logistics98/prob19.pddl
+!Gen=831 !Gen=831	Prob=examples/logistics98/prob20.pddl
+!Gen=973 !Gen=973	Prob=examples/logistics98/prob21.pddl
+!Gen=430 !Gen=430	Prob=examples/logistics98/prob22.pddl
+!Gen=2081 !Gen=2414	Prob=examples/logistics98/prob23.pddl
+!Gen=662 !Gen=662	Prob=examples/logistics98/prob24.pddl
+!Gen=688 !Gen=688	Prob=examples/logistics98/prob25.pddl
+!Gen=238 !Gen=430	Prob=examples/logistics98/prob26.pddl
+!Gen=502 !Gen=502	Prob=examples/logistics98/prob27.pddl
+ExpSize=5 SolSize=5 Gen=122 EgSize=2 ExpSize=5 SolSize=5 Gen=122	Prob=examples/mprime/prob01.pddl
+ExpSize=9 SolSize=9 Gen=1297 EgSize=6 ExpSize=9 SolSize=9 Gen=416	Prob=examples/mprime/prob02.pddl
+ExpSize=4 SolSize=4 Gen=267 EgSize=1 ExpSize=4 SolSize=4 Gen=267	Prob=examples/mprime/prob03.pddl
+ExpSize=9 SolSize=9 Gen=1625 EgSize=5 ExpSize=9 SolSize=9 Gen=390	Prob=examples/mprime/prob04.pddl
+!Gen=1578 !Gen=1808	Prob=examples/mprime/prob05.pddl
+!Gen=265 !Gen=265	Prob=examples/mprime/prob06.pddl
+ExpSize=5 SolSize=5 Gen=185 EgSize=3 ExpSize=5 SolSize=5 Gen=185	Prob=examples/mprime/prob07.pddl
+!Gen=397 !Gen=397	Prob=examples/mprime/prob08.pddl
+ExpSize=8 SolSize=8 Gen=248 EgSize=5 ExpSize=8 SolSize=8 Gen=248	Prob=examples/mprime/prob09.pddl
+!Gen=276 !Gen=276	Prob=examples/mprime/prob10.pddl
+!Gen=5075 !Gen=5081	Prob=examples/mprime/prob11.pddl
+ExpSize=6 SolSize=6 Gen=239 EgSize=4 ExpSize=6 SolSize=6 Gen=239	Prob=examples/mprime/prob12.pddl
+!Gen=226 !Gen=226	Prob=examples/mprime/prob13.pddl
+ExpSize=5 SolSize=5 Gen=10 EgSize=3 ExpSize=8 SolSize=5 Gen=10	Prob=examples/pegsolitaire/p01.pddl
+ExpSize=9 SolSize=9 Gen=46 EgSize=6 ExpSize=15 SolSize=9 Gen=24	Prob=examples/pegsolitaire/p02.pddl
+ExpSize=9 SolSize=9 Gen=63 EgSize=3 ExpSize=12 SolSize=9 Gen=36	Prob=examples/pegsolitaire/p03.pddl
+ExpSize=12 SolSize=12 Gen=107 EgSize=7 ExpSize=19 SolSize=12 Gen=37	Prob=examples/pegsolitaire/p04.pddl
+ExpSize=13 SolSize=13 Gen=43 EgSize=4 ExpSize=17 SolSize=13 Gen=43	Prob=examples/pegsolitaire/p05.pddl
+ExpSize=15 SolSize=15 Gen=259 EgSize=5 ExpSize=20 SolSize=15 Gen=95	Prob=examples/pegsolitaire/p06.pddl
+ExpSize=16 SolSize=16 Gen=45 EgSize=8 ExpSize=24 SolSize=16 Gen=44	Prob=examples/pegsolitaire/p07.pddl
+ExpSize=20 SolSize=20 Gen=201 EgSize=8 ExpSize=28 SolSize=20 Gen=87	Prob=examples/pegsolitaire/p08.pddl
+ExpSize=18 SolSize=18 Gen=385 EgSize=8 ExpSize=26 SolSize=18 Gen=215	Prob=examples/pegsolitaire/p09.pddl
+ExpSize=23 SolSize=23 Gen=142 EgSize=9 ExpSize=32 SolSize=23 Gen=100	Prob=examples/pegsolitaire/p10.pddl
+ExpSize=21 SolSize=21 Gen=857 EgSize=12 ExpSize=32 SolSize=20 Gen=86	Prob=examples/pegsolitaire/p11.pddl
+ExpSize=24 SolSize=24 Gen=142 EgSize=10 ExpSize=32 SolSize=22 Gen=142	Prob=examples/pegsolitaire/p12.pddl
+ExpSize=23 SolSize=23 Gen=4564 EgSize=11 ExpSize=34 SolSize=23 Gen=110	Prob=examples/pegsolitaire/p13.pddl
+ExpSize=24 SolSize=24 Gen=1326 EgSize=12 ExpSize=36 SolSize=24 Gen=160	Prob=examples/pegsolitaire/p14.pddl
+ExpSize=25 SolSize=25 Gen=210 EgSize=20 ExpSize=45 SolSize=25 Gen=114	Prob=examples/pegsolitaire/p15.pddl
+ExpSize=23 SolSize=23 Gen=441 EgSize=10 ExpSize=34 SolSize=24 Gen=171	Prob=examples/pegsolitaire/p16.pddl
+ExpSize=26 SolSize=26 Gen=2908 EgSize=16 ExpSize=42 SolSize=26 Gen=123	Prob=examples/pegsolitaire/p17.pddl
+ExpSize=26 SolSize=26 Gen=4914 EgSize=11 ExpSize=36 SolSize=25 Gen=137	Prob=examples/pegsolitaire/p18.pddl
+ExpSize=28 SolSize=28 Gen=5956 EgSize=18 ExpSize=46 SolSize=28 Gen=132	Prob=examples/pegsolitaire/p19.pddl
+ExpSize=27 SolSize=27 Gen=399 EgSize=15 ExpSize=42 SolSize=27 Gen=199	Prob=examples/pegsolitaire/p20.pddl
+ExpSize=28 SolSize=28 Gen=178 EgSize=13 ExpSize=43 SolSize=30 Gen=197	Prob=examples/pegsolitaire/p21.pddl
+ExpSize=27 SolSize=27 Gen=503 EgSize=16 ExpSize=43 SolSize=27 Gen=128	Prob=examples/pegsolitaire/p22.pddl
+ExpSize=31 SolSize=31 Gen=4910 EgSize=18 ExpSize=50 SolSize=32 Gen=165	Prob=examples/pegsolitaire/p23.pddl
+ExpSize=31 SolSize=31 Gen=270 EgSize=12 ExpSize=46 SolSize=34 Gen=223	Prob=examples/pegsolitaire/p24.pddl
+ExpSize=30 SolSize=30 Gen=334 EgSize=13 ExpSize=44 SolSize=31 Gen=281	Prob=examples/pegsolitaire/p25.pddl
+ExpSize=34 SolSize=34 Gen=613 EgSize=12 ExpSize=47 SolSize=35 Gen=196	Prob=examples/pegsolitaire/p26.pddl
+ExpSize=38 SolSize=38 Gen=362 EgSize=18 ExpSize=55 SolSize=37 Gen=313	Prob=examples/pegsolitaire/p27.pddl
+ExpSize=43 SolSize=43 Gen=19101 EgSize=21 ExpSize=65 SolSize=44 Gen=707	Prob=examples/pegsolitaire/p28.pddl
+ExpSize=49 SolSize=49 Gen=626 EgSize=26 ExpSize=75 SolSize=49 Gen=286	Prob=examples/pegsolitaire/p29.pddl
+!Gen=235165 !Gen=236911	Prob=examples/pegsolitaire/p30.pddl
+ExpSize=5 SolSize=5 Gen=24 EgSize=1 ExpSize=6 SolSize=5 Gen=24	Prob=examples/pipesworld-notankage/p01-net1-b6-g2.pddl
+ExpSize=12 SolSize=12 Gen=67 EgSize=5 ExpSize=17 SolSize=12 Gen=71	Prob=examples/pipesworld-notankage/p02-net1-b6-g4.pddl
+ExpSize=9 SolSize=9 Gen=72 EgSize=7 ExpSize=16 SolSize=9 Gen=62	Prob=examples/pipesworld-notankage/p03-net1-b8-g3.pddl
+ExpSize=11 SolSize=11 Gen=113 EgSize=7 ExpSize=21 SolSize=14 Gen=85	Prob=examples/pipesworld-notankage/p04-net1-b8-g5.pddl
+ExpSize=9 SolSize=9 Gen=97 EgSize=6 ExpSize=17 SolSize=11 Gen=92	Prob=examples/pipesworld-notankage/p05-net1-b10-g4.pddl
+ExpSize=12 SolSize=12 Gen=115 EgSize=6 ExpSize=17 SolSize=11 Gen=125	Prob=examples/pipesworld-notankage/p06-net1-b10-g6.pddl
+ExpSize=9 SolSize=9 Gen=127 EgSize=5 ExpSize=13 SolSize=10 Gen=113	Prob=examples/pipesworld-notankage/p07-net1-b12-g5.pddl
+ExpSize=11 SolSize=11 Gen=147 EgSize=7 ExpSize=12 SolSize=11 Gen=172	Prob=examples/pipesworld-notankage/p08-net1-b12-g7.pddl
+ExpSize=19 SolSize=19 Gen=4195 EgSize=9 ExpSize=28 SolSize=19 Gen=501	Prob=examples/pipesworld-notankage/p09-net1-b14-g6.pddl
+ExpSize=27 SolSize=27 Gen=2293 EgSize=14 ExpSize=44 SolSize=30 Gen=490	Prob=examples/pipesworld-notankage/p10-net1-b14-g8.pddl
+!Gen=4235 !Gen=4030	Prob=examples/pipesworld-notankage/p11-net2-b10-g2.pddl
+ExpSize=36 SolSize=36 Gen=1667 EgSize=18 ExpSize=36 SolSize=36 Gen=287	Prob=examples/pipesworld-notankage/p12-net2-b10-g4.pddl
+!Gen=3897 !Gen=3897	Prob=examples/pipesworld-notankage/p13-net2-b12-g3.pddl
+ExpSize=38 SolSize=38 Gen=2996 EgSize=17 ExpSize=38 SolSize=38 Gen=607	Prob=examples/pipesworld-notankage/p14-net2-b12-g5.pddl
+ExpSize=34 SolSize=34 Gen=4045 EgSize=22 ExpSize=37 SolSize=34 Gen=804	Prob=examples/pipesworld-notankage/p15-net2-b14-g4.pddl
+!Gen=5423 !Gen=5361	Prob=examples/pipesworld-notankage/p16-net2-b14-g6.pddl
+!Gen=2167 !Gen=2198	Prob=examples/pipesworld-notankage/p17-net2-b16-g5.pddl
+!Gen=2286 !Gen=2279	Prob=examples/pipesworld-notankage/p18-net2-b16-g7.pddl
+!Gen=1771 !Gen=1771	Prob=examples/pipesworld-notankage/p19-net2-b18-g6.pddl
+!Gen=1833 !Gen=1845	Prob=examples/pipesworld-notankage/p20-net2-b18-g8.pddl
+!Gen=3154 !Gen=3128	Prob=examples/pipesworld-notankage/p21-net3-b12-g2.pddl
+!Gen=3654 !Gen=3636	Prob=examples/pipesworld-notankage/p22-net3-b12-g4.pddl
+ExpSize=20 SolSize=20 Gen=344 EgSize=12 ExpSize=40 SolSize=29 Gen=1012	Prob=examples/pipesworld-notankage/p23-net3-b14-g3.pddl
+!Gen=1964 !Gen=1990	Prob=examples/pipesworld-notankage/p24-net3-b14-g5.pddl
+!Gen=1354 !Gen=1354	Prob=examples/pipesworld-notankage/p25-net3-b16-g5.pddl
+!Gen=1434 !Gen=1419	Prob=examples/pipesworld-notankage/p26-net3-b16-g7.pddl
+!Gen=1170 !Gen=1184	Prob=examples/pipesworld-notankage/p27-net3-b18-g6.pddl
+!Gen=1186 !Gen=1186	Prob=examples/pipesworld-notankage/p28-net3-b18-g7.pddl
+!Gen=950 !Gen=950	Prob=examples/pipesworld-notankage/p29-net3-b20-g6.pddl
+!Gen=1136 !Gen=1136	Prob=examples/pipesworld-notankage/p30-net3-b20-g8.pddl
+!Gen=1512 !Gen=1512	Prob=examples/pipesworld-notankage/p31-net4-b14-g3.pddl
+!Gen=1676 !Gen=1665	Prob=examples/pipesworld-notankage/p32-net4-b14-g5.pddl
+!Gen=1372 !Gen=1386	Prob=examples/pipesworld-notankage/p33-net4-b16-g5.pddl
+!Gen=1215 !Gen=1215	Prob=examples/pipesworld-notankage/p34-net4-b16-g6.pddl
+!Gen=950 !Gen=942	Prob=examples/pipesworld-notankage/p35-net4-b18-g4.pddl
+!Gen=989 !Gen=989	Prob=examples/pipesworld-notankage/p36-net4-b18-g6.pddl
+!Gen=845 !Gen=851	Prob=examples/pipesworld-notankage/p37-net4-b20-g5.pddl
+!Gen=834 !Gen=845	Prob=examples/pipesworld-notankage/p38-net4-b20-g7.pddl
+!Gen=649 !Gen=606	Prob=examples/pipesworld-notankage/p39-net4-b22-g7.pddl
+!Gen=641 !Gen=658	Prob=examples/pipesworld-notankage/p40-net4-b22-g8.pddl
+!Gen=375 !Gen=375	Prob=examples/pipesworld-notankage/p41-net5-b22-g2.pddl
+!Gen=359 !Gen=359	Prob=examples/pipesworld-notankage/p42-net5-b22-g4.pddl
+!Gen=323 !Gen=323	Prob=examples/pipesworld-notankage/p43-net5-b24-g3.pddl
+!Gen=320 !Gen=320	Prob=examples/pipesworld-notankage/p44-net5-b24-g5.pddl
+!Gen=285 !Gen=285	Prob=examples/pipesworld-notankage/p45-net5-b26-g4.pddl
+!Gen=290 !Gen=290	Prob=examples/pipesworld-notankage/p46-net5-b26-g6.pddl
+!Gen=229 !Gen=229	Prob=examples/pipesworld-notankage/p47-net5-b28-g5.pddl
+!Gen=230 !Gen=230	Prob=examples/pipesworld-notankage/p48-net5-b28-g7.pddl
+!Gen=192 !Gen=192	Prob=examples/pipesworld-notankage/p49-net5-b30-g6.pddl
+!Gen=188 !Gen=188	Prob=examples/pipesworld-notankage/p50-net5-b30-g8.pddl
+ExpSize=5 SolSize=5 Gen=24 EgSize=2 ExpSize=7 SolSize=5 Gen=24	Prob=examples/pipesworld-tankage/p01-net1-b6-g2-t50.pddl
+ExpSize=14 SolSize=14 Gen=416 EgSize=6 ExpSize=22 SolSize=16 Gen=249	Prob=examples/pipesworld-tankage/p02-net1-b6-g4-t50.pddl
+ExpSize=9 SolSize=9 Gen=173 EgSize=5 ExpSize=14 SolSize=9 Gen=173	Prob=examples/pipesworld-tankage/p03-net1-b8-g3-t80.pddl
+ExpSize=13 SolSize=13 Gen=352 EgSize=6 ExpSize=17 SolSize=11 Gen=316	Prob=examples/pipesworld-tankage/p04-net1-b8-g5-t80.pddl
+ExpSize=9 SolSize=9 Gen=153 EgSize=5 ExpSize=9 SolSize=9 Gen=151	Prob=examples/pipesworld-tankage/p05-net1-b10-g4-t50.pddl
+ExpSize=11 SolSize=11 Gen=211 EgSize=3 ExpSize=11 SolSize=11 Gen=211	Prob=examples/pipesworld-tankage/p06-net1-b10-g6-t50.pddl
+ExpSize=9 SolSize=9 Gen=839 EgSize=4 ExpSize=9 SolSize=9 Gen=839	Prob=examples/pipesworld-tankage/p07-net1-b12-g5-t80.pddl
+ExpSize=11 SolSize=11 Gen=615 EgSize=6 ExpSize=14 SolSize=11 Gen=615	Prob=examples/pipesworld-tankage/p08-net1-b12-g7-t80.pddl
+!Gen=912 !Gen=912	Prob=examples/pipesworld-tankage/p09-net1-b14-g6-t50.pddl
+!Gen=903 !Gen=903	Prob=examples/pipesworld-tankage/p10-net1-b14-g8-t50.pddl
+!Gen=1500 !Gen=1500	Prob=examples/pipesworld-tankage/p11-net2-b10-g2-t30.pddl
+!Gen=942 !Gen=952	Prob=examples/pipesworld-tankage/p12-net2-b10-g4-t60.pddl
+!Gen=683 !Gen=671	Prob=examples/pipesworld-tankage/p13-net2-b12-g3-t70.pddl
+!Gen=965 !Gen=965	Prob=examples/pipesworld-tankage/p14-net2-b12-g5-t30.pddl
+!Gen=906 !Gen=906	Prob=examples/pipesworld-tankage/p15-net2-b14-g4-t30.pddl
+!Gen=432 !Gen=432	Prob=examples/pipesworld-tankage/p16-net2-b14-g6-t80.pddl
+!Gen=1064 !Gen=1058	Prob=examples/pipesworld-tankage/p17-net2-b16-g5-t20.pddl
+!Gen=327 !Gen=349	Prob=examples/pipesworld-tankage/p18-net2-b16-g7-t60.pddl
+!Gen=306 !Gen=286	Prob=examples/pipesworld-tankage/p19-net2-b18-g6-t60.pddl
+!Gen=174 !Gen=174	Prob=examples/pipesworld-tankage/p20-net2-b18-g8-t90.pddl
+!Gen=586 !Gen=586	Prob=examples/pipesworld-tankage/p21-net3-b12-g2-t60.pddl
+!Gen=594 !Gen=594	Prob=examples/pipesworld-tankage/p22-net3-b12-g4-t60.pddl
+!Gen=257 !Gen=257	Prob=examples/pipesworld-tankage/p23-net3-b14-g3-t60.pddl
+!Gen=246 !Gen=246	Prob=examples/pipesworld-tankage/p24-net3-b14-g5-t60.pddl
+!Gen=147 !Gen=147	Prob=examples/pipesworld-tankage/p25-net3-b16-g5-t60.pddl
+!Gen=146 !Gen=146	Prob=examples/pipesworld-tankage/p26-net3-b16-g7-t70.pddl
+!Gen=132 !Gen=132	Prob=examples/pipesworld-tankage/p27-net3-b18-g6-t70.pddl
+!Gen=132 !Gen=132	Prob=examples/pipesworld-tankage/p28-net3-b18-g7-t70.pddl
+!Gen=71 !Gen=71	Prob=examples/pipesworld-tankage/p29-net3-b20-g6-t70.pddl
+!Gen=57 !Gen=117	Prob=examples/pipesworld-tankage/p30-net3-b20-g8-t70.pddl
+!Gen=1135 !Gen=1127	Prob=examples/pipesworld-tankage/p31-net4-b14-g3-t20.pddl
+!Gen=439 !Gen=432	Prob=examples/pipesworld-tankage/p32-net4-b14-g5-t30.pddl
+!Gen=237 !Gen=216	Prob=examples/pipesworld-tankage/p33-net4-b16-g5-t60.pddl
+!Gen=140 !Gen=181	Prob=examples/pipesworld-tankage/p34-net4-b16-g6-t60.pddl
+!Gen=58 !Gen=58	Prob=examples/pipesworld-tankage/p35-net4-b18-g4-t90.pddl
+!Gen=51 !Gen=51	Prob=examples/pipesworld-tankage/p36-net4-b18-g6-t90.pddl
+!Gen=93 !Gen=93	Prob=examples/pipesworld-tankage/p37-net4-b20-g5-t60.pddl
+!Gen=93 !Gen=93	Prob=examples/pipesworld-tankage/p38-net4-b20-g7-t60.pddl
+!Gen=61 !Gen=61	Prob=examples/pipesworld-tankage/p39-net4-b22-g7-t50.pddl
+!Gen=61 !Gen=61	Prob=examples/pipesworld-tankage/p40-net4-b22-g8-t50.pddl
+!Gen=129 !Gen=129	Prob=examples/pipesworld-tankage/p41-net5-b22-g2-t20.pddl
+!Gen=57 !Gen=57	Prob=examples/pipesworld-tankage/p42-net5-b22-g4-t50.pddl
+!Gen=42 !Gen=42	Prob=examples/pipesworld-tankage/p43-net5-b24-g3-t80.pddl
+!Gen=42 !Gen=42	Prob=examples/pipesworld-tankage/p44-net5-b24-g5-t80.pddl
+!Gen=49 !Gen=49	Prob=examples/pipesworld-tankage/p45-net5-b26-g4-t50.pddl
+!Gen=49 !Gen=49	Prob=examples/pipesworld-tankage/p46-net5-b26-g6-t50.pddl
+!Gen=48 !Gen=48	Prob=examples/pipesworld-tankage/p47-net5-b28-g5-t50.pddl
+!Gen=48 !Gen=48	Prob=examples/pipesworld-tankage/p48-net5-b28-g7-t50.pddl
+!Gen=59 !Gen=59	Prob=examples/pipesworld-tankage/p49-net5-b30-g6-t50.pddl
+!Gen=59 !Gen=59	Prob=examples/pipesworld-tankage/p50-net5-b30-g8-t50.pddl
+ExpSize=10 SolSize=10 Gen=53 EgSize=6 ExpSize=16 SolSize=10 Gen=48	Prob=examples/rovers/p01.pddl
+ExpSize=8 SolSize=8 Gen=74 EgSize=4 ExpSize=12 SolSize=8 Gen=60	Prob=examples/rovers/p02.pddl
+ExpSize=13 SolSize=13 Gen=631 EgSize=4 ExpSize=17 SolSize=13 Gen=210	Prob=examples/rovers/p03.pddl
+ExpSize=8 SolSize=8 Gen=62 EgSize=3 ExpSize=11 SolSize=8 Gen=61	Prob=examples/rovers/p04.pddl
+ExpSize=22 SolSize=22 Gen=308 EgSize=9 ExpSize=31 SolSize=22 Gen=239	Prob=examples/rovers/p05.pddl
+ExpSize=38 SolSize=38 Gen=35175 EgSize=21 ExpSize=59 SolSize=38 Gen=419	Prob=examples/rovers/p06.pddl
+ExpSize=18 SolSize=18 Gen=296 EgSize=11 ExpSize=29 SolSize=18 Gen=217	Prob=examples/rovers/p07.pddl
+ExpSize=26 SolSize=26 Gen=746 EgSize=18 ExpSize=44 SolSize=26 Gen=504	Prob=examples/rovers/p08.pddl
+!Gen=46545 !Gen=46451	Prob=examples/rovers/p09.pddl
+ExpSize=36 SolSize=36 Gen=2499 EgSize=20 ExpSize=58 SolSize=38 Gen=4178	Prob=examples/rovers/p10.pddl
+!Gen=42147 !Gen=32688	Prob=examples/rovers/p11.pddl
+ExpSize=19 SolSize=19 Gen=395 EgSize=9 ExpSize=28 SolSize=19 Gen=380	Prob=examples/rovers/p12.pddl
+ExpSize=48 SolSize=48 Gen=2121 EgSize=19 ExpSize=67 SolSize=48 Gen=1312	Prob=examples/rovers/p13.pddl
+!Gen=19355 !Gen=19582	Prob=examples/rovers/p14.pddl
+!Gen=14376 !Gen=14580	Prob=examples/rovers/p15.pddl
+!Gen=15542 !Gen=15137	Prob=examples/rovers/p16.pddl
+!Gen=6688 !Gen=6716	Prob=examples/rovers/p17.pddl
+!Gen=4484 !Gen=4455	Prob=examples/rovers/p18.pddl
+!Gen=3082 !Gen=3115	Prob=examples/rovers/p19.pddl
+!Gen=2219 !Gen=2219	Prob=examples/rovers/p20.pddl
+!Gen=2036 !Gen=2281	Prob=examples/rovers/p21.pddl
+!Gen=2088 !Gen=2088	Prob=examples/rovers/p22.pddl
+!Gen=1803 !Gen=1803	Prob=examples/rovers/p23.pddl
+!Gen=2185 !Gen=2185	Prob=examples/rovers/p24.pddl
+!Gen=2638 !Gen=2638	Prob=examples/rovers/p25.pddl
+!Gen=3230 !Gen=3182	Prob=examples/rovers/p26.pddl
+!Gen=1657 !Gen=1657	Prob=examples/rovers/p27.pddl
+!Gen=927 !Gen=927	Prob=examples/rovers/p28.pddl
+!Gen=959 !Gen=959	Prob=examples/rovers/p29.pddl
+!Gen=790 !Gen=955	Prob=examples/rovers/p30.pddl
+!Gen=1403 !Gen=1403	Prob=examples/rovers/p31.pddl
+!Gen=868 !Gen=868	Prob=examples/rovers/p32.pddl
+!Gen=975 !Gen=975	Prob=examples/rovers/p33.pddl
+!Gen=794 !Gen=441	Prob=examples/rovers/p34.pddl
+!Gen=613 !Gen=613	Prob=examples/rovers/p35.pddl
+!Gen=670 !Gen=554	Prob=examples/rovers/p36.pddl
+!Gen=216 !Gen=216	Prob=examples/rovers/p37.pddl
+!Gen=230 !Gen=230	Prob=examples/rovers/p38.pddl
+!Gen=100 !Gen=217	Prob=examples/rovers/p39.pddl
+!Gen=254 !Gen=254	Prob=examples/rovers/p40.pddl
+ExpSize=9 SolSize=9 Gen=42 EgSize=7 ExpSize=16 SolSize=9 Gen=42	Prob=examples/satellite/p01-pfile1.pddl
+ExpSize=13 SolSize=13 Gen=88 EgSize=6 ExpSize=13 SolSize=13 Gen=88	Prob=examples/satellite/p02-pfile2.pddl
+ExpSize=11 SolSize=11 Gen=193 EgSize=3 ExpSize=11 SolSize=11 Gen=193	Prob=examples/satellite/p03-pfile3.pddl
+ExpSize=18 SolSize=18 Gen=411 EgSize=8 ExpSize=18 SolSize=18 Gen=339	Prob=examples/satellite/p04-pfile4.pddl
+ExpSize=16 SolSize=16 Gen=515 EgSize=10 ExpSize=16 SolSize=16 Gen=515	Prob=examples/satellite/p05-pfile5.pddl
+ExpSize=20 SolSize=20 Gen=615 EgSize=9 ExpSize=20 SolSize=20 Gen=618	Prob=examples/satellite/p06-pfile6.pddl
+ExpSize=23 SolSize=23 Gen=2205 EgSize=7 ExpSize=24 SolSize=23 Gen=2059	Prob=examples/satellite/p07-pfile7.pddl
+ExpSize=26 SolSize=26 Gen=1544 EgSize=13 ExpSize=33 SolSize=26 Gen=1556	Prob=examples/satellite/p08-pfile8.pddl
+ExpSize=29 SolSize=29 Gen=3991 EgSize=19 ExpSize=31 SolSize=29 Gen=2202	Prob=examples/satellite/p09-pfile9.pddl
+ExpSize=29 SolSize=29 Gen=2493 EgSize=10 ExpSize=29 SolSize=29 Gen=2493	Prob=examples/satellite/p10-pfile10.pddl
+ExpSize=31 SolSize=31 Gen=2963 EgSize=13 ExpSize=36 SolSize=31 Gen=2962	Prob=examples/satellite/p11-pfile11.pddl
+ExpSize=43 SolSize=43 Gen=5146 EgSize=27 ExpSize=43 SolSize=43 Gen=5146	Prob=examples/satellite/p12-pfile12.pddl
+!Gen=5410 !Gen=5410	Prob=examples/satellite/p13-pfile13.pddl
+!Gen=5747 !Gen=5747	Prob=examples/satellite/p14-pfile14.pddl
+!Gen=4241 !Gen=6218	Prob=examples/satellite/p15-pfile15.pddl
+!Gen=4546 !Gen=4546	Prob=examples/satellite/p16-pfile16.pddl
+!Gen=3346 !Gen=3346	Prob=examples/satellite/p17-pfile17.pddl
+ExpSize=32 SolSize=32 Gen=3882 EgSize=21 ExpSize=34 SolSize=32 Gen=3877	Prob=examples/satellite/p18-pfile18.pddl
+!Gen=6662 !Gen=6772	Prob=examples/satellite/p19-pfile19.pddl
+!Gen=5215 !Gen=5215	Prob=examples/satellite/p20-pfile20.pddl
+!Gen=3662 !Gen=3843	Prob=examples/satellite/p21-HC-pfile1.pddl
+!Gen=2540 !Gen=2540	Prob=examples/satellite/p22-HC-pfile2.pddl
+!Gen=1858 !Gen=1858	Prob=examples/satellite/p23-HC-pfile3.pddl
+!Gen=519 !Gen=519	Prob=examples/satellite/p24-HC-pfile4.pddl
+!Gen=593 !Gen=593	Prob=examples/satellite/p25-HC-pfile5.pddl
+!Gen=604 !Gen=604	Prob=examples/satellite/p26-HC-pfile6.pddl
+!Gen=757 !Gen=757	Prob=examples/satellite/p27-HC-pfile7.pddl
+!Gen=1064 !Gen=1064	Prob=examples/satellite/p28-HC-pfile8.pddl
+!Gen=1588 !Gen=1588	Prob=examples/satellite/p29-HC-pfile9.pddl
+!Gen=1891 !Gen=1891	Prob=examples/satellite/p30-HC-pfile10.pddl
+!Gen=2340 !Gen=2340	Prob=examples/satellite/p31-HC-pfile11.pddl
+!Gen=3090 !Gen=3090	Prob=examples/satellite/p32-HC-pfile12.pddl
+!Gen=3845 !Gen=3845	Prob=examples/satellite/p33-HC-pfile13.pddl
+!Gen=1027 !Gen=1027	Prob=examples/satellite/p34-HC-pfile14.pddl
+!Gen=1648 !Gen=1648	Prob=examples/satellite/p35-HC-pfile15.pddl
+!Gen=2063 !Gen=2063	Prob=examples/satellite/p36-HC-pfile16.pddl
+ExpSize=6 SolSize=6 Gen=90 EgSize=3 ExpSize=9 SolSize=6 Gen=90	Prob=examples/scananalyzer/p01.pddl
+ExpSize=14 SolSize=14 Gen=263 EgSize=7 ExpSize=21 SolSize=14 Gen=205	Prob=examples/scananalyzer/p02.pddl
+ExpSize=18 SolSize=18 Gen=358 EgSize=10 ExpSize=25 SolSize=16 Gen=283	Prob=examples/scananalyzer/p03.pddl
+ExpSize=8 SolSize=8 Gen=208 EgSize=5 ExpSize=13 SolSize=8 Gen=208	Prob=examples/scananalyzer/p04.pddl
+ExpSize=20 SolSize=20 Gen=1024 EgSize=10 ExpSize=29 SolSize=20 Gen=911	Prob=examples/scananalyzer/p05.pddl
+ExpSize=26 SolSize=26 Gen=1403 EgSize=12 ExpSize=37 SolSize=26 Gen=1604	Prob=examples/scananalyzer/p06.pddl
+ExpSize=10 SolSize=10 Gen=400 EgSize=3 ExpSize=13 SolSize=10 Gen=400	Prob=examples/scananalyzer/p07.pddl
+ExpSize=26 SolSize=26 Gen=3002 EgSize=13 ExpSize=37 SolSize=26 Gen=2623	Prob=examples/scananalyzer/p08.pddl
+ExpSize=34 SolSize=34 Gen=4091 EgSize=17 ExpSize=47 SolSize=34 Gen=2223	Prob=examples/scananalyzer/p09.pddl
+ExpSize=12 SolSize=12 Gen=684 EgSize=6 ExpSize=16 SolSize=12 Gen=684	Prob=examples/scananalyzer/p10.pddl
+!Gen=2439 !Gen=2439	Prob=examples/scananalyzer/p11.pddl
+!Gen=2915 !Gen=2915	Prob=examples/scananalyzer/p12.pddl
+!Gen=623 !Gen=462	Prob=examples/scananalyzer/p13.pddl
+!Gen=863 !Gen=863	Prob=examples/scananalyzer/p14.pddl
+!Gen=1037 !Gen=1547	Prob=examples/scananalyzer/p15.pddl
+!Gen=256 !Gen=256	Prob=examples/scananalyzer/p16.pddl
+!Gen=775 !Gen=775	Prob=examples/scananalyzer/p17.pddl
+!Gen=572 !Gen=863	Prob=examples/scananalyzer/p18.pddl
+!Gen=162 !Gen=162	Prob=examples/scananalyzer/p19.pddl
+!Gen=358 !Gen=358	Prob=examples/scananalyzer/p20.pddl
+!Gen=325 !Gen=325	Prob=examples/scananalyzer/p21.pddl
+ExpSize=5 SolSize=5 Gen=11 EgSize=1 ExpSize=5 SolSize=5 Gen=11	Prob=examples/scananalyzer/p22.pddl
+ExpSize=5 SolSize=5 Gen=11 EgSize=2 ExpSize=5 SolSize=5 Gen=9	Prob=examples/scananalyzer/p23.pddl
+ExpSize=5 SolSize=5 Gen=11 EgSize=2 ExpSize=5 SolSize=5 Gen=9	Prob=examples/scananalyzer/p24.pddl
+!Gen=55 !Gen=55	Prob=examples/scananalyzer/p25.pddl
+!Gen=88 !Gen=93	Prob=examples/scananalyzer/p26.pddl
+!Gen=109 !Gen=109	Prob=examples/scananalyzer/p27.pddl
+!Gen=18 !Gen=18	Prob=examples/scananalyzer/p28.pddl
+!Gen=12 !Gen=12	Prob=examples/scananalyzer/p29.pddl
+!Gen=10 !Gen=10	Prob=examples/scananalyzer/p30.pddl
+ExpSize=49 SolSize=49 Gen=126 EgSize=25 ExpSize=74 SolSize=49 Gen=96	Prob=examples/sokoban/p01.pddl
+ExpSize=41 SolSize=41 Gen=263 EgSize=15 ExpSize=56 SolSize=41 Gen=142	Prob=examples/sokoban/p02.pddl
+ExpSize=51 SolSize=51 Gen=89 EgSize=28 ExpSize=79 SolSize=51 Gen=93	Prob=examples/sokoban/p03.pddl
+ExpSize=121 SolSize=121 Gen=769 EgSize=61 ExpSize=178 SolSize=117 Gen=356	Prob=examples/sokoban/p04.pddl
+ExpSize=55 SolSize=55 Gen=370 EgSize=37 ExpSize=55 SolSize=55 Gen=155	Prob=examples/sokoban/p05.pddl
+ExpSize=35 SolSize=35 Gen=325 EgSize=20 ExpSize=55 SolSize=35 Gen=336	Prob=examples/sokoban/p06.pddl
+ExpSize=97 SolSize=97 Gen=3311 EgSize=48 ExpSize=97 SolSize=97 Gen=575	Prob=examples/sokoban/p07.pddl
+!Gen=6624 !Gen=10442	Prob=examples/sokoban/p08.pddl
+ExpSize=116 SolSize=116 Gen=7380 EgSize=58 ExpSize=174 SolSize=116 Gen=4450	Prob=examples/sokoban/p09.pddl
+!Gen=13210 !Gen=13446	Prob=examples/sokoban/p10.pddl
+!Gen=12724 !Gen=13181	Prob=examples/sokoban/p11.pddl
+!Gen=13148 !Gen=13008	Prob=examples/sokoban/p12.pddl
+!Gen=13966 !Gen=13976	Prob=examples/sokoban/p13.pddl
+ExpSize=95 SolSize=95 Gen=2405 EgSize=51 ExpSize=146 SolSize=95 Gen=450	Prob=examples/sokoban/p14.pddl
+!Gen=10019 !Gen=6710	Prob=examples/sokoban/p15.pddl
+!Gen=5360 !Gen=5352	Prob=examples/sokoban/p16.pddl
+!Gen=11739 !Gen=11683	Prob=examples/sokoban/p17.pddl
+!Gen=8098 !Gen=8261	Prob=examples/sokoban/p18.pddl
+!Gen=9273 !Gen=9581	Prob=examples/sokoban/p19.pddl
+ExpSize=429 SolSize=429 Gen=908 EgSize=212 ExpSize=641 SolSize=429 Gen=877	Prob=examples/sokoban/p20.pddl
+ExpSize=48 SolSize=48 Gen=569 EgSize=22 ExpSize=48 SolSize=48 Gen=353	Prob=examples/sokoban/p21.pddl
+!Gen=6243 !Gen=6108	Prob=examples/sokoban/p22.pddl
+!Gen=12476 !Gen=13162	Prob=examples/sokoban/p23.pddl
+!Gen=8999 !Gen=5874	Prob=examples/sokoban/p24.pddl
+!Gen=9659 !Gen=9810	Prob=examples/sokoban/p25.pddl
+!Gen=5747 !Gen=5481	Prob=examples/sokoban/p26.pddl
+!Gen=3907 !Gen=3791	Prob=examples/sokoban/p27.pddl
+!Gen=5206 !Gen=5147	Prob=examples/sokoban/p28.pddl
+!Gen=1079 !Gen=1063	Prob=examples/sokoban/p29.pddl
+!Gen=1024 !Gen=656	Prob=examples/sokoban/p30.pddl
+ExpSize=5 SolSize=5 Gen=6 EgSize=1 ExpSize=6 SolSize=5 Gen=6	Prob=examples/tpp/p01.pddl
+ExpSize=8 SolSize=8 Gen=16 EgSize=2 ExpSize=10 SolSize=8 Gen=16	Prob=examples/tpp/p02.pddl
+ExpSize=13 SolSize=13 Gen=29 EgSize=7 ExpSize=20 SolSize=13 Gen=29	Prob=examples/tpp/p03.pddl
+ExpSize=16 SolSize=16 Gen=46 EgSize=9 ExpSize=25 SolSize=16 Gen=46	Prob=examples/tpp/p04.pddl
+ExpSize=27 SolSize=27 Gen=101 EgSize=14 ExpSize=27 SolSize=27 Gen=100	Prob=examples/tpp/p05.pddl
+ExpSize=37 SolSize=37 Gen=506 EgSize=15 ExpSize=43 SolSize=37 Gen=548	Prob=examples/tpp/p06.pddl
+ExpSize=54 SolSize=54 Gen=2426 EgSize=25 ExpSize=56 SolSize=54 Gen=1414	Prob=examples/tpp/p07.pddl
+ExpSize=76 SolSize=76 Gen=2168 EgSize=40 ExpSize=81 SolSize=74 Gen=779	Prob=examples/tpp/p08.pddl
+ExpSize=82 SolSize=82 Gen=4597 EgSize=45 ExpSize=82 SolSize=82 Gen=2388	Prob=examples/tpp/p09.pddl
+!Gen=17685 !Gen=14207	Prob=examples/tpp/p10.pddl
+!Gen=8851 !Gen=9381	Prob=examples/tpp/p11.pddl
+!Gen=7483 !Gen=7536	Prob=examples/tpp/p12.pddl
+!Gen=4418 !Gen=3970	Prob=examples/tpp/p13.pddl
+!Gen=3686 !Gen=3626	Prob=examples/tpp/p14.pddl
+!Gen=2914 !Gen=2712	Prob=examples/tpp/p15.pddl
+!Gen=1482 !Gen=1520	Prob=examples/tpp/p16.pddl
+!Gen=916 !Gen=964	Prob=examples/tpp/p17.pddl
+!Gen=704 !Gen=790	Prob=examples/tpp/p18.pddl
+!Gen=737 !Gen=643	Prob=examples/tpp/p19.pddl
+!Gen=580 !Gen=652	Prob=examples/tpp/p20.pddl
+!Gen=411 !Gen=411	Prob=examples/tpp/p21.pddl
+!Gen=304 !Gen=325	Prob=examples/tpp/p22.pddl
+!Gen=320 !Gen=384	Prob=examples/tpp/p23.pddl
+!Gen=295 !Gen=295	Prob=examples/tpp/p24.pddl
+!Gen=172 !Gen=219	Prob=examples/tpp/p25.pddl
+!Gen=56 !Gen=80	Prob=examples/tpp/p26.pddl
+!Gen=59 !Gen=59	Prob=examples/tpp/p27.pddl
+!Gen=60 !Gen=60	Prob=examples/tpp/p28.pddl
+!Gen=53 !Gen=30	Prob=examples/tpp/p29.pddl
+!Gen=30 !Gen=30	Prob=examples/tpp/p30.pddl
+ExpSize=5 SolSize=5 Gen=18 EgSize=3 ExpSize=5 SolSize=5 Gen=18	Prob=examples/transport/p01.pddl
+ExpSize=17 SolSize=17 Gen=71 EgSize=11 ExpSize=17 SolSize=17 Gen=61	Prob=examples/transport/p02.pddl
+ExpSize=20 SolSize=20 Gen=152 EgSize=10 ExpSize=28 SolSize=20 Gen=138	Prob=examples/transport/p03.pddl
+ExpSize=29 SolSize=29 Gen=362 EgSize=14 ExpSize=29 SolSize=29 Gen=290	Prob=examples/transport/p04.pddl
+ExpSize=36 SolSize=36 Gen=559 EgSize=23 ExpSize=37 SolSize=36 Gen=403	Prob=examples/transport/p05.pddl
+!Gen=2062 !Gen=2322	Prob=examples/transport/p06.pddl
+!Gen=1196 !Gen=1247	Prob=examples/transport/p07.pddl
+!Gen=1194 !Gen=1194	Prob=examples/transport/p08.pddl
+!Gen=932 !Gen=732	Prob=examples/transport/p09.pddl
+!Gen=613 !Gen=676	Prob=examples/transport/p10.pddl
+ExpSize=9 SolSize=9 Gen=41 EgSize=3 ExpSize=9 SolSize=9 Gen=41	Prob=examples/transport/p11.pddl
+ExpSize=18 SolSize=18 Gen=127 EgSize=10 ExpSize=18 SolSize=18 Gen=95	Prob=examples/transport/p12.pddl
+ExpSize=41 SolSize=41 Gen=519 EgSize=22 ExpSize=44 SolSize=43 Gen=324	Prob=examples/transport/p13.pddl
+ExpSize=54 SolSize=54 Gen=689 EgSize=26 ExpSize=62 SolSize=54 Gen=440	Prob=examples/transport/p14.pddl
+ExpSize=56 SolSize=56 Gen=777 EgSize=24 ExpSize=65 SolSize=57 Gen=520	Prob=examples/transport/p15.pddl
+!Gen=1413 !Gen=1216	Prob=examples/transport/p16.pddl
+!Gen=957 !Gen=948	Prob=examples/transport/p17.pddl
+!Gen=743 !Gen=610	Prob=examples/transport/p18.pddl
+!Gen=513 !Gen=565	Prob=examples/transport/p19.pddl
+!Gen=393 !Gen=404	Prob=examples/transport/p20.pddl
+ExpSize=7 SolSize=7 Gen=31 EgSize=0 ExpSize=7 SolSize=7 Gen=31	Prob=examples/transport/p21.pddl
+ExpSize=12 SolSize=12 Gen=65 EgSize=5 ExpSize=17 SolSize=12 Gen=59	Prob=examples/transport/p22.pddl
+ExpSize=19 SolSize=19 Gen=138 EgSize=8 ExpSize=19 SolSize=19 Gen=109	Prob=examples/transport/p23.pddl
+ExpSize=23 SolSize=23 Gen=201 EgSize=16 ExpSize=26 SolSize=24 Gen=163	Prob=examples/transport/p24.pddl
+ExpSize=36 SolSize=36 Gen=331 EgSize=21 ExpSize=39 SolSize=36 Gen=286	Prob=examples/transport/p25.pddl
+ExpSize=41 SolSize=41 Gen=957 EgSize=25 ExpSize=44 SolSize=40 Gen=585	Prob=examples/transport/p26.pddl
+!Gen=1485 !Gen=1156	Prob=examples/transport/p27.pddl
+!Gen=976 !Gen=1131	Prob=examples/transport/p28.pddl
+!Gen=838 !Gen=821	Prob=examples/transport/p29.pddl
+!Gen=726 !Gen=739	Prob=examples/transport/p30.pddl

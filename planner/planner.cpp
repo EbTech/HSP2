@@ -150,6 +150,7 @@ string               EGraphOut;
 vector<experience_t> experience;
 vector<atom_t*>      eNode;
 vector<vector<cost_t> > eDist;
+FILE* statsFile;
 
 
 
@@ -3816,6 +3817,7 @@ readEGraph(string fileName)
         eDist[i][j].max = min(eDist[i][j].max, eDist[i][k].max + eDist[k][j].max);
       }
   // TODO remove debug code
+  fprintf(statsFile, "EgSize=%u ", experience.size());
   /*for (size_t i = 0; i < eNode.size(); ++i)
   {
       fprintf( stdout, "%d'th distance to goal is %d:\t", i, eDist[i][0].max );
@@ -3839,6 +3841,9 @@ printEGraph(string fileName)
     perror( "ERROR: could not write EGraph to file" );
     return false;
   }
+  
+  // TODO remove debug code
+  fprintf(statsFile, "ExpSize=%u ", experience.size());
   
   std::uniform_real_distribution<double> dist(0, 1);
   for (auto& exper: experience)
@@ -4017,14 +4022,12 @@ printStatistics( void )
   fprintf( stdout, "STATISTICS: average branching factor = %f\n", (float)generatedNodes / (float)expandedNodes );
   
   // TODO debug remove extra prints
-  FILE *file = fopen( std::string(StatisticsOut).c_str(), "a" );
-  if (file != nullptr)
+  if (statsFile != nullptr)
   {
    if (EGraphIn == "Test/none.eg")
-      fprintf( file, "%d ", generatedNodes );
+      fprintf( statsFile, "Gen=%d ", generatedNodes );
     else
-      fprintf( file, "%d\t%s\n", generatedNodes, problemFile );
-    fclose( file );
+      fprintf( statsFile, "Gen=%d\tProb=%s\n", generatedNodes, problemFile );
   }
 }
 
@@ -4486,9 +4489,8 @@ scheduler( schedule_t *schedule )
     {
       fprintf( stderr, "SOLUTION: no solution found\n" );
       // TODO debug remove extra prints
-      FILE *file = fopen( std::string(StatisticsOut).c_str(), "a" );
-      if (file != nullptr )
-          fprintf( file, ">" );
+      if (statsFile != nullptr )
+          fprintf( statsFile, "!" );
     }
     else
     {
@@ -4497,6 +4499,9 @@ scheduler( schedule_t *schedule )
         printPath( stderr, result, "+  ", "\n" );
       memorizePath(result);
       printEGraph(EGraphOut);
+      
+      // TODO remove debug code
+      fprintf(statsFile, "SolSize=%u ", result->cost);
     }
       
     printStatistics();
@@ -4676,6 +4681,7 @@ parseArguments( int argc, char **argv )
   EGraphIn = "EGraph.txt";
   EGraphOut = "EGraph.txt";
   StatisticsOut = "Test/Stats.txt";
+  statsFile = fopen( StatisticsOut.c_str(), "a" ); // TODO close file
 
   /* parse options */
   while( argc > 1 && *(*++argv) == '-' )
