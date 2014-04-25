@@ -281,7 +281,8 @@ static procRegister_t *procStackTop = nullptr;
 
 /* random number generator */
 std::random_device randomDevice;
-std::mt19937_64 rng(randomDevice());
+//std::mt19937_64 rng(randomDevice());
+std::mt19937_64 rng;
 
 
 
@@ -2176,6 +2177,48 @@ printLists( void )
 **
 **/
 
+void
+randomWalk( atom_t* state, int steps )
+{
+  
+  atom_t prevState[MAXATOMPACKS];
+  while (steps--)
+  {
+    vector<int> ops;
+    int* p;
+    for( int* alpha = validOperators; *alpha != -1; ++alpha )
+    {
+      /* preconditions */
+      for( p = operatorTable[*alpha].prec; (*p != 0) && asserted( state, *p ); ++p );
+      if( *p == 0 )
+        ops.push_back(*alpha);
+    }
+    if (ops.empty())
+      break;
+    std::uniform_int_distribution<int> dist(0, ops.size()-1);
+    int op = ops[dist(rng)];
+    memcpy( prevState, state, SIZE_PACKS * sizeof( atom_t ) );
+    
+    /* operators effects */
+    for( int* a = operatorTable[op].add; *a != 0; ++a )
+      set( state, *a );
+    for( int* d = operatorTable[op].del; *d != 0; ++d )
+      clear( state, *d );
+    /* suboperators effects */
+    for( suboperator_t* sub = operatorTable[op].suboperators; sub != nullptr; sub = sub->next )
+    {
+      for( p = sub->prec; (*p != 0) && asserted( prevState, *p ); ++p );
+      if( *p == 0 )
+      {
+        for( int* a = sub->add; *a != 0; ++a )
+          set( state, *a );
+        for( int* d = sub->del; *d != 0; ++d )
+          clear( state, *d );
+      }
+    }
+  }
+}
+
 int
 forwardNodeExpansion( node_t *node, node_t ***result )
 {
@@ -3470,12 +3513,12 @@ initialize( void )
   /* goal state */
   int* p = _low_copyGoalAtoms;
   for( int* a = _low_goalAtoms; *a != 0; ++a )
-    {
-      set( staticGoalState, *a );
-      *p++ = *a;
-    }
+  {
+    set( staticGoalState, *a );
+    *p++ = *a;
+  }
   *p = 0;
-
+  
   /* operator instantiation */
   operatorCompilation();
 
@@ -3486,6 +3529,41 @@ initialize( void )
   int* op = validOperators;
   for( size_t i = 0; i < numberOperators; *op++ = i++ );
   *op = -1;
+  
+  // TODO hack random number initialization
+  if (statsFile != nullptr)
+    fprintf(statsFile, ", ");
+  int seed = 123456789;
+  for (char* c = problemFile; *c != 0; ++c)
+    seed *= 7, seed += *c;
+  rng = std::mt19937_64(seed);
+  /* TODO make random walks configurable: randomly move start and goal */
+  if (EGraphOut == "Test/trash.eg")
+  {
+    randomWalk(staticInitialState, 10);
+    randomWalk(staticGoalState, 10);
+    p = _low_initialAtoms;
+    for (size_t at = 1; at < SIZE_ATOMS; ++at)
+      if ( asserted( staticInitialState, at ) )
+      {
+        *p++ = at;
+      }
+    *p = 0;
+    p = _low_goalAtoms;
+    for (size_t at = 1; at < SIZE_ATOMS; ++at)
+      if ( asserted( staticGoalState, at ) )
+      {
+        *p++ = at;
+      }
+    *p = 0;
+    p = _low_copyGoalAtoms;
+    for (size_t at = 1; at < SIZE_ATOMS; ++at)
+      if ( asserted( staticGoalState, at ) )
+      {
+        *p++ = at;
+      }
+    *p = 0;
+  }
 
   /* some general info */
   fprintf( stderr, "GENERAL: node size %d = %d (fixed) + %d (variable)\n",
@@ -3817,7 +3895,7 @@ readEGraph(string fileName)
         eDist[i][j].max = min(eDist[i][j].max, eDist[i][k].max + eDist[k][j].max);
       }
   // TODO remove debug code
-  fprintf(statsFile, "EgSize=%u ", experience.size());
+  fprintf(statsFile, "EgSize= %u ", experience.size());
   /*for (size_t i = 0; i < eNode.size(); ++i)
   {
       fprintf( stdout, "%d'th distance to goal is %d:\t", i, eDist[i][0].max );
@@ -3843,7 +3921,7 @@ printEGraph(string fileName)
   }
   
   // TODO remove debug code
-  fprintf(statsFile, "ExpSize=%u ", experience.size());
+  fprintf(statsFile, "ExpSize= %u ", experience.size());
   
   std::uniform_real_distribution<double> dist(0, 1);
   for (auto& exper: experience)
@@ -4025,9 +4103,9 @@ printStatistics( void )
   if (statsFile != nullptr)
   {
    if (EGraphIn == "Test/none.eg")
-      fprintf( statsFile, "Gen=%d ", generatedNodes );
+      fprintf( statsFile, "Gen= %d ", generatedNodes );
     else
-      fprintf( statsFile, "Gen=%d\tProb=%s\n", generatedNodes, problemFile );
+      fprintf( statsFile, "Gen= %d\t%s\n", generatedNodes, problemFile );
   }
 }
 
@@ -4501,7 +4579,7 @@ scheduler( schedule_t *schedule )
       printEGraph(EGraphOut);
       
       // TODO remove debug code
-      fprintf(statsFile, "SolSize=%u ", result->cost);
+      fprintf(statsFile, "SolSize= %u ", result->cost);
     }
       
     printStatistics();
