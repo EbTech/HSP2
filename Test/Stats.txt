@@ -1,484 +1,793 @@
-, ExpSize= 46 SolSize= 46 Gen= 412 , ExpSize= 48 SolSize= 48 Gen= 413 , EgSize= 14 ExpSize= 46 SolSize= 44 Gen= 189	examples/blocks/probBLOCKS-10-0.pddl
-, ExpSize= 44 SolSize= 44 Gen= 645 , ExpSize= 40 SolSize= 40 Gen= 1177 , EgSize= 27 ExpSize= 54 SolSize= 44 Gen= 234	examples/blocks/probBLOCKS-10-1.pddl
-, ExpSize= 48 SolSize= 48 Gen= 737 , ExpSize= 50 SolSize= 50 Gen= 718 , EgSize= 23 ExpSize= 50 SolSize= 48 Gen= 190	examples/blocks/probBLOCKS-10-2.pddl
-, ExpSize= 54 SolSize= 54 Gen= 1268 , ExpSize= 52 SolSize= 52 Gen= 1246 , EgSize= 34 ExpSize= 55 SolSize= 44 Gen= 260	examples/blocks/probBLOCKS-11-0.pddl
-, ExpSize= 58 SolSize= 58 Gen= 2412 , ExpSize= 56 SolSize= 56 Gen= 2419 , EgSize= 28 ExpSize= 60 SolSize= 44 Gen= 657	examples/blocks/probBLOCKS-11-1.pddl
-, ExpSize= 56 SolSize= 56 Gen= 1294 , ExpSize= 54 SolSize= 54 Gen= 1301 , EgSize= 31 ExpSize= 63 SolSize= 46 Gen= 344	examples/blocks/probBLOCKS-11-2.pddl
-, ExpSize= 58 SolSize= 58 Gen= 3333 , ExpSize= 44 SolSize= 44 Gen= 1097 , EgSize= 23 ExpSize= 63 SolSize= 56 Gen= 1032	examples/blocks/probBLOCKS-12-0.pddl
-, ExpSize= 72 SolSize= 72 Gen= 1242 , ExpSize= 58 SolSize= 58 Gen= 467 , EgSize= 42 ExpSize= 87 SolSize= 70 Gen= 505	examples/blocks/probBLOCKS-12-1.pddl
-, ExpSize= 72 SolSize= 72 Gen= 3292 , ExpSize= 54 SolSize= 54 Gen= 1601 , EgSize= 34 ExpSize= 85 SolSize= 62 Gen= 515	examples/blocks/probBLOCKS-13-0.pddl
-, ExpSize= 74 SolSize= 74 Gen= 1352 , ExpSize= 76 SolSize= 76 Gen= 2873 , EgSize= 30 ExpSize= 81 SolSize= 72 Gen= 1120	examples/blocks/probBLOCKS-13-1.pddl
-, !Gen= 27352 , !Gen= 27490 , !Gen= 27546	examples/blocks/probBLOCKS-14-0.pddl
-, ExpSize= 80 SolSize= 80 Gen= 7062 , ExpSize= 82 SolSize= 82 Gen= 9686 , EgSize= 36 ExpSize= 98 SolSize= 84 Gen= 2548	examples/blocks/probBLOCKS-14-1.pddl
-, ExpSize= 78 SolSize= 78 Gen= 2895 , ExpSize= 72 SolSize= 72 Gen= 4996 , EgSize= 39 ExpSize= 98 SolSize= 76 Gen= 1641	examples/blocks/probBLOCKS-15-0.pddl
-, ExpSize= 80 SolSize= 80 Gen= 6183 , ExpSize= 80 SolSize= 80 Gen= 6183 , EgSize= 51 ExpSize= 84 SolSize= 80 Gen= 500	examples/blocks/probBLOCKS-15-1.pddl
-, ExpSize= 94 SolSize= 94 Gen= 3917 , ExpSize= 96 SolSize= 96 Gen= 3134 , EgSize= 50 ExpSize= 106 SolSize= 92 Gen= 929	examples/blocks/probBLOCKS-16-1.pddl
-, ExpSize= 86 SolSize= 86 Gen= 3607 , ExpSize= 86 SolSize= 86 Gen= 3776 , EgSize= 44 ExpSize= 105 SolSize= 82 Gen= 675	examples/blocks/probBLOCKS-16-2.pddl
-, ExpSize= 102 SolSize= 102 Gen= 12405 , !Gen= 14299 , EgSize= 50 ExpSize= 123 SolSize= 104 Gen= 4874	examples/blocks/probBLOCKS-17-0.pddl
-, ExpSize= 10 SolSize= 10 Gen= 22 , ExpSize= 10 SolSize= 10 Gen= 22 , EgSize= 7 ExpSize= 11 SolSize= 10 Gen= 19	examples/blocks/probBLOCKS-4-0.pddl
-, ExpSize= 10 SolSize= 10 Gen= 20 , ExpSize= 6 SolSize= 6 Gen= 15 , EgSize= 2 ExpSize= 7 SolSize= 6 Gen= 15	examples/blocks/probBLOCKS-4-1.pddl
-, ExpSize= 6 SolSize= 6 Gen= 15 , ExpSize= 12 SolSize= 12 Gen= 30 , EgSize= 3 ExpSize= 12 SolSize= 12 Gen= 25	examples/blocks/probBLOCKS-4-2.pddl
-, ExpSize= 18 SolSize= 18 Gen= 89 , ExpSize= 20 SolSize= 20 Gen= 90 , EgSize= 3 ExpSize= 18 SolSize= 16 Gen= 53	examples/blocks/probBLOCKS-5-0.pddl
-, ExpSize= 14 SolSize= 14 Gen= 38 , ExpSize= 10 SolSize= 10 Gen= 22 , EgSize= 8 ExpSize= 10 SolSize= 6 Gen= 25	examples/blocks/probBLOCKS-5-1.pddl
-, ExpSize= 20 SolSize= 20 Gen= 89 , ExpSize= 16 SolSize= 16 Gen= 84 , EgSize= 10 ExpSize= 18 SolSize= 10 Gen= 28	examples/blocks/probBLOCKS-5-2.pddl
-, ExpSize= 32 SolSize= 32 Gen= 181 , ExpSize= 32 SolSize= 32 Gen= 181 , EgSize= 22 ExpSize= 32 SolSize= 32 Gen= 111	examples/blocks/probBLOCKS-6-0.pddl
-, ExpSize= 14 SolSize= 14 Gen= 56 , ExpSize= 18 SolSize= 18 Gen= 76 , EgSize= 6 ExpSize= 19 SolSize= 18 Gen= 77	examples/blocks/probBLOCKS-6-1.pddl
-, ExpSize= 28 SolSize= 28 Gen= 95 , ExpSize= 26 SolSize= 26 Gen= 94 , EgSize= 14 ExpSize= 29 SolSize= 20 Gen= 73	examples/blocks/probBLOCKS-6-2.pddl
-, ExpSize= 22 SolSize= 22 Gen= 109 , ExpSize= 38 SolSize= 38 Gen= 425 , EgSize= 10 ExpSize= 22 SolSize= 20 Gen= 58	examples/blocks/probBLOCKS-7-0.pddl
-, ExpSize= 32 SolSize= 32 Gen= 198 , ExpSize= 24 SolSize= 24 Gen= 174 , EgSize= 16 ExpSize= 39 SolSize= 32 Gen= 139	examples/blocks/probBLOCKS-7-1.pddl
-, ExpSize= 28 SolSize= 28 Gen= 387 , ExpSize= 26 SolSize= 26 Gen= 383 , EgSize= 15 ExpSize= 25 SolSize= 22 Gen= 154	examples/blocks/probBLOCKS-7-2.pddl
-, ExpSize= 26 SolSize= 26 Gen= 292 , ExpSize= 26 SolSize= 26 Gen= 287 , EgSize= 12 ExpSize= 31 SolSize= 26 Gen= 297	examples/blocks/probBLOCKS-8-0.pddl
-, ExpSize= 40 SolSize= 40 Gen= 333 , ExpSize= 34 SolSize= 34 Gen= 504 , EgSize= 19 ExpSize= 42 SolSize= 28 Gen= 127	examples/blocks/probBLOCKS-8-1.pddl
-, ExpSize= 28 SolSize= 28 Gen= 294 , ExpSize= 32 SolSize= 32 Gen= 334 , EgSize= 16 ExpSize= 31 SolSize= 26 Gen= 91	examples/blocks/probBLOCKS-8-2.pddl
-, ExpSize= 48 SolSize= 48 Gen= 647 , ExpSize= 52 SolSize= 52 Gen= 1559 , EgSize= 19 ExpSize= 47 SolSize= 44 Gen= 339	examples/blocks/probBLOCKS-9-0.pddl
-, ExpSize= 44 SolSize= 44 Gen= 872 , ExpSize= 44 SolSize= 44 Gen= 872 , EgSize= 24 ExpSize= 45 SolSize= 44 Gen= 228	examples/blocks/probBLOCKS-9-1.pddl
-, ExpSize= 44 SolSize= 44 Gen= 465 , ExpSize= 42 SolSize= 42 Gen= 302 , EgSize= 22 ExpSize= 45 SolSize= 40 Gen= 336	examples/blocks/probBLOCKS-9-2.pddl
-, ExpSize= 14 SolSize= 14 Gen= 193 , ExpSize= 13 SolSize= 13 Gen= 171 , EgSize= 8 ExpSize= 21 SolSize= 13 Gen= 157	examples/elevators/p01.pddl
-, ExpSize= 9 SolSize= 9 Gen= 153 , ExpSize= 8 SolSize= 8 Gen= 135 , EgSize= 6 ExpSize= 14 SolSize= 8 Gen= 135	examples/elevators/p02.pddl
-, ExpSize= 19 SolSize= 19 Gen= 301 , ExpSize= 18 SolSize= 18 Gen= 269 , EgSize= 8 ExpSize= 31 SolSize= 23 Gen= 315	examples/elevators/p03.pddl
-, ExpSize= 22 SolSize= 22 Gen= 387 , ExpSize= 17 SolSize= 17 Gen= 285 , EgSize= 9 ExpSize= 27 SolSize= 18 Gen= 305	examples/elevators/p04.pddl
-, ExpSize= 23 SolSize= 23 Gen= 1063 , ExpSize= 26 SolSize= 26 Gen= 415 , EgSize= 12 ExpSize= 39 SolSize= 27 Gen= 360	examples/elevators/p05.pddl
-, ExpSize= 27 SolSize= 27 Gen= 1173 , ExpSize= 26 SolSize= 26 Gen= 1213 , EgSize= 16 ExpSize= 44 SolSize= 28 Gen= 501	examples/elevators/p06.pddl
-, ExpSize= 30 SolSize= 30 Gen= 1035 , ExpSize= 27 SolSize= 27 Gen= 1429 , EgSize= 15 ExpSize= 43 SolSize= 28 Gen= 410	examples/elevators/p07.pddl
-, ExpSize= 21 SolSize= 21 Gen= 391 , ExpSize= 21 SolSize= 21 Gen= 392 , EgSize= 12 ExpSize= 31 SolSize= 27 Gen= 495	examples/elevators/p08.pddl
-, ExpSize= 36 SolSize= 36 Gen= 765 , ExpSize= 46 SolSize= 46 Gen= 2028 , EgSize= 14 ExpSize= 42 SolSize= 36 Gen= 534	examples/elevators/p09.pddl
-, ExpSize= 33 SolSize= 33 Gen= 1373 , ExpSize= 30 SolSize= 30 Gen= 1172 , EgSize= 17 ExpSize= 40 SolSize= 38 Gen= 712	examples/elevators/p10.pddl
-, ExpSize= 19 SolSize= 19 Gen= 288 , ExpSize= 16 SolSize= 16 Gen= 294 , EgSize= 10 ExpSize= 29 SolSize= 19 Gen= 285	examples/elevators/p11.pddl
-, ExpSize= 21 SolSize= 21 Gen= 1687 , ExpSize= 20 SolSize= 20 Gen= 1494 , EgSize= 8 ExpSize= 24 SolSize= 16 Gen= 343	examples/elevators/p12.pddl
-, ExpSize= 15 SolSize= 15 Gen= 229 , ExpSize= 14 SolSize= 14 Gen= 275 , EgSize= 9 ExpSize= 25 SolSize= 16 Gen= 234	examples/elevators/p13.pddl
-, ExpSize= 27 SolSize= 27 Gen= 2027 , ExpSize= 26 SolSize= 26 Gen= 1922 , EgSize= 12 ExpSize= 38 SolSize= 26 Gen= 565	examples/elevators/p14.pddl
-, ExpSize= 31 SolSize= 31 Gen= 1445 , ExpSize= 28 SolSize= 28 Gen= 1114 , EgSize= 18 ExpSize= 48 SolSize= 30 Gen= 533	examples/elevators/p15.pddl
-, ExpSize= 32 SolSize= 32 Gen= 5486 , ExpSize= 33 SolSize= 33 Gen= 4636 , EgSize= 18 ExpSize= 52 SolSize= 34 Gen= 928	examples/elevators/p16.pddl
-, ExpSize= 26 SolSize= 26 Gen= 647 , ExpSize= 28 SolSize= 28 Gen= 1716 , EgSize= 15 ExpSize= 44 SolSize= 29 Gen= 503	examples/elevators/p17.pddl
-, ExpSize= 27 SolSize= 27 Gen= 3472 , ExpSize= 28 SolSize= 28 Gen= 3571 , EgSize= 14 ExpSize= 45 SolSize= 31 Gen= 1209	examples/elevators/p18.pddl
-, ExpSize= 42 SolSize= 42 Gen= 1903 , ExpSize= 41 SolSize= 41 Gen= 1768 , EgSize= 28 ExpSize= 69 SolSize= 41 Gen= 816	examples/elevators/p19.pddl
-, ExpSize= 38 SolSize= 38 Gen= 7061 , ExpSize= 38 SolSize= 38 Gen= 4983 , EgSize= 22 ExpSize= 50 SolSize= 39 Gen= 847	examples/elevators/p20.pddl
-, ExpSize= 19 SolSize= 19 Gen= 373 , ExpSize= 18 SolSize= 18 Gen= 349 , EgSize= 9 ExpSize= 30 SolSize= 21 Gen= 351	examples/elevators/p21.pddl
-, ExpSize= 14 SolSize= 14 Gen= 392 , ExpSize= 13 SolSize= 13 Gen= 560 , EgSize= 9 ExpSize= 27 SolSize= 18 Gen= 420	examples/elevators/p22.pddl
-, ExpSize= 22 SolSize= 22 Gen= 407 , ExpSize= 20 SolSize= 20 Gen= 365 , EgSize= 11 ExpSize= 32 SolSize= 21 Gen= 393	examples/elevators/p23.pddl
-, ExpSize= 25 SolSize= 25 Gen= 646 , ExpSize= 24 SolSize= 24 Gen= 622 , EgSize= 9 ExpSize= 36 SolSize= 27 Gen= 690	examples/elevators/p24.pddl
-, ExpSize= 27 SolSize= 27 Gen= 668 , ExpSize= 24 SolSize= 24 Gen= 489 , EgSize= 12 ExpSize= 40 SolSize= 28 Gen= 686	examples/elevators/p25.pddl
-, !Gen= 9309 , !Gen= 9969 , !Gen= 10120	examples/elevators/p26.pddl
-, ExpSize= 38 SolSize= 38 Gen= 1518 , ExpSize= 38 SolSize= 38 Gen= 1518 , EgSize= 16 ExpSize= 54 SolSize= 38 Gen= 720	examples/elevators/p27.pddl
-, !Gen= 8616 , !Gen= 8619 , !Gen= 8156	examples/elevators/p28.pddl
-, ExpSize= 32 SolSize= 32 Gen= 694 , ExpSize= 30 SolSize= 30 Gen= 682 , EgSize= 14 ExpSize= 38 SolSize= 32 Gen= 692	examples/elevators/p29.pddl
-, ExpSize= 40 SolSize= 40 Gen= 1521 , ExpSize= 39 SolSize= 39 Gen= 1411 , EgSize= 18 ExpSize= 56 SolSize= 38 Gen= 1148	examples/elevators/p30.pddl
-, !Gen= 170 , !Gen= 175 , !Gen= 165	examples/freecell/probfreecell-10-1.pddl
-, !Gen= 160 , !Gen= 182 , !Gen= 188	examples/freecell/probfreecell-10-2.pddl
-, !Gen= 168 , !Gen= 170 , !Gen= 180	examples/freecell/probfreecell-10-3.pddl
-, !Gen= 160 , !Gen= 166 , !Gen= 166	examples/freecell/probfreecell-10-4.pddl
-, !Gen= 152 , !Gen= 136 , !Gen= 145	examples/freecell/probfreecell-10-5.pddl
-, !Gen= 137 , , , !Gen= 133 , , , !Gen= 135 , !Gen= 127 , !Gen= 135	examples/freecell/probfreecell-11-3.pddl
-, !Gen= 126 , !Gen= 120 , !Gen= 120	examples/freecell/probfreecell-11-4.pddl
-, !Gen= 118 , !Gen= 134 , !Gen= 124	examples/freecell/probfreecell-11-5.pddl
-, !Gen= 129 , , , !Gen= 115 , !Gen= 120 , !Gen= 112	examples/freecell/probfreecell-12-2.pddl
-, !Gen= 106 , !Gen= 132 , !Gen= 121	examples/freecell/probfreecell-12-3.pddl
-, !Gen= 113 , !Gen= 116 , !Gen= 122	examples/freecell/probfreecell-12-4.pddl
-, !Gen= 105 , !Gen= 114 , !Gen= 114	examples/freecell/probfreecell-12-5.pddl
-, !Gen= 108 , , , !Gen= 112 , !Gen= 135 , !Gen= 135	examples/freecell/probfreecell-13-2.pddl
-, !Gen= 99 , , , !Gen= 75 , !Gen= 84 , !Gen= 91	examples/freecell/probfreecell-13-4.pddl
-, !Gen= 74 , !Gen= 106 , !Gen= 92	examples/freecell/probfreecell-13-5.pddl
-, ExpSize= 9 SolSize= 9 Gen= 89 , ExpSize= 3 SolSize= 3 Gen= 11 , EgSize= 1 ExpSize= 4 SolSize= 3 Gen= 11	examples/freecell/probfreecell-2-1.pddl
-, ExpSize= 8 SolSize= 8 Gen= 73 , ExpSize= 6 SolSize= 6 Gen= 39 , EgSize= 3 ExpSize= 9 SolSize= 6 Gen= 39	examples/freecell/probfreecell-2-2.pddl
-, ExpSize= 9 SolSize= 9 Gen= 84 , ExpSize= 4 SolSize= 4 Gen= 17 , EgSize= 5 ExpSize= 9 SolSize= 4 Gen= 17	examples/freecell/probfreecell-2-3.pddl
-, ExpSize= 8 SolSize= 8 Gen= 73 , ExpSize= 6 SolSize= 6 Gen= 42 , EgSize= 5 ExpSize= 10 SolSize= 6 Gen= 42	examples/freecell/probfreecell-2-4.pddl
-, ExpSize= 9 SolSize= 9 Gen= 64 , ExpSize= 6 SolSize= 6 Gen= 41 , EgSize= 5 ExpSize= 11 SolSize= 6 Gen= 41	examples/freecell/probfreecell-2-5.pddl
-, ExpSize= 15 SolSize= 15 Gen= 163 , ExpSize= 14 SolSize= 14 Gen= 143 , EgSize= 8 ExpSize= 19 SolSize= 14 Gen= 143	examples/freecell/probfreecell-3-1.pddl
-, ExpSize= 14 SolSize= 14 Gen= 152 , ExpSize= 10 SolSize= 10 Gen= 100 , EgSize= 9 ExpSize= 19 SolSize= 10 Gen= 100	examples/freecell/probfreecell-3-2.pddl
-, ExpSize= 13 SolSize= 13 Gen= 147 , ExpSize= 9 SolSize= 9 Gen= 85 , EgSize= 5 ExpSize= 13 SolSize= 9 Gen= 85	examples/freecell/probfreecell-3-3.pddl
-, ExpSize= 12 SolSize= 12 Gen= 141 , ExpSize= 12 SolSize= 12 Gen= 159 , EgSize= 8 ExpSize= 20 SolSize= 12 Gen= 159	examples/freecell/probfreecell-3-4.pddl
-, ExpSize= 13 SolSize= 13 Gen= 152 , ExpSize= 11 SolSize= 11 Gen= 115 , EgSize= 5 ExpSize= 14 SolSize= 12 Gen= 132	examples/freecell/probfreecell-3-5.pddl
-, ExpSize= 21 SolSize= 21 Gen= 245 , ExpSize= 19 SolSize= 19 Gen= 270 , EgSize= 13 ExpSize= 32 SolSize= 19 Gen= 270	examples/freecell/probfreecell-4-1.pddl
-, ExpSize= 19 SolSize= 19 Gen= 251 , ExpSize= 14 SolSize= 14 Gen= 182 , EgSize= 6 ExpSize= 20 SolSize= 14 Gen= 182	examples/freecell/probfreecell-4-2.pddl
-, ExpSize= 20 SolSize= 20 Gen= 251 , ExpSize= 22 SolSize= 22 Gen= 310 , EgSize= 13 ExpSize= 29 SolSize= 22 Gen= 310	examples/freecell/probfreecell-4-3.pddl
-, ExpSize= 20 SolSize= 20 Gen= 225 , ExpSize= 14 SolSize= 14 Gen= 184 , EgSize= 5 ExpSize= 19 SolSize= 14 Gen= 184	examples/freecell/probfreecell-4-4.pddl
-, ExpSize= 18 SolSize= 18 Gen= 219 , ExpSize= 14 SolSize= 14 Gen= 167 , EgSize= 7 ExpSize= 19 SolSize= 14 Gen= 167	examples/freecell/probfreecell-4-5.pddl
-, ExpSize= 25 SolSize= 25 Gen= 377 , ExpSize= 22 SolSize= 22 Gen= 254 , EgSize= 11 ExpSize= 31 SolSize= 22 Gen= 254	examples/freecell/probfreecell-5-1.pddl
-, ExpSize= 25 SolSize= 25 Gen= 320 , ExpSize= 24 SolSize= 24 Gen= 317 , EgSize= 16 ExpSize= 39 SolSize= 24 Gen= 317	examples/freecell/probfreecell-5-2.pddl
-, ExpSize= 26 SolSize= 26 Gen= 341 , ExpSize= 23 SolSize= 23 Gen= 319 , EgSize= 14 ExpSize= 31 SolSize= 25 Gen= 334	examples/freecell/probfreecell-5-3.pddl
-, ExpSize= 26 SolSize= 26 Gen= 318 , ExpSize= 20 SolSize= 20 Gen= 265 , EgSize= 14 ExpSize= 34 SolSize= 20 Gen= 265	examples/freecell/probfreecell-5-4.pddl
-, !Gen= 447 , ExpSize= 25 SolSize= 25 Gen= 317 , ExpSize= 25 SolSize= 25 Gen= 317	examples/freecell/probfreecell-5-5.pddl
-, !Gen= 346 , !Gen= 379 , !Gen= 379	examples/freecell/probfreecell-6-1.pddl
-, ExpSize= 30 SolSize= 30 Gen= 380 , ExpSize= 25 SolSize= 25 Gen= 329 , EgSize= 16 ExpSize= 39 SolSize= 25 Gen= 329	examples/freecell/probfreecell-6-2.pddl
-, !Gen= 390 , ExpSize= 27 SolSize= 27 Gen= 375 , ExpSize= 27 SolSize= 27 Gen= 375	examples/freecell/probfreecell-6-3.pddl
-, !Gen= 371 , !Gen= 370 , !Gen= 359	examples/freecell/probfreecell-6-4.pddl
-, !Gen= 334 , !Gen= 378 , !Gen= 354	examples/freecell/probfreecell-6-5.pddl
-, !Gen= 299 , !Gen= 318 , !Gen= 318	examples/freecell/probfreecell-7-1.pddl
-, !Gen= 307 , !Gen= 322 , !Gen= 322	examples/freecell/probfreecell-7-2.pddl
-, !Gen= 294 , !Gen= 302 , !Gen= 320	examples/freecell/probfreecell-7-3.pddl
-, !Gen= 298 , !Gen= 305 , !Gen= 317	examples/freecell/probfreecell-7-4.pddl
-, !Gen= 278 , !Gen= 305 , !Gen= 305	examples/freecell/probfreecell-7-5.pddl
-, !Gen= 233 , !Gen= 269 , !Gen= 269	examples/freecell/probfreecell-8-1.pddl
-, !Gen= 256 , !Gen= 261 , !Gen= 273	examples/freecell/probfreecell-8-2.pddl
-, !Gen= 244 , !Gen= 253 , !Gen= 253	examples/freecell/probfreecell-8-3.pddl
-, !Gen= 235 , !Gen= 222 , !Gen= 222	examples/freecell/probfreecell-8-4.pddl
-, !Gen= 222 , !Gen= 164 , !Gen= 233	examples/freecell/probfreecell-8-5.pddl
-, !Gen= 200 , !Gen= 214 , !Gen= 204	examples/freecell/probfreecell-9-1.pddl
-, !Gen= 205 , !Gen= 232 , !Gen= 206	examples/freecell/probfreecell-9-2.pddl
-, !Gen= 203 , !Gen= 212 , !Gen= 212	examples/freecell/probfreecell-9-3.pddl
-, !Gen= 195 , !Gen= 174 , !Gen= 165	examples/freecell/probfreecell-9-4.pddl
-, !Gen= 189 , !Gen= 190 , !Gen= 201	examples/freecell/probfreecell-9-5.pddl
-, ExpSize= 14 SolSize= 14 Gen= 67 , ExpSize= 12 SolSize= 12 Gen= 66 , EgSize= 5 ExpSize= 14 SolSize= 12 Gen= 52	examples/grid/prob01.pddl
-, ExpSize= 26 SolSize= 26 Gen= 393 , ExpSize= 27 SolSize= 27 Gen= 275 , EgSize= 10 ExpSize= 28 SolSize= 26 Gen= 90	examples/grid/prob02.pddl
-, !Gen= 669 , !Gen= 822 , !Gen= 829	examples/grid/prob03.pddl
-, !Gen= 555 , !Gen= 531 , !Gen= 538	examples/grid/prob04.pddl
-, !Gen= 249 , !Gen= 250 , !Gen= 225	examples/grid/prob05.pddl
-, ExpSize= 59 SolSize= 59 Gen= 843 , ExpSize= 65 SolSize= 65 Gen= 889 , EgSize= 24 ExpSize= 88 SolSize= 64 Gen= 882	examples/logistics00/probLOGISTICS-10-0.pddl
-, ExpSize= 57 SolSize= 57 Gen= 829 , ExpSize= 56 SolSize= 56 Gen= 922 , EgSize= 21 ExpSize= 85 SolSize= 64 Gen= 882	examples/logistics00/probLOGISTICS-10-1.pddl
-, ExpSize= 69 SolSize= 69 Gen= 1610 , ExpSize= 68 SolSize= 68 Gen= 1729 , EgSize= 27 ExpSize= 95 SolSize= 68 Gen= 1163	examples/logistics00/probLOGISTICS-11-0.pddl
-, ExpSize= 86 SolSize= 86 Gen= 1855 , ExpSize= 83 SolSize= 83 Gen= 1774 , EgSize= 50 ExpSize= 94 SolSize= 89 Gen= 1239	examples/logistics00/probLOGISTICS-11-1.pddl
-, ExpSize= 57 SolSize= 57 Gen= 1429 , ExpSize= 57 SolSize= 57 Gen= 1386 , EgSize= 31 ExpSize= 85 SolSize= 64 Gen= 1025	examples/logistics00/probLOGISTICS-12-0.pddl
-, ExpSize= 98 SolSize= 98 Gen= 1422 , ExpSize= 93 SolSize= 93 Gen= 1379 , EgSize= 56 ExpSize= 127 SolSize= 101 Gen= 1290	examples/logistics00/probLOGISTICS-12-1.pddl
-, ExpSize= 102 SolSize= 102 Gen= 2442 , ExpSize= 93 SolSize= 93 Gen= 2323 , EgSize= 47 ExpSize= 127 SolSize= 114 Gen= 2587	examples/logistics00/probLOGISTICS-13-0.pddl
-, ExpSize= 82 SolSize= 82 Gen= 1942 , ExpSize= 86 SolSize= 86 Gen= 2103 , EgSize= 34 ExpSize= 103 SolSize= 86 Gen= 1898	examples/logistics00/probLOGISTICS-13-1.pddl
-, ExpSize= 82 SolSize= 82 Gen= 2021 , ExpSize= 76 SolSize= 76 Gen= 1967 , EgSize= 38 ExpSize= 130 SolSize= 93 Gen= 2335	examples/logistics00/probLOGISTICS-14-0.pddl
-, ExpSize= 98 SolSize= 98 Gen= 2504 , ExpSize= 95 SolSize= 95 Gen= 2357 , EgSize= 48 ExpSize= 145 SolSize= 110 Gen= 2332	examples/logistics00/probLOGISTICS-14-1.pddl
-, ExpSize= 107 SolSize= 107 Gen= 2749 , ExpSize= 102 SolSize= 102 Gen= 2666 , EgSize= 52 ExpSize= 130 SolSize= 114 Gen= 2899	examples/logistics00/probLOGISTICS-15-0.pddl
-, ExpSize= 98 SolSize= 98 Gen= 2467 , ExpSize= 98 SolSize= 98 Gen= 2436 , EgSize= 44 ExpSize= 136 SolSize= 107 Gen= 2361	examples/logistics00/probLOGISTICS-15-1.pddl
-, ExpSize= 26 SolSize= 26 Gen= 165 , ExpSize= 21 SolSize= 21 Gen= 152 , EgSize= 16 ExpSize= 31 SolSize= 30 Gen= 186	examples/logistics00/probLOGISTICS-4-0.pddl
-, ExpSize= 25 SolSize= 25 Gen= 164 , ExpSize= 20 SolSize= 20 Gen= 144 , EgSize= 15 ExpSize= 30 SolSize= 29 Gen= 186	examples/logistics00/probLOGISTICS-4-1.pddl
-, ExpSize= 15 SolSize= 15 Gen= 89 , ExpSize= 18 SolSize= 18 Gen= 85 , EgSize= 5 ExpSize= 24 SolSize= 19 Gen= 94	examples/logistics00/probLOGISTICS-4-2.pddl
-, ExpSize= 36 SolSize= 36 Gen= 236 , ExpSize= 36 SolSize= 36 Gen= 234 , EgSize= 21 ExpSize= 39 SolSize= 38 Gen= 250	examples/logistics00/probLOGISTICS-5-0.pddl
-, ExpSize= 21 SolSize= 21 Gen= 155 , ExpSize= 19 SolSize= 19 Gen= 157 , EgSize= 11 ExpSize= 31 SolSize= 21 Gen= 150	examples/logistics00/probLOGISTICS-5-1.pddl
-, ExpSize= 10 SolSize= 10 Gen= 67 , ExpSize= 9 SolSize= 9 Gen= 71 , EgSize= 5 ExpSize= 15 SolSize= 13 Gen= 84	examples/logistics00/probLOGISTICS-5-2.pddl
-, ExpSize= 34 SolSize= 34 Gen= 256 , ExpSize= 30 SolSize= 30 Gen= 220 , EgSize= 14 ExpSize= 37 SolSize= 30 Gen= 225	examples/logistics00/probLOGISTICS-6-0.pddl
-, ExpSize= 16 SolSize= 16 Gen= 105 , ExpSize= 17 SolSize= 17 Gen= 104 , EgSize= 8 ExpSize= 20 SolSize= 17 Gen= 98	examples/logistics00/probLOGISTICS-6-1.pddl
-, ExpSize= 32 SolSize= 32 Gen= 185 , ExpSize= 32 SolSize= 32 Gen= 173 , EgSize= 14 ExpSize= 34 SolSize= 33 Gen= 181	examples/logistics00/probLOGISTICS-6-2.pddl
-, ExpSize= 28 SolSize= 28 Gen= 174 , ExpSize= 27 SolSize= 27 Gen= 143 , EgSize= 15 ExpSize= 31 SolSize= 30 Gen= 183	examples/logistics00/probLOGISTICS-6-9.pddl
-, ExpSize= 52 SolSize= 52 Gen= 1873 , ExpSize= 43 SolSize= 43 Gen= 1810 , EgSize= 28 ExpSize= 71 SolSize= 45 Gen= 483	examples/logistics00/probLOGISTICS-7-0.pddl
-, ExpSize= 56 SolSize= 56 Gen= 499 , ExpSize= 63 SolSize= 63 Gen= 807 , EgSize= 26 ExpSize= 72 SolSize= 61 Gen= 537	examples/logistics00/probLOGISTICS-7-1.pddl
-, ExpSize= 40 SolSize= 40 Gen= 403 , ExpSize= 41 SolSize= 41 Gen= 409 , EgSize= 26 ExpSize= 44 SolSize= 44 Gen= 414	examples/logistics00/probLOGISTICS-8-0.pddl
-, ExpSize= 60 SolSize= 60 Gen= 552 , ExpSize= 53 SolSize= 53 Gen= 663 , EgSize= 30 ExpSize= 68 SolSize= 66 Gen= 612	examples/logistics00/probLOGISTICS-8-1.pddl
-, ExpSize= 51 SolSize= 51 Gen= 584 , ExpSize= 48 SolSize= 48 Gen= 550 , EgSize= 27 ExpSize= 71 SolSize= 56 Gen= 558	examples/logistics00/probLOGISTICS-9-0.pddl
-, ExpSize= 43 SolSize= 43 Gen= 576 , ExpSize= 42 SolSize= 42 Gen= 466 , EgSize= 19 ExpSize= 60 SolSize= 42 Gen= 432	examples/logistics00/probLOGISTICS-9-1.pddl
-, ExpSize= 31 SolSize= 31 Gen= 859 , ExpSize= 29 SolSize= 29 Gen= 626 , EgSize= 17 ExpSize= 48 SolSize= 31 Gen= 578	examples/logistics98/prob01.pddl
-, ExpSize= 34 SolSize= 34 Gen= 4771 , ExpSize= 34 SolSize= 34 Gen= 4784 , EgSize= 23 ExpSize= 37 SolSize= 36 Gen= 1684	examples/logistics98/prob02.pddl
-, !Gen= 5785 , !Gen= 5430 , !Gen= 5741	examples/logistics98/prob03.pddl
-, !Gen= 4021 , !Gen= 3813 , !Gen= 2986	examples/logistics98/prob04.pddl
-, ExpSize= 25 SolSize= 25 Gen= 532 , ExpSize= 24 SolSize= 24 Gen= 500 , EgSize= 14 ExpSize= 29 SolSize= 29 Gen= 603	examples/logistics98/prob05.pddl
-, !Gen= 2173 , !Gen= 2220 , !Gen= 2220	examples/logistics98/prob06.pddl
-, !Gen= 7354 , !Gen= 6594 , !Gen= 6972	examples/logistics98/prob07.pddl
-, !Gen= 1169 , !Gen= 1306 , !Gen= 1154	examples/logistics98/prob08.pddl
-, !Gen= 2037 , !Gen= 1848 , !Gen= 2040	examples/logistics98/prob09.pddl
-, !Gen= 2133 , !Gen= 2131 , !Gen= 2131	examples/logistics98/prob10.pddl
-, ExpSize= 31 SolSize= 31 Gen= 3692 , ExpSize= 32 SolSize= 32 Gen= 3594 , EgSize= 13 ExpSize= 51 SolSize= 42 Gen= 4030	examples/logistics98/prob11.pddl
-, !Gen= 1181 , !Gen= 1183 , !Gen= 1183	examples/logistics98/prob12.pddl
-, !Gen= 669 , !Gen= 353 , !Gen= 353	examples/logistics98/prob13.pddl
-, !Gen= 1202 , !Gen= 1186 , !Gen= 1186	examples/logistics98/prob14.pddl
-, !Gen= 4532 , !Gen= 4614 , !Gen= 4649	examples/logistics98/prob15.pddl
-, !Gen= 1703 , !Gen= 2680 , !Gen= 2680	examples/logistics98/prob16.pddl
-, !Gen= 2657 , !Gen= 2770 , !Gen= 2770	examples/logistics98/prob17.pddl
-, !Gen= 362 , !Gen= 359 , !Gen= 359	examples/logistics98/prob18.pddl
-, !Gen= 1153 , !Gen= 861 , !Gen= 1146	examples/logistics98/prob19.pddl
-, !Gen= 831 , !Gen= 831 , !Gen= 831	examples/logistics98/prob20.pddl
-, !Gen= 973 , !Gen= 980 , !Gen= 980	examples/logistics98/prob21.pddl
-, !Gen= 430 , !Gen= 427 , !Gen= 427	examples/logistics98/prob22.pddl
-, !Gen= 2819 , !Gen= 2971 , !Gen= 2886	examples/logistics98/prob23.pddl
-, !Gen= 662 , !Gen= 665 , !Gen= 665	examples/logistics98/prob24.pddl
-, ExpSize= 5 SolSize= 5 Gen= 122 , ExpSize= 6 SolSize= 6 Gen= 113 , EgSize= 3 ExpSize= 9 SolSize= 6 Gen= 113	examples/mprime/prob01.pddl
-, ExpSize= 9 SolSize= 9 Gen= 1297 , ExpSize= 9 SolSize= 9 Gen= 1554 , EgSize= 5 ExpSize= 14 SolSize= 9 Gen= 1554	examples/mprime/prob02.pddl
-, ExpSize= 4 SolSize= 4 Gen= 267 , ExpSize= 4 SolSize= 4 Gen= 299 , EgSize= 1 ExpSize= 5 SolSize= 4 Gen= 299	examples/mprime/prob03.pddl
-, ExpSize= 9 SolSize= 9 Gen= 1625 , ExpSize= 7 SolSize= 7 Gen= 1026 , EgSize= 3 ExpSize= 10 SolSize= 7 Gen= 1026	examples/mprime/prob04.pddl
-, !Gen= 1830 , ExpSize= 10 SolSize= 10 Gen= 559 , ExpSize= 10 SolSize= 10 Gen= 559	examples/mprime/prob05.pddl
-, !Gen= 265 , !Gen= 267 , !Gen= 267	examples/mprime/prob06.pddl
-, ExpSize= 5 SolSize= 5 Gen= 185 , ExpSize= 5 SolSize= 5 Gen= 36 , EgSize= 1 ExpSize= 6 SolSize= 5 Gen= 36	examples/mprime/prob07.pddl
-, !Gen= 527 , !Gen= 561 , !Gen= 561	examples/mprime/prob08.pddl
-, ExpSize= 8 SolSize= 8 Gen= 248 , ExpSize= 9 SolSize= 9 Gen= 344 , EgSize= 5 ExpSize= 14 SolSize= 9 Gen= 344	examples/mprime/prob09.pddl
-, !Gen= 276 , !Gen= 281 , !Gen= 281	examples/mprime/prob10.pddl
-, !Gen= 5081 , ExpSize= 12 SolSize= 12 Gen= 1810 , ExpSize= 12 SolSize= 12 Gen= 1810	examples/mprime/prob11.pddl
-, ExpSize= 6 SolSize= 6 Gen= 239 , ExpSize= 6 SolSize= 6 Gen= 255 , EgSize= 5 ExpSize= 11 SolSize= 6 Gen= 255	examples/mprime/prob12.pddl
-, !Gen= 226 , !Gen= 229 , !Gen= 229	examples/mprime/prob13.pddl
-, !Gen= 285 , !Gen= 319 , !Gen= 319	examples/mprime/prob14.pddl
-, !Gen= 259 , !Gen= 289 , !Gen= 289	examples/mprime/prob15.pddl
-, !Gen= 823 , !Gen= 782 , !Gen= 782	examples/mprime/prob16.pddl
-, !Gen= 217 , !Gen= 182 , !Gen= 182	examples/mprime/prob17.pddl
-, !Gen= 301 , !Gen= 283 , !Gen= 283	examples/mprime/prob18.pddl
-, !Gen= 323 , !Gen= 321 , !Gen= 321	examples/mprime/prob19.pddl
-, !Gen= 302 , !Gen= 288 , !Gen= 288	examples/mprime/prob20.pddl
-, !Gen= 309 , !Gen= 311 , !Gen= 311	examples/mprime/prob21.pddl
-, !Gen= 287 , !Gen= 331 , !Gen= 331	examples/mprime/prob22.pddl
-, !Gen= 234 , !Gen= 414 , !Gen= 414	examples/mprime/prob23.pddl
-, !Gen= 120 , !Gen= 144 , !Gen= 144	examples/mprime/prob24.pddl
-, ExpSize= 4 SolSize= 4 Gen= 52 , ExpSize= 4 SolSize= 4 Gen= 47 , EgSize= 2 ExpSize= 6 SolSize= 4 Gen= 47	examples/mprime/prob25.pddl
-, ExpSize= 6 SolSize= 6 Gen= 428 , ExpSize= 6 SolSize= 6 Gen= 532 , EgSize= 4 ExpSize= 10 SolSize= 6 Gen= 532	examples/mprime/prob26.pddl
-, !Gen= 531 , !Gen= 603 , !Gen= 603	examples/mprime/prob27.pddl
-, ExpSize= 14 SolSize= 14 Gen= 499 , ExpSize= 14 SolSize= 14 Gen= 757 , EgSize= 7 ExpSize= 21 SolSize= 14 Gen= 757	examples/mprime/prob28.pddl
-, ExpSize= 4 SolSize= 4 Gen= 201 , ExpSize= 4 SolSize= 4 Gen= 233 , EgSize= 1 ExpSize= 5 SolSize= 4 Gen= 233	examples/mprime/prob29.pddl
-, !Gen= 148 , !Gen= 148 , !Gen= 148	examples/mprime/prob30.pddl
-, ExpSize= 4 SolSize= 4 Gen= 138 , , EgSize= 1 , ExpSize= 7 SolSize= 7 Gen= 831 , ExpSize= 6 SolSize= 6 Gen= 167 , EgSize= 3 ExpSize= 9 SolSize= 6 Gen= 167	examples/mprime/prob32.pddl
-, !Gen= 276 , !Gen= 321 , !Gen= 321	examples/mprime/prob33.pddl
-, ExpSize= 4 SolSize= 4 Gen= 142 , , EgSize= 2 , ExpSize= 5 SolSize= 5 Gen= 105 , ExpSize= 4 SolSize= 4 Gen= 100 , EgSize= 1 ExpSize= 5 SolSize= 4 Gen= 100	examples/mprime/prob35.pddl
-, ExpSize= 5 SolSize= 5 Gen= 10 , , EgSize= 2 , ExpSize= 9 SolSize= 9 Gen= 46 , , EgSize= 4 , ExpSize= 9 SolSize= 9 Gen= 63 , , EgSize= 6 , ExpSize= 12 SolSize= 12 Gen= 107 , , EgSize= 8 , ExpSize= 13 SolSize= 13 Gen= 43 , , EgSize= 6 , ExpSize= 15 SolSize= 15 Gen= 259 , , EgSize= 8 , ExpSize= 16 SolSize= 16 Gen= 45 , ExpSize= 8 SolSize= 8 Gen= 19 , EgSize= 7 ExpSize= 15 SolSize= 8 Gen= 19	examples/pegsolitaire/p07.pddl
-, ExpSize= 20 SolSize= 20 Gen= 201 , , EgSize= 11 , ExpSize= 18 SolSize= 18 Gen= 385 , , EgSize= 6 , ExpSize= 23 SolSize= 23 Gen= 142 , , EgSize= 11 , ExpSize= 21 SolSize= 21 Gen= 857 , !Gen= 21 , EgSize= 12 !Gen= 21	examples/pegsolitaire/p11.pddl
-, ExpSize= 24 SolSize= 24 Gen= 142 , !Gen= 31 , EgSize= 10 !Gen= 31	examples/pegsolitaire/p12.pddl
-, ExpSize= 23 SolSize= 23 Gen= 4564 , !Gen= 51 , EgSize= 9 !Gen= 51	examples/pegsolitaire/p13.pddl
-, ExpSize= 24 SolSize= 24 Gen= 1326 , !Gen= 47 , EgSize= 11 !Gen= 47	examples/pegsolitaire/p14.pddl
-, ExpSize= 25 SolSize= 25 Gen= 210 , !Gen= 35 , EgSize= 11 !Gen= 35	examples/pegsolitaire/p15.pddl
-, ExpSize= 23 SolSize= 23 Gen= 441 , !Gen= 6 , EgSize= 12 !Gen= 6	examples/pegsolitaire/p16.pddl
-, ExpSize= 26 SolSize= 26 Gen= 2908 , , EgSize= 15 , ExpSize= 26 SolSize= 26 Gen= 4914 , !Gen= 249 , EgSize= 8 !Gen= 269	examples/pegsolitaire/p18.pddl
-, ExpSize= 28 SolSize= 28 Gen= 5956 , !Gen= 19 , EgSize= 10 !Gen= 19	examples/pegsolitaire/p19.pddl
-, ExpSize= 27 SolSize= 27 Gen= 399 , !Gen= 242 , EgSize= 15 !Gen= 242	examples/pegsolitaire/p20.pddl
-, ExpSize= 28 SolSize= 28 Gen= 178 , !Gen= 192 , EgSize= 9 !Gen= 192	examples/pegsolitaire/p21.pddl
-, ExpSize= 27 SolSize= 27 Gen= 503 , !Gen= 176 , EgSize= 10 !Gen= 176	examples/pegsolitaire/p22.pddl
-, ExpSize= 31 SolSize= 31 Gen= 4910 , ExpSize= 21 SolSize= 21 Gen= 204 , EgSize= 14 ExpSize= 33 SolSize= 19 Gen= 256	examples/pegsolitaire/p23.pddl
-, ExpSize= 31 SolSize= 31 Gen= 270 , !Gen= 4495 , EgSize= 15 !Gen= 4503	examples/pegsolitaire/p24.pddl
-, ExpSize= 30 SolSize= 30 Gen= 334 , !Gen= 2316 , EgSize= 11 !Gen= 2319	examples/pegsolitaire/p25.pddl
-, ExpSize= 34 SolSize= 34 Gen= 613 , !Gen= 24633 , EgSize= 18 !Gen= 22526	examples/pegsolitaire/p26.pddl
-, ExpSize= 38 SolSize= 38 Gen= 362 , !Gen= 19586 , EgSize= 22 !Gen= 18678	examples/pegsolitaire/p27.pddl
-, ExpSize= 43 SolSize= 43 Gen= 19101 , !Gen= 25115 , EgSize= 19 !Gen= 23901	examples/pegsolitaire/p28.pddl
-, ExpSize= 49 SolSize= 49 Gen= 626 , ExpSize= 36 SolSize= 36 Gen= 379 , EgSize= 28 ExpSize= 64 SolSize= 36 Gen= 379	examples/pegsolitaire/p29.pddl
-, !Gen= 20530 , !Gen= 20538 , !Gen= 20554	examples/pegsolitaire/p30.pddl
-, ExpSize= 5 SolSize= 5 Gen= 24 , ExpSize= 9 SolSize= 9 Gen= 44 , EgSize= 4 ExpSize= 15 SolSize= 11 Gen= 53	examples/pipesworld-notankage/p01-net1-b6-g2.pddl
-, ExpSize= 12 SolSize= 12 Gen= 67 , ExpSize= 10 SolSize= 10 Gen= 58 , EgSize= 6 ExpSize= 18 SolSize= 12 Gen= 55	examples/pipesworld-notankage/p02-net1-b6-g4.pddl
-, ExpSize= 9 SolSize= 9 Gen= 72 , ExpSize= 6 SolSize= 6 Gen= 44 , EgSize= 4 ExpSize= 10 SolSize= 6 Gen= 44	examples/pipesworld-notankage/p03-net1-b8-g3.pddl
-, ExpSize= 11 SolSize= 11 Gen= 113 , ExpSize= 14 SolSize= 14 Gen= 107 , EgSize= 6 ExpSize= 20 SolSize= 14 Gen= 107	examples/pipesworld-notankage/p04-net1-b8-g5.pddl
-, ExpSize= 9 SolSize= 9 Gen= 97 , ExpSize= 7 SolSize= 7 Gen= 66 , EgSize= 4 ExpSize= 11 SolSize= 7 Gen= 66	examples/pipesworld-notankage/p05-net1-b10-g4.pddl
-, ExpSize= 12 SolSize= 12 Gen= 115 , ExpSize= 10 SolSize= 10 Gen= 112 , EgSize= 3 ExpSize= 13 SolSize= 10 Gen= 112	examples/pipesworld-notankage/p06-net1-b10-g6.pddl
-, ExpSize= 9 SolSize= 9 Gen= 127 , ExpSize= 6 SolSize= 6 Gen= 76 , EgSize= 2 ExpSize= 8 SolSize= 6 Gen= 76	examples/pipesworld-notankage/p07-net1-b12-g5.pddl
-, ExpSize= 11 SolSize= 11 Gen= 147 , ExpSize= 11 SolSize= 11 Gen= 285 , EgSize= 6 ExpSize= 17 SolSize= 11 Gen= 285	examples/pipesworld-notankage/p08-net1-b12-g7.pddl
-, ExpSize= 19 SolSize= 19 Gen= 4195 , ExpSize= 15 SolSize= 15 Gen= 413 , EgSize= 14 ExpSize= 35 SolSize= 21 Gen= 566	examples/pipesworld-notankage/p09-net1-b14-g6.pddl
-, ExpSize= 27 SolSize= 27 Gen= 2293 , ExpSize= 19 SolSize= 19 Gen= 501 , EgSize= 16 ExpSize= 35 SolSize= 19 Gen= 501	examples/pipesworld-notankage/p10-net1-b14-g8.pddl
-, !Gen= 5515 , ExpSize= 22 SolSize= 22 Gen= 180 , ExpSize= 22 SolSize= 22 Gen= 180	examples/pipesworld-notankage/p11-net2-b10-g2.pddl
-, ExpSize= 36 SolSize= 36 Gen= 1667 , ExpSize= 38 SolSize= 38 Gen= 721 , EgSize= 18 ExpSize= 56 SolSize= 38 Gen= 721	examples/pipesworld-notankage/p12-net2-b10-g4.pddl
-, !Gen= 3812 , !Gen= 3766 , !Gen= 3768	examples/pipesworld-notankage/p13-net2-b12-g3.pddl
-, ExpSize= 38 SolSize= 38 Gen= 2996 , !Gen= 3572 , EgSize= 17 !Gen= 3568	examples/pipesworld-notankage/p14-net2-b12-g5.pddl
-, ExpSize= 34 SolSize= 34 Gen= 4045 , ExpSize= 28 SolSize= 28 Gen= 2146 , EgSize= 18 ExpSize= 46 SolSize= 28 Gen= 2146	examples/pipesworld-notankage/p15-net2-b14-g4.pddl
-, !Gen= 5088 , ExpSize= 64 SolSize= 64 Gen= 2834 , ExpSize= 64 SolSize= 64 Gen= 2834	examples/pipesworld-notankage/p16-net2-b14-g6.pddl
-, !Gen= 2094 , !Gen= 1952 , !Gen= 2130	examples/pipesworld-notankage/p17-net2-b16-g5.pddl
-, !Gen= 2234 , !Gen= 2144 , !Gen= 2163	examples/pipesworld-notankage/p18-net2-b16-g7.pddl
-, !Gen= 1733 , !Gen= 1862 , !Gen= 1920	examples/pipesworld-notankage/p19-net2-b18-g6.pddl
-, !Gen= 1845 , ExpSize= 38 SolSize= 38 Gen= 952 , ExpSize= 38 SolSize= 38 Gen= 952	examples/pipesworld-notankage/p20-net2-b18-g8.pddl
-, !Gen= 3085 , !Gen= 3156 , !Gen= 3136	examples/pipesworld-notankage/p21-net3-b12-g2.pddl
-, !Gen= 3553 , !Gen= 3737 , !Gen= 3617	examples/pipesworld-notankage/p22-net3-b12-g4.pddl
-, ExpSize= 20 SolSize= 20 Gen= 344 , !Gen= 1898 , EgSize= 9 !Gen= 1920	examples/pipesworld-notankage/p23-net3-b14-g3.pddl
-, !Gen= 1966 , !Gen= 1881 , !Gen= 1891	examples/pipesworld-notankage/p24-net3-b14-g5.pddl
-, !Gen= 1354 , !Gen= 1372 , !Gen= 1372	examples/pipesworld-notankage/p25-net3-b16-g5.pddl
-, !Gen= 1410 , !Gen= 1610 , !Gen= 1594	examples/pipesworld-notankage/p26-net3-b16-g7.pddl
-, !Gen= 1119 , !Gen= 1123 , !Gen= 1161	examples/pipesworld-notankage/p27-net3-b18-g6.pddl
-, !Gen= 1162 , !Gen= 1335 , !Gen= 1371	examples/pipesworld-notankage/p28-net3-b18-g7.pddl
-, !Gen= 950 , !Gen= 897 , !Gen= 897	examples/pipesworld-notankage/p29-net3-b20-g6.pddl
-, !Gen= 1136 , !Gen= 998 , !Gen= 998	examples/pipesworld-notankage/p30-net3-b20-g8.pddl
-, !Gen= 1526 , !Gen= 1512 , !Gen= 1512	examples/pipesworld-notankage/p31-net4-b14-g3.pddl
-, !Gen= 1602 , !Gen= 1490 , !Gen= 1484	examples/pipesworld-notankage/p32-net4-b14-g5.pddl
-, !Gen= 1372 , !Gen= 1262 , !Gen= 1241	examples/pipesworld-notankage/p33-net4-b16-g5.pddl
-, !Gen= 1195 , !Gen= 1207 , !Gen= 1207	examples/pipesworld-notankage/p34-net4-b16-g6.pddl
-, !Gen= 942 , !Gen= 944 , !Gen= 944	examples/pipesworld-notankage/p35-net4-b18-g4.pddl
-, !Gen= 978 , !Gen= 919 , !Gen= 992	examples/pipesworld-notankage/p36-net4-b18-g6.pddl
-, !Gen= 858 , !Gen= 854 , !Gen= 854	examples/pipesworld-notankage/p37-net4-b20-g5.pddl
-, !Gen= 810 , !Gen= 888 , !Gen= 913	examples/pipesworld-notankage/p38-net4-b20-g7.pddl
-, !Gen= 644 , !Gen= 633 , !Gen= 633	examples/pipesworld-notankage/p39-net4-b22-g7.pddl
-, !Gen= 641 , !Gen= 647 , !Gen= 647	examples/pipesworld-notankage/p40-net4-b22-g8.pddl
-, !Gen= 361 , !Gen= 381 , !Gen= 381	examples/pipesworld-notankage/p41-net5-b22-g2.pddl
-, !Gen= 359 , !Gen= 351 , !Gen= 356	examples/pipesworld-notankage/p42-net5-b22-g4.pddl
-, !Gen= 323 , !Gen= 392 , !Gen= 392	examples/pipesworld-notankage/p43-net5-b24-g3.pddl
-, !Gen= 320 , !Gen= 328 , !Gen= 328	examples/pipesworld-notankage/p44-net5-b24-g5.pddl
-, !Gen= 279 , !Gen= 267 , !Gen= 267	examples/pipesworld-notankage/p45-net5-b26-g4.pddl
-, !Gen= 301 , !Gen= 276 , !Gen= 276	examples/pipesworld-notankage/p46-net5-b26-g6.pddl
-, !Gen= 229 , !Gen= 244 , !Gen= 228	examples/pipesworld-notankage/p47-net5-b28-g5.pddl
-, !Gen= 230 , !Gen= 235 , !Gen= 235	examples/pipesworld-notankage/p48-net5-b28-g7.pddl
-, !Gen= 192 , !Gen= 187 , !Gen= 187	examples/pipesworld-notankage/p49-net5-b30-g6.pddl
-, !Gen= 188 , !Gen= 181 , !Gen= 181	examples/pipesworld-notankage/p50-net5-b30-g8.pddl
-, ExpSize= 5 SolSize= 5 Gen= 24 , ExpSize= 7 SolSize= 7 Gen= 31 , EgSize= 2 ExpSize= 9 SolSize= 7 Gen= 31	examples/pipesworld-tankage/p01-net1-b6-g2-t50.pddl
-, ExpSize= 14 SolSize= 14 Gen= 416 , ExpSize= 12 SolSize= 12 Gen= 240 , EgSize= 10 ExpSize= 22 SolSize= 12 Gen= 238	examples/pipesworld-tankage/p02-net1-b6-g4-t50.pddl
-, ExpSize= 9 SolSize= 9 Gen= 173 , ExpSize= 7 SolSize= 7 Gen= 197 , EgSize= 2 ExpSize= 9 SolSize= 7 Gen= 197	examples/pipesworld-tankage/p03-net1-b8-g3-t80.pddl
-, ExpSize= 13 SolSize= 13 Gen= 352 , ExpSize= 12 SolSize= 12 Gen= 257 , EgSize= 5 ExpSize= 17 SolSize= 12 Gen= 257	examples/pipesworld-tankage/p04-net1-b8-g5-t80.pddl
-, ExpSize= 9 SolSize= 9 Gen= 153 , ExpSize= 7 SolSize= 7 Gen= 103 , EgSize= 5 ExpSize= 12 SolSize= 7 Gen= 103	examples/pipesworld-tankage/p05-net1-b10-g4-t50.pddl
-, ExpSize= 11 SolSize= 11 Gen= 211 , ExpSize= 16 SolSize= 16 Gen= 559 , EgSize= 6 ExpSize= 22 SolSize= 16 Gen= 427	examples/pipesworld-tankage/p06-net1-b10-g6-t50.pddl
-, ExpSize= 9 SolSize= 9 Gen= 839 , ExpSize= 7 SolSize= 7 Gen= 667 , EgSize= 4 ExpSize= 11 SolSize= 7 Gen= 667	examples/pipesworld-tankage/p07-net1-b12-g5-t80.pddl
-, ExpSize= 11 SolSize= 11 Gen= 615 , ExpSize= 8 SolSize= 8 Gen= 339 , EgSize= 7 ExpSize= 15 SolSize= 8 Gen= 339	examples/pipesworld-tankage/p08-net1-b12-g7-t80.pddl
-, !Gen= 912 , !Gen= 803 , !Gen= 803	examples/pipesworld-tankage/p09-net1-b14-g6-t50.pddl
-, !Gen= 903 , !Gen= 877 , !Gen= 877	examples/pipesworld-tankage/p10-net1-b14-g8-t50.pddl
-, !Gen= 1517 , , , !Gen= 947 , !Gen= 969 , !Gen= 981	examples/pipesworld-tankage/p12-net2-b10-g4-t60.pddl
-, !Gen= 671 , !Gen= 663 , !Gen= 663	examples/pipesworld-tankage/p13-net2-b12-g3-t70.pddl
-, !Gen= 965 , !Gen= 957 , !Gen= 961	examples/pipesworld-tankage/p14-net2-b12-g5-t30.pddl
-, !Gen= 906 , !Gen= 886 , !Gen= 886	examples/pipesworld-tankage/p15-net2-b14-g4-t30.pddl
-, !Gen= 438 , !Gen= 441 , !Gen= 441	examples/pipesworld-tankage/p16-net2-b14-g6-t80.pddl
-, !Gen= 1076 , , , !Gen= 349 , !Gen= 350 , !Gen= 350	examples/pipesworld-tankage/p18-net2-b16-g7-t60.pddl
-, !Gen= 306 , !Gen= 368 , !Gen= 368	examples/pipesworld-tankage/p19-net2-b18-g6-t60.pddl
-, !Gen= 174 , !Gen= 174 , !Gen= 174	examples/pipesworld-tankage/p20-net2-b18-g8-t90.pddl
-, !Gen= 578 , !Gen= 588 , !Gen= 604	examples/pipesworld-tankage/p21-net3-b12-g2-t60.pddl
-, !Gen= 596 , !Gen= 609 , !Gen= 609	examples/pipesworld-tankage/p22-net3-b12-g4-t60.pddl
-, !Gen= 257 , !Gen= 238 , !Gen= 238	examples/pipesworld-tankage/p23-net3-b14-g3-t60.pddl
-, !Gen= 241 , !Gen= 240 , !Gen= 240	examples/pipesworld-tankage/p24-net3-b14-g5-t60.pddl
-, !Gen= 147 , !Gen= 133 , !Gen= 133	examples/pipesworld-tankage/p25-net3-b16-g5-t60.pddl
-, !Gen= 146 , !Gen= 120 , !Gen= 120	examples/pipesworld-tankage/p26-net3-b16-g7-t70.pddl
-, !Gen= 132 , !Gen= 140 , !Gen= 140	examples/pipesworld-tankage/p27-net3-b18-g6-t70.pddl
-, !Gen= 132 , !Gen= 137 , !Gen= 116	examples/pipesworld-tankage/p28-net3-b18-g7-t70.pddl
-, !Gen= 71 , !Gen= 80 , !Gen= 80	examples/pipesworld-tankage/p29-net3-b20-g6-t70.pddl
-, !Gen= 117 , !Gen= 62 , !Gen= 62	examples/pipesworld-tankage/p30-net3-b20-g8-t70.pddl
-, !Gen= 1135 , !Gen= 1002 , !Gen= 969	examples/pipesworld-tankage/p31-net4-b14-g3-t20.pddl
-, !Gen= 432 , !Gen= 433 , !Gen= 433	examples/pipesworld-tankage/p32-net4-b14-g5-t30.pddl
-, !Gen= 237 , !Gen= 224 , !Gen= 224	examples/pipesworld-tankage/p33-net4-b16-g5-t60.pddl
-, !Gen= 181 , !Gen= 175 , !Gen= 175	examples/pipesworld-tankage/p34-net4-b16-g6-t60.pddl
-, !Gen= 58 , !Gen= 51 , !Gen= 51	examples/pipesworld-tankage/p35-net4-b18-g4-t90.pddl
-, !Gen= 51 , !Gen= 34 , !Gen= 34	examples/pipesworld-tankage/p36-net4-b18-g6-t90.pddl
-, !Gen= 93 , !Gen= 77 , !Gen= 82	examples/pipesworld-tankage/p37-net4-b20-g5-t60.pddl
-, !Gen= 93 , !Gen= 84 , !Gen= 84	examples/pipesworld-tankage/p38-net4-b20-g7-t60.pddl
-, !Gen= 61 , !Gen= 54 , !Gen= 54	examples/pipesworld-tankage/p39-net4-b22-g7-t50.pddl
-, !Gen= 61 , !Gen= 90 , !Gen= 90	examples/pipesworld-tankage/p40-net4-b22-g8-t50.pddl
-, !Gen= 129 , !Gen= 131 , !Gen= 131	examples/pipesworld-tankage/p41-net5-b22-g2-t20.pddl
-, !Gen= 57 , !Gen= 50 , !Gen= 50	examples/pipesworld-tankage/p42-net5-b22-g4-t50.pddl
-, !Gen= 42 , !Gen= 53 , !Gen= 53	examples/pipesworld-tankage/p43-net5-b24-g3-t80.pddl
-, !Gen= 42 , !Gen= 39 , !Gen= 39	examples/pipesworld-tankage/p44-net5-b24-g5-t80.pddl
-, !Gen= 49 , !Gen= 31 , !Gen= 31	examples/pipesworld-tankage/p45-net5-b26-g4-t50.pddl
-, !Gen= 49 , !Gen= 26 , !Gen= 26	examples/pipesworld-tankage/p46-net5-b26-g6-t50.pddl
-, !Gen= 48 , !Gen= 35 , !Gen= 35	examples/pipesworld-tankage/p47-net5-b28-g5-t50.pddl
-, !Gen= 48 , !Gen= 29 , !Gen= 29	examples/pipesworld-tankage/p48-net5-b28-g7-t50.pddl
-, !Gen= 59 , !Gen= 55 , !Gen= 55	examples/pipesworld-tankage/p49-net5-b30-g6-t50.pddl
-, !Gen= 59 , !Gen= 39 , !Gen= 39	examples/pipesworld-tankage/p50-net5-b30-g8-t50.pddl
-, ExpSize= 10 SolSize= 10 Gen= 53 , ExpSize= 7 SolSize= 7 Gen= 37 , EgSize= 4 ExpSize= 11 SolSize= 7 Gen= 37	examples/rovers/p01.pddl
-, ExpSize= 8 SolSize= 8 Gen= 74 , ExpSize= 9 SolSize= 9 Gen= 85 , EgSize= 3 ExpSize= 12 SolSize= 9 Gen= 67	examples/rovers/p02.pddl
-, ExpSize= 13 SolSize= 13 Gen= 631 , ExpSize= 13 SolSize= 13 Gen= 97 , EgSize= 4 ExpSize= 17 SolSize= 13 Gen= 97	examples/rovers/p03.pddl
-, ExpSize= 8 SolSize= 8 Gen= 62 , ExpSize= 7 SolSize= 7 Gen= 62 , EgSize= 2 ExpSize= 9 SolSize= 7 Gen= 62	examples/rovers/p04.pddl
-, ExpSize= 22 SolSize= 22 Gen= 308 , ExpSize= 21 SolSize= 21 Gen= 375 , EgSize= 9 ExpSize= 32 SolSize= 23 Gen= 445	examples/rovers/p05.pddl
-, ExpSize= 38 SolSize= 38 Gen= 35175 , ExpSize= 33 SolSize= 33 Gen= 4671 , EgSize= 18 ExpSize= 51 SolSize= 33 Gen= 1301	examples/rovers/p06.pddl
-, ExpSize= 18 SolSize= 18 Gen= 296 , ExpSize= 13 SolSize= 13 Gen= 202 , EgSize= 8 ExpSize= 21 SolSize= 13 Gen= 202	examples/rovers/p07.pddl
-, ExpSize= 26 SolSize= 26 Gen= 746 , ExpSize= 26 SolSize= 26 Gen= 768 , EgSize= 15 ExpSize= 41 SolSize= 26 Gen= 768	examples/rovers/p08.pddl
-, !Gen= 42960 , !Gen= 47684 , !Gen= 47821	examples/rovers/p09.pddl
-, ExpSize= 36 SolSize= 36 Gen= 2499 , ExpSize= 34 SolSize= 34 Gen= 6467 , EgSize= 17 ExpSize= 53 SolSize= 36 Gen= 3650	examples/rovers/p10.pddl
-, !Gen= 41556 , !Gen= 41610 , !Gen= 40263	examples/rovers/p11.pddl
-, ExpSize= 19 SolSize= 19 Gen= 395 , ExpSize= 19 SolSize= 19 Gen= 537 , EgSize= 8 ExpSize= 29 SolSize= 21 Gen= 464	examples/rovers/p12.pddl
-, ExpSize= 48 SolSize= 48 Gen= 2121 , ExpSize= 42 SolSize= 42 Gen= 1712 , EgSize= 26 ExpSize= 68 SolSize= 42 Gen= 1712	examples/rovers/p13.pddl
-, !Gen= 28960 , ExpSize= 32 SolSize= 32 Gen= 2107 , ExpSize= 32 SolSize= 32 Gen= 2107	examples/rovers/p14.pddl
-, !Gen= 21287 , !Gen= 24212 , !Gen= 21839	examples/rovers/p15.pddl
-, ExpSize= 47 SolSize= 47 Gen= 16221 , ExpSize= 48 SolSize= 48 Gen= 14032 , EgSize= 24 ExpSize= 78 SolSize= 54 Gen= 2069	examples/rovers/p16.pddl
-, !Gen= 9671 , !Gen= 9841 , !Gen= 9889	examples/rovers/p17.pddl
-, !Gen= 6602 , !Gen= 6687 , !Gen= 6699	examples/rovers/p18.pddl
-, !Gen= 4636 , !Gen= 4589 , !Gen= 4589	examples/rovers/p19.pddl
-, !Gen= 3365 , !Gen= 3322 , !Gen= 3322	examples/rovers/p20.pddl
-, !Gen= 2281 , !Gen= 2196 , !Gen= 2227	examples/rovers/p21.pddl
-, !Gen= 2088 , !Gen= 2095 , !Gen= 2095	examples/rovers/p22.pddl
-, !Gen= 1803 , !Gen= 1789 , !Gen= 1789	examples/rovers/p23.pddl
-, !Gen= 2142 , !Gen= 2085 , !Gen= 2118	examples/rovers/p24.pddl
-, !Gen= 2593 , !Gen= 2570 , !Gen= 2570	examples/rovers/p25.pddl
-, !Gen= 3182 , !Gen= 3184 , !Gen= 3227	examples/rovers/p26.pddl
-, !Gen= 2473 , !Gen= 2375 , !Gen= 2375	examples/rovers/p27.pddl
-, !Gen= 1440 , !Gen= 1355 , !Gen= 1355	examples/rovers/p28.pddl
-, !Gen= 1345 , !Gen= 1357 , !Gen= 1357	examples/rovers/p29.pddl
-, !Gen= 1130 , !Gen= 1043 , !Gen= 1238	examples/rovers/p30.pddl
-, !Gen= 1403 , !Gen= 1358 , !Gen= 1358	examples/rovers/p31.pddl
+TEST Prob100 Walk5
+
+, !Gen= 593 , ExpSize= 46 SolSize= 46 Gen= 412 , ExpSize= 47 SolSize= 47 Gen= 413 , EgSize= 46 ExpSize= 47 SolSize= 47 Gen= 134	examples/blocks/probBLOCKS-10-0.pddl
+, ExpSize= 44 SolSize= 44 Gen= 645 , ExpSize= 41 SolSize= 41 Gen= 1181 , EgSize= 44 ExpSize= 54 SolSize= 45 Gen= 176	examples/blocks/probBLOCKS-10-1.pddl
+, ExpSize= 48 SolSize= 48 Gen= 737 , ExpSize= 45 SolSize= 45 Gen= 733 , EgSize= 48 ExpSize= 48 SolSize= 45 Gen= 141	examples/blocks/probBLOCKS-10-2.pddl
+, ExpSize= 54 SolSize= 54 Gen= 1268 , ExpSize= 57 SolSize= 57 Gen= 1804 , EgSize= 54 ExpSize= 55 SolSize= 55 Gen= 217	examples/blocks/probBLOCKS-11-0.pddl
+, ExpSize= 58 SolSize= 58 Gen= 2412 , ExpSize= 67 SolSize= 67 Gen= 1917 , EgSize= 58 ExpSize= 67 SolSize= 57 Gen= 261	examples/blocks/probBLOCKS-11-1.pddl
+, ExpSize= 56 SolSize= 56 Gen= 1294 , ExpSize= 55 SolSize= 55 Gen= 1305 , EgSize= 56 ExpSize= 57 SolSize= 57 Gen= 223	examples/blocks/probBLOCKS-11-2.pddl
+, ExpSize= 58 SolSize= 58 Gen= 3333 , ExpSize= 61 SolSize= 61 Gen= 4710 , EgSize= 58 ExpSize= 59 SolSize= 57 Gen= 231	examples/blocks/probBLOCKS-12-0.pddl
+, ExpSize= 72 SolSize= 72 Gen= 1242 , ExpSize= 61 SolSize= 61 Gen= 961 , EgSize= 72 ExpSize= 73 SolSize= 71 Gen= 256	examples/blocks/probBLOCKS-12-1.pddl
+, ExpSize= 72 SolSize= 72 Gen= 3292 , ExpSize= 81 SolSize= 81 Gen= 2272 , EgSize= 72 ExpSize= 75 SolSize= 71 Gen= 248	examples/blocks/probBLOCKS-13-0.pddl
+, ExpSize= 74 SolSize= 74 Gen= 1352 , ExpSize= 75 SolSize= 75 Gen= 2873 , EgSize= 74 ExpSize= 76 SolSize= 75 Gen= 292	examples/blocks/probBLOCKS-13-1.pddl
+, ExpSize= 80 SolSize= 80 Gen= 28293 , !Gen= 28285 , EgSize= 80 ExpSize= 81 SolSize= 81 Gen= 343	examples/blocks/probBLOCKS-14-0.pddl
+, ExpSize= 80 SolSize= 80 Gen= 7062 , ExpSize= 83 SolSize= 83 Gen= 9685 , EgSize= 80 ExpSize= 85 SolSize= 81 Gen= 395	examples/blocks/probBLOCKS-14-1.pddl
+, ExpSize= 78 SolSize= 78 Gen= 2895 , ExpSize= 81 SolSize= 81 Gen= 3368 , EgSize= 78 ExpSize= 83 SolSize= 83 Gen= 448	examples/blocks/probBLOCKS-15-0.pddl
+, ExpSize= 80 SolSize= 80 Gen= 6183 , ExpSize= 91 SolSize= 91 Gen= 3797 , EgSize= 80 ExpSize= 81 SolSize= 81 Gen= 436	examples/blocks/probBLOCKS-15-1.pddl
+, ExpSize= 94 SolSize= 94 Gen= 3917 , ExpSize= 85 SolSize= 85 Gen= 2273 , EgSize= 94 ExpSize= 95 SolSize= 95 Gen= 450	examples/blocks/probBLOCKS-16-1.pddl
+, ExpSize= 86 SolSize= 86 Gen= 3607 , ExpSize= 77 SolSize= 77 Gen= 3806 , EgSize= 86 ExpSize= 87 SolSize= 85 Gen= 384	examples/blocks/probBLOCKS-16-2.pddl
+, ExpSize= 102 SolSize= 102 Gen= 12405 , !Gen= 14577 , EgSize= 102 ExpSize= 104 SolSize= 103 Gen= 655	examples/blocks/probBLOCKS-17-0.pddl
+, ExpSize= 10 SolSize= 10 Gen= 22 , ExpSize= 11 SolSize= 11 Gen= 24 , EgSize= 10 ExpSize= 12 SolSize= 11 Gen= 21	examples/blocks/probBLOCKS-4-0.pddl
+, ExpSize= 10 SolSize= 10 Gen= 20 , ExpSize= 7 SolSize= 7 Gen= 19 , EgSize= 10 ExpSize= 10 SolSize= 7 Gen= 14	examples/blocks/probBLOCKS-4-1.pddl
+, ExpSize= 6 SolSize= 6 Gen= 15 , ExpSize= 9 SolSize= 9 Gen= 22 , EgSize= 6 ExpSize= 8 SolSize= 7 Gen= 16	examples/blocks/probBLOCKS-4-2.pddl
+, ExpSize= 18 SolSize= 18 Gen= 89 , ExpSize= 19 SolSize= 19 Gen= 90 , EgSize= 18 ExpSize= 19 SolSize= 19 Gen= 44	examples/blocks/probBLOCKS-5-0.pddl
+, ExpSize= 14 SolSize= 14 Gen= 38 , ExpSize= 13 SolSize= 13 Gen= 38 , EgSize= 14 ExpSize= 14 SolSize= 13 Gen= 29	examples/blocks/probBLOCKS-5-1.pddl
+, ExpSize= 20 SolSize= 20 Gen= 89 , ExpSize= 17 SolSize= 17 Gen= 88 , EgSize= 20 ExpSize= 22 SolSize= 19 Gen= 45	examples/blocks/probBLOCKS-5-2.pddl
+, ExpSize= 32 SolSize= 32 Gen= 181 , ExpSize= 11 SolSize= 11 Gen= 31 , EgSize= 32 ExpSize= 33 SolSize= 33 Gen= 83	examples/blocks/probBLOCKS-6-0.pddl
+, ExpSize= 14 SolSize= 14 Gen= 56 , ExpSize= 19 SolSize= 19 Gen= 102 , EgSize= 14 ExpSize= 17 SolSize= 17 Gen= 47	examples/blocks/probBLOCKS-6-1.pddl
+, ExpSize= 28 SolSize= 28 Gen= 95 , ExpSize= 25 SolSize= 25 Gen= 93 , EgSize= 28 ExpSize= 28 SolSize= 25 Gen= 58	examples/blocks/probBLOCKS-6-2.pddl
+, ExpSize= 22 SolSize= 22 Gen= 109 , ExpSize= 21 SolSize= 21 Gen= 109 , EgSize= 22 ExpSize= 22 SolSize= 21 Gen= 50	examples/blocks/probBLOCKS-7-0.pddl
+, ExpSize= 32 SolSize= 32 Gen= 198 , ExpSize= 29 SolSize= 29 Gen= 186 , EgSize= 32 ExpSize= 34 SolSize= 31 Gen= 90	examples/blocks/probBLOCKS-7-1.pddl
+, ExpSize= 28 SolSize= 28 Gen= 387 , ExpSize= 27 SolSize= 27 Gen= 387 , EgSize= 28 ExpSize= 29 SolSize= 29 Gen= 86	examples/blocks/probBLOCKS-7-2.pddl
+, ExpSize= 26 SolSize= 26 Gen= 292 , ExpSize= 25 SolSize= 25 Gen= 287 , EgSize= 26 ExpSize= 31 SolSize= 25 Gen= 88	examples/blocks/probBLOCKS-8-0.pddl
+, ExpSize= 40 SolSize= 40 Gen= 333 , ExpSize= 33 SolSize= 33 Gen= 504 , EgSize= 40 ExpSize= 45 SolSize= 45 Gen= 124	examples/blocks/probBLOCKS-8-1.pddl
+, ExpSize= 28 SolSize= 28 Gen= 294 , ExpSize= 27 SolSize= 27 Gen= 290 , EgSize= 28 ExpSize= 28 SolSize= 27 Gen= 78	examples/blocks/probBLOCKS-8-2.pddl
+, ExpSize= 48 SolSize= 48 Gen= 647 , ExpSize= 49 SolSize= 49 Gen= 648 , EgSize= 48 ExpSize= 49 SolSize= 49 Gen= 175	examples/blocks/probBLOCKS-9-0.pddl
+, ExpSize= 44 SolSize= 44 Gen= 872 , ExpSize= 43 SolSize= 43 Gen= 872 , EgSize= 44 ExpSize= 44 SolSize= 43 Gen= 157	examples/blocks/probBLOCKS-9-1.pddl
+, ExpSize= 44 SolSize= 44 Gen= 465 , ExpSize= 45 SolSize= 45 Gen= 466 , EgSize= 44 ExpSize= 45 SolSize= 45 Gen= 136	examples/blocks/probBLOCKS-9-2.pddl
+, ExpSize= 14 SolSize= 14 Gen= 193 , ExpSize= 13 SolSize= 13 Gen= 182 , EgSize= 14 ExpSize= 27 SolSize= 13 Gen= 157	examples/elevators/p01.pddl
+, ExpSize= 9 SolSize= 9 Gen= 153 , ExpSize= 9 SolSize= 9 Gen= 148 , EgSize= 9 ExpSize= 21 SolSize= 12 Gen= 198	examples/elevators/p02.pddl
+, ExpSize= 19 SolSize= 19 Gen= 301 , ExpSize= 19 SolSize= 19 Gen= 301 , EgSize= 19 ExpSize= 40 SolSize= 21 Gen= 251	examples/elevators/p03.pddl
+, ExpSize= 22 SolSize= 22 Gen= 387 , ExpSize= 17 SolSize= 17 Gen= 289 , EgSize= 22 ExpSize= 48 SolSize= 26 Gen= 447	examples/elevators/p04.pddl
+, ExpSize= 23 SolSize= 23 Gen= 1063 , ExpSize= 24 SolSize= 24 Gen= 519 , EgSize= 23 ExpSize= 46 SolSize= 23 Gen= 336	examples/elevators/p05.pddl
+, ExpSize= 27 SolSize= 27 Gen= 1173 , ExpSize= 26 SolSize= 26 Gen= 528 , EgSize= 27 ExpSize= 55 SolSize= 28 Gen= 488	examples/elevators/p06.pddl
+, ExpSize= 30 SolSize= 30 Gen= 1035 , ExpSize= 37 SolSize= 37 Gen= 13490 , EgSize= 30 ExpSize= 34 SolSize= 32 Gen= 456	examples/elevators/p07.pddl
+, ExpSize= 21 SolSize= 21 Gen= 391 , ExpSize= 20 SolSize= 20 Gen= 371 , EgSize= 21 ExpSize= 23 SolSize= 23 Gen= 424	examples/elevators/p08.pddl
+, ExpSize= 36 SolSize= 36 Gen= 765 , ExpSize= 40 SolSize= 40 Gen= 1817 , EgSize= 36 ExpSize= 38 SolSize= 37 Gen= 539	examples/elevators/p09.pddl
+, ExpSize= 33 SolSize= 33 Gen= 1373 , ExpSize= 35 SolSize= 35 Gen= 10690 , EgSize= 33 ExpSize= 35 SolSize= 35 Gen= 605	examples/elevators/p10.pddl
+, ExpSize= 19 SolSize= 19 Gen= 288 , ExpSize= 18 SolSize= 18 Gen= 290 , EgSize= 19 ExpSize= 40 SolSize= 21 Gen= 314	examples/elevators/p11.pddl
+, ExpSize= 21 SolSize= 21 Gen= 1687 , ExpSize= 20 SolSize= 20 Gen= 1496 , EgSize= 21 ExpSize= 44 SolSize= 23 Gen= 419	examples/elevators/p12.pddl
+, ExpSize= 15 SolSize= 15 Gen= 229 , ExpSize= 15 SolSize= 15 Gen= 224 , EgSize= 15 ExpSize= 31 SolSize= 16 Gen= 234	examples/elevators/p13.pddl
+, ExpSize= 27 SolSize= 27 Gen= 2027 , ExpSize= 25 SolSize= 25 Gen= 1527 , EgSize= 27 ExpSize= 56 SolSize= 29 Gen= 584	examples/elevators/p14.pddl
+, ExpSize= 31 SolSize= 31 Gen= 1445 , ExpSize= 31 SolSize= 31 Gen= 1488 , EgSize= 31 ExpSize= 63 SolSize= 32 Gen= 505	examples/elevators/p15.pddl
+, ExpSize= 32 SolSize= 32 Gen= 5486 , ExpSize= 32 SolSize= 32 Gen= 5505 , EgSize= 32 ExpSize= 66 SolSize= 34 Gen= 676	examples/elevators/p16.pddl
+, ExpSize= 26 SolSize= 26 Gen= 647 , ExpSize= 25 SolSize= 25 Gen= 630 , EgSize= 26 ExpSize= 51 SolSize= 25 Gen= 412	examples/elevators/p17.pddl
+, ExpSize= 27 SolSize= 27 Gen= 3472 , ExpSize= 30 SolSize= 30 Gen= 3899 , EgSize= 27 ExpSize= 56 SolSize= 29 Gen= 582	examples/elevators/p18.pddl
+, ExpSize= 42 SolSize= 42 Gen= 1903 , ExpSize= 40 SolSize= 40 Gen= 1720 , EgSize= 42 ExpSize= 85 SolSize= 43 Gen= 828	examples/elevators/p19.pddl
+, ExpSize= 38 SolSize= 38 Gen= 7061 , ExpSize= 37 SolSize= 37 Gen= 7050 , EgSize= 38 ExpSize= 39 SolSize= 39 Gen= 829	examples/elevators/p20.pddl
+, ExpSize= 19 SolSize= 19 Gen= 373 , ExpSize= 18 SolSize= 18 Gen= 692 , EgSize= 19 ExpSize= 41 SolSize= 22 Gen= 370	examples/elevators/p21.pddl
+, ExpSize= 14 SolSize= 14 Gen= 392 , ExpSize= 14 SolSize= 14 Gen= 1526 , EgSize= 14 ExpSize= 30 SolSize= 16 Gen= 364	examples/elevators/p22.pddl
+, ExpSize= 22 SolSize= 22 Gen= 407 , ExpSize= 20 SolSize= 20 Gen= 385 , EgSize= 22 ExpSize= 47 SolSize= 25 Gen= 454	examples/elevators/p23.pddl
+, ExpSize= 25 SolSize= 25 Gen= 646 , ExpSize= 24 SolSize= 24 Gen= 620 , EgSize= 25 ExpSize= 54 SolSize= 29 Gen= 727	examples/elevators/p24.pddl
+, ExpSize= 27 SolSize= 27 Gen= 668 , ExpSize= 26 SolSize= 26 Gen= 623 , EgSize= 27 ExpSize= 55 SolSize= 28 Gen= 520	examples/elevators/p25.pddl
+, !Gen= 9906 , !Gen= 10599 , !Gen= 10604	examples/elevators/p26.pddl
+, ExpSize= 38 SolSize= 38 Gen= 1518 , ExpSize= 33 SolSize= 33 Gen= 885 , EgSize= 38 ExpSize= 78 SolSize= 40 Gen= 754	examples/elevators/p27.pddl
+, !Gen= 8691 , !Gen= 8556 , !Gen= 8542	examples/elevators/p28.pddl
+, ExpSize= 32 SolSize= 32 Gen= 694 , ExpSize= 31 SolSize= 31 Gen= 730 , EgSize= 32 ExpSize= 35 SolSize= 33 Gen= 653	examples/elevators/p29.pddl
+, ExpSize= 40 SolSize= 40 Gen= 1521 , ExpSize= 39 SolSize= 39 Gen= 1525 , EgSize= 40 ExpSize= 44 SolSize= 44 Gen= 1223	examples/elevators/p30.pddl
+, ExpSize= 10 SolSize= 10 Gen= 53 , ExpSize= 8 SolSize= 8 Gen= 34 , EgSize= 10 ExpSize= 18 SolSize= 8 Gen= 34	examples/rovers/p01.pddl
+, ExpSize= 8 SolSize= 8 Gen= 74 , ExpSize= 8 SolSize= 8 Gen= 72 , EgSize= 8 ExpSize= 16 SolSize= 8 Gen= 59	examples/rovers/p02.pddl
+, ExpSize= 13 SolSize= 13 Gen= 631 , ExpSize= 14 SolSize= 14 Gen= 166 , EgSize= 13 ExpSize= 27 SolSize= 14 Gen= 166	examples/rovers/p03.pddl
+, ExpSize= 8 SolSize= 8 Gen= 62 , ExpSize= 8 SolSize= 8 Gen= 59 , EgSize= 8 ExpSize= 16 SolSize= 8 Gen= 59	examples/rovers/p04.pddl
+, ExpSize= 22 SolSize= 22 Gen= 308 , ExpSize= 21 SolSize= 21 Gen= 398 , EgSize= 22 ExpSize= 43 SolSize= 21 Gen= 268	examples/rovers/p05.pddl
+, ExpSize= 38 SolSize= 38 Gen= 35175 , ExpSize= 37 SolSize= 37 Gen= 4708 , EgSize= 38 ExpSize= 75 SolSize= 37 Gen= 7674	examples/rovers/p06.pddl
+, ExpSize= 18 SolSize= 18 Gen= 296 , ExpSize= 15 SolSize= 15 Gen= 232 , EgSize= 18 ExpSize= 33 SolSize= 15 Gen= 232	examples/rovers/p07.pddl
+, ExpSize= 26 SolSize= 26 Gen= 746 , ExpSize= 30 SolSize= 30 Gen= 1564 , EgSize= 26 ExpSize= 56 SolSize= 30 Gen= 1564	examples/rovers/p08.pddl
+, !Gen= 45980 , !Gen= 49751 , !Gen= 49824	examples/rovers/p09.pddl
+, ExpSize= 36 SolSize= 36 Gen= 2499 , ExpSize= 36 SolSize= 36 Gen= 2609 , EgSize= 36 ExpSize= 73 SolSize= 37 Gen= 967	examples/rovers/p10.pddl
+, !Gen= 42894 , !Gen= 40982 , !Gen= 43215	examples/rovers/p11.pddl
+, ExpSize= 19 SolSize= 19 Gen= 395 , ExpSize= 20 SolSize= 20 Gen= 346 , EgSize= 19 ExpSize= 40 SolSize= 21 Gen= 407	examples/rovers/p12.pddl
+, ExpSize= 48 SolSize= 48 Gen= 2121 , ExpSize= 45 SolSize= 45 Gen= 1949 , EgSize= 48 ExpSize= 98 SolSize= 50 Gen= 1301	examples/rovers/p13.pddl
+, !Gen= 31066 , ExpSize= 30 SolSize= 30 Gen= 1705 , ExpSize= 30 SolSize= 30 Gen= 1705	examples/rovers/p14.pddl
+, !Gen= 22135 , !Gen= 24262 , !Gen= 23971	examples/rovers/p15.pddl
+, ExpSize= 47 SolSize= 47 Gen= 16221 , ExpSize= 46 SolSize= 46 Gen= 9615 , EgSize= 47 ExpSize= 97 SolSize= 50 Gen= 1099	examples/rovers/p16.pddl
+, !Gen= 10048 , !Gen= 10223 , !Gen= 10015	examples/rovers/p17.pddl
+, ExpSize= 9 SolSize= 9 Gen= 42 , ExpSize= 9 SolSize= 9 Gen= 42 , EgSize= 9 ExpSize= 19 SolSize= 10 Gen= 42	examples/satellite/p01-pfile1.pddl
+, ExpSize= 13 SolSize= 13 Gen= 88 , ExpSize= 13 SolSize= 13 Gen= 89 , EgSize= 13 ExpSize= 28 SolSize= 15 Gen= 99	examples/satellite/p02-pfile2.pddl
+, ExpSize= 11 SolSize= 11 Gen= 193 , ExpSize= 12 SolSize= 12 Gen= 203 , EgSize= 11 ExpSize= 13 SolSize= 13 Gen= 213	examples/satellite/p03-pfile3.pddl
+, ExpSize= 18 SolSize= 18 Gen= 411 , ExpSize= 18 SolSize= 18 Gen= 450 , EgSize= 18 ExpSize= 21 SolSize= 20 Gen= 348	examples/satellite/p04-pfile4.pddl
+, ExpSize= 16 SolSize= 16 Gen= 515 , ExpSize= 16 SolSize= 16 Gen= 476 , EgSize= 16 ExpSize= 19 SolSize= 17 Gen= 535	examples/satellite/p05-pfile5.pddl
+, ExpSize= 20 SolSize= 20 Gen= 615 , ExpSize= 20 SolSize= 20 Gen= 637 , EgSize= 20 ExpSize= 22 SolSize= 22 Gen= 663	examples/satellite/p06-pfile6.pddl
+, ExpSize= 23 SolSize= 23 Gen= 2205 , ExpSize= 20 SolSize= 20 Gen= 1076 , EgSize= 23 ExpSize= 28 SolSize= 28 Gen= 1319	examples/satellite/p07-pfile7.pddl
+, ExpSize= 26 SolSize= 26 Gen= 1544 , ExpSize= 26 SolSize= 26 Gen= 1544 , EgSize= 26 ExpSize= 28 SolSize= 28 Gen= 1646	examples/satellite/p08-pfile8.pddl
+, ExpSize= 29 SolSize= 29 Gen= 3991 , ExpSize= 30 SolSize= 30 Gen= 4073 , EgSize= 29 ExpSize= 36 SolSize= 35 Gen= 2620	examples/satellite/p09-pfile9.pddl
+, ExpSize= 29 SolSize= 29 Gen= 2493 , ExpSize= 31 SolSize= 31 Gen= 3606 , EgSize= 29 ExpSize= 34 SolSize= 34 Gen= 2909	examples/satellite/p10-pfile10.pddl
+, ExpSize= 31 SolSize= 31 Gen= 2963 , ExpSize= 31 SolSize= 31 Gen= 2963 , EgSize= 31 ExpSize= 37 SolSize= 35 Gen= 3299	examples/satellite/p11-pfile11.pddl
+, ExpSize= 43 SolSize= 43 Gen= 5146 , ExpSize= 43 SolSize= 43 Gen= 5185 , EgSize= 43 ExpSize= 46 SolSize= 46 Gen= 5461	examples/satellite/p12-pfile12.pddl
+, !Gen= 7589 , !Gen= 7512 , !Gen= 7512	examples/satellite/p13-pfile13.pddl
+, !Gen= 8307 , !Gen= 8358 , !Gen= 8358	examples/satellite/p14-pfile14.pddl
+, !Gen= 6218 , !Gen= 6236 , !Gen= 6236	examples/satellite/p15-pfile15.pddl
+, !Gen= 4788 , !Gen= 4548 , !Gen= 4813	examples/satellite/p16-pfile16.pddl
+, !Gen= 3346 , !Gen= 3957 , !Gen= 3957	examples/satellite/p17-pfile17.pddl
+, ExpSize= 32 SolSize= 32 Gen= 3882 , ExpSize= 32 SolSize= 32 Gen= 3882 , EgSize= 32 ExpSize= 35 SolSize= 35 Gen= 4206	examples/satellite/p18-pfile18.pddl
+, !Gen= 6905 , !Gen= 7153 , !Gen= 7153	examples/satellite/p19-pfile19.pddl
+, !Gen= 5327 , !Gen= 5327 , !Gen= 5327	examples/satellite/p20-pfile20.pddl
+, !Gen= 3843 , !Gen= 3843 , !Gen= 3843	examples/satellite/p21-HC-pfile1.pddl
+, !Gen= 2806 , !Gen= 2796 , !Gen= 2796	examples/satellite/p22-HC-pfile2.pddl
+, !Gen= 1858 , !Gen= 1858 , !Gen= 1858	examples/satellite/p23-HC-pfile3.pddl
+, !Gen= 519 , !Gen= 519 , !Gen= 519	examples/satellite/p24-HC-pfile4.pddl
+
+TEST Prob100 Walk10
+
+, ExpSize= 46 SolSize= 46 Gen= 412 , ExpSize= 48 SolSize= 48 Gen= 413 , EgSize= 46 ExpSize= 48 SolSize= 48 Gen= 134	examples/blocks/probBLOCKS-10-0.pddl
+, ExpSize= 44 SolSize= 44 Gen= 645 , ExpSize= 40 SolSize= 40 Gen= 1177 , EgSize= 44 ExpSize= 46 SolSize= 44 Gen= 165	examples/blocks/probBLOCKS-10-1.pddl
+, ExpSize= 48 SolSize= 48 Gen= 737 , ExpSize= 50 SolSize= 50 Gen= 718 , EgSize= 48 ExpSize= 52 SolSize= 48 Gen= 146	examples/blocks/probBLOCKS-10-2.pddl
+, ExpSize= 54 SolSize= 54 Gen= 1268 , ExpSize= 52 SolSize= 52 Gen= 1246 , EgSize= 54 ExpSize= 55 SolSize= 52 Gen= 209	examples/blocks/probBLOCKS-11-0.pddl
+, ExpSize= 58 SolSize= 58 Gen= 2412 , ExpSize= 56 SolSize= 56 Gen= 2419 , EgSize= 58 ExpSize= 66 SolSize= 56 Gen= 258	examples/blocks/probBLOCKS-11-1.pddl
+, ExpSize= 56 SolSize= 56 Gen= 1294 , ExpSize= 54 SolSize= 54 Gen= 1301 , EgSize= 56 ExpSize= 64 SolSize= 54 Gen= 220	examples/blocks/probBLOCKS-11-2.pddl
+, ExpSize= 58 SolSize= 58 Gen= 3333 , ExpSize= 44 SolSize= 44 Gen= 1097 , EgSize= 58 ExpSize= 62 SolSize= 60 Gen= 239	examples/blocks/probBLOCKS-12-0.pddl
+, ExpSize= 72 SolSize= 72 Gen= 1242 , ExpSize= 58 SolSize= 58 Gen= 467 , EgSize= 72 ExpSize= 78 SolSize= 74 Gen= 265	examples/blocks/probBLOCKS-12-1.pddl
+, ExpSize= 72 SolSize= 72 Gen= 3292 , ExpSize= 54 SolSize= 54 Gen= 1601 , EgSize= 72 ExpSize= 87 SolSize= 70 Gen= 264	examples/blocks/probBLOCKS-13-0.pddl
+, ExpSize= 74 SolSize= 74 Gen= 1352 , ExpSize= 76 SolSize= 76 Gen= 2873 , EgSize= 74 ExpSize= 75 SolSize= 74 Gen= 290	examples/blocks/probBLOCKS-13-1.pddl
+, ExpSize= 80 SolSize= 80 Gen= 28293 , ExpSize= 82 SolSize= 82 Gen= 28297 , EgSize= 80 ExpSize= 82 SolSize= 82 Gen= 344	examples/blocks/probBLOCKS-14-0.pddl
+, ExpSize= 80 SolSize= 80 Gen= 7062 , ExpSize= 82 SolSize= 82 Gen= 9686 , EgSize= 80 ExpSize= 118 SolSize= 78 Gen= 477	examples/blocks/probBLOCKS-14-1.pddl
+, ExpSize= 78 SolSize= 78 Gen= 2895 , ExpSize= 72 SolSize= 72 Gen= 4996 , EgSize= 78 ExpSize= 95 SolSize= 84 Gen= 476	examples/blocks/probBLOCKS-15-0.pddl
+, ExpSize= 80 SolSize= 80 Gen= 6183 , ExpSize= 80 SolSize= 80 Gen= 6183 , EgSize= 80 ExpSize= 80 SolSize= 80 Gen= 434	examples/blocks/probBLOCKS-15-1.pddl
+, ExpSize= 94 SolSize= 94 Gen= 3917 , ExpSize= 96 SolSize= 96 Gen= 3134 , EgSize= 94 ExpSize= 96 SolSize= 96 Gen= 452	examples/blocks/probBLOCKS-16-1.pddl
+, ExpSize= 86 SolSize= 86 Gen= 3607 , ExpSize= 86 SolSize= 86 Gen= 3776 , EgSize= 86 ExpSize= 111 SolSize= 86 Gen= 409	examples/blocks/probBLOCKS-16-2.pddl
+, ExpSize= 102 SolSize= 102 Gen= 12405 , !Gen= 15654 , EgSize= 102 ExpSize= 108 SolSize= 106 Gen= 670	examples/blocks/probBLOCKS-17-0.pddl
+, ExpSize= 10 SolSize= 10 Gen= 22 , ExpSize= 10 SolSize= 10 Gen= 22 , EgSize= 10 ExpSize= 11 SolSize= 10 Gen= 19	examples/blocks/probBLOCKS-4-0.pddl
+, ExpSize= 10 SolSize= 10 Gen= 20 , ExpSize= 6 SolSize= 6 Gen= 15 , EgSize= 10 ExpSize= 10 SolSize= 6 Gen= 12	examples/blocks/probBLOCKS-4-1.pddl
+, ExpSize= 6 SolSize= 6 Gen= 15 , ExpSize= 12 SolSize= 12 Gen= 30 , EgSize= 6 ExpSize= 11 SolSize= 10 Gen= 21	examples/blocks/probBLOCKS-4-2.pddl
+, ExpSize= 18 SolSize= 18 Gen= 89 , ExpSize= 20 SolSize= 20 Gen= 90 , EgSize= 18 ExpSize= 20 SolSize= 20 Gen= 44	examples/blocks/probBLOCKS-5-0.pddl
+, ExpSize= 14 SolSize= 14 Gen= 38 , ExpSize= 10 SolSize= 10 Gen= 22 , EgSize= 14 ExpSize= 14 SolSize= 10 Gen= 19	examples/blocks/probBLOCKS-5-1.pddl
+, ExpSize= 20 SolSize= 20 Gen= 89 , ExpSize= 16 SolSize= 16 Gen= 84 , EgSize= 20 ExpSize= 22 SolSize= 16 Gen= 40	examples/blocks/probBLOCKS-5-2.pddl
+, ExpSize= 32 SolSize= 32 Gen= 181 , ExpSize= 32 SolSize= 32 Gen= 181 , EgSize= 32 ExpSize= 32 SolSize= 32 Gen= 81	examples/blocks/probBLOCKS-6-0.pddl
+, ExpSize= 14 SolSize= 14 Gen= 56 , ExpSize= 18 SolSize= 18 Gen= 76 , EgSize= 14 ExpSize= 18 SolSize= 18 Gen= 49	examples/blocks/probBLOCKS-6-1.pddl
+, ExpSize= 28 SolSize= 28 Gen= 95 , ExpSize= 26 SolSize= 26 Gen= 94 , EgSize= 28 ExpSize= 28 SolSize= 26 Gen= 59	examples/blocks/probBLOCKS-6-2.pddl
+, ExpSize= 22 SolSize= 22 Gen= 109 , ExpSize= 38 SolSize= 38 Gen= 425 , EgSize= 22 ExpSize= 23 SolSize= 20 Gen= 49	examples/blocks/probBLOCKS-7-0.pddl
+, ExpSize= 32 SolSize= 32 Gen= 198 , ExpSize= 24 SolSize= 24 Gen= 174 , EgSize= 32 ExpSize= 43 SolSize= 34 Gen= 109	examples/blocks/probBLOCKS-7-1.pddl
+, ExpSize= 28 SolSize= 28 Gen= 387 , ExpSize= 26 SolSize= 26 Gen= 383 , EgSize= 28 ExpSize= 30 SolSize= 26 Gen= 81	examples/blocks/probBLOCKS-7-2.pddl
+, ExpSize= 26 SolSize= 26 Gen= 292 , ExpSize= 26 SolSize= 26 Gen= 287 , EgSize= 26 ExpSize= 32 SolSize= 26 Gen= 91	examples/blocks/probBLOCKS-8-0.pddl
+, ExpSize= 40 SolSize= 40 Gen= 333 , ExpSize= 34 SolSize= 34 Gen= 504 , EgSize= 40 ExpSize= 46 SolSize= 46 Gen= 126	examples/blocks/probBLOCKS-8-1.pddl
+, ExpSize= 28 SolSize= 28 Gen= 294 , ExpSize= 32 SolSize= 32 Gen= 334 , EgSize= 28 ExpSize= 32 SolSize= 30 Gen= 87	examples/blocks/probBLOCKS-8-2.pddl
+, ExpSize= 48 SolSize= 48 Gen= 647 , ExpSize= 52 SolSize= 52 Gen= 1559 , EgSize= 48 ExpSize= 49 SolSize= 48 Gen= 174	examples/blocks/probBLOCKS-9-0.pddl
+, ExpSize= 44 SolSize= 44 Gen= 872 , ExpSize= 44 SolSize= 44 Gen= 872 , EgSize= 44 ExpSize= 44 SolSize= 44 Gen= 157	examples/blocks/probBLOCKS-9-1.pddl
+, ExpSize= 44 SolSize= 44 Gen= 465 , ExpSize= 42 SolSize= 42 Gen= 302 , EgSize= 44 ExpSize= 45 SolSize= 44 Gen= 135	examples/blocks/probBLOCKS-9-2.pddl
+, ExpSize= 14 SolSize= 14 Gen= 193 , ExpSize= 13 SolSize= 13 Gen= 171 , EgSize= 14 ExpSize= 28 SolSize= 14 Gen= 165	examples/elevators/p01.pddl
+, ExpSize= 9 SolSize= 9 Gen= 153 , ExpSize= 8 SolSize= 8 Gen= 135 , EgSize= 9 ExpSize= 20 SolSize= 11 Gen= 184	examples/elevators/p02.pddl
+, ExpSize= 19 SolSize= 19 Gen= 301 , ExpSize= 18 SolSize= 18 Gen= 269 , EgSize= 19 ExpSize= 41 SolSize= 22 Gen= 260	examples/elevators/p03.pddl
+, ExpSize= 22 SolSize= 22 Gen= 387 , ExpSize= 17 SolSize= 17 Gen= 285 , EgSize= 22 ExpSize= 43 SolSize= 21 Gen= 388	examples/elevators/p04.pddl
+, ExpSize= 23 SolSize= 23 Gen= 1063 , ExpSize= 26 SolSize= 26 Gen= 415 , EgSize= 23 ExpSize= 51 SolSize= 28 Gen= 377	examples/elevators/p05.pddl
+, ExpSize= 27 SolSize= 27 Gen= 1173 , ExpSize= 26 SolSize= 26 Gen= 1213 , EgSize= 27 ExpSize= 55 SolSize= 28 Gen= 485	examples/elevators/p06.pddl
+, ExpSize= 30 SolSize= 30 Gen= 1035 , ExpSize= 27 SolSize= 27 Gen= 1429 , EgSize= 30 ExpSize= 47 SolSize= 30 Gen= 550	examples/elevators/p07.pddl
+, ExpSize= 21 SolSize= 21 Gen= 391 , ExpSize= 21 SolSize= 21 Gen= 392 , EgSize= 21 ExpSize= 25 SolSize= 25 Gen= 454	examples/elevators/p08.pddl
+, ExpSize= 36 SolSize= 36 Gen= 765 , ExpSize= 46 SolSize= 46 Gen= 2028 , EgSize= 36 ExpSize= 38 SolSize= 37 Gen= 543	examples/elevators/p09.pddl
+, ExpSize= 33 SolSize= 33 Gen= 1373 , ExpSize= 30 SolSize= 30 Gen= 1172 , EgSize= 33 ExpSize= 42 SolSize= 38 Gen= 661	examples/elevators/p10.pddl
+, ExpSize= 19 SolSize= 19 Gen= 288 , ExpSize= 16 SolSize= 16 Gen= 294 , EgSize= 19 ExpSize= 38 SolSize= 19 Gen= 287	examples/elevators/p11.pddl
+, ExpSize= 21 SolSize= 21 Gen= 1687 , ExpSize= 20 SolSize= 20 Gen= 1494 , EgSize= 21 ExpSize= 44 SolSize= 23 Gen= 419	examples/elevators/p12.pddl
+, ExpSize= 15 SolSize= 15 Gen= 229 , ExpSize= 14 SolSize= 14 Gen= 275 , EgSize= 15 ExpSize= 31 SolSize= 16 Gen= 234	examples/elevators/p13.pddl
+, ExpSize= 27 SolSize= 27 Gen= 2027 , ExpSize= 26 SolSize= 26 Gen= 1922 , EgSize= 27 ExpSize= 56 SolSize= 29 Gen= 568	examples/elevators/p14.pddl
+, ExpSize= 31 SolSize= 31 Gen= 1445 , ExpSize= 28 SolSize= 28 Gen= 1114 , EgSize= 31 ExpSize= 63 SolSize= 32 Gen= 508	examples/elevators/p15.pddl
+, ExpSize= 32 SolSize= 32 Gen= 5486 , ExpSize= 33 SolSize= 33 Gen= 4636 , EgSize= 32 ExpSize= 67 SolSize= 35 Gen= 688	examples/elevators/p16.pddl
+, ExpSize= 26 SolSize= 26 Gen= 647 , ExpSize= 28 SolSize= 28 Gen= 1716 , EgSize= 26 ExpSize= 54 SolSize= 28 Gen= 457	examples/elevators/p17.pddl
+, ExpSize= 27 SolSize= 27 Gen= 3472 , ExpSize= 28 SolSize= 28 Gen= 3571 , EgSize= 27 ExpSize= 55 SolSize= 28 Gen= 569	examples/elevators/p18.pddl
+, ExpSize= 42 SolSize= 42 Gen= 1903 , ExpSize= 41 SolSize= 41 Gen= 1768 , EgSize= 42 ExpSize= 86 SolSize= 44 Gen= 838	examples/elevators/p19.pddl
+, ExpSize= 38 SolSize= 38 Gen= 7061 , ExpSize= 38 SolSize= 38 Gen= 4983 , EgSize= 38 ExpSize= 41 SolSize= 40 Gen= 840	examples/elevators/p20.pddl
+, ExpSize= 19 SolSize= 19 Gen= 373 , ExpSize= 18 SolSize= 18 Gen= 349 , EgSize= 19 ExpSize= 40 SolSize= 21 Gen= 357	examples/elevators/p21.pddl
+, ExpSize= 14 SolSize= 14 Gen= 392 , ExpSize= 13 SolSize= 13 Gen= 560 , EgSize= 14 ExpSize= 32 SolSize= 18 Gen= 406	examples/elevators/p22.pddl
+, ExpSize= 22 SolSize= 22 Gen= 407 , ExpSize= 20 SolSize= 20 Gen= 365 , EgSize= 22 ExpSize= 48 SolSize= 26 Gen= 478	examples/elevators/p23.pddl
+, ExpSize= 25 SolSize= 25 Gen= 646 , ExpSize= 24 SolSize= 24 Gen= 622 , EgSize= 25 ExpSize= 53 SolSize= 28 Gen= 712	examples/elevators/p24.pddl
+, ExpSize= 27 SolSize= 27 Gen= 668 , ExpSize= 24 SolSize= 24 Gen= 489 , EgSize= 27 ExpSize= 56 SolSize= 29 Gen= 535	examples/elevators/p25.pddl
+, !Gen= 9911 , !Gen= 10387 , !Gen= 10478	examples/elevators/p26.pddl
+, ExpSize= 38 SolSize= 38 Gen= 1518 , ExpSize= 38 SolSize= 38 Gen= 1518 , EgSize= 38 ExpSize= 77 SolSize= 39 Gen= 735	examples/elevators/p27.pddl
+, !Gen= 8679 , !Gen= 8644 , !Gen= 8708	examples/elevators/p28.pddl
+, ExpSize= 32 SolSize= 32 Gen= 694 , ExpSize= 30 SolSize= 30 Gen= 682 , EgSize= 32 ExpSize= 36 SolSize= 34 Gen= 673	examples/elevators/p29.pddl
+, ExpSize= 40 SolSize= 40 Gen= 1521 , ExpSize= 39 SolSize= 39 Gen= 1411 , EgSize= 40 ExpSize= 47 SolSize= 47 Gen= 1303	examples/elevators/p30.pddl
+, ExpSize= 10 SolSize= 10 Gen= 53 , ExpSize= 7 SolSize= 7 Gen= 37 , EgSize= 10 ExpSize= 17 SolSize= 7 Gen= 37	examples/rovers/p01.pddl
+, ExpSize= 8 SolSize= 8 Gen= 74 , ExpSize= 9 SolSize= 9 Gen= 85 , EgSize= 8 ExpSize= 17 SolSize= 9 Gen= 67	examples/rovers/p02.pddl
+, ExpSize= 13 SolSize= 13 Gen= 631 , ExpSize= 13 SolSize= 13 Gen= 97 , EgSize= 13 ExpSize= 26 SolSize= 13 Gen= 97	examples/rovers/p03.pddl
+, ExpSize= 8 SolSize= 8 Gen= 62 , ExpSize= 7 SolSize= 7 Gen= 62 , EgSize= 8 ExpSize= 15 SolSize= 7 Gen= 62	examples/rovers/p04.pddl
+, ExpSize= 22 SolSize= 22 Gen= 308 , ExpSize= 21 SolSize= 21 Gen= 375 , EgSize= 22 ExpSize= 45 SolSize= 23 Gen= 439	examples/rovers/p05.pddl
+, ExpSize= 38 SolSize= 38 Gen= 35175 , ExpSize= 33 SolSize= 33 Gen= 4671 , EgSize= 38 ExpSize= 71 SolSize= 33 Gen= 7637	examples/rovers/p06.pddl
+, ExpSize= 18 SolSize= 18 Gen= 296 , ExpSize= 13 SolSize= 13 Gen= 202 , EgSize= 18 ExpSize= 31 SolSize= 13 Gen= 202	examples/rovers/p07.pddl
+, ExpSize= 26 SolSize= 26 Gen= 746 , ExpSize= 26 SolSize= 26 Gen= 768 , EgSize= 26 ExpSize= 52 SolSize= 26 Gen= 768	examples/rovers/p08.pddl
+, !Gen= 47029 , !Gen= 49314 , !Gen= 48346	examples/rovers/p09.pddl
+, ExpSize= 36 SolSize= 36 Gen= 2499 , ExpSize= 34 SolSize= 34 Gen= 6467 , EgSize= 36 ExpSize= 72 SolSize= 36 Gen= 926	examples/rovers/p10.pddl
+, !Gen= 41396 , !Gen= 41559 , !Gen= 42433	examples/rovers/p11.pddl
+, ExpSize= 19 SolSize= 19 Gen= 395 , ExpSize= 19 SolSize= 19 Gen= 537 , EgSize= 19 ExpSize= 40 SolSize= 21 Gen= 480	examples/rovers/p12.pddl
+, ExpSize= 48 SolSize= 48 Gen= 2121 , ExpSize= 42 SolSize= 42 Gen= 1712 , EgSize= 48 ExpSize= 90 SolSize= 42 Gen= 1712	examples/rovers/p13.pddl
+, !Gen= 30983 , ExpSize= 32 SolSize= 32 Gen= 2107 , ExpSize= 32 SolSize= 32 Gen= 2107	examples/rovers/p14.pddl
+, !Gen= 23298 , !Gen= 24173 , !Gen= 23392	examples/rovers/p15.pddl
+, ExpSize= 47 SolSize= 47 Gen= 16221 , ExpSize= 48 SolSize= 48 Gen= 14032 , EgSize= 47 ExpSize= 101 SolSize= 54 Gen= 1284	examples/rovers/p16.pddl
+, !Gen= 10320 , !Gen= 10069 , !Gen= 10166	examples/rovers/p17.pddl
+, ExpSize= 9 SolSize= 9 Gen= 42 , ExpSize= 9 SolSize= 9 Gen= 42 , EgSize= 9 ExpSize= 19 SolSize= 10 Gen= 42	examples/satellite/p01-pfile1.pddl
+, ExpSize= 13 SolSize= 13 Gen= 88 , ExpSize= 14 SolSize= 14 Gen= 112 , EgSize= 13 ExpSize= 26 SolSize= 13 Gen= 98	examples/satellite/p02-pfile2.pddl
+, ExpSize= 11 SolSize= 11 Gen= 193 , ExpSize= 11 SolSize= 11 Gen= 165 , EgSize= 11 ExpSize= 15 SolSize= 13 Gen= 211	examples/satellite/p03-pfile3.pddl
+, ExpSize= 18 SolSize= 18 Gen= 411 , ExpSize= 18 SolSize= 18 Gen= 385 , EgSize= 18 ExpSize= 20 SolSize= 19 Gen= 326	examples/satellite/p04-pfile4.pddl
+, ExpSize= 16 SolSize= 16 Gen= 515 , ExpSize= 17 SolSize= 17 Gen= 524 , EgSize= 16 ExpSize= 22 SolSize= 19 Gen= 588	examples/satellite/p05-pfile5.pddl
+, ExpSize= 20 SolSize= 20 Gen= 615 , ExpSize= 20 SolSize= 20 Gen= 637 , EgSize= 20 ExpSize= 23 SolSize= 23 Gen= 687	examples/satellite/p06-pfile6.pddl
+, ExpSize= 23 SolSize= 23 Gen= 2205 , ExpSize= 24 SolSize= 24 Gen= 26145 , EgSize= 23 ExpSize= 29 SolSize= 28 Gen= 1316	examples/satellite/p07-pfile7.pddl
+, ExpSize= 26 SolSize= 26 Gen= 1544 , ExpSize= 26 SolSize= 26 Gen= 1566 , EgSize= 26 ExpSize= 29 SolSize= 29 Gen= 1697	examples/satellite/p08-pfile8.pddl
+, ExpSize= 29 SolSize= 29 Gen= 3991 , ExpSize= 31 SolSize= 31 Gen= 2449 , EgSize= 29 ExpSize= 39 SolSize= 38 Gen= 2826	examples/satellite/p09-pfile9.pddl
+, ExpSize= 29 SolSize= 29 Gen= 2493 , ExpSize= 27 SolSize= 27 Gen= 3286 , EgSize= 29 ExpSize= 36 SolSize= 36 Gen= 3068	examples/satellite/p10-pfile10.pddl
+, ExpSize= 31 SolSize= 31 Gen= 2963 , ExpSize= 32 SolSize= 32 Gen= 6645 , EgSize= 31 ExpSize= 38 SolSize= 36 Gen= 3383	examples/satellite/p11-pfile11.pddl
+, ExpSize= 43 SolSize= 43 Gen= 5146 , ExpSize= 44 SolSize= 44 Gen= 5286 , EgSize= 43 ExpSize= 48 SolSize= 48 Gen= 5671	examples/satellite/p12-pfile12.pddl
+, !Gen= 7589 , !Gen= 7469 , !Gen= 7469	examples/satellite/p13-pfile13.pddl
+, !Gen= 8307 , ExpSize= 41 SolSize= 41 Gen= 5988 , ExpSize= 41 SolSize= 41 Gen= 5988	examples/satellite/p14-pfile14.pddl
+, !Gen= 6218 , !Gen= 6242 , !Gen= 6242	examples/satellite/p15-pfile15.pddl
+, !Gen= 4546 , !Gen= 4780 , !Gen= 4780	examples/satellite/p16-pfile16.pddl
+, !Gen= 3346 , !Gen= 4262 , !Gen= 3949	examples/satellite/p17-pfile17.pddl
+, ExpSize= 32 SolSize= 32 Gen= 3882 , ExpSize= 31 SolSize= 31 Gen= 3751 , EgSize= 32 ExpSize= 37 SolSize= 36 Gen= 4276	examples/satellite/p18-pfile18.pddl
+, !Gen= 6905 , !Gen= 7037 , !Gen= 7037	examples/satellite/p19-pfile19.pddl
+
+TEST Prob100 Walk20
+
+, ExpSize= 46 SolSize= 46 Gen= 412 , ExpSize= 48 SolSize= 48 Gen= 413 , EgSize= 46 ExpSize= 48 SolSize= 48 Gen= 134	examples/blocks/probBLOCKS-10-0.pddl
+, ExpSize= 44 SolSize= 44 Gen= 645 , ExpSize= 52 SolSize= 52 Gen= 1568 , EgSize= 44 ExpSize= 52 SolSize= 50 Gen= 172	examples/blocks/probBLOCKS-10-1.pddl
+, ExpSize= 48 SolSize= 48 Gen= 737 , ExpSize= 48 SolSize= 48 Gen= 714 , EgSize= 48 ExpSize= 50 SolSize= 46 Gen= 143	examples/blocks/probBLOCKS-10-2.pddl
+, ExpSize= 54 SolSize= 54 Gen= 1268 , ExpSize= 54 SolSize= 54 Gen= 1457 , EgSize= 54 ExpSize= 68 SolSize= 60 Gen= 279	examples/blocks/probBLOCKS-11-0.pddl
+, ExpSize= 58 SolSize= 58 Gen= 2412 , ExpSize= 50 SolSize= 50 Gen= 1427 , EgSize= 58 ExpSize= 76 SolSize= 58 Gen= 360	examples/blocks/probBLOCKS-11-1.pddl
+, ExpSize= 56 SolSize= 56 Gen= 1294 , ExpSize= 56 SolSize= 56 Gen= 1305 , EgSize= 56 ExpSize= 58 SolSize= 58 Gen= 224	examples/blocks/probBLOCKS-11-2.pddl
+, ExpSize= 58 SolSize= 58 Gen= 3333 , ExpSize= 52 SolSize= 52 Gen= 2039 , EgSize= 58 ExpSize= 76 SolSize= 62 Gen= 246	examples/blocks/probBLOCKS-12-0.pddl
+, ExpSize= 72 SolSize= 72 Gen= 1242 , ExpSize= 56 SolSize= 56 Gen= 1544 , EgSize= 72 ExpSize= 80 SolSize= 72 Gen= 262	examples/blocks/probBLOCKS-12-1.pddl
+, ExpSize= 72 SolSize= 72 Gen= 3292 , ExpSize= 58 SolSize= 58 Gen= 3394 , EgSize= 72 ExpSize= 91 SolSize= 74 Gen= 276	examples/blocks/probBLOCKS-13-0.pddl
+, ExpSize= 74 SolSize= 74 Gen= 1352 , ExpSize= 66 SolSize= 66 Gen= 9647 , EgSize= 74 ExpSize= 79 SolSize= 78 Gen= 296	examples/blocks/probBLOCKS-13-1.pddl
+, ExpSize= 80 SolSize= 80 Gen= 28293 , ExpSize= 76 SolSize= 76 Gen= 7458 , EgSize= 80 ExpSize= 98 SolSize= 82 Gen= 352	examples/blocks/probBLOCKS-14-0.pddl
+, ExpSize= 80 SolSize= 80 Gen= 7062 , ExpSize= 60 SolSize= 60 Gen= 1721 , EgSize= 80 ExpSize= 122 SolSize= 82 Gen= 560	examples/blocks/probBLOCKS-14-1.pddl
+, ExpSize= 78 SolSize= 78 Gen= 2895 , ExpSize= 70 SolSize= 70 Gen= 4971 , EgSize= 78 ExpSize= 104 SolSize= 82 Gen= 510	examples/blocks/probBLOCKS-15-0.pddl
+, ExpSize= 80 SolSize= 80 Gen= 6183 , ExpSize= 84 SolSize= 84 Gen= 7005 , EgSize= 80 ExpSize= 84 SolSize= 78 Gen= 431	examples/blocks/probBLOCKS-15-1.pddl
+, ExpSize= 94 SolSize= 94 Gen= 3917 , ExpSize= 80 SolSize= 80 Gen= 4441 , EgSize= 94 ExpSize= 96 SolSize= 94 Gen= 449	examples/blocks/probBLOCKS-16-1.pddl
+, ExpSize= 86 SolSize= 86 Gen= 3607 , ExpSize= 78 SolSize= 78 Gen= 3806 , EgSize= 86 ExpSize= 111 SolSize= 86 Gen= 409	examples/blocks/probBLOCKS-16-2.pddl
+, ExpSize= 102 SolSize= 102 Gen= 12405 , ExpSize= 102 SolSize= 102 Gen= 12341 , EgSize= 102 ExpSize= 114 SolSize= 110 Gen= 716	examples/blocks/probBLOCKS-17-0.pddl
+, ExpSize= 10 SolSize= 10 Gen= 22 , ExpSize= 2 SolSize= 2 Gen= 3 , EgSize= 10 ExpSize= 10 SolSize= 2 Gen= 3	examples/blocks/probBLOCKS-4-0.pddl
+, ExpSize= 10 SolSize= 10 Gen= 20 , ExpSize= 8 SolSize= 8 Gen= 19 , EgSize= 10 ExpSize= 10 SolSize= 8 Gen= 15	examples/blocks/probBLOCKS-4-1.pddl
+, ExpSize= 6 SolSize= 6 Gen= 15 , ExpSize= 14 SolSize= 14 Gen= 34 , EgSize= 6 ExpSize= 11 SolSize= 10 Gen= 21	examples/blocks/probBLOCKS-4-2.pddl
+, ExpSize= 18 SolSize= 18 Gen= 89 , ExpSize= 18 SolSize= 18 Gen= 89 , EgSize= 18 ExpSize= 18 SolSize= 18 Gen= 43	examples/blocks/probBLOCKS-5-0.pddl
+, ExpSize= 14 SolSize= 14 Gen= 38 , ExpSize= 10 SolSize= 10 Gen= 24 , EgSize= 14 ExpSize= 15 SolSize= 10 Gen= 19	examples/blocks/probBLOCKS-5-1.pddl
+, ExpSize= 20 SolSize= 20 Gen= 89 , ExpSize= 18 SolSize= 18 Gen= 88 , EgSize= 20 ExpSize= 23 SolSize= 20 Gen= 46	examples/blocks/probBLOCKS-5-2.pddl
+, ExpSize= 32 SolSize= 32 Gen= 181 , ExpSize= 28 SolSize= 28 Gen= 226 , EgSize= 32 ExpSize= 36 SolSize= 28 Gen= 72	examples/blocks/probBLOCKS-6-0.pddl
+, ExpSize= 14 SolSize= 14 Gen= 56 , ExpSize= 24 SolSize= 24 Gen= 130 , EgSize= 14 ExpSize= 20 SolSize= 20 Gen= 52	examples/blocks/probBLOCKS-6-1.pddl
+, ExpSize= 28 SolSize= 28 Gen= 95 , ExpSize= 28 SolSize= 28 Gen= 95 , EgSize= 28 ExpSize= 28 SolSize= 28 Gen= 60	examples/blocks/probBLOCKS-6-2.pddl
+, ExpSize= 22 SolSize= 22 Gen= 109 , ExpSize= 22 SolSize= 22 Gen= 109 , EgSize= 22 ExpSize= 26 SolSize= 22 Gen= 50	examples/blocks/probBLOCKS-7-0.pddl
+, ExpSize= 32 SolSize= 32 Gen= 198 , ExpSize= 22 SolSize= 22 Gen= 165 , EgSize= 32 ExpSize= 41 SolSize= 32 Gen= 104	examples/blocks/probBLOCKS-7-1.pddl
+, ExpSize= 28 SolSize= 28 Gen= 387 , ExpSize= 28 SolSize= 28 Gen= 387 , EgSize= 28 ExpSize= 30 SolSize= 30 Gen= 87	examples/blocks/probBLOCKS-7-2.pddl
+, ExpSize= 26 SolSize= 26 Gen= 292 , ExpSize= 26 SolSize= 26 Gen= 287 , EgSize= 26 ExpSize= 34 SolSize= 28 Gen= 100	examples/blocks/probBLOCKS-8-0.pddl
+, ExpSize= 40 SolSize= 40 Gen= 333 , ExpSize= 28 SolSize= 28 Gen= 182 , EgSize= 40 ExpSize= 60 SolSize= 30 Gen= 139	examples/blocks/probBLOCKS-8-1.pddl
+, ExpSize= 28 SolSize= 28 Gen= 294 , ExpSize= 30 SolSize= 30 Gen= 310 , EgSize= 28 ExpSize= 33 SolSize= 32 Gen= 94	examples/blocks/probBLOCKS-8-2.pddl
+, ExpSize= 48 SolSize= 48 Gen= 647 , ExpSize= 44 SolSize= 44 Gen= 615 , EgSize= 48 ExpSize= 49 SolSize= 46 Gen= 171	examples/blocks/probBLOCKS-9-0.pddl
+, ExpSize= 44 SolSize= 44 Gen= 872 , ExpSize= 42 SolSize= 42 Gen= 871 , EgSize= 44 ExpSize= 44 SolSize= 42 Gen= 156	examples/blocks/probBLOCKS-9-1.pddl
+, ExpSize= 44 SolSize= 44 Gen= 465 , ExpSize= 44 SolSize= 44 Gen= 465 , EgSize= 44 ExpSize= 44 SolSize= 44 Gen= 135	examples/blocks/probBLOCKS-9-2.pddl
+, ExpSize= 14 SolSize= 14 Gen= 193 , ExpSize= 14 SolSize= 14 Gen= 195 , EgSize= 14 ExpSize= 31 SolSize= 17 Gen= 193	examples/elevators/p01.pddl
+, ExpSize= 9 SolSize= 9 Gen= 153 , ExpSize= 10 SolSize= 10 Gen= 165 , EgSize= 9 ExpSize= 24 SolSize= 15 Gen= 245	examples/elevators/p02.pddl
+, ExpSize= 19 SolSize= 19 Gen= 301 , ExpSize= 21 SolSize= 21 Gen= 367 , EgSize= 19 ExpSize= 47 SolSize= 28 Gen= 325	examples/elevators/p03.pddl
+, ExpSize= 22 SolSize= 22 Gen= 387 , ExpSize= 15 SolSize= 15 Gen= 270 , EgSize= 22 ExpSize= 43 SolSize= 21 Gen= 382	examples/elevators/p04.pddl
+, ExpSize= 23 SolSize= 23 Gen= 1063 , ExpSize= 24 SolSize= 24 Gen= 537 , EgSize= 23 ExpSize= 48 SolSize= 25 Gen= 340	examples/elevators/p05.pddl
+, ExpSize= 27 SolSize= 27 Gen= 1173 , ExpSize= 26 SolSize= 26 Gen= 1202 , EgSize= 27 ExpSize= 58 SolSize= 31 Gen= 536	examples/elevators/p06.pddl
+, ExpSize= 30 SolSize= 30 Gen= 1035 , ExpSize= 30 SolSize= 30 Gen= 2068 , EgSize= 30 ExpSize= 39 SolSize= 37 Gen= 523	examples/elevators/p07.pddl
+, ExpSize= 21 SolSize= 21 Gen= 391 , ExpSize= 21 SolSize= 21 Gen= 381 , EgSize= 21 ExpSize= 30 SolSize= 28 Gen= 557	examples/elevators/p08.pddl
+, ExpSize= 36 SolSize= 36 Gen= 765 , ExpSize= 38 SolSize= 38 Gen= 904 , EgSize= 36 ExpSize= 39 SolSize= 39 Gen= 562	examples/elevators/p09.pddl
+, ExpSize= 33 SolSize= 33 Gen= 1373 , ExpSize= 25 SolSize= 25 Gen= 1028 , EgSize= 33 ExpSize= 44 SolSize= 40 Gen= 697	examples/elevators/p10.pddl
+, ExpSize= 19 SolSize= 19 Gen= 288 , ExpSize= 18 SolSize= 18 Gen= 273 , EgSize= 19 ExpSize= 38 SolSize= 19 Gen= 287	examples/elevators/p11.pddl
+, ExpSize= 21 SolSize= 21 Gen= 1687 , ExpSize= 16 SolSize= 16 Gen= 746 , EgSize= 21 ExpSize= 45 SolSize= 24 Gen= 434	examples/elevators/p12.pddl
+, ExpSize= 15 SolSize= 15 Gen= 229 , ExpSize= 14 SolSize= 14 Gen= 214 , EgSize= 15 ExpSize= 31 SolSize= 16 Gen= 237	examples/elevators/p13.pddl
+, ExpSize= 27 SolSize= 27 Gen= 2027 , ExpSize= 26 SolSize= 26 Gen= 1546 , EgSize= 27 ExpSize= 58 SolSize= 31 Gen= 611	examples/elevators/p14.pddl
+, ExpSize= 31 SolSize= 31 Gen= 1445 , ExpSize= 31 SolSize= 31 Gen= 1445 , EgSize= 31 ExpSize= 62 SolSize= 31 Gen= 494	examples/elevators/p15.pddl
+, ExpSize= 32 SolSize= 32 Gen= 5486 , !Gen= 15114 , EgSize= 32 ExpSize= 68 SolSize= 36 Gen= 703	examples/elevators/p16.pddl
+, ExpSize= 26 SolSize= 26 Gen= 647 , ExpSize= 26 SolSize= 26 Gen= 526 , EgSize= 26 ExpSize= 51 SolSize= 25 Gen= 397	examples/elevators/p17.pddl
+, ExpSize= 27 SolSize= 27 Gen= 3472 , ExpSize= 28 SolSize= 28 Gen= 3486 , EgSize= 27 ExpSize= 57 SolSize= 30 Gen= 597	examples/elevators/p18.pddl
+, ExpSize= 42 SolSize= 42 Gen= 1903 , ExpSize= 40 SolSize= 40 Gen= 1840 , EgSize= 42 ExpSize= 86 SolSize= 44 Gen= 845	examples/elevators/p19.pddl
+, ExpSize= 38 SolSize= 38 Gen= 7061 , ExpSize= 30 SolSize= 30 Gen= 2590 , EgSize= 38 ExpSize= 48 SolSize= 43 Gen= 913	examples/elevators/p20.pddl
+, ExpSize= 19 SolSize= 19 Gen= 373 , ExpSize= 18 SolSize= 18 Gen= 351 , EgSize= 19 ExpSize= 40 SolSize= 21 Gen= 358	examples/elevators/p21.pddl
+, ExpSize= 14 SolSize= 14 Gen= 392 , ExpSize= 13 SolSize= 13 Gen= 334 , EgSize= 14 ExpSize= 31 SolSize= 17 Gen= 386	examples/elevators/p22.pddl
+, ExpSize= 22 SolSize= 22 Gen= 407 , ExpSize= 18 SolSize= 18 Gen= 337 , EgSize= 22 ExpSize= 49 SolSize= 27 Gen= 511	examples/elevators/p23.pddl
+, ExpSize= 25 SolSize= 25 Gen= 646 , ExpSize= 31 SolSize= 31 Gen= 11938 , EgSize= 25 ExpSize= 56 SolSize= 31 Gen= 776	examples/elevators/p24.pddl
+, ExpSize= 27 SolSize= 27 Gen= 668 , ExpSize= 27 SolSize= 27 Gen= 663 , EgSize= 27 ExpSize= 59 SolSize= 32 Gen= 590	examples/elevators/p25.pddl
+, !Gen= 10026 , ExpSize= 20 SolSize= 20 Gen= 9478 , ExpSize= 20 SolSize= 20 Gen= 9478	examples/elevators/p26.pddl
+, ExpSize= 38 SolSize= 38 Gen= 1518 , ExpSize= 34 SolSize= 34 Gen= 1770 , EgSize= 38 ExpSize= 79 SolSize= 41 Gen= 776	examples/elevators/p27.pddl
+, !Gen= 8802 , !Gen= 8638 , !Gen= 8667	examples/elevators/p28.pddl
+, ExpSize= 32 SolSize= 32 Gen= 694 , ExpSize= 31 SolSize= 31 Gen= 1208 , EgSize= 32 ExpSize= 37 SolSize= 32 Gen= 650	examples/elevators/p29.pddl
+, ExpSize= 40 SolSize= 40 Gen= 1521 , ExpSize= 41 SolSize= 41 Gen= 1484 , EgSize= 40 ExpSize= 48 SolSize= 48 Gen= 1318	examples/elevators/p30.pddl
+, ExpSize= 10 SolSize= 10 Gen= 53 , ExpSize= 5 SolSize= 5 Gen= 24 , EgSize= 10 ExpSize= 15 SolSize= 5 Gen= 24	examples/rovers/p01.pddl
+, ExpSize= 8 SolSize= 8 Gen= 74 , ExpSize= 8 SolSize= 8 Gen= 82 , EgSize= 8 ExpSize= 16 SolSize= 8 Gen= 65	examples/rovers/p02.pddl
+, ExpSize= 13 SolSize= 13 Gen= 631 , ExpSize= 8 SolSize= 8 Gen= 60 , EgSize= 13 ExpSize= 21 SolSize= 8 Gen= 60	examples/rovers/p03.pddl
+, ExpSize= 8 SolSize= 8 Gen= 62 , ExpSize= 6 SolSize= 6 Gen= 61 , EgSize= 8 ExpSize= 14 SolSize= 6 Gen= 61	examples/rovers/p04.pddl
+, ExpSize= 22 SolSize= 22 Gen= 308 , ExpSize= 19 SolSize= 19 Gen= 297 , EgSize= 22 ExpSize= 42 SolSize= 20 Gen= 271	examples/rovers/p05.pddl
+, ExpSize= 38 SolSize= 38 Gen= 35175 , ExpSize= 31 SolSize= 31 Gen= 5636 , EgSize= 38 ExpSize= 70 SolSize= 32 Gen= 6154	examples/rovers/p06.pddl
+, ExpSize= 18 SolSize= 18 Gen= 296 , ExpSize= 11 SolSize= 11 Gen= 188 , EgSize= 18 ExpSize= 29 SolSize= 11 Gen= 188	examples/rovers/p07.pddl
+, ExpSize= 26 SolSize= 26 Gen= 746 , ExpSize= 26 SolSize= 26 Gen= 475 , EgSize= 26 ExpSize= 52 SolSize= 26 Gen= 475	examples/rovers/p08.pddl
+, !Gen= 47371 , !Gen= 48927 , !Gen= 49490	examples/rovers/p09.pddl
+, ExpSize= 36 SolSize= 36 Gen= 2499 , ExpSize= 31 SolSize= 31 Gen= 1870 , EgSize= 36 ExpSize= 67 SolSize= 31 Gen= 1870	examples/rovers/p10.pddl
+, !Gen= 43139 , !Gen= 43301 , !Gen= 43357	examples/rovers/p11.pddl
+, ExpSize= 19 SolSize= 19 Gen= 395 , ExpSize= 18 SolSize= 18 Gen= 450 , EgSize= 19 ExpSize= 37 SolSize= 18 Gen= 450	examples/rovers/p12.pddl
+, ExpSize= 48 SolSize= 48 Gen= 2121 , ExpSize= 42 SolSize= 42 Gen= 1953 , EgSize= 48 ExpSize= 90 SolSize= 42 Gen= 1953	examples/rovers/p13.pddl
+, !Gen= 29589 , ExpSize= 31 SolSize= 31 Gen= 1655 , ExpSize= 31 SolSize= 31 Gen= 1655	examples/rovers/p14.pddl
+, !Gen= 22504 , !Gen= 22883 , !Gen= 23022	examples/rovers/p15.pddl
+, ExpSize= 47 SolSize= 47 Gen= 16221 , ExpSize= 39 SolSize= 39 Gen= 10202 , EgSize= 47 ExpSize= 86 SolSize= 39 Gen= 10202	examples/rovers/p16.pddl
+, !Gen= 10155 , !Gen= 10283 , !Gen= 9940	examples/rovers/p17.pddl
+, ExpSize= 9 SolSize= 9 Gen= 42 , ExpSize= 9 SolSize= 9 Gen= 42 , EgSize= 9 ExpSize= 19 SolSize= 10 Gen= 42	examples/satellite/p01-pfile1.pddl
+, ExpSize= 13 SolSize= 13 Gen= 88 , ExpSize= 13 SolSize= 13 Gen= 93 , EgSize= 13 ExpSize= 27 SolSize= 14 Gen= 89	examples/satellite/p02-pfile2.pddl
+, ExpSize= 11 SolSize= 11 Gen= 193 , ExpSize= 11 SolSize= 11 Gen= 165 , EgSize= 11 ExpSize= 14 SolSize= 12 Gen= 201	examples/satellite/p03-pfile3.pddl
+, ExpSize= 18 SolSize= 18 Gen= 411 , ExpSize= 18 SolSize= 18 Gen= 437 , EgSize= 18 ExpSize= 21 SolSize= 20 Gen= 348	examples/satellite/p04-pfile4.pddl
+, ExpSize= 16 SolSize= 16 Gen= 515 , ExpSize= 18 SolSize= 18 Gen= 749 , EgSize= 16 ExpSize= 24 SolSize= 23 Gen= 711	examples/satellite/p05-pfile5.pddl
+, ExpSize= 20 SolSize= 20 Gen= 615 , !Gen= 73484 , EgSize= 20 ExpSize= 24 SolSize= 24 Gen= 718	examples/satellite/p06-pfile6.pddl
+, ExpSize= 23 SolSize= 23 Gen= 2205 , ExpSize= 21 SolSize= 21 Gen= 991 , EgSize= 23 ExpSize= 28 SolSize= 27 Gen= 1278	examples/satellite/p07-pfile7.pddl
+, ExpSize= 26 SolSize= 26 Gen= 1544 , ExpSize= 24 SolSize= 24 Gen= 1410 , EgSize= 26 ExpSize= 32 SolSize= 32 Gen= 1870	examples/satellite/p08-pfile8.pddl
+, ExpSize= 29 SolSize= 29 Gen= 3991 , ExpSize= 31 SolSize= 31 Gen= 2411 , EgSize= 29 ExpSize= 38 SolSize= 37 Gen= 2760	examples/satellite/p09-pfile9.pddl
+, ExpSize= 29 SolSize= 29 Gen= 2493 , ExpSize= 28 SolSize= 28 Gen= 3436 , EgSize= 29 ExpSize= 37 SolSize= 37 Gen= 3130	examples/satellite/p10-pfile10.pddl
+, ExpSize= 31 SolSize= 31 Gen= 2963 , ExpSize= 30 SolSize= 30 Gen= 6188 , EgSize= 31 ExpSize= 39 SolSize= 35 Gen= 3295	examples/satellite/p11-pfile11.pddl
+, ExpSize= 43 SolSize= 43 Gen= 5146 , ExpSize= 45 SolSize= 45 Gen= 5383 , EgSize= 43 ExpSize= 49 SolSize= 48 Gen= 5664	examples/satellite/p12-pfile12.pddl
+, !Gen= 7589 , !Gen= 7640 , !Gen= 7640	examples/satellite/p13-pfile13.pddl
+, !Gen= 8404 , !Gen= 8390 , !Gen= 8390	examples/satellite/p14-pfile14.pddl
+, !Gen= 6218 , !Gen= 6282 , !Gen= 6282	examples/satellite/p15-pfile15.pddl
+, !Gen= 4788 , !Gen= 4292 , !Gen= 4292	examples/satellite/p16-pfile16.pddl
+, !Gen= 3346 , !Gen= 4214 , !Gen= 4214	examples/satellite/p17-pfile17.pddl
+, ExpSize= 32 SolSize= 32 Gen= 3882 , ExpSize= 31 SolSize= 31 Gen= 3751 , EgSize= 32 ExpSize= 36 SolSize= 35 Gen= 4171	examples/satellite/p18-pfile18.pddl
+, !Gen= 6772 , !Gen= 7049 , !Gen= 7049	examples/satellite/p19-pfile19.pddl
+
+TEST Prob25 Walk0
+, ExpSize= 46 SolSize= 46 Gen= 412 , ExpSize= 46 SolSize= 46 Gen= 412 , EgSize= 12 ExpSize= 43 SolSize= 42 Gen= 618	examples/blocks/probBLOCKS-10-0.pddl
+, ExpSize= 44 SolSize= 44 Gen= 645 , ExpSize= 44 SolSize= 44 Gen= 645 , EgSize= 11 ExpSize= 50 SolSize= 46 Gen= 471	examples/blocks/probBLOCKS-10-1.pddl
+, ExpSize= 48 SolSize= 48 Gen= 737 , ExpSize= 48 SolSize= 48 Gen= 737 , EgSize= 12 ExpSize= 50 SolSize= 48 Gen= 292	examples/blocks/probBLOCKS-10-2.pddl
+, ExpSize= 54 SolSize= 54 Gen= 1268 , ExpSize= 54 SolSize= 54 Gen= 1268 , EgSize= 14 ExpSize= 49 SolSize= 46 Gen= 393	examples/blocks/probBLOCKS-11-0.pddl
+, ExpSize= 58 SolSize= 58 Gen= 2412 , ExpSize= 58 SolSize= 58 Gen= 2412 , EgSize= 15 ExpSize= 56 SolSize= 48 Gen= 998	examples/blocks/probBLOCKS-11-1.pddl
+, ExpSize= 56 SolSize= 56 Gen= 1294 , ExpSize= 56 SolSize= 56 Gen= 1294 , EgSize= 14 ExpSize= 52 SolSize= 46 Gen= 653	examples/blocks/probBLOCKS-11-2.pddl
+, ExpSize= 58 SolSize= 58 Gen= 3333 , ExpSize= 58 SolSize= 58 Gen= 3333 , EgSize= 15 ExpSize= 58 SolSize= 54 Gen= 1069	examples/blocks/probBLOCKS-12-0.pddl
+, ExpSize= 72 SolSize= 72 Gen= 1242 , ExpSize= 72 SolSize= 72 Gen= 1242 , EgSize= 18 ExpSize= 70 SolSize= 64 Gen= 1153	examples/blocks/probBLOCKS-12-1.pddl
+, ExpSize= 72 SolSize= 72 Gen= 3292 , ExpSize= 72 SolSize= 72 Gen= 3292 , EgSize= 18 ExpSize= 75 SolSize= 68 Gen= 1170	examples/blocks/probBLOCKS-13-0.pddl
+, ExpSize= 74 SolSize= 74 Gen= 1352 , ExpSize= 74 SolSize= 74 Gen= 1352 , EgSize= 19 ExpSize= 73 SolSize= 70 Gen= 1081	examples/blocks/probBLOCKS-13-1.pddl
+, ExpSize= 80 SolSize= 80 Gen= 28293 , ExpSize= 80 SolSize= 80 Gen= 28293 , EgSize= 20 ExpSize= 83 SolSize= 76 Gen= 4125	examples/blocks/probBLOCKS-14-0.pddl
+, ExpSize= 80 SolSize= 80 Gen= 7062 , ExpSize= 80 SolSize= 80 Gen= 7062 , EgSize= 20 ExpSize= 86 SolSize= 80 Gen= 2913	examples/blocks/probBLOCKS-14-1.pddl
+, ExpSize= 78 SolSize= 78 Gen= 2895 , ExpSize= 78 SolSize= 78 Gen= 2895 , EgSize= 20 ExpSize= 86 SolSize= 78 Gen= 10385	examples/blocks/probBLOCKS-15-0.pddl
+, ExpSize= 80 SolSize= 80 Gen= 6183 , ExpSize= 80 SolSize= 80 Gen= 6183 , EgSize= 20 ExpSize= 85 SolSize= 80 Gen= 4022	examples/blocks/probBLOCKS-15-1.pddl
+, ExpSize= 94 SolSize= 94 Gen= 3917 , ExpSize= 94 SolSize= 94 Gen= 3917 , EgSize= 24 ExpSize= 94 SolSize= 86 Gen= 3313	examples/blocks/probBLOCKS-16-1.pddl
+, ExpSize= 86 SolSize= 86 Gen= 3607 , ExpSize= 86 SolSize= 86 Gen= 3607 , EgSize= 22 ExpSize= 87 SolSize= 82 Gen= 1430	examples/blocks/probBLOCKS-16-2.pddl
+, ExpSize= 102 SolSize= 102 Gen= 12405 , ExpSize= 102 SolSize= 102 Gen= 12405 , EgSize= 26 !Gen= 13590	examples/blocks/probBLOCKS-17-0.pddl
+, ExpSize= 10 SolSize= 10 Gen= 22 , ExpSize= 10 SolSize= 10 Gen= 22 , EgSize= 3 ExpSize= 8 SolSize= 6 Gen= 18	examples/blocks/probBLOCKS-4-0.pddl
+, ExpSize= 10 SolSize= 10 Gen= 20 , ExpSize= 10 SolSize= 10 Gen= 20 , EgSize= 3 ExpSize= 10 SolSize= 10 Gen= 20	examples/blocks/probBLOCKS-4-1.pddl
+, ExpSize= 6 SolSize= 6 Gen= 15 , ExpSize= 6 SolSize= 6 Gen= 15 , EgSize= 2 ExpSize= 6 SolSize= 6 Gen= 12	examples/blocks/probBLOCKS-4-2.pddl
+, ExpSize= 18 SolSize= 18 Gen= 89 , ExpSize= 18 SolSize= 18 Gen= 89 , EgSize= 5 ExpSize= 16 SolSize= 14 Gen= 52	examples/blocks/probBLOCKS-5-0.pddl
+, ExpSize= 14 SolSize= 14 Gen= 38 , ExpSize= 14 SolSize= 14 Gen= 38 , EgSize= 4 ExpSize= 12 SolSize= 10 Gen= 30	examples/blocks/probBLOCKS-5-1.pddl
+, ExpSize= 20 SolSize= 20 Gen= 89 , ExpSize= 20 SolSize= 20 Gen= 89 , EgSize= 5 ExpSize= 22 SolSize= 20 Gen= 52	examples/blocks/probBLOCKS-5-2.pddl
+, ExpSize= 32 SolSize= 32 Gen= 181 , ExpSize= 32 SolSize= 32 Gen= 181 , EgSize= 8 ExpSize= 27 SolSize= 24 Gen= 125	examples/blocks/probBLOCKS-6-0.pddl
+, ExpSize= 14 SolSize= 14 Gen= 56 , ExpSize= 14 SolSize= 14 Gen= 56 , EgSize= 4 ExpSize= 14 SolSize= 14 Gen= 42	examples/blocks/probBLOCKS-6-1.pddl
+, ExpSize= 28 SolSize= 28 Gen= 95 , ExpSize= 28 SolSize= 28 Gen= 95 , EgSize= 7 ExpSize= 25 SolSize= 22 Gen= 74	examples/blocks/probBLOCKS-6-2.pddl
+, ExpSize= 22 SolSize= 22 Gen= 109 , ExpSize= 22 SolSize= 22 Gen= 109 , EgSize= 6 ExpSize= 24 SolSize= 22 Gen= 59	examples/blocks/probBLOCKS-7-0.pddl
+, ExpSize= 32 SolSize= 32 Gen= 198 , ExpSize= 32 SolSize= 32 Gen= 198 , EgSize= 8 ExpSize= 31 SolSize= 28 Gen= 129	examples/blocks/probBLOCKS-7-1.pddl
+, ExpSize= 28 SolSize= 28 Gen= 387 , ExpSize= 28 SolSize= 28 Gen= 387 , EgSize= 7 ExpSize= 25 SolSize= 24 Gen= 90	examples/blocks/probBLOCKS-7-2.pddl
+, ExpSize= 26 SolSize= 26 Gen= 292 , ExpSize= 26 SolSize= 26 Gen= 292 , EgSize= 7 ExpSize= 25 SolSize= 22 Gen= 362	examples/blocks/probBLOCKS-8-0.pddl
+, ExpSize= 40 SolSize= 40 Gen= 333 , ExpSize= 40 SolSize= 40 Gen= 333 , EgSize= 10 ExpSize= 29 SolSize= 24 Gen= 98	examples/blocks/probBLOCKS-8-1.pddl
+, ExpSize= 28 SolSize= 28 Gen= 294 , ExpSize= 28 SolSize= 28 Gen= 294 , EgSize= 7 ExpSize= 24 SolSize= 20 Gen= 150	examples/blocks/probBLOCKS-8-2.pddl
+, ExpSize= 48 SolSize= 48 Gen= 647 , ExpSize= 48 SolSize= 48 Gen= 647 , EgSize= 12 ExpSize= 47 SolSize= 44 Gen= 445	examples/blocks/probBLOCKS-9-0.pddl
+, ExpSize= 44 SolSize= 44 Gen= 872 , ExpSize= 44 SolSize= 44 Gen= 872 , EgSize= 11 ExpSize= 41 SolSize= 40 Gen= 557	examples/blocks/probBLOCKS-9-1.pddl
+, ExpSize= 44 SolSize= 44 Gen= 465 , ExpSize= 44 SolSize= 44 Gen= 465 , EgSize= 11 ExpSize= 42 SolSize= 40 Gen= 314	examples/blocks/probBLOCKS-9-2.pddl
+, ExpSize= 14 SolSize= 14 Gen= 193 , ExpSize= 14 SolSize= 14 Gen= 193 , EgSize= 4 ExpSize= 18 SolSize= 14 Gen= 168	examples/elevators/p01.pddl
+, ExpSize= 9 SolSize= 9 Gen= 153 , ExpSize= 9 SolSize= 9 Gen= 153 , EgSize= 2 ExpSize= 11 SolSize= 9 Gen= 153	examples/elevators/p02.pddl
+, ExpSize= 19 SolSize= 19 Gen= 301 , ExpSize= 19 SolSize= 19 Gen= 301 , EgSize= 5 ExpSize= 24 SolSize= 19 Gen= 310	examples/elevators/p03.pddl
+, ExpSize= 22 SolSize= 22 Gen= 387 , ExpSize= 22 SolSize= 22 Gen= 387 , EgSize= 6 ExpSize= 28 SolSize= 22 Gen= 387	examples/elevators/p04.pddl
+, ExpSize= 23 SolSize= 23 Gen= 1063 , ExpSize= 23 SolSize= 23 Gen= 1063 , EgSize= 6 ExpSize= 29 SolSize= 23 Gen= 338	examples/elevators/p05.pddl
+, ExpSize= 27 SolSize= 27 Gen= 1173 , ExpSize= 27 SolSize= 27 Gen= 1173 , EgSize= 7 ExpSize= 39 SolSize= 32 Gen= 1396	examples/elevators/p06.pddl
+, ExpSize= 30 SolSize= 30 Gen= 1035 , ExpSize= 30 SolSize= 30 Gen= 1035 , EgSize= 8 ExpSize= 30 SolSize= 28 Gen= 399	examples/elevators/p07.pddl
+, ExpSize= 21 SolSize= 21 Gen= 391 , ExpSize= 21 SolSize= 21 Gen= 391 , EgSize= 5 ExpSize= 21 SolSize= 21 Gen= 391	examples/elevators/p08.pddl
+, ExpSize= 36 SolSize= 36 Gen= 765 , ExpSize= 36 SolSize= 36 Gen= 765 , EgSize= 9 ExpSize= 43 SolSize= 36 Gen= 526	examples/elevators/p09.pddl
+, ExpSize= 33 SolSize= 33 Gen= 1373 , ExpSize= 33 SolSize= 33 Gen= 1373 , EgSize= 8 ExpSize= 38 SolSize= 33 Gen= 3210	examples/elevators/p10.pddl
+, ExpSize= 19 SolSize= 19 Gen= 288 , ExpSize= 19 SolSize= 19 Gen= 288 , EgSize= 5 ExpSize= 24 SolSize= 19 Gen= 288	examples/elevators/p11.pddl
+, ExpSize= 21 SolSize= 21 Gen= 1687 , ExpSize= 21 SolSize= 21 Gen= 1687 , EgSize= 5 ExpSize= 22 SolSize= 17 Gen= 359	examples/elevators/p12.pddl
+, ExpSize= 15 SolSize= 15 Gen= 229 , ExpSize= 15 SolSize= 15 Gen= 229 , EgSize= 4 ExpSize= 19 SolSize= 15 Gen= 228	examples/elevators/p13.pddl
+, ExpSize= 27 SolSize= 27 Gen= 2027 , ExpSize= 27 SolSize= 27 Gen= 2027 , EgSize= 7 ExpSize= 34 SolSize= 27 Gen= 685	examples/elevators/p14.pddl
+, ExpSize= 31 SolSize= 31 Gen= 1445 , ExpSize= 31 SolSize= 31 Gen= 1445 , EgSize= 8 ExpSize= 37 SolSize= 29 Gen= 641	examples/elevators/p15.pddl
+, ExpSize= 32 SolSize= 32 Gen= 5486 , ExpSize= 32 SolSize= 32 Gen= 5486 , EgSize= 8 ExpSize= 40 SolSize= 32 Gen= 1379	examples/elevators/p16.pddl
+, ExpSize= 26 SolSize= 26 Gen= 647 , ExpSize= 26 SolSize= 26 Gen= 647 , EgSize= 7 ExpSize= 33 SolSize= 26 Gen= 537	examples/elevators/p17.pddl
+, ExpSize= 27 SolSize= 27 Gen= 3472 , ExpSize= 27 SolSize= 27 Gen= 3472 , EgSize= 7 ExpSize= 34 SolSize= 27 Gen= 913	examples/elevators/p18.pddl
+, ExpSize= 42 SolSize= 42 Gen= 1903 , ExpSize= 42 SolSize= 42 Gen= 1903 , EgSize= 11 ExpSize= 53 SolSize= 42 Gen= 1215	examples/elevators/p19.pddl
+, ExpSize= 38 SolSize= 38 Gen= 7061 , ExpSize= 38 SolSize= 38 Gen= 7061 , EgSize= 10 ExpSize= 43 SolSize= 37 Gen= 926	examples/elevators/p20.pddl
+, ExpSize= 19 SolSize= 19 Gen= 373 , ExpSize= 19 SolSize= 19 Gen= 373 , EgSize= 5 ExpSize= 23 SolSize= 18 Gen= 319	examples/elevators/p21.pddl
+, ExpSize= 14 SolSize= 14 Gen= 392 , ExpSize= 14 SolSize= 14 Gen= 392 , EgSize= 4 ExpSize= 18 SolSize= 14 Gen= 338	examples/elevators/p22.pddl
+, ExpSize= 22 SolSize= 22 Gen= 407 , ExpSize= 22 SolSize= 22 Gen= 407 , EgSize= 6 ExpSize= 28 SolSize= 22 Gen= 407	examples/elevators/p23.pddl
+, ExpSize= 25 SolSize= 25 Gen= 646 , ExpSize= 25 SolSize= 25 Gen= 646 , EgSize= 6 ExpSize= 31 SolSize= 25 Gen= 644	examples/elevators/p24.pddl
+, ExpSize= 27 SolSize= 27 Gen= 668 , ExpSize= 27 SolSize= 27 Gen= 668 , EgSize= 7 ExpSize= 34 SolSize= 27 Gen= 537	examples/elevators/p25.pddl
+, !Gen= 9946 , !Gen= 9881 , !Gen= 10071	examples/elevators/p26.pddl
+, ExpSize= 38 SolSize= 38 Gen= 1518 , ExpSize= 38 SolSize= 38 Gen= 1518 , EgSize= 10 ExpSize= 48 SolSize= 38 Gen= 1130	examples/elevators/p27.pddl
+, !Gen= 8808 , !Gen= 8724 , !Gen= 8724	examples/elevators/p28.pddl
+, ExpSize= 32 SolSize= 32 Gen= 694 , ExpSize= 32 SolSize= 32 Gen= 694 , EgSize= 8 ExpSize= 37 SolSize= 34 Gen= 681	examples/elevators/p29.pddl
+, ExpSize= 40 SolSize= 40 Gen= 1521 , ExpSize= 40 SolSize= 40 Gen= 1521 , EgSize= 10 ExpSize= 46 SolSize= 42 Gen= 2391	examples/elevators/p30.pddl
+, ExpSize= 10 SolSize= 10 Gen= 53 , ExpSize= 10 SolSize= 10 Gen= 53 , EgSize= 3 ExpSize= 13 SolSize= 10 Gen= 47	examples/rovers/p01.pddl
+, ExpSize= 8 SolSize= 8 Gen= 74 , ExpSize= 8 SolSize= 8 Gen= 74 , EgSize= 2 ExpSize= 10 SolSize= 8 Gen= 60	examples/rovers/p02.pddl
+, ExpSize= 13 SolSize= 13 Gen= 631 , ExpSize= 13 SolSize= 13 Gen= 631 , EgSize= 3 ExpSize= 16 SolSize= 13 Gen= 164	examples/rovers/p03.pddl
+, ExpSize= 8 SolSize= 8 Gen= 62 , ExpSize= 8 SolSize= 8 Gen= 62 , EgSize= 2 ExpSize= 10 SolSize= 8 Gen= 64	examples/rovers/p04.pddl
+, ExpSize= 22 SolSize= 22 Gen= 308 , ExpSize= 22 SolSize= 22 Gen= 308 , EgSize= 6 ExpSize= 28 SolSize= 22 Gen= 272	examples/rovers/p05.pddl
+, ExpSize= 38 SolSize= 38 Gen= 35175 , ExpSize= 38 SolSize= 38 Gen= 35175 , EgSize= 10 ExpSize= 48 SolSize= 38 Gen= 4324	examples/rovers/p06.pddl
+, ExpSize= 18 SolSize= 18 Gen= 296 , ExpSize= 18 SolSize= 18 Gen= 296 , EgSize= 5 ExpSize= 23 SolSize= 18 Gen= 299	examples/rovers/p07.pddl
+, ExpSize= 26 SolSize= 26 Gen= 746 , ExpSize= 26 SolSize= 26 Gen= 746 , EgSize= 7 ExpSize= 33 SolSize= 26 Gen= 487	examples/rovers/p08.pddl
+, !Gen= 47183 , !Gen= 47240 , !Gen= 47479	examples/rovers/p09.pddl
+, ExpSize= 36 SolSize= 36 Gen= 2499 , ExpSize= 36 SolSize= 36 Gen= 2499 , EgSize= 9 ExpSize= 45 SolSize= 36 Gen= 2896	examples/rovers/p10.pddl
+, !Gen= 42878 , !Gen= 42828 , !Gen= 42816	examples/rovers/p11.pddl
+, ExpSize= 19 SolSize= 19 Gen= 395 , ExpSize= 19 SolSize= 19 Gen= 395 , EgSize= 5 ExpSize= 24 SolSize= 19 Gen= 369	examples/rovers/p12.pddl
+, ExpSize= 48 SolSize= 48 Gen= 2121 , ExpSize= 48 SolSize= 48 Gen= 2121 , EgSize= 12 ExpSize= 60 SolSize= 48 Gen= 2822	examples/rovers/p13.pddl
+, !Gen= 30329 , !Gen= 29240 , !Gen= 30967	examples/rovers/p14.pddl
+, !Gen= 23257 , !Gen= 22076 , !Gen= 22458	examples/rovers/p15.pddl
+, ExpSize= 47 SolSize= 47 Gen= 16221 , ExpSize= 47 SolSize= 47 Gen= 16221 , EgSize= 12 ExpSize= 59 SolSize= 47 Gen= 16514	examples/rovers/p16.pddl
+, !Gen= 10155 , !Gen= 10395 , !Gen= 9979	examples/rovers/p17.pddl
+, !Gen= 6722 , !Gen= 6771 , !Gen= 6853	examples/rovers/p18.pddl
+, !Gen= 4747 , !Gen= 4665 , !Gen= 4556	examples/rovers/p19.pddl
+, !Gen= 3365 , !Gen= 3432 , !Gen= 3403	examples/rovers/p20.pddl
+, !Gen= 2334 , !Gen= 2334 , !Gen= 2334	examples/rovers/p21.pddl
+, !Gen= 2088 , !Gen= 2088 , !Gen= 2148	examples/rovers/p22.pddl
+, !Gen= 1803 , !Gen= 1803 , !Gen= 1751	examples/rovers/p23.pddl
+, !Gen= 2185 , !Gen= 2185 , !Gen= 2185	examples/rovers/p24.pddl
+, !Gen= 2638 , !Gen= 2638 , !Gen= 2638	examples/rovers/p25.pddl
+, !Gen= 3230 , !Gen= 3182 , !Gen= 3230	examples/rovers/p26.pddl
+, !Gen= 2473 , !Gen= 2527 , !Gen= 2473	examples/rovers/p27.pddl
+, !Gen= 1440 , !Gen= 1440 , !Gen= 1440	examples/rovers/p28.pddl
+, !Gen= 1433 , !Gen= 1433 , ExpSize= 9 SolSize= 9 Gen= 42 , ExpSize= 9 SolSize= 9 Gen= 42 , EgSize= 2 ExpSize= 11 SolSize= 9 Gen= 42	examples/satellite/p01-pfile1.pddl
+, ExpSize= 13 SolSize= 13 Gen= 88 , ExpSize= 13 SolSize= 13 Gen= 88 , EgSize= 3 ExpSize= 14 SolSize= 13 Gen= 88	examples/satellite/p02-pfile2.pddl
+, ExpSize= 11 SolSize= 11 Gen= 193 , ExpSize= 11 SolSize= 11 Gen= 193 , EgSize= 3 ExpSize= 11 SolSize= 11 Gen= 193	examples/satellite/p03-pfile3.pddl
+, ExpSize= 18 SolSize= 18 Gen= 411 , ExpSize= 18 SolSize= 18 Gen= 411 , EgSize= 5 ExpSize= 21 SolSize= 18 Gen= 326	examples/satellite/p04-pfile4.pddl
+, ExpSize= 16 SolSize= 16 Gen= 515 , ExpSize= 16 SolSize= 16 Gen= 515 , EgSize= 4 ExpSize= 18 SolSize= 16 Gen= 539	examples/satellite/p05-pfile5.pddl
+, ExpSize= 20 SolSize= 20 Gen= 615 , ExpSize= 20 SolSize= 20 Gen= 615 , EgSize= 5 ExpSize= 22 SolSize= 20 Gen= 615	examples/satellite/p06-pfile6.pddl
+, ExpSize= 23 SolSize= 23 Gen= 2205 , ExpSize= 23 SolSize= 23 Gen= 2205 , EgSize= 6 ExpSize= 25 SolSize= 23 Gen= 1415	examples/satellite/p07-pfile7.pddl
+, ExpSize= 26 SolSize= 26 Gen= 1544 , ExpSize= 26 SolSize= 26 Gen= 1544 , EgSize= 7 ExpSize= 27 SolSize= 26 Gen= 1544	examples/satellite/p08-pfile8.pddl
+, ExpSize= 29 SolSize= 29 Gen= 3991 , ExpSize= 29 SolSize= 29 Gen= 3991 , EgSize= 7 ExpSize= 34 SolSize= 30 Gen= 2549	examples/satellite/p09-pfile9.pddl
+, ExpSize= 29 SolSize= 29 Gen= 2493 , ExpSize= 29 SolSize= 29 Gen= 2493 , EgSize= 7 ExpSize= 31 SolSize= 29 Gen= 2492	examples/satellite/p10-pfile10.pddl
+, ExpSize= 31 SolSize= 31 Gen= 2963 , ExpSize= 31 SolSize= 31 Gen= 2963 , EgSize= 8 ExpSize= 33 SolSize= 31 Gen= 2956	examples/satellite/p11-pfile11.pddl
+, ExpSize= 43 SolSize= 43 Gen= 5146 , ExpSize= 43 SolSize= 43 Gen= 5146 , EgSize= 11 ExpSize= 51 SolSize= 43 Gen= 5141	examples/satellite/p12-pfile12.pddl
+, !Gen= 7589 , !Gen= 7589 , !Gen= 7589	examples/satellite/p13-pfile13.pddl
+, !Gen= 8404 , !Gen= 8404 , !Gen= 8404	examples/satellite/p14-pfile14.pddl
+, !Gen= 6218 , !Gen= 6218 , !Gen= 6025	examples/satellite/p15-pfile15.pddl
+, !Gen= 4546 , !Gen= 4546 , !Gen= 4788	examples/satellite/p16-pfile16.pddl
+, !Gen= 3346 , !Gen= 3346 , !Gen= 3346	examples/satellite/p17-pfile17.pddl
+, ExpSize= 32 SolSize= 32 Gen= 3882 , ExpSize= 32 SolSize= 32 Gen= 3882 , EgSize= 8 ExpSize= 32 SolSize= 32 Gen= 3883	examples/satellite/p18-pfile18.pddl
+, !Gen= 6905 , !Gen= 6905 , !Gen= 6662	examples/satellite/p19-pfile19.pddl
+
+TEST Prob50 Walk0
+
+, ExpSize= 46 SolSize= 46 Gen= 412 , ExpSize= 46 SolSize= 46 Gen= 412 , EgSize= 23 ExpSize= 46 SolSize= 42 Gen= 188	examples/blocks/probBLOCKS-10-0.pddl
+, ExpSize= 44 SolSize= 44 Gen= 645 , ExpSize= 44 SolSize= 44 Gen= 645 , EgSize= 22 ExpSize= 48 SolSize= 44 Gen= 324	examples/blocks/probBLOCKS-10-1.pddl
+, ExpSize= 48 SolSize= 48 Gen= 737 , ExpSize= 48 SolSize= 48 Gen= 737 , EgSize= 24 ExpSize= 48 SolSize= 48 Gen= 195	examples/blocks/probBLOCKS-10-2.pddl
+, ExpSize= 54 SolSize= 54 Gen= 1268 , ExpSize= 54 SolSize= 54 Gen= 1268 , EgSize= 27 ExpSize= 56 SolSize= 46 Gen= 324	examples/blocks/probBLOCKS-11-0.pddl
+, ExpSize= 58 SolSize= 58 Gen= 2412 , ExpSize= 58 SolSize= 58 Gen= 2412 , EgSize= 29 ExpSize= 61 SolSize= 46 Gen= 646	examples/blocks/probBLOCKS-11-1.pddl
+, ExpSize= 56 SolSize= 56 Gen= 1294 , ExpSize= 56 SolSize= 56 Gen= 1294 , EgSize= 28 ExpSize= 60 SolSize= 46 Gen= 318	examples/blocks/probBLOCKS-11-2.pddl
+, ExpSize= 58 SolSize= 58 Gen= 3333 , ExpSize= 58 SolSize= 58 Gen= 3333 , EgSize= 29 ExpSize= 60 SolSize= 54 Gen= 1030	examples/blocks/probBLOCKS-12-0.pddl
+, ExpSize= 72 SolSize= 72 Gen= 1242 , ExpSize= 72 SolSize= 72 Gen= 1242 , EgSize= 36 ExpSize= 82 SolSize= 70 Gen= 1569	examples/blocks/probBLOCKS-12-1.pddl
+, ExpSize= 72 SolSize= 72 Gen= 3292 , ExpSize= 72 SolSize= 72 Gen= 3292 , EgSize= 36 ExpSize= 80 SolSize= 64 Gen= 473	examples/blocks/probBLOCKS-13-0.pddl
+, ExpSize= 74 SolSize= 74 Gen= 1352 , ExpSize= 74 SolSize= 74 Gen= 1352 , EgSize= 37 ExpSize= 80 SolSize= 70 Gen= 708	examples/blocks/probBLOCKS-13-1.pddl
+, !Gen= 26478 , !Gen= 27311 , EgSize= 20 ExpSize= 83 SolSize= 76 Gen= 4125	examples/blocks/probBLOCKS-14-0.pddl
+, ExpSize= 80 SolSize= 80 Gen= 7062 , ExpSize= 80 SolSize= 80 Gen= 7062 , EgSize= 40 ExpSize= 88 SolSize= 72 Gen= 2575	examples/blocks/probBLOCKS-14-1.pddl
+, ExpSize= 78 SolSize= 78 Gen= 2895 , ExpSize= 78 SolSize= 78 Gen= 2895 , EgSize= 39 ExpSize= 89 SolSize= 74 Gen= 1628	examples/blocks/probBLOCKS-15-0.pddl
+, ExpSize= 80 SolSize= 80 Gen= 6183 , ExpSize= 80 SolSize= 80 Gen= 6183 , EgSize= 40 ExpSize= 80 SolSize= 80 Gen= 845	examples/blocks/probBLOCKS-15-1.pddl
+, ExpSize= 94 SolSize= 94 Gen= 3917 , ExpSize= 94 SolSize= 94 Gen= 3917 , EgSize= 47 ExpSize= 105 SolSize= 90 Gen= 968	examples/blocks/probBLOCKS-16-1.pddl
+, ExpSize= 86 SolSize= 86 Gen= 3607 , ExpSize= 86 SolSize= 86 Gen= 3607 , EgSize= 43 ExpSize= 92 SolSize= 82 Gen= 504	examples/blocks/probBLOCKS-16-2.pddl
+, !Gen= 12353 , !Gen= 12253 , EgSize= 26 !Gen= 12390	examples/blocks/probBLOCKS-17-0.pddl
+, ExpSize= 10 SolSize= 10 Gen= 22 , ExpSize= 10 SolSize= 10 Gen= 22 , EgSize= 5 ExpSize= 9 SolSize= 6 Gen= 18	examples/blocks/probBLOCKS-4-0.pddl
+, ExpSize= 10 SolSize= 10 Gen= 20 , ExpSize= 10 SolSize= 10 Gen= 20 , EgSize= 5 ExpSize= 10 SolSize= 10 Gen= 20	examples/blocks/probBLOCKS-4-1.pddl
+, ExpSize= 6 SolSize= 6 Gen= 15 , ExpSize= 6 SolSize= 6 Gen= 15 , EgSize= 3 ExpSize= 6 SolSize= 6 Gen= 12	examples/blocks/probBLOCKS-4-2.pddl
+, ExpSize= 18 SolSize= 18 Gen= 89 , ExpSize= 18 SolSize= 18 Gen= 89 , EgSize= 9 ExpSize= 18 SolSize= 14 Gen= 59	examples/blocks/probBLOCKS-5-0.pddl
+, ExpSize= 14 SolSize= 14 Gen= 38 , ExpSize= 14 SolSize= 14 Gen= 38 , EgSize= 7 ExpSize= 12 SolSize= 10 Gen= 30	examples/blocks/probBLOCKS-5-1.pddl
+, ExpSize= 20 SolSize= 20 Gen= 89 , ExpSize= 20 SolSize= 20 Gen= 89 , EgSize= 10 ExpSize= 22 SolSize= 20 Gen= 49	examples/blocks/probBLOCKS-5-2.pddl
+, ExpSize= 32 SolSize= 32 Gen= 181 , ExpSize= 32 SolSize= 32 Gen= 181 , EgSize= 16 ExpSize= 31 SolSize= 22 Gen= 125	examples/blocks/probBLOCKS-6-0.pddl
+, ExpSize= 14 SolSize= 14 Gen= 56 , ExpSize= 14 SolSize= 14 Gen= 56 , EgSize= 7 ExpSize= 15 SolSize= 14 Gen= 62	examples/blocks/probBLOCKS-6-1.pddl
+, ExpSize= 28 SolSize= 28 Gen= 95 , ExpSize= 28 SolSize= 28 Gen= 95 , EgSize= 14 ExpSize= 29 SolSize= 22 Gen= 74	examples/blocks/probBLOCKS-6-2.pddl
+, ExpSize= 22 SolSize= 22 Gen= 109 , ExpSize= 22 SolSize= 22 Gen= 109 , EgSize= 11 ExpSize= 24 SolSize= 22 Gen= 59	examples/blocks/probBLOCKS-7-0.pddl
+, ExpSize= 32 SolSize= 32 Gen= 198 , ExpSize= 32 SolSize= 32 Gen= 198 , EgSize= 16 ExpSize= 33 SolSize= 32 Gen= 119	examples/blocks/probBLOCKS-7-1.pddl
+, ExpSize= 28 SolSize= 28 Gen= 387 , ExpSize= 28 SolSize= 28 Gen= 387 , EgSize= 14 ExpSize= 26 SolSize= 24 Gen= 144	examples/blocks/probBLOCKS-7-2.pddl
+, ExpSize= 26 SolSize= 26 Gen= 292 , ExpSize= 26 SolSize= 26 Gen= 292 , EgSize= 13 ExpSize= 29 SolSize= 26 Gen= 296	examples/blocks/probBLOCKS-8-0.pddl
+, ExpSize= 40 SolSize= 40 Gen= 333 , ExpSize= 40 SolSize= 40 Gen= 333 , EgSize= 20 ExpSize= 46 SolSize= 34 Gen= 129	examples/blocks/probBLOCKS-8-1.pddl
+, ExpSize= 28 SolSize= 28 Gen= 294 , ExpSize= 28 SolSize= 28 Gen= 294 , EgSize= 14 ExpSize= 28 SolSize= 24 Gen= 90	examples/blocks/probBLOCKS-8-2.pddl
+, ExpSize= 48 SolSize= 48 Gen= 647 , ExpSize= 48 SolSize= 48 Gen= 647 , EgSize= 24 ExpSize= 47 SolSize= 44 Gen= 334	examples/blocks/probBLOCKS-9-0.pddl
+, ExpSize= 44 SolSize= 44 Gen= 872 , ExpSize= 44 SolSize= 44 Gen= 872 , EgSize= 22 ExpSize= 45 SolSize= 44 Gen= 234	examples/blocks/probBLOCKS-9-1.pddl
+, ExpSize= 44 SolSize= 44 Gen= 465 , ExpSize= 44 SolSize= 44 Gen= 465 , EgSize= 22 ExpSize= 44 SolSize= 40 Gen= 399	examples/blocks/probBLOCKS-9-2.pddl
+, ExpSize= 14 SolSize= 14 Gen= 193 , ExpSize= 14 SolSize= 14 Gen= 193 , EgSize= 7 ExpSize= 21 SolSize= 14 Gen= 168	examples/elevators/p01.pddl
+, ExpSize= 9 SolSize= 9 Gen= 153 , ExpSize= 9 SolSize= 9 Gen= 153 , EgSize= 5 ExpSize= 14 SolSize= 9 Gen= 153	examples/elevators/p02.pddl
+, ExpSize= 19 SolSize= 19 Gen= 301 , ExpSize= 19 SolSize= 19 Gen= 301 , EgSize= 10 ExpSize= 31 SolSize= 21 Gen= 292	examples/elevators/p03.pddl
+, ExpSize= 22 SolSize= 22 Gen= 387 , ExpSize= 22 SolSize= 22 Gen= 387 , EgSize= 11 ExpSize= 33 SolSize= 22 Gen= 387	examples/elevators/p04.pddl
+, ExpSize= 23 SolSize= 23 Gen= 1063 , ExpSize= 23 SolSize= 23 Gen= 1063 , EgSize= 12 ExpSize= 35 SolSize= 23 Gen= 316	examples/elevators/p05.pddl
+, ExpSize= 27 SolSize= 27 Gen= 1173 , ExpSize= 27 SolSize= 27 Gen= 1173 , EgSize= 14 ExpSize= 43 SolSize= 29 Gen= 520	examples/elevators/p06.pddl
+, ExpSize= 30 SolSize= 30 Gen= 1035 , ExpSize= 30 SolSize= 30 Gen= 1035 , EgSize= 15 ExpSize= 34 SolSize= 30 Gen= 432	examples/elevators/p07.pddl
+, ExpSize= 21 SolSize= 21 Gen= 391 , ExpSize= 21 SolSize= 21 Gen= 391 , EgSize= 11 ExpSize= 21 SolSize= 21 Gen= 391	examples/elevators/p08.pddl
+, ExpSize= 36 SolSize= 36 Gen= 765 , ExpSize= 36 SolSize= 36 Gen= 765 , EgSize= 18 ExpSize= 43 SolSize= 36 Gen= 527	examples/elevators/p09.pddl
+, ExpSize= 33 SolSize= 33 Gen= 1373 , ExpSize= 33 SolSize= 33 Gen= 1373 , EgSize= 17 ExpSize= 33 SolSize= 33 Gen= 628	examples/elevators/p10.pddl
+, ExpSize= 19 SolSize= 19 Gen= 288 , ExpSize= 19 SolSize= 19 Gen= 288 , EgSize= 10 ExpSize= 29 SolSize= 19 Gen= 287	examples/elevators/p11.pddl
+, ExpSize= 21 SolSize= 21 Gen= 1687 , ExpSize= 21 SolSize= 21 Gen= 1687 , EgSize= 11 ExpSize= 29 SolSize= 18 Gen= 374	examples/elevators/p12.pddl
+, ExpSize= 15 SolSize= 15 Gen= 229 , ExpSize= 15 SolSize= 15 Gen= 229 , EgSize= 8 ExpSize= 23 SolSize= 15 Gen= 229	examples/elevators/p13.pddl
+, ExpSize= 27 SolSize= 27 Gen= 2027 , ExpSize= 27 SolSize= 27 Gen= 2027 , EgSize= 14 ExpSize= 40 SolSize= 26 Gen= 533	examples/elevators/p14.pddl
+, ExpSize= 31 SolSize= 31 Gen= 1445 , ExpSize= 31 SolSize= 31 Gen= 1445 , EgSize= 16 ExpSize= 47 SolSize= 31 Gen= 552	examples/elevators/p15.pddl
+, ExpSize= 32 SolSize= 32 Gen= 5486 , ExpSize= 32 SolSize= 32 Gen= 5486 , EgSize= 16 ExpSize= 47 SolSize= 31 Gen= 739	examples/elevators/p16.pddl
+, ExpSize= 26 SolSize= 26 Gen= 647 , ExpSize= 26 SolSize= 26 Gen= 647 , EgSize= 13 ExpSize= 42 SolSize= 29 Gen= 718	examples/elevators/p17.pddl
+, ExpSize= 27 SolSize= 27 Gen= 3472 , ExpSize= 27 SolSize= 27 Gen= 3472 , EgSize= 14 ExpSize= 44 SolSize= 30 Gen= 1190	examples/elevators/p18.pddl
+, ExpSize= 42 SolSize= 42 Gen= 1903 , ExpSize= 42 SolSize= 42 Gen= 1903 , EgSize= 21 ExpSize= 65 SolSize= 44 Gen= 987	examples/elevators/p19.pddl
+, ExpSize= 38 SolSize= 38 Gen= 7061 , ExpSize= 38 SolSize= 38 Gen= 7061 , EgSize= 19 ExpSize= 46 SolSize= 37 Gen= 818	examples/elevators/p20.pddl
+, ExpSize= 19 SolSize= 19 Gen= 373 , ExpSize= 19 SolSize= 19 Gen= 373 , EgSize= 10 ExpSize= 29 SolSize= 19 Gen= 325	examples/elevators/p21.pddl
+, ExpSize= 14 SolSize= 14 Gen= 392 , ExpSize= 14 SolSize= 14 Gen= 392 , EgSize= 7 ExpSize= 21 SolSize= 14 Gen= 339	examples/elevators/p22.pddl
+, ExpSize= 22 SolSize= 22 Gen= 407 , ExpSize= 22 SolSize= 22 Gen= 407 , EgSize= 11 ExpSize= 33 SolSize= 22 Gen= 407	examples/elevators/p23.pddl
+, ExpSize= 25 SolSize= 25 Gen= 646 , ExpSize= 25 SolSize= 25 Gen= 646 , EgSize= 13 ExpSize= 38 SolSize= 25 Gen= 646	examples/elevators/p24.pddl
+, ExpSize= 27 SolSize= 27 Gen= 668 , ExpSize= 27 SolSize= 27 Gen= 668 , EgSize= 14 ExpSize= 41 SolSize= 27 Gen= 755	examples/elevators/p25.pddl
+, !Gen= 9851 , !Gen= 9635 , !Gen= 9659	examples/elevators/p26.pddl
+, ExpSize= 38 SolSize= 38 Gen= 1518 , ExpSize= 38 SolSize= 38 Gen= 1518 , EgSize= 19 ExpSize= 57 SolSize= 38 Gen= 724	examples/elevators/p27.pddl
+, !Gen= 8532 , !Gen= 8616 , !Gen= 8638	examples/elevators/p28.pddl
+, ExpSize= 32 SolSize= 32 Gen= 694 , ExpSize= 32 SolSize= 32 Gen= 694 , EgSize= 16 ExpSize= 36 SolSize= 33 Gen= 701	examples/elevators/p29.pddl
+, ExpSize= 40 SolSize= 40 Gen= 1521 , ExpSize= 40 SolSize= 40 Gen= 1521 , EgSize= 20 ExpSize= 56 SolSize= 44 Gen= 1345	examples/elevators/p30.pddl
+, ExpSize= 10 SolSize= 10 Gen= 53 , ExpSize= 10 SolSize= 10 Gen= 53 , EgSize= 5 ExpSize= 15 SolSize= 10 Gen= 47	examples/rovers/p01.pddl
+, ExpSize= 8 SolSize= 8 Gen= 74 , ExpSize= 8 SolSize= 8 Gen= 74 , EgSize= 4 ExpSize= 12 SolSize= 8 Gen= 60	examples/rovers/p02.pddl
+, ExpSize= 13 SolSize= 13 Gen= 631 , ExpSize= 13 SolSize= 13 Gen= 631 , EgSize= 7 ExpSize= 20 SolSize= 13 Gen= 89	examples/rovers/p03.pddl
+, ExpSize= 8 SolSize= 8 Gen= 62 , ExpSize= 8 SolSize= 8 Gen= 62 , EgSize= 4 ExpSize= 12 SolSize= 8 Gen= 62	examples/rovers/p04.pddl
+, ExpSize= 22 SolSize= 22 Gen= 308 , ExpSize= 22 SolSize= 22 Gen= 308 , EgSize= 11 ExpSize= 33 SolSize= 22 Gen= 235	examples/rovers/p05.pddl
+, ExpSize= 38 SolSize= 38 Gen= 35175 , ExpSize= 38 SolSize= 38 Gen= 35175 , EgSize= 19 ExpSize= 57 SolSize= 38 Gen= 490	examples/rovers/p06.pddl
+, ExpSize= 18 SolSize= 18 Gen= 296 , ExpSize= 18 SolSize= 18 Gen= 296 , EgSize= 9 ExpSize= 27 SolSize= 18 Gen= 236	examples/rovers/p07.pddl
+, ExpSize= 26 SolSize= 26 Gen= 746 , ExpSize= 26 SolSize= 26 Gen= 746 , EgSize= 13 ExpSize= 39 SolSize= 26 Gen= 504	examples/rovers/p08.pddl
+, !Gen= 46620 , !Gen= 46870 , !Gen= 47019	examples/rovers/p09.pddl
+, ExpSize= 36 SolSize= 36 Gen= 2499 , ExpSize= 36 SolSize= 36 Gen= 2499 , EgSize= 18 ExpSize= 54 SolSize= 36 Gen= 2930	examples/rovers/p10.pddl
+, !Gen= 42855 , !Gen= 41442 , !Gen= 41080	examples/rovers/p11.pddl
+, ExpSize= 19 SolSize= 19 Gen= 395 , ExpSize= 19 SolSize= 19 Gen= 395 , EgSize= 10 ExpSize= 29 SolSize= 19 Gen= 316	examples/rovers/p12.pddl
+, ExpSize= 48 SolSize= 48 Gen= 2121 , ExpSize= 48 SolSize= 48 Gen= 2121 , EgSize= 24 ExpSize= 72 SolSize= 48 Gen= 1131	examples/rovers/p13.pddl
+, !Gen= 30202 , !Gen= 30067 , !Gen= 25866	examples/rovers/p14.pddl
+, !Gen= 22729 , !Gen= 22677 , !Gen= 23992	examples/rovers/p15.pddl
+, ExpSize= 47 SolSize= 47 Gen= 16221 , ExpSize= 47 SolSize= 47 Gen= 16221 , EgSize= 24 ExpSize= 71 SolSize= 47 Gen= 1564	examples/rovers/p16.pddl
+, !Gen= 10062 , !Gen= 10363 , !Gen= 10270	examples/rovers/p17.pddl
+, !Gen= 6690 , !Gen= 6534 , !Gen= 6419	examples/rovers/p18.pddl
+, !Gen= 4515 , !Gen= 4479 , !Gen= 4686	examples/rovers/p19.pddl
+, !Gen= 3403 , !Gen= 3403 , !Gen= 3403	examples/rovers/p20.pddl
+, !Gen= 2241 , !Gen= 2281 , !Gen= 2281	examples/rovers/p21.pddl
+, !Gen= 2047 , ExpSize= 9 SolSize= 9 Gen= 42 , ExpSize= 9 SolSize= 9 Gen= 42 , EgSize= 5 ExpSize= 14 SolSize= 9 Gen= 42	examples/satellite/p01-pfile1.pddl
+, ExpSize= 13 SolSize= 13 Gen= 88 , ExpSize= 13 SolSize= 13 Gen= 88 , EgSize= 7 ExpSize= 13 SolSize= 13 Gen= 88	examples/satellite/p02-pfile2.pddl
+, ExpSize= 11 SolSize= 11 Gen= 193 , ExpSize= 11 SolSize= 11 Gen= 193 , EgSize= 6 ExpSize= 11 SolSize= 11 Gen= 193	examples/satellite/p03-pfile3.pddl
+, ExpSize= 18 SolSize= 18 Gen= 411 , ExpSize= 18 SolSize= 18 Gen= 411 , EgSize= 9 ExpSize= 22 SolSize= 18 Gen= 326	examples/satellite/p04-pfile4.pddl
+, ExpSize= 16 SolSize= 16 Gen= 515 , ExpSize= 16 SolSize= 16 Gen= 515 , EgSize= 8 ExpSize= 18 SolSize= 16 Gen= 515	examples/satellite/p05-pfile5.pddl
+, ExpSize= 20 SolSize= 20 Gen= 615 , ExpSize= 20 SolSize= 20 Gen= 615 , EgSize= 10 ExpSize= 20 SolSize= 20 Gen= 615	examples/satellite/p06-pfile6.pddl
+, ExpSize= 23 SolSize= 23 Gen= 2205 , ExpSize= 23 SolSize= 23 Gen= 2205 , EgSize= 12 ExpSize= 24 SolSize= 23 Gen= 1179	examples/satellite/p07-pfile7.pddl
+, ExpSize= 26 SolSize= 26 Gen= 1544 , ExpSize= 26 SolSize= 26 Gen= 1544 , EgSize= 13 ExpSize= 26 SolSize= 26 Gen= 1544	examples/satellite/p08-pfile8.pddl
+, ExpSize= 29 SolSize= 29 Gen= 3991 , ExpSize= 29 SolSize= 29 Gen= 3991 , EgSize= 15 ExpSize= 30 SolSize= 29 Gen= 2341	examples/satellite/p09-pfile9.pddl
+, ExpSize= 29 SolSize= 29 Gen= 2493 , ExpSize= 29 SolSize= 29 Gen= 2493 , EgSize= 15 ExpSize= 31 SolSize= 29 Gen= 2493	examples/satellite/p10-pfile10.pddl
+, ExpSize= 31 SolSize= 31 Gen= 2963 , ExpSize= 31 SolSize= 31 Gen= 2963 , EgSize= 16 ExpSize= 34 SolSize= 31 Gen= 2962	examples/satellite/p11-pfile11.pddl
+, ExpSize= 43 SolSize= 43 Gen= 5146 , ExpSize= 43 SolSize= 43 Gen= 5146 , EgSize= 22 ExpSize= 47 SolSize= 43 Gen= 5151	examples/satellite/p12-pfile12.pddl
+, !Gen= 7435 , !Gen= 7589 , !Gen= 7589	examples/satellite/p13-pfile13.pddl
+, !Gen= 8209 , !Gen= 8112 , !Gen= 8112	examples/satellite/p14-pfile14.pddl
+, !Gen= 6218 , !Gen= 6218 , !Gen= 6218	examples/satellite/p15-pfile15.pddl
+, !Gen= 4788 , !Gen= 4546 , !Gen= 4281	examples/satellite/p16-pfile16.pddl
+, !Gen= 3346 , !Gen= 3056 , !Gen= 3346	examples/satellite/p17-pfile17.pddl
+, ExpSize= 32 SolSize= 32 Gen= 3882 , ExpSize= 32 SolSize= 32 Gen= 3882 , EgSize= 16 ExpSize= 32 SolSize= 32 Gen= 3882	examples/satellite/p18-pfile18.pddl
+, !Gen= 6178 , !Gen= 6772 , !Gen= 6772	examples/satellite/p19-pfile19.pddl
+, !Gen= 5215 , !Gen= 5215 , !Gen= 5215	examples/satellite/p20-pfile20.pddl
+, !Gen= 3843 , !Gen= 3843 , !Gen= 3843	examples/satellite/p21-HC-pfile1.pddl
+, !Gen= 2806 , !Gen= 2806 , !Gen= 2540	examples/satellite/p22-HC-pfile2.pddl
+, !Gen= 1858 , !Gen= 1858 , !Gen= 1858	examples/satellite/p23-HC-pfile3.pddl
+, !Gen= 519 , !Gen= 519 , !Gen= 519	examples/satellite/p24-HC-pfile4.pddl
+, !Gen= 593 , !Gen= 593 , !Gen= 593	examples/satellite/p25-HC-pfile5.pddl
+, !Gen= 604 , !Gen= 604 , !Gen= 604	examples/satellite/p26-HC-pfile6.pddl
+, !Gen= 757 , !Gen= 757 , !Gen= 757	examples/satellite/p27-HC-pfile7.pddl
+
+TEST Prob75 Walk0
+
+, ExpSize= 46 SolSize= 46 Gen= 412 , ExpSize= 46 SolSize= 46 Gen= 412 , EgSize= 35 ExpSize= 46 SolSize= 46 Gen= 166	examples/blocks/probBLOCKS-10-0.pddl
+, ExpSize= 44 SolSize= 44 Gen= 645 , ExpSize= 44 SolSize= 44 Gen= 645 , EgSize= 33 ExpSize= 47 SolSize= 44 Gen= 169	examples/blocks/probBLOCKS-10-1.pddl
+, ExpSize= 48 SolSize= 48 Gen= 737 , ExpSize= 48 SolSize= 48 Gen= 737 , EgSize= 36 ExpSize= 48 SolSize= 48 Gen= 146	examples/blocks/probBLOCKS-10-2.pddl
+, ExpSize= 54 SolSize= 54 Gen= 1268 , ExpSize= 54 SolSize= 54 Gen= 1268 , EgSize= 41 ExpSize= 59 SolSize= 50 Gen= 292	examples/blocks/probBLOCKS-11-0.pddl
+, ExpSize= 58 SolSize= 58 Gen= 2412 , ExpSize= 58 SolSize= 58 Gen= 2412 , EgSize= 44 ExpSize= 58 SolSize= 46 Gen= 728	examples/blocks/probBLOCKS-11-1.pddl
+, ExpSize= 56 SolSize= 56 Gen= 1294 , ExpSize= 56 SolSize= 56 Gen= 1294 , EgSize= 42 ExpSize= 55 SolSize= 52 Gen= 315	examples/blocks/probBLOCKS-11-2.pddl
+, ExpSize= 58 SolSize= 58 Gen= 3333 , ExpSize= 58 SolSize= 58 Gen= 3333 , EgSize= 44 ExpSize= 59 SolSize= 54 Gen= 559	examples/blocks/probBLOCKS-12-0.pddl
+, ExpSize= 72 SolSize= 72 Gen= 1242 , ExpSize= 72 SolSize= 72 Gen= 1242 , EgSize= 54 ExpSize= 74 SolSize= 68 Gen= 415	examples/blocks/probBLOCKS-12-1.pddl
+, ExpSize= 72 SolSize= 72 Gen= 3292 , ExpSize= 72 SolSize= 72 Gen= 3292 , EgSize= 54 ExpSize= 73 SolSize= 68 Gen= 274	examples/blocks/probBLOCKS-13-0.pddl
+, ExpSize= 74 SolSize= 74 Gen= 1352 , ExpSize= 74 SolSize= 74 Gen= 1352 , EgSize= 56 ExpSize= 82 SolSize= 70 Gen= 404	examples/blocks/probBLOCKS-13-1.pddl
+, !Gen= 28255 , !Gen= 28287 , EgSize= 20 ExpSize= 83 SolSize= 76 Gen= 4125	examples/blocks/probBLOCKS-14-0.pddl
+, ExpSize= 80 SolSize= 80 Gen= 7062 , ExpSize= 80 SolSize= 80 Gen= 7062 , EgSize= 60 ExpSize= 81 SolSize= 76 Gen= 573	examples/blocks/probBLOCKS-14-1.pddl
+, ExpSize= 78 SolSize= 78 Gen= 2895 , ExpSize= 78 SolSize= 78 Gen= 2895 , EgSize= 59 ExpSize= 112 SolSize= 74 Gen= 933	examples/blocks/probBLOCKS-15-0.pddl
+, ExpSize= 80 SolSize= 80 Gen= 6183 , ExpSize= 80 SolSize= 80 Gen= 6183 , EgSize= 60 ExpSize= 80 SolSize= 80 Gen= 434	examples/blocks/probBLOCKS-15-1.pddl
+, ExpSize= 94 SolSize= 94 Gen= 3917 , ExpSize= 94 SolSize= 94 Gen= 3917 , EgSize= 71 ExpSize= 103 SolSize= 90 Gen= 667	examples/blocks/probBLOCKS-16-1.pddl
+, ExpSize= 86 SolSize= 86 Gen= 3607 , ExpSize= 86 SolSize= 86 Gen= 3607 , EgSize= 65 ExpSize= 91 SolSize= 86 Gen= 415	examples/blocks/probBLOCKS-16-2.pddl
+, ExpSize= 102 SolSize= 102 Gen= 12405 , ExpSize= 102 SolSize= 102 Gen= 12405 , EgSize= 77 ExpSize= 111 SolSize= 90 Gen= 1650	examples/blocks/probBLOCKS-17-0.pddl
+, ExpSize= 10 SolSize= 10 Gen= 22 , ExpSize= 10 SolSize= 10 Gen= 22 , EgSize= 8 ExpSize= 10 SolSize= 10 Gen= 19	examples/blocks/probBLOCKS-4-0.pddl
+, ExpSize= 10 SolSize= 10 Gen= 20 , ExpSize= 10 SolSize= 10 Gen= 20 , EgSize= 8 ExpSize= 10 SolSize= 10 Gen= 19	examples/blocks/probBLOCKS-4-1.pddl
+, ExpSize= 6 SolSize= 6 Gen= 15 , ExpSize= 6 SolSize= 6 Gen= 15 , EgSize= 5 ExpSize= 6 SolSize= 6 Gen= 12	examples/blocks/probBLOCKS-4-2.pddl
+, ExpSize= 18 SolSize= 18 Gen= 89 , ExpSize= 18 SolSize= 18 Gen= 89 , EgSize= 14 ExpSize= 20 SolSize= 18 Gen= 54	examples/blocks/probBLOCKS-5-0.pddl
+, ExpSize= 14 SolSize= 14 Gen= 38 , ExpSize= 14 SolSize= 14 Gen= 38 , EgSize= 11 ExpSize= 14 SolSize= 10 Gen= 30	examples/blocks/probBLOCKS-5-1.pddl
+, ExpSize= 20 SolSize= 20 Gen= 89 , ExpSize= 20 SolSize= 20 Gen= 89 , EgSize= 15 ExpSize= 23 SolSize= 20 Gen= 49	examples/blocks/probBLOCKS-5-2.pddl
+, ExpSize= 32 SolSize= 32 Gen= 181 , ExpSize= 32 SolSize= 32 Gen= 181 , EgSize= 24 ExpSize= 39 SolSize= 32 Gen= 128	examples/blocks/probBLOCKS-6-0.pddl
+, ExpSize= 14 SolSize= 14 Gen= 56 , ExpSize= 14 SolSize= 14 Gen= 56 , EgSize= 11 ExpSize= 17 SolSize= 14 Gen= 45	examples/blocks/probBLOCKS-6-1.pddl
+, ExpSize= 28 SolSize= 28 Gen= 95 , ExpSize= 28 SolSize= 28 Gen= 95 , EgSize= 21 ExpSize= 28 SolSize= 24 Gen= 62	examples/blocks/probBLOCKS-6-2.pddl
+, ExpSize= 22 SolSize= 22 Gen= 109 , ExpSize= 22 SolSize= 22 Gen= 109 , EgSize= 17 ExpSize= 22 SolSize= 22 Gen= 55	examples/blocks/probBLOCKS-7-0.pddl
+, ExpSize= 32 SolSize= 32 Gen= 198 , ExpSize= 32 SolSize= 32 Gen= 198 , EgSize= 24 ExpSize= 36 SolSize= 32 Gen= 108	examples/blocks/probBLOCKS-7-1.pddl
+, ExpSize= 28 SolSize= 28 Gen= 387 , ExpSize= 28 SolSize= 28 Gen= 387 , EgSize= 21 ExpSize= 29 SolSize= 28 Gen= 94	examples/blocks/probBLOCKS-7-2.pddl
+, ExpSize= 26 SolSize= 26 Gen= 292 , ExpSize= 26 SolSize= 26 Gen= 292 , EgSize= 20 ExpSize= 26 SolSize= 26 Gen= 89	examples/blocks/probBLOCKS-8-0.pddl
+, ExpSize= 40 SolSize= 40 Gen= 333 , ExpSize= 40 SolSize= 40 Gen= 333 , EgSize= 30 ExpSize= 49 SolSize= 36 Gen= 131	examples/blocks/probBLOCKS-8-1.pddl
+, ExpSize= 28 SolSize= 28 Gen= 294 , ExpSize= 28 SolSize= 28 Gen= 294 , EgSize= 21 ExpSize= 28 SolSize= 24 Gen= 86	examples/blocks/probBLOCKS-8-2.pddl
+, ExpSize= 48 SolSize= 48 Gen= 647 , ExpSize= 48 SolSize= 48 Gen= 647 , EgSize= 36 ExpSize= 52 SolSize= 44 Gen= 204	examples/blocks/probBLOCKS-9-0.pddl
+, ExpSize= 44 SolSize= 44 Gen= 872 , ExpSize= 44 SolSize= 44 Gen= 872 , EgSize= 33 ExpSize= 44 SolSize= 44 Gen= 164	examples/blocks/probBLOCKS-9-1.pddl
+, ExpSize= 44 SolSize= 44 Gen= 465 , ExpSize= 44 SolSize= 44 Gen= 465 , EgSize= 33 ExpSize= 46 SolSize= 44 Gen= 236	examples/blocks/probBLOCKS-9-2.pddl
+, ExpSize= 14 SolSize= 14 Gen= 193 , ExpSize= 14 SolSize= 14 Gen= 193 , EgSize= 11 ExpSize= 25 SolSize= 14 Gen= 172	examples/elevators/p01.pddl
+, ExpSize= 9 SolSize= 9 Gen= 153 , ExpSize= 9 SolSize= 9 Gen= 153 , EgSize= 7 ExpSize= 16 SolSize= 9 Gen= 153	examples/elevators/p02.pddl
+, ExpSize= 19 SolSize= 19 Gen= 301 , ExpSize= 19 SolSize= 19 Gen= 301 , EgSize= 14 ExpSize= 34 SolSize= 20 Gen= 296	examples/elevators/p03.pddl
+, ExpSize= 22 SolSize= 22 Gen= 387 , ExpSize= 22 SolSize= 22 Gen= 387 , EgSize= 17 ExpSize= 39 SolSize= 22 Gen= 387	examples/elevators/p04.pddl
+, ExpSize= 23 SolSize= 23 Gen= 1063 , ExpSize= 23 SolSize= 23 Gen= 1063 , EgSize= 17 ExpSize= 40 SolSize= 23 Gen= 318	examples/elevators/p05.pddl
+, ExpSize= 27 SolSize= 27 Gen= 1173 , ExpSize= 27 SolSize= 27 Gen= 1173 , EgSize= 20 ExpSize= 49 SolSize= 29 Gen= 521	examples/elevators/p06.pddl
+, ExpSize= 30 SolSize= 30 Gen= 1035 , ExpSize= 30 SolSize= 30 Gen= 1035 , EgSize= 23 ExpSize= 31 SolSize= 30 Gen= 426	examples/elevators/p07.pddl
+, ExpSize= 21 SolSize= 21 Gen= 391 , ExpSize= 21 SolSize= 21 Gen= 391 , EgSize= 16 ExpSize= 21 SolSize= 21 Gen= 391	examples/elevators/p08.pddl
+, ExpSize= 36 SolSize= 36 Gen= 765 , ExpSize= 36 SolSize= 36 Gen= 765 , EgSize= 27 ExpSize= 36 SolSize= 36 Gen= 531	examples/elevators/p09.pddl
+, ExpSize= 33 SolSize= 33 Gen= 1373 , ExpSize= 33 SolSize= 33 Gen= 1373 , EgSize= 25 ExpSize= 35 SolSize= 33 Gen= 573	examples/elevators/p10.pddl
+, ExpSize= 19 SolSize= 19 Gen= 288 , ExpSize= 19 SolSize= 19 Gen= 288 , EgSize= 14 ExpSize= 33 SolSize= 19 Gen= 288	examples/elevators/p11.pddl
+, ExpSize= 21 SolSize= 21 Gen= 1687 , ExpSize= 21 SolSize= 21 Gen= 1687 , EgSize= 16 ExpSize= 34 SolSize= 18 Gen= 374	examples/elevators/p12.pddl
+, ExpSize= 15 SolSize= 15 Gen= 229 , ExpSize= 15 SolSize= 15 Gen= 229 , EgSize= 11 ExpSize= 26 SolSize= 15 Gen= 229	examples/elevators/p13.pddl
+, ExpSize= 27 SolSize= 27 Gen= 2027 , ExpSize= 27 SolSize= 27 Gen= 2027 , EgSize= 20 ExpSize= 47 SolSize= 27 Gen= 565	examples/elevators/p14.pddl
+, ExpSize= 31 SolSize= 31 Gen= 1445 , ExpSize= 31 SolSize= 31 Gen= 1445 , EgSize= 23 ExpSize= 54 SolSize= 31 Gen= 530	examples/elevators/p15.pddl
+, ExpSize= 32 SolSize= 32 Gen= 5486 , ExpSize= 32 SolSize= 32 Gen= 5486 , EgSize= 24 ExpSize= 56 SolSize= 32 Gen= 1615	examples/elevators/p16.pddl
+, ExpSize= 26 SolSize= 26 Gen= 647 , ExpSize= 26 SolSize= 26 Gen= 647 , EgSize= 20 ExpSize= 46 SolSize= 26 Gen= 429	examples/elevators/p17.pddl
+, ExpSize= 27 SolSize= 27 Gen= 3472 , ExpSize= 27 SolSize= 27 Gen= 3472 , EgSize= 20 ExpSize= 47 SolSize= 27 Gen= 551	examples/elevators/p18.pddl
+, ExpSize= 42 SolSize= 42 Gen= 1903 , ExpSize= 42 SolSize= 42 Gen= 1903 , EgSize= 32 ExpSize= 73 SolSize= 41 Gen= 799	examples/elevators/p19.pddl
+, ExpSize= 38 SolSize= 38 Gen= 7061 , ExpSize= 38 SolSize= 38 Gen= 7061 , EgSize= 29 ExpSize= 38 SolSize= 38 Gen= 811	examples/elevators/p20.pddl
+, ExpSize= 19 SolSize= 19 Gen= 373 , ExpSize= 19 SolSize= 19 Gen= 373 , EgSize= 14 ExpSize= 33 SolSize= 19 Gen= 332	examples/elevators/p21.pddl
+, ExpSize= 14 SolSize= 14 Gen= 392 , ExpSize= 14 SolSize= 14 Gen= 392 , EgSize= 11 ExpSize= 25 SolSize= 14 Gen= 325	examples/elevators/p22.pddl
+, ExpSize= 22 SolSize= 22 Gen= 407 , ExpSize= 22 SolSize= 22 Gen= 407 , EgSize= 17 ExpSize= 39 SolSize= 22 Gen= 407	examples/elevators/p23.pddl
+, ExpSize= 25 SolSize= 25 Gen= 646 , ExpSize= 25 SolSize= 25 Gen= 646 , EgSize= 19 ExpSize= 44 SolSize= 25 Gen= 646	examples/elevators/p24.pddl
+, ExpSize= 27 SolSize= 27 Gen= 668 , ExpSize= 27 SolSize= 27 Gen= 668 , EgSize= 20 ExpSize= 47 SolSize= 27 Gen= 506	examples/elevators/p25.pddl
+, !Gen= 9796 , !Gen= 9971 , !Gen= 9811	examples/elevators/p26.pddl
+, ExpSize= 38 SolSize= 38 Gen= 1518 , ExpSize= 38 SolSize= 38 Gen= 1518 , EgSize= 29 ExpSize= 67 SolSize= 38 Gen= 719	examples/elevators/p27.pddl
+, !Gen= 8827 , !Gen= 8775 , !Gen= 8753	examples/elevators/p28.pddl
+, ExpSize= 32 SolSize= 32 Gen= 694 , ExpSize= 32 SolSize= 32 Gen= 694 , EgSize= 24 ExpSize= 32 SolSize= 32 Gen= 637	examples/elevators/p29.pddl
+, ExpSize= 40 SolSize= 40 Gen= 1521 , ExpSize= 40 SolSize= 40 Gen= 1521 , EgSize= 30 ExpSize= 40 SolSize= 40 Gen= 1131	examples/elevators/p30.pddl
+, ExpSize= 10 SolSize= 10 Gen= 53 , ExpSize= 10 SolSize= 10 Gen= 53 , EgSize= 8 ExpSize= 18 SolSize= 10 Gen= 47	examples/rovers/p01.pddl
+, ExpSize= 8 SolSize= 8 Gen= 74 , ExpSize= 8 SolSize= 8 Gen= 74 , EgSize= 6 ExpSize= 14 SolSize= 8 Gen= 60	examples/rovers/p02.pddl
+, ExpSize= 13 SolSize= 13 Gen= 631 , ExpSize= 13 SolSize= 13 Gen= 631 , EgSize= 10 ExpSize= 23 SolSize= 13 Gen= 88	examples/rovers/p03.pddl
+, ExpSize= 8 SolSize= 8 Gen= 62 , ExpSize= 8 SolSize= 8 Gen= 62 , EgSize= 6 ExpSize= 14 SolSize= 8 Gen= 62	examples/rovers/p04.pddl
+, ExpSize= 22 SolSize= 22 Gen= 308 , ExpSize= 22 SolSize= 22 Gen= 308 , EgSize= 17 ExpSize= 39 SolSize= 22 Gen= 237	examples/rovers/p05.pddl
+, ExpSize= 38 SolSize= 38 Gen= 35175 , ExpSize= 38 SolSize= 38 Gen= 35175 , EgSize= 29 ExpSize= 67 SolSize= 38 Gen= 436	examples/rovers/p06.pddl
+, ExpSize= 18 SolSize= 18 Gen= 296 , ExpSize= 18 SolSize= 18 Gen= 296 , EgSize= 14 ExpSize= 32 SolSize= 18 Gen= 231	examples/rovers/p07.pddl
+, ExpSize= 26 SolSize= 26 Gen= 746 , ExpSize= 26 SolSize= 26 Gen= 746 , EgSize= 20 ExpSize= 46 SolSize= 26 Gen= 504	examples/rovers/p08.pddl
+, !Gen= 47151 , !Gen= 47252 , !Gen= 47191	examples/rovers/p09.pddl
+, ExpSize= 36 SolSize= 36 Gen= 2499 , ExpSize= 36 SolSize= 36 Gen= 2499 , EgSize= 27 ExpSize= 63 SolSize= 36 Gen= 1024	examples/rovers/p10.pddl
+, !Gen= 42917 , !Gen= 42694 , !Gen= 42917	examples/rovers/p11.pddl
+, ExpSize= 19 SolSize= 19 Gen= 395 , ExpSize= 19 SolSize= 19 Gen= 395 , EgSize= 14 ExpSize= 33 SolSize= 19 Gen= 326	examples/rovers/p12.pddl
+, ExpSize= 48 SolSize= 48 Gen= 2121 , ExpSize= 48 SolSize= 48 Gen= 2121 , EgSize= 36 ExpSize= 84 SolSize= 48 Gen= 912	examples/rovers/p13.pddl
+, !Gen= 31114 , !Gen= 30701 , !Gen= 31050	examples/rovers/p14.pddl
+, !Gen= 23635 , !Gen= 22973 , !Gen= 24097	examples/rovers/p15.pddl
+, ExpSize= 47 SolSize= 47 Gen= 16221 , ExpSize= 47 SolSize= 47 Gen= 16221 , EgSize= 35 ExpSize= 82 SolSize= 47 Gen= 1062	examples/rovers/p16.pddl
+, !Gen= 10179 , !Gen= 9909 , !Gen= 10076	examples/rovers/p17.pddl
+, !Gen= 6722 , !Gen= 6690 , !Gen= 6559	examples/rovers/p18.pddl
+, !Gen= 4725 , !Gen= 4706 , !Gen= 4686	examples/rovers/p19.pddl
+, !Gen= 3403 , !Gen= 3432 , !Gen= 3403	examples/rovers/p20.pddl
+, !Gen= 2281 , !Gen= 2281 , !Gen= 2281	examples/rovers/p21.pddl
+, !Gen= 2148 , !Gen= 2088 , !Gen= 2148	examples/rovers/p22.pddl
+, !Gen= 1803 , !Gen= 1803 , !Gen= 1854	examples/rovers/p23.pddl
+, !Gen= 2227 , !Gen= 2227 , !Gen= 2227	examples/rovers/p24.pddl
+, !Gen= 2638 , !Gen= 2683 , !Gen= 2593	examples/rovers/p25.pddl
+, !Gen= 3230 , ExpSize= 9 SolSize= 9 Gen= 42 , ExpSize= 9 SolSize= 9 Gen= 42 , EgSize= 7 ExpSize= 16 SolSize= 9 Gen= 42	examples/satellite/p01-pfile1.pddl
+, ExpSize= 13 SolSize= 13 Gen= 88 , ExpSize= 13 SolSize= 13 Gen= 88 , EgSize= 10 ExpSize= 13 SolSize= 13 Gen= 88	examples/satellite/p02-pfile2.pddl
+, ExpSize= 11 SolSize= 11 Gen= 193 , ExpSize= 11 SolSize= 11 Gen= 193 , EgSize= 8 ExpSize= 11 SolSize= 11 Gen= 193	examples/satellite/p03-pfile3.pddl
+, ExpSize= 18 SolSize= 18 Gen= 411 , ExpSize= 18 SolSize= 18 Gen= 411 , EgSize= 14 ExpSize= 18 SolSize= 18 Gen= 326	examples/satellite/p04-pfile4.pddl
+, ExpSize= 16 SolSize= 16 Gen= 515 , ExpSize= 16 SolSize= 16 Gen= 515 , EgSize= 12 ExpSize= 16 SolSize= 16 Gen= 515	examples/satellite/p05-pfile5.pddl
+, ExpSize= 20 SolSize= 20 Gen= 615 , ExpSize= 20 SolSize= 20 Gen= 615 , EgSize= 15 ExpSize= 20 SolSize= 20 Gen= 615	examples/satellite/p06-pfile6.pddl
+, ExpSize= 23 SolSize= 23 Gen= 2205 , ExpSize= 23 SolSize= 23 Gen= 2205 , EgSize= 17 ExpSize= 23 SolSize= 23 Gen= 1106	examples/satellite/p07-pfile7.pddl
+, ExpSize= 26 SolSize= 26 Gen= 1544 , ExpSize= 26 SolSize= 26 Gen= 1544 , EgSize= 20 ExpSize= 26 SolSize= 26 Gen= 1544	examples/satellite/p08-pfile8.pddl
+, ExpSize= 29 SolSize= 29 Gen= 3991 , ExpSize= 29 SolSize= 29 Gen= 3991 , EgSize= 22 ExpSize= 31 SolSize= 29 Gen= 2206	examples/satellite/p09-pfile9.pddl
+, ExpSize= 29 SolSize= 29 Gen= 2493 , ExpSize= 29 SolSize= 29 Gen= 2493 , EgSize= 22 ExpSize= 29 SolSize= 29 Gen= 2493	examples/satellite/p10-pfile10.pddl
+, ExpSize= 31 SolSize= 31 Gen= 2963 , ExpSize= 31 SolSize= 31 Gen= 2963 , EgSize= 23 ExpSize= 35 SolSize= 31 Gen= 2963	examples/satellite/p11-pfile11.pddl
+, ExpSize= 43 SolSize= 43 Gen= 5146 , ExpSize= 43 SolSize= 43 Gen= 5146 , EgSize= 32 ExpSize= 44 SolSize= 43 Gen= 5151	examples/satellite/p12-pfile12.pddl
+, !Gen= 7589 , !Gen= 7743 , !Gen= 7589	examples/satellite/p13-pfile13.pddl
+, !Gen= 8404 , !Gen= 8502 , !Gen= 8404	examples/satellite/p14-pfile14.pddl
+, !Gen= 6218 , !Gen= 6218 , !Gen= 6218	examples/satellite/p15-pfile15.pddl
+, !Gen= 4788 , !Gen= 4788 , !Gen= 4788	examples/satellite/p16-pfile16.pddl
+, !Gen= 3346 , !Gen= 3346 , !Gen= 3346	examples/satellite/p17-pfile17.pddl
+, ExpSize= 32 SolSize= 32 Gen= 3882 , ExpSize= 32 SolSize= 32 Gen= 3882 , EgSize= 24 ExpSize= 32 SolSize= 32 Gen= 3882	examples/satellite/p18-pfile18.pddl
+, !Gen= 6905 , !Gen= 6905 , !Gen= 6905	examples/satellite/p19-pfile19.pddl
+, !Gen= 5327 , !Gen= 5327 , !Gen= 5215	examples/satellite/p20-pfile20.pddl
+, !Gen= 3843 , !Gen= 3843 , !Gen= 3843	examples/satellite/p21-HC-pfile1.pddl
+, !Gen= 2806 , !Gen= 2540 , !Gen= 2806	examples/satellite/p22-HC-pfile2.pddl
+, !Gen= 1858 , !Gen= 1858 , !Gen= 1858	examples/satellite/p23-HC-pfile3.pddl
+, !Gen= 519 , !Gen= 519 , !Gen= 519	examples/satellite/p24-HC-pfile4.pddl
+, !Gen= 593 , !Gen= 593 , !Gen= 593	examples/satellite/p25-HC-pfile5.pddl
+, !Gen= 604 , !Gen= 604 , !Gen= 604	examples/satellite/p26-HC-pfile6.pddl
+, !Gen= 757 , !Gen= 757 , !Gen= 757	examples/satellite/p27-HC-pfile7.pddl
+
+TEST Prob100 Walk0
+
+, ExpSize= 46 SolSize= 46 Gen= 412 , ExpSize= 46 SolSize= 46 Gen= 412 , EgSize= 46 ExpSize= 46 SolSize= 46 Gen= 133	examples/blocks/probBLOCKS-10-0.pddl
+, ExpSize= 44 SolSize= 44 Gen= 645 , ExpSize= 44 SolSize= 44 Gen= 645 , EgSize= 44 ExpSize= 44 SolSize= 44 Gen= 163	examples/blocks/probBLOCKS-10-1.pddl
+, ExpSize= 48 SolSize= 48 Gen= 737 , ExpSize= 48 SolSize= 48 Gen= 737 , EgSize= 48 ExpSize= 48 SolSize= 48 Gen= 146	examples/blocks/probBLOCKS-10-2.pddl
+, ExpSize= 54 SolSize= 54 Gen= 1268 , ExpSize= 54 SolSize= 54 Gen= 1268 , EgSize= 54 ExpSize= 54 SolSize= 54 Gen= 214	examples/blocks/probBLOCKS-11-0.pddl
+, ExpSize= 58 SolSize= 58 Gen= 2412 , ExpSize= 58 SolSize= 58 Gen= 2412 , EgSize= 58 ExpSize= 58 SolSize= 58 Gen= 261	examples/blocks/probBLOCKS-11-1.pddl
+, ExpSize= 56 SolSize= 56 Gen= 1294 , ExpSize= 56 SolSize= 56 Gen= 1294 , EgSize= 56 ExpSize= 56 SolSize= 56 Gen= 221	examples/blocks/probBLOCKS-11-2.pddl
+, ExpSize= 58 SolSize= 58 Gen= 3333 , ExpSize= 58 SolSize= 58 Gen= 3333 , EgSize= 58 ExpSize= 58 SolSize= 58 Gen= 232	examples/blocks/probBLOCKS-12-0.pddl
+, ExpSize= 72 SolSize= 72 Gen= 1242 , ExpSize= 72 SolSize= 72 Gen= 1242 , EgSize= 72 ExpSize= 72 SolSize= 72 Gen= 256	examples/blocks/probBLOCKS-12-1.pddl
+, ExpSize= 72 SolSize= 72 Gen= 3292 , ExpSize= 72 SolSize= 72 Gen= 3292 , EgSize= 72 ExpSize= 72 SolSize= 72 Gen= 250	examples/blocks/probBLOCKS-13-0.pddl
+, ExpSize= 74 SolSize= 74 Gen= 1352 , ExpSize= 74 SolSize= 74 Gen= 1352 , EgSize= 74 ExpSize= 74 SolSize= 74 Gen= 290	examples/blocks/probBLOCKS-13-1.pddl
+, !Gen= 28070 , ExpSize= 80 SolSize= 80 Gen= 28293 , EgSize= 20 ExpSize= 83 SolSize= 76 Gen= 4125	examples/blocks/probBLOCKS-14-0.pddl
+, ExpSize= 80 SolSize= 80 Gen= 7062 , ExpSize= 80 SolSize= 80 Gen= 7062 , EgSize= 80 ExpSize= 80 SolSize= 80 Gen= 388	examples/blocks/probBLOCKS-14-1.pddl
+, ExpSize= 78 SolSize= 78 Gen= 2895 , ExpSize= 78 SolSize= 78 Gen= 2895 , EgSize= 78 ExpSize= 78 SolSize= 78 Gen= 426	examples/blocks/probBLOCKS-15-0.pddl
+, ExpSize= 80 SolSize= 80 Gen= 6183 , ExpSize= 80 SolSize= 80 Gen= 6183 , EgSize= 80 ExpSize= 80 SolSize= 80 Gen= 434	examples/blocks/probBLOCKS-15-1.pddl
+, ExpSize= 94 SolSize= 94 Gen= 3917 , ExpSize= 94 SolSize= 94 Gen= 3917 , EgSize= 94 ExpSize= 94 SolSize= 94 Gen= 447	examples/blocks/probBLOCKS-16-1.pddl
+, ExpSize= 86 SolSize= 86 Gen= 3607 , ExpSize= 86 SolSize= 86 Gen= 3607 , EgSize= 86 ExpSize= 86 SolSize= 86 Gen= 384	examples/blocks/probBLOCKS-16-2.pddl
+, ExpSize= 102 SolSize= 102 Gen= 12405 , ExpSize= 102 SolSize= 102 Gen= 12405 , EgSize= 102 ExpSize= 102 SolSize= 102 Gen= 650	examples/blocks/probBLOCKS-17-0.pddl
+, ExpSize= 10 SolSize= 10 Gen= 22 , ExpSize= 10 SolSize= 10 Gen= 22 , EgSize= 10 ExpSize= 10 SolSize= 10 Gen= 19	examples/blocks/probBLOCKS-4-0.pddl
+, ExpSize= 10 SolSize= 10 Gen= 20 , ExpSize= 10 SolSize= 10 Gen= 20 , EgSize= 10 ExpSize= 10 SolSize= 10 Gen= 16	examples/blocks/probBLOCKS-4-1.pddl
+, ExpSize= 6 SolSize= 6 Gen= 15 , ExpSize= 6 SolSize= 6 Gen= 15 , EgSize= 6 ExpSize= 6 SolSize= 6 Gen= 12	examples/blocks/probBLOCKS-4-2.pddl
+, ExpSize= 18 SolSize= 18 Gen= 89 , ExpSize= 18 SolSize= 18 Gen= 89 , EgSize= 18 ExpSize= 18 SolSize= 18 Gen= 43	examples/blocks/probBLOCKS-5-0.pddl
+, ExpSize= 14 SolSize= 14 Gen= 38 , ExpSize= 14 SolSize= 14 Gen= 38 , EgSize= 14 ExpSize= 14 SolSize= 14 Gen= 31	examples/blocks/probBLOCKS-5-1.pddl
+, ExpSize= 20 SolSize= 20 Gen= 89 , ExpSize= 20 SolSize= 20 Gen= 89 , EgSize= 20 ExpSize= 20 SolSize= 20 Gen= 44	examples/blocks/probBLOCKS-5-2.pddl
+, ExpSize= 32 SolSize= 32 Gen= 181 , ExpSize= 32 SolSize= 32 Gen= 181 , EgSize= 32 ExpSize= 32 SolSize= 32 Gen= 81	examples/blocks/probBLOCKS-6-0.pddl
+, ExpSize= 14 SolSize= 14 Gen= 56 , ExpSize= 14 SolSize= 14 Gen= 56 , EgSize= 14 ExpSize= 14 SolSize= 14 Gen= 37	examples/blocks/probBLOCKS-6-1.pddl
+, ExpSize= 28 SolSize= 28 Gen= 95 , ExpSize= 28 SolSize= 28 Gen= 95 , EgSize= 28 ExpSize= 28 SolSize= 28 Gen= 60	examples/blocks/probBLOCKS-6-2.pddl
+, ExpSize= 22 SolSize= 22 Gen= 109 , ExpSize= 22 SolSize= 22 Gen= 109 , EgSize= 22 ExpSize= 22 SolSize= 22 Gen= 50	examples/blocks/probBLOCKS-7-0.pddl
+, ExpSize= 32 SolSize= 32 Gen= 198 , ExpSize= 32 SolSize= 32 Gen= 198 , EgSize= 32 ExpSize= 32 SolSize= 32 Gen= 90	examples/blocks/probBLOCKS-7-1.pddl
+, ExpSize= 28 SolSize= 28 Gen= 387 , ExpSize= 28 SolSize= 28 Gen= 387 , EgSize= 28 ExpSize= 28 SolSize= 28 Gen= 84	examples/blocks/probBLOCKS-7-2.pddl
+, ExpSize= 26 SolSize= 26 Gen= 292 , ExpSize= 26 SolSize= 26 Gen= 292 , EgSize= 26 ExpSize= 26 SolSize= 26 Gen= 89	examples/blocks/probBLOCKS-8-0.pddl
+, ExpSize= 40 SolSize= 40 Gen= 333 , ExpSize= 40 SolSize= 40 Gen= 333 , EgSize= 40 ExpSize= 40 SolSize= 40 Gen= 110	examples/blocks/probBLOCKS-8-1.pddl
+, ExpSize= 28 SolSize= 28 Gen= 294 , ExpSize= 28 SolSize= 28 Gen= 294 , EgSize= 28 ExpSize= 28 SolSize= 28 Gen= 82	examples/blocks/probBLOCKS-8-2.pddl
+, ExpSize= 48 SolSize= 48 Gen= 647 , ExpSize= 48 SolSize= 48 Gen= 647 , EgSize= 48 ExpSize= 48 SolSize= 48 Gen= 174	examples/blocks/probBLOCKS-9-0.pddl
+, ExpSize= 44 SolSize= 44 Gen= 872 , ExpSize= 44 SolSize= 44 Gen= 872 , EgSize= 44 ExpSize= 44 SolSize= 44 Gen= 157	examples/blocks/probBLOCKS-9-1.pddl
+, ExpSize= 44 SolSize= 44 Gen= 465 , ExpSize= 44 SolSize= 44 Gen= 465 , EgSize= 44 ExpSize= 44 SolSize= 44 Gen= 135	examples/blocks/probBLOCKS-9-2.pddl
+, ExpSize= 14 SolSize= 14 Gen= 193 , ExpSize= 14 SolSize= 14 Gen= 193 , EgSize= 14 ExpSize= 28 SolSize= 14 Gen= 168	examples/elevators/p01.pddl
+, ExpSize= 9 SolSize= 9 Gen= 153 , ExpSize= 9 SolSize= 9 Gen= 153 , EgSize= 9 ExpSize= 18 SolSize= 9 Gen= 153	examples/elevators/p02.pddl
+, ExpSize= 19 SolSize= 19 Gen= 301 , ExpSize= 19 SolSize= 19 Gen= 301 , EgSize= 19 ExpSize= 38 SolSize= 19 Gen= 235	examples/elevators/p03.pddl
+, ExpSize= 22 SolSize= 22 Gen= 387 , ExpSize= 22 SolSize= 22 Gen= 387 , EgSize= 22 ExpSize= 44 SolSize= 22 Gen= 387	examples/elevators/p04.pddl
+, ExpSize= 23 SolSize= 23 Gen= 1063 , ExpSize= 23 SolSize= 23 Gen= 1063 , EgSize= 23 ExpSize= 46 SolSize= 23 Gen= 318	examples/elevators/p05.pddl
+, ExpSize= 27 SolSize= 27 Gen= 1173 , ExpSize= 27 SolSize= 27 Gen= 1173 , EgSize= 27 ExpSize= 54 SolSize= 27 Gen= 476	examples/elevators/p06.pddl
+, ExpSize= 30 SolSize= 30 Gen= 1035 , ExpSize= 30 SolSize= 30 Gen= 1035 , EgSize= 30 ExpSize= 30 SolSize= 30 Gen= 428	examples/elevators/p07.pddl
+, ExpSize= 21 SolSize= 21 Gen= 391 , ExpSize= 21 SolSize= 21 Gen= 391 , EgSize= 21 ExpSize= 21 SolSize= 21 Gen= 391	examples/elevators/p08.pddl
+, ExpSize= 36 SolSize= 36 Gen= 765 , ExpSize= 36 SolSize= 36 Gen= 765 , EgSize= 36 ExpSize= 36 SolSize= 36 Gen= 531	examples/elevators/p09.pddl
+, ExpSize= 33 SolSize= 33 Gen= 1373 , ExpSize= 33 SolSize= 33 Gen= 1373 , EgSize= 33 ExpSize= 33 SolSize= 33 Gen= 578	examples/elevators/p10.pddl
+, ExpSize= 19 SolSize= 19 Gen= 288 , ExpSize= 19 SolSize= 19 Gen= 288 , EgSize= 19 ExpSize= 38 SolSize= 19 Gen= 288	examples/elevators/p11.pddl
+, ExpSize= 21 SolSize= 21 Gen= 1687 , ExpSize= 21 SolSize= 21 Gen= 1687 , EgSize= 21 ExpSize= 42 SolSize= 21 Gen= 391	examples/elevators/p12.pddl
+, ExpSize= 15 SolSize= 15 Gen= 229 , ExpSize= 15 SolSize= 15 Gen= 229 , EgSize= 15 ExpSize= 30 SolSize= 15 Gen= 229	examples/elevators/p13.pddl
+, ExpSize= 27 SolSize= 27 Gen= 2027 , ExpSize= 27 SolSize= 27 Gen= 2027 , EgSize= 27 ExpSize= 54 SolSize= 27 Gen= 540	examples/elevators/p14.pddl
+, ExpSize= 31 SolSize= 31 Gen= 1445 , ExpSize= 31 SolSize= 31 Gen= 1445 , EgSize= 31 ExpSize= 62 SolSize= 31 Gen= 494	examples/elevators/p15.pddl
+, ExpSize= 32 SolSize= 32 Gen= 5486 , ExpSize= 32 SolSize= 32 Gen= 5486 , EgSize= 32 ExpSize= 64 SolSize= 32 Gen= 646	examples/elevators/p16.pddl
+, ExpSize= 26 SolSize= 26 Gen= 647 , ExpSize= 26 SolSize= 26 Gen= 647 , EgSize= 26 ExpSize= 52 SolSize= 26 Gen= 429	examples/elevators/p17.pddl
+, ExpSize= 27 SolSize= 27 Gen= 3472 , ExpSize= 27 SolSize= 27 Gen= 3472 , EgSize= 27 ExpSize= 54 SolSize= 27 Gen= 551	examples/elevators/p18.pddl
+, ExpSize= 42 SolSize= 42 Gen= 1903 , ExpSize= 42 SolSize= 42 Gen= 1903 , EgSize= 42 ExpSize= 84 SolSize= 42 Gen= 815	examples/elevators/p19.pddl
+, ExpSize= 38 SolSize= 38 Gen= 7061 , ExpSize= 38 SolSize= 38 Gen= 7061 , EgSize= 38 ExpSize= 38 SolSize= 38 Gen= 811	examples/elevators/p20.pddl
+, ExpSize= 19 SolSize= 19 Gen= 373 , ExpSize= 19 SolSize= 19 Gen= 373 , EgSize= 19 ExpSize= 38 SolSize= 19 Gen= 332	examples/elevators/p21.pddl
+, ExpSize= 14 SolSize= 14 Gen= 392 , ExpSize= 14 SolSize= 14 Gen= 392 , EgSize= 14 ExpSize= 28 SolSize= 14 Gen= 325	examples/elevators/p22.pddl
+, ExpSize= 22 SolSize= 22 Gen= 407 , ExpSize= 22 SolSize= 22 Gen= 407 , EgSize= 22 ExpSize= 44 SolSize= 22 Gen= 407	examples/elevators/p23.pddl
+, ExpSize= 25 SolSize= 25 Gen= 646 , ExpSize= 25 SolSize= 25 Gen= 646 , EgSize= 25 ExpSize= 50 SolSize= 25 Gen= 646	examples/elevators/p24.pddl
+, ExpSize= 27 SolSize= 27 Gen= 668 , ExpSize= 27 SolSize= 27 Gen= 668 , EgSize= 27 ExpSize= 54 SolSize= 27 Gen= 505	examples/elevators/p25.pddl
+, !Gen= 10116 , !Gen= 10041 , !Gen= 10156	examples/elevators/p26.pddl
+, ExpSize= 38 SolSize= 38 Gen= 1518 , ExpSize= 38 SolSize= 38 Gen= 1518 , EgSize= 38 ExpSize= 76 SolSize= 38 Gen= 722	examples/elevators/p27.pddl
+, !Gen= 8795 , !Gen= 8672 , !Gen= 8608	examples/elevators/p28.pddl
+, ExpSize= 32 SolSize= 32 Gen= 694 , ExpSize= 32 SolSize= 32 Gen= 694 , EgSize= 32 ExpSize= 32 SolSize= 32 Gen= 637	examples/elevators/p29.pddl
+, ExpSize= 40 SolSize= 40 Gen= 1521 , ExpSize= 40 SolSize= 40 Gen= 1521 , EgSize= 40 ExpSize= 40 SolSize= 40 Gen= 1131	examples/elevators/p30.pddl
+, ExpSize= 10 SolSize= 10 Gen= 53 , ExpSize= 10 SolSize= 10 Gen= 53 , EgSize= 10 ExpSize= 20 SolSize= 10 Gen= 47	examples/rovers/p01.pddl
+, ExpSize= 8 SolSize= 8 Gen= 74 , ExpSize= 8 SolSize= 8 Gen= 74 , EgSize= 8 ExpSize= 16 SolSize= 8 Gen= 60	examples/rovers/p02.pddl
+, ExpSize= 13 SolSize= 13 Gen= 631 , ExpSize= 13 SolSize= 13 Gen= 631 , EgSize= 13 ExpSize= 26 SolSize= 13 Gen= 88	examples/rovers/p03.pddl
+, ExpSize= 8 SolSize= 8 Gen= 62 , ExpSize= 8 SolSize= 8 Gen= 62 , EgSize= 8 ExpSize= 16 SolSize= 8 Gen= 62	examples/rovers/p04.pddl
+, ExpSize= 22 SolSize= 22 Gen= 308 , ExpSize= 22 SolSize= 22 Gen= 308 , EgSize= 22 ExpSize= 44 SolSize= 22 Gen= 235	examples/rovers/p05.pddl
+, ExpSize= 38 SolSize= 38 Gen= 35175 , ExpSize= 38 SolSize= 38 Gen= 35175 , EgSize= 38 ExpSize= 76 SolSize= 38 Gen= 420	examples/rovers/p06.pddl
+, ExpSize= 18 SolSize= 18 Gen= 296 , ExpSize= 18 SolSize= 18 Gen= 296 , EgSize= 18 ExpSize= 36 SolSize= 18 Gen= 215	examples/rovers/p07.pddl
+, ExpSize= 26 SolSize= 26 Gen= 746 , ExpSize= 26 SolSize= 26 Gen= 746 , EgSize= 26 ExpSize= 52 SolSize= 26 Gen= 504	examples/rovers/p08.pddl
+, !Gen= 47455 , !Gen= 47634 , !Gen= 47384	examples/rovers/p09.pddl
+, ExpSize= 36 SolSize= 36 Gen= 2499 , ExpSize= 36 SolSize= 36 Gen= 2499 , EgSize= 36 ExpSize= 72 SolSize= 36 Gen= 887	examples/rovers/p10.pddl
+, !Gen= 42933 , !Gen= 42816 , !Gen= 42982	examples/rovers/p11.pddl
+, ExpSize= 19 SolSize= 19 Gen= 395 , ExpSize= 19 SolSize= 19 Gen= 395 , EgSize= 19 ExpSize= 38 SolSize= 19 Gen= 326	examples/rovers/p12.pddl
+, ExpSize= 48 SolSize= 48 Gen= 2121 , ExpSize= 48 SolSize= 48 Gen= 2121 , EgSize= 48 ExpSize= 96 SolSize= 48 Gen= 907	examples/rovers/p13.pddl
+, !Gen= 29424 , !Gen= 31206 , !Gen= 31149	examples/rovers/p14.pddl
+, !Gen= 23340 , !Gen= 23197 , !Gen= 23065	examples/rovers/p15.pddl
+, ExpSize= 47 SolSize= 47 Gen= 16221 , ExpSize= 47 SolSize= 47 Gen= 16221 , EgSize= 47 ExpSize= 94 SolSize= 47 Gen= 1032	examples/rovers/p16.pddl
+, !Gen= 10363 , !Gen= 10062 , !Gen= 10105	examples/rovers/p17.pddl
+, !Gen= 6677 , !Gen= 6747 , !Gen= 6798	examples/rovers/p18.pddl
+, !Gen= 4686 , !Gen= 4747 , !Gen= 4747	examples/rovers/p19.pddl
+, !Gen= 3463 , !Gen= 3463 , !Gen= 3432	examples/rovers/p20.pddl
+, !Gen= 2334 , !Gen= 2281 , !Gen= 2281	examples/rovers/p21.pddl
+, !Gen= 2088 , !Gen= 2088 , !Gen= 2088	examples/rovers/p22.pddl
+, !Gen= 1803 , !Gen= 1803 , !Gen= 1803	examples/rovers/p23.pddl
+, !Gen= 2185 , !Gen= 2227 , !Gen= 2227	examples/rovers/p24.pddl
+, !Gen= 2683 , !Gen= 2638 , !Gen= 2638	examples/rovers/p25.pddl
+, !Gen= 3230 , !Gen= 3273 , !Gen= 3273	examples/rovers/p26.pddl
+, !Gen= 2473 , !Gen= 2527 , !Gen= 2527	examples/rovers/p27.pddl
+, !Gen= 1440 , !Gen= 1440 , !Gen= 1440	examples/rovers/p28.pddl
+, !Gen= 1433 , !Gen= 1433 , !Gen= 1433	examples/rovers/p29.pddl
+, !Gen= 1130 , !Gen= 1130 , !Gen= 1130	examples/rovers/p30.pddl
+, !Gen= 1403 , !Gen= 1403 , !Gen= 1403	examples/rovers/p31.pddl
 , !Gen= 868 , !Gen= 868 , !Gen= 868	examples/rovers/p32.pddl
-, !Gen= 855 , !Gen= 922 , !Gen= 922	examples/rovers/p33.pddl
-, !Gen= 679 , !Gen= 709 , !Gen= 709	examples/rovers/p34.pddl
-, !Gen= 613 , !Gen= 507 , !Gen= 412	examples/rovers/p35.pddl
-, !Gen= 670 , !Gen= 649 , !Gen= 649	examples/rovers/p36.pddl
-, !Gen= 216 , !Gen= 294 , !Gen= 294	examples/rovers/p37.pddl
-, !Gen= 230 , !Gen= 220 , !Gen= 220	examples/rovers/p38.pddl
-, !Gen= 217 , !Gen= 169 , !Gen= 169	examples/rovers/p39.pddl
-, !Gen= 128 , !Gen= 147 , !Gen= 147	examples/rovers/p40.pddl
-, ExpSize= 9 SolSize= 9 Gen= 42 , ExpSize= 9 SolSize= 9 Gen= 42 , EgSize= 2 ExpSize= 11 SolSize= 9 Gen= 42	examples/satellite/p01-pfile1.pddl
-, ExpSize= 13 SolSize= 13 Gen= 88 , ExpSize= 14 SolSize= 14 Gen= 112 , EgSize= 9 ExpSize= 22 SolSize= 13 Gen= 98	examples/satellite/p02-pfile2.pddl
-, ExpSize= 11 SolSize= 11 Gen= 193 , ExpSize= 11 SolSize= 11 Gen= 165 , EgSize= 5 ExpSize= 15 SolSize= 14 Gen= 221	examples/satellite/p03-pfile3.pddl
-, ExpSize= 18 SolSize= 18 Gen= 411 , ExpSize= 18 SolSize= 18 Gen= 385 , EgSize= 8 ExpSize= 24 SolSize= 18 Gen= 314	examples/satellite/p04-pfile4.pddl
-, ExpSize= 16 SolSize= 16 Gen= 515 , ExpSize= 17 SolSize= 17 Gen= 524 , EgSize= 7 ExpSize= 24 SolSize= 20 Gen= 611	examples/satellite/p05-pfile5.pddl
-, ExpSize= 20 SolSize= 20 Gen= 615 , ExpSize= 20 SolSize= 20 Gen= 637 , EgSize= 9 ExpSize= 22 SolSize= 22 Gen= 659	examples/satellite/p06-pfile6.pddl
-, ExpSize= 23 SolSize= 23 Gen= 2205 , ExpSize= 24 SolSize= 24 Gen= 26145 , EgSize= 11 ExpSize= 29 SolSize= 28 Gen= 1343	examples/satellite/p07-pfile7.pddl
-, ExpSize= 26 SolSize= 26 Gen= 1544 , ExpSize= 26 SolSize= 26 Gen= 1566 , EgSize= 10 ExpSize= 30 SolSize= 29 Gen= 1697	examples/satellite/p08-pfile8.pddl
-, ExpSize= 29 SolSize= 29 Gen= 3991 , ExpSize= 31 SolSize= 31 Gen= 2449 , EgSize= 15 ExpSize= 40 SolSize= 38 Gen= 2961	examples/satellite/p09-pfile9.pddl
-, ExpSize= 29 SolSize= 29 Gen= 2493 , ExpSize= 27 SolSize= 27 Gen= 3286 , EgSize= 15 ExpSize= 37 SolSize= 34 Gen= 2867	examples/satellite/p10-pfile10.pddl
-, ExpSize= 31 SolSize= 31 Gen= 2963 , ExpSize= 32 SolSize= 32 Gen= 6645 , EgSize= 12 ExpSize= 42 SolSize= 36 Gen= 6975	examples/satellite/p11-pfile11.pddl
-, ExpSize= 43 SolSize= 43 Gen= 5146 , ExpSize= 44 SolSize= 44 Gen= 5286 , EgSize= 22 ExpSize= 52 SolSize= 48 Gen= 5676	examples/satellite/p12-pfile12.pddl
-, !Gen= 6838 , !Gen= 7185 , !Gen= 7057	examples/satellite/p13-pfile13.pddl
-, !Gen= 7818 , ExpSize= 41 SolSize= 41 Gen= 5988 , ExpSize= 41 SolSize= 41 Gen= 5988	examples/satellite/p14-pfile14.pddl
-, !Gen= 5635 , !Gen= 5846 , !Gen= 6044	examples/satellite/p15-pfile15.pddl
-, !Gen= 4546 , !Gen= 4517 , !Gen= 4517	examples/satellite/p16-pfile16.pddl
-, !Gen= 3346 , !Gen= 3949 , !Gen= 3949	examples/satellite/p17-pfile17.pddl
-, ExpSize= 32 SolSize= 32 Gen= 3882 , ExpSize= 31 SolSize= 31 Gen= 3751 , EgSize= 19 ExpSize= 37 SolSize= 36 Gen= 4270	examples/satellite/p18-pfile18.pddl
-, ExpSize= 6 SolSize= 6 Gen= 90 , ExpSize= 4 SolSize= 4 Gen= 41 , EgSize= 3 ExpSize= 7 SolSize= 4 Gen= 41	examples/scananalyzer/p01.pddl
-, ExpSize= 14 SolSize= 14 Gen= 263 , ExpSize= 16 SolSize= 16 Gen= 264 , EgSize= 4 ExpSize= 20 SolSize= 16 Gen= 264	examples/scananalyzer/p02.pddl
-, ExpSize= 18 SolSize= 18 Gen= 358 , ExpSize= 18 SolSize= 18 Gen= 300 , EgSize= 9 ExpSize= 27 SolSize= 18 Gen= 300	examples/scananalyzer/p03.pddl
-, ExpSize= 8 SolSize= 8 Gen= 208 , ExpSize= 6 SolSize= 6 Gen= 108 , EgSize= 7 ExpSize= 13 SolSize= 6 Gen= 108	examples/scananalyzer/p04.pddl
-, ExpSize= 20 SolSize= 20 Gen= 1024 , ExpSize= 24 SolSize= 24 Gen= 1077 , EgSize= 9 ExpSize= 33 SolSize= 24 Gen= 1077	examples/scananalyzer/p05.pddl
-, ExpSize= 26 SolSize= 26 Gen= 1403 , ExpSize= 28 SolSize= 28 Gen= 1251 , EgSize= 15 ExpSize= 43 SolSize= 28 Gen= 1251	examples/scananalyzer/p06.pddl
-, ExpSize= 10 SolSize= 10 Gen= 400 , ExpSize= 12 SolSize= 12 Gen= 444 , EgSize= 5 ExpSize= 17 SolSize= 12 Gen= 444	examples/scananalyzer/p07.pddl
-, ExpSize= 26 SolSize= 26 Gen= 3002 , ExpSize= 28 SolSize= 28 Gen= 2716 , EgSize= 12 ExpSize= 40 SolSize= 28 Gen= 2716	examples/scananalyzer/p08.pddl
-, ExpSize= 34 SolSize= 34 Gen= 4091 , ExpSize= 36 SolSize= 36 Gen= 3593 , EgSize= 18 ExpSize= 54 SolSize= 36 Gen= 3593	examples/scananalyzer/p09.pddl
-, ExpSize= 12 SolSize= 12 Gen= 684 , ExpSize= 14 SolSize= 14 Gen= 634 , EgSize= 6 ExpSize= 20 SolSize= 14 Gen= 634	examples/scananalyzer/p10.pddl
-, !Gen= 2343 , !Gen= 2313 , !Gen= 2427	examples/scananalyzer/p11.pddl
-, !Gen= 2879 , !Gen= 2904 , !Gen= 2904	examples/scananalyzer/p12.pddl
-, !Gen= 623 , !Gen= 385 , !Gen= 315	examples/scananalyzer/p13.pddl
-, !Gen= 1251 , !Gen= 809 , !Gen= 970	examples/scananalyzer/p14.pddl
-, !Gen= 1529 , !Gen= 1431 , !Gen= 1388	examples/scananalyzer/p15.pddl
-, !Gen= 256 , !Gen= 256 , !Gen= 256	examples/scananalyzer/p16.pddl
-, !Gen= 712 , !Gen= 640 , !Gen= 710	examples/scananalyzer/p17.pddl
-, !Gen= 863 , !Gen= 830 , !Gen= 894	examples/scananalyzer/p18.pddl
-, !Gen= 162 , !Gen= 144 , !Gen= 144	examples/scananalyzer/p19.pddl
-, !Gen= 358 , !Gen= 355 , !Gen= 355	examples/scananalyzer/p20.pddl
-, !Gen= 485 , !Gen= 404 , !Gen= 404	examples/scananalyzer/p21.pddl
-, ExpSize= 5 SolSize= 5 Gen= 11 , ExpSize= 5 SolSize= 5 Gen= 9 , EgSize= 2 ExpSize= 5 SolSize= 5 Gen= 9	examples/scananalyzer/p22.pddl
-, ExpSize= 5 SolSize= 5 Gen= 11 , ExpSize= 1 SolSize= 1 Gen= 1 , EgSize= 4 ExpSize= 5 SolSize= 1 Gen= 1	examples/scananalyzer/p23.pddl
-, ExpSize= 5 SolSize= 5 Gen= 11 , ExpSize= 1 SolSize= 1 Gen= 1 , EgSize= 4 ExpSize= 5 SolSize= 1 Gen= 1	examples/scananalyzer/p24.pddl
-, ExpSize= 49 SolSize= 49 Gen= 126 , , EgSize= 23 , ExpSize= 41 SolSize= 41 Gen= 263 , , EgSize= 22 , ExpSize= 51 SolSize= 51 Gen= 89 , , EgSize= 33 , ExpSize= 121 SolSize= 121 Gen= 769 , ExpSize= 119 SolSize= 119 Gen= 765 , EgSize= 63 ExpSize= 178 SolSize= 115 Gen= 230	examples/sokoban/p04.pddl
-, ExpSize= 55 SolSize= 55 Gen= 370 , ExpSize= 55 SolSize= 55 Gen= 370 , EgSize= 29 ExpSize= 55 SolSize= 55 Gen= 267	examples/sokoban/p05.pddl
-, ExpSize= 35 SolSize= 35 Gen= 325 , !Gen= 114 , EgSize= 16 !Gen= 114	examples/sokoban/p06.pddl
-, ExpSize= 97 SolSize= 97 Gen= 3311 , ExpSize= 95 SolSize= 95 Gen= 3301 , EgSize= 43 ExpSize= 95 SolSize= 95 Gen= 646	examples/sokoban/p07.pddl
-, !Gen= 10581 , !Gen= 10254 , !Gen= 10486	examples/sokoban/p08.pddl
-, ExpSize= 116 SolSize= 116 Gen= 7380 , ExpSize= 118 SolSize= 118 Gen= 7382 , EgSize= 62 ExpSize= 182 SolSize= 120 Gen= 4141	examples/sokoban/p09.pddl
-, !Gen= 20010 , !Gen= 19937 , !Gen= 19981	examples/sokoban/p10.pddl
-, !Gen= 13183 , !Gen= 13172 , !Gen= 13175	examples/sokoban/p11.pddl
-, !Gen= 13009 , !Gen= 12845 , !Gen= 13033	examples/sokoban/p12.pddl
-, !Gen= 13956 , , , ExpSize= 95 SolSize= 95 Gen= 2405 , , EgSize= 56 , !Gen= 10013 , !Gen= 4373 , !Gen= 4373	examples/sokoban/p15.pddl
-, !Gen= 8239 , !Gen= 8249 , !Gen= 8200	examples/sokoban/p16.pddl
-, !Gen= 16264 , !Gen= 19221 , !Gen= 19233	examples/sokoban/p17.pddl
-, !Gen= 8152 , !Gen= 8176 , !Gen= 8193	examples/sokoban/p18.pddl
-, !Gen= 9576 , !Gen= 9594 , !Gen= 9454	examples/sokoban/p19.pddl
-, ExpSize= 429 SolSize= 429 Gen= 908 , ExpSize= 429 SolSize= 429 Gen= 908 , ExpSize= 5 SolSize= 5 Gen= 6 , ExpSize= 1 SolSize= 1 Gen= 2 , EgSize= 2 ExpSize= 3 SolSize= 1 Gen= 2	examples/tpp/p01.pddl
-, ExpSize= 8 SolSize= 8 Gen= 16 , ExpSize= 2 SolSize= 2 Gen= 5 , EgSize= 5 ExpSize= 7 SolSize= 2 Gen= 5	examples/tpp/p02.pddl
-, ExpSize= 13 SolSize= 13 Gen= 29 , ExpSize= 7 SolSize= 7 Gen= 12 , EgSize= 7 ExpSize= 14 SolSize= 7 Gen= 12	examples/tpp/p03.pddl
-, ExpSize= 16 SolSize= 16 Gen= 46 , ExpSize= 6 SolSize= 6 Gen= 10 , EgSize= 3 ExpSize= 9 SolSize= 6 Gen= 10	examples/tpp/p04.pddl
-, ExpSize= 27 SolSize= 27 Gen= 101 , ExpSize= 23 SolSize= 23 Gen= 80 , EgSize= 14 ExpSize= 24 SolSize= 23 Gen= 78	examples/tpp/p05.pddl
-, ExpSize= 37 SolSize= 37 Gen= 506 , ExpSize= 33 SolSize= 33 Gen= 455 , EgSize= 18 ExpSize= 51 SolSize= 33 Gen= 455	examples/tpp/p06.pddl
-, ExpSize= 54 SolSize= 54 Gen= 2426 , ExpSize= 54 SolSize= 54 Gen= 2188 , EgSize= 24 ExpSize= 78 SolSize= 54 Gen= 2188	examples/tpp/p07.pddl
-, ExpSize= 76 SolSize= 76 Gen= 2168 , ExpSize= 72 SolSize= 72 Gen= 2142 , EgSize= 32 ExpSize= 84 SolSize= 70 Gen= 1691	examples/tpp/p08.pddl
-, ExpSize= 82 SolSize= 82 Gen= 4597 , ExpSize= 70 SolSize= 70 Gen= 3322 , EgSize= 34 ExpSize= 109 SolSize= 78 Gen= 4237	examples/tpp/p09.pddl
-, ExpSize= 92 SolSize= 92 Gen= 17764 , ExpSize= 91 SolSize= 91 Gen= 19016 , EgSize= 40 ExpSize= 131 SolSize= 91 Gen= 19016	examples/tpp/p10.pddl
-, !Gen= 9663 , !Gen= 10102 , !Gen= 10255	examples/tpp/p11.pddl
-, !Gen= 10497 , !Gen= 7975 , !Gen= 8126	examples/tpp/p12.pddl
-, !Gen= 4630 , !Gen= 4557 , !Gen= 4622	examples/tpp/p13.pddl
-, !Gen= 3975 , !Gen= 3992 , !Gen= 3992	examples/tpp/p14.pddl
-, !Gen= 3368 , !Gen= 3441 , !Gen= 3441	examples/tpp/p15.pddl
-, !Gen= 1705 , !Gen= 1664 , !Gen= 1619	examples/tpp/p16.pddl
-, !Gen= 949 , !Gen= 959 , !Gen= 959	examples/tpp/p17.pddl
-, !Gen= 774 , !Gen= 681 , !Gen= 809	examples/tpp/p18.pddl
-, !Gen= 737 , !Gen= 743 , !Gen= 743	examples/tpp/p19.pddl
-, !Gen= 743 , !Gen= 743 , !Gen= 743	examples/tpp/p20.pddl
-, !Gen= 440 , !Gen= 446 , !Gen= 446	examples/tpp/p21.pddl
-, !Gen= 357 , !Gen= 393 , !Gen= 402	examples/tpp/p22.pddl
-, !Gen= 384 , !Gen= 361 , !Gen= 377	examples/tpp/p23.pddl
-, !Gen= 361 , !Gen= 372 , !Gen= 372	examples/tpp/p24.pddl
-, !Gen= 241 , !Gen= 303 , !Gen= 258	examples/tpp/p25.pddl
-, !Gen= 80 , !Gen= 97 , !Gen= 97	examples/tpp/p26.pddl
-, !Gen= 85 , !Gen= 115 , !Gen= 115	examples/tpp/p27.pddl
-, !Gen= 87 , !Gen= 87 , !Gen= 87	examples/tpp/p28.pddl
-, !Gen= 53 , !Gen= 82 , !Gen= 82	examples/tpp/p29.pddl
-, !Gen= 53 , !Gen= 64 , !Gen= 64	examples/tpp/p30.pddl
-, ExpSize= 5 SolSize= 5 Gen= 18 , ExpSize= 5 SolSize= 5 Gen= 21 , EgSize= 2 ExpSize= 7 SolSize= 5 Gen= 21	examples/transport/p01.pddl
-, ExpSize= 17 SolSize= 17 Gen= 71 , ExpSize= 16 SolSize= 16 Gen= 99 , EgSize= 7 ExpSize= 18 SolSize= 17 Gen= 64	examples/transport/p02.pddl
-, ExpSize= 20 SolSize= 20 Gen= 152 , ExpSize= 19 SolSize= 19 Gen= 176 , EgSize= 14 ExpSize= 27 SolSize= 23 Gen= 182	examples/transport/p03.pddl
-, ExpSize= 29 SolSize= 29 Gen= 362 , ExpSize= 22 SolSize= 22 Gen= 240 , EgSize= 14 ExpSize= 34 SolSize= 26 Gen= 277	examples/transport/p04.pddl
-, ExpSize= 36 SolSize= 36 Gen= 559 , ExpSize= 36 SolSize= 36 Gen= 557 , EgSize= 22 ExpSize= 57 SolSize= 35 Gen= 485	examples/transport/p05.pddl
-, !Gen= 2394 , ExpSize= 45 SolSize= 45 Gen= 1211 , ExpSize= 45 SolSize= 45 Gen= 1211	examples/transport/p06.pddl
-, !Gen= 1378 , !Gen= 1437 , !Gen= 1443	examples/transport/p07.pddl
-, !Gen= 1181 , !Gen= 1172 , !Gen= 1182	examples/transport/p08.pddl
-, !Gen= 920 , !Gen= 988 , !Gen= 988	examples/transport/p09.pddl
-, !Gen= 691 , !Gen= 712 , !Gen= 732	examples/transport/p10.pddl
-, ExpSize= 9 SolSize= 9 Gen= 41 , ExpSize= 7 SolSize= 7 Gen= 32 , EgSize= 1 ExpSize= 8 SolSize= 7 Gen= 32	examples/transport/p11.pddl
-, ExpSize= 18 SolSize= 18 Gen= 127 , ExpSize= 17 SolSize= 17 Gen= 131 , EgSize= 8 ExpSize= 19 SolSize= 19 Gen= 117	examples/transport/p12.pddl
-, ExpSize= 41 SolSize= 41 Gen= 519 , ExpSize= 43 SolSize= 43 Gen= 528 , EgSize= 21 ExpSize= 48 SolSize= 43 Gen= 317	examples/transport/p13.pddl
-, ExpSize= 54 SolSize= 54 Gen= 689 , ExpSize= 53 SolSize= 53 Gen= 699 , EgSize= 22 ExpSize= 56 SolSize= 51 Gen= 429	examples/transport/p14.pddl
-, ExpSize= 56 SolSize= 56 Gen= 777 , ExpSize= 55 SolSize= 55 Gen= 786 , EgSize= 29 ExpSize= 69 SolSize= 57 Gen= 487	examples/transport/p15.pddl
-, !Gen= 1482 , !Gen= 1479 , !Gen= 1479	examples/transport/p16.pddl
-, !Gen= 975 , !Gen= 1002 , !Gen= 1013	examples/transport/p17.pddl
-, !Gen= 789 , !Gen= 832 , !Gen= 846	examples/transport/p18.pddl
-, !Gen= 581 , !Gen= 584 , !Gen= 584	examples/transport/p19.pddl
-, !Gen= 404 , !Gen= 414 , !Gen= 414	examples/transport/p20.pddl
-, ExpSize= 7 SolSize= 7 Gen= 31 , ExpSize= 4 SolSize= 4 Gen= 16 , EgSize= 3 ExpSize= 7 SolSize= 4 Gen= 16	examples/transport/p21.pddl
-, ExpSize= 12 SolSize= 12 Gen= 65 , ExpSize= 14 SolSize= 14 Gen= 56 , EgSize= 5 ExpSize= 21 SolSize= 16 Gen= 71	examples/transport/p22.pddl
-, ExpSize= 19 SolSize= 19 Gen= 138 , ExpSize= 25 SolSize= 25 Gen= 169 , EgSize= 7 ExpSize= 30 SolSize= 25 Gen= 150	examples/transport/p23.pddl
-, ExpSize= 23 SolSize= 23 Gen= 201 , ExpSize= 25 SolSize= 25 Gen= 224 , EgSize= 12 ExpSize= 30 SolSize= 25 Gen= 178	examples/transport/p24.pddl
-, ExpSize= 36 SolSize= 36 Gen= 331 , ExpSize= 33 SolSize= 33 Gen= 314 , EgSize= 14 ExpSize= 38 SolSize= 33 Gen= 258	examples/transport/p25.pddl
-, ExpSize= 41 SolSize= 41 Gen= 957 , ExpSize= 45 SolSize= 45 Gen= 963 , EgSize= 19 ExpSize= 47 SolSize= 43 Gen= 587	examples/transport/p26.pddl
-, !Gen= 1615 , !Gen= 1611 , !Gen= 1639	examples/transport/p27.pddl
-, !Gen= 1144 , !Gen= 1135 , !Gen= 1111	examples/transport/p28.pddl
-, !Gen= 890 , !Gen= 877 , !Gen= 899	examples/transport/p29.pddl
-, !Gen= 823 , !Gen= 862 , !Gen= 862	examples/transport/p30.pddl
+, !Gen= 855 , ExpSize= 9 SolSize= 9 Gen= 42 , ExpSize= 9 SolSize= 9 Gen= 42 , EgSize= 9 ExpSize= 18 SolSize= 9 Gen= 42	examples/satellite/p01-pfile1.pddl
+, ExpSize= 13 SolSize= 13 Gen= 88 , ExpSize= 13 SolSize= 13 Gen= 88 , EgSize= 13 ExpSize= 13 SolSize= 13 Gen= 88	examples/satellite/p02-pfile2.pddl
+, ExpSize= 11 SolSize= 11 Gen= 193 , ExpSize= 11 SolSize= 11 Gen= 193 , EgSize= 11 ExpSize= 11 SolSize= 11 Gen= 193	examples/satellite/p03-pfile3.pddl
+, ExpSize= 18 SolSize= 18 Gen= 411 , ExpSize= 18 SolSize= 18 Gen= 411 , EgSize= 18 ExpSize= 18 SolSize= 18 Gen= 326	examples/satellite/p04-pfile4.pddl
+, ExpSize= 16 SolSize= 16 Gen= 515 , ExpSize= 16 SolSize= 16 Gen= 515 , EgSize= 16 ExpSize= 16 SolSize= 16 Gen= 515	examples/satellite/p05-pfile5.pddl
+, ExpSize= 20 SolSize= 20 Gen= 615 , ExpSize= 20 SolSize= 20 Gen= 615 , EgSize= 20 ExpSize= 20 SolSize= 20 Gen= 615	examples/satellite/p06-pfile6.pddl
+, ExpSize= 23 SolSize= 23 Gen= 2205 , ExpSize= 23 SolSize= 23 Gen= 2205 , EgSize= 23 ExpSize= 23 SolSize= 23 Gen= 1106	examples/satellite/p07-pfile7.pddl
+, ExpSize= 26 SolSize= 26 Gen= 1544 , ExpSize= 26 SolSize= 26 Gen= 1544 , EgSize= 26 ExpSize= 26 SolSize= 26 Gen= 1544	examples/satellite/p08-pfile8.pddl
+, ExpSize= 29 SolSize= 29 Gen= 3991 , ExpSize= 29 SolSize= 29 Gen= 3991 , EgSize= 29 ExpSize= 29 SolSize= 29 Gen= 2206	examples/satellite/p09-pfile9.pddl
+, ExpSize= 29 SolSize= 29 Gen= 2493 , ExpSize= 29 SolSize= 29 Gen= 2493 , EgSize= 29 ExpSize= 29 SolSize= 29 Gen= 2493	examples/satellite/p10-pfile10.pddl
+, ExpSize= 31 SolSize= 31 Gen= 2963 , ExpSize= 31 SolSize= 31 Gen= 2963 , EgSize= 31 ExpSize= 31 SolSize= 31 Gen= 2963	examples/satellite/p11-pfile11.pddl
+, ExpSize= 43 SolSize= 43 Gen= 5146 , ExpSize= 43 SolSize= 43 Gen= 5146 , EgSize= 43 ExpSize= 43 SolSize= 43 Gen= 5146	examples/satellite/p12-pfile12.pddl
+, !Gen= 7435 , !Gen= 7435 , !Gen= 7589	examples/satellite/p13-pfile13.pddl
+, !Gen= 8307 , !Gen= 8307 , !Gen= 8307	examples/satellite/p14-pfile14.pddl
+, !Gen= 6218 , !Gen= 6218 , !Gen= 6218	examples/satellite/p15-pfile15.pddl
+, !Gen= 4788 , !Gen= 4788 , !Gen= 4788	examples/satellite/p16-pfile16.pddl
+, !Gen= 3346 , !Gen= 3346 , !Gen= 3346	examples/satellite/p17-pfile17.pddl
+, ExpSize= 32 SolSize= 32 Gen= 3882 , ExpSize= 32 SolSize= 32 Gen= 3882 , EgSize= 32 ExpSize= 32 SolSize= 32 Gen= 3882	examples/satellite/p18-pfile18.pddl
+, !Gen= 6905 , !Gen= 6905 , !Gen= 6905	examples/satellite/p19-pfile19.pddl
+, !Gen= 5327 , !Gen= 5215 , !Gen= 5327	examples/satellite/p20-pfile20.pddl
+, !Gen= 3843 , !Gen= 3843 , !Gen= 3843	examples/satellite/p21-HC-pfile1.pddl
+, !Gen= 2806 , !Gen= 2806 , !Gen= 2806	examples/satellite/p22-HC-pfile2.pddl
+, !Gen= 1858 , !Gen= 1858 , !Gen= 1858	examples/satellite/p23-HC-pfile3.pddl
+, !Gen= 519 , !Gen= 519 , !Gen= 519	examples/satellite/p24-HC-pfile4.pddl
+, !Gen= 593 , !Gen= 593 , !Gen= 593	examples/satellite/p25-HC-pfile5.pddl
+, !Gen= 604 , !Gen= 604 , !Gen= 604	examples/satellite/p26-HC-pfile6.pddl
+, !Gen= 757 , !Gen= 757 , !Gen= 757	examples/satellite/p27-HC-pfile7.pddl

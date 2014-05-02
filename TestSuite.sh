@@ -17,6 +17,7 @@
 #for dir in examples/*/
 #for dir in "examples/mprime/" "examples/openstacks/" "examples/parcprinter-strips/" "examples/pegsolitaire/"
 #for dir in "examples/pipesworld-notankage/" "examples/pipesworld-tankage/" "examples/rovers/" "examples/satellite/" "examples/scananalyzer/" "examples/sokoban/" "examples/tpp/" "examples/transport/" "examples/zenotravel/"
+for dir in "examples/blocks/" "examples/elevators/" "examples/rovers/" "examples/satellite/"
 do
 	mkdir -p Test/${dir}
 	for filename in ${dir}p*.pddl

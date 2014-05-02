@@ -3540,8 +3540,8 @@ initialize( void )
   /* TODO make random walks configurable: randomly move start and goal */
   if (EGraphOut == "Test/trash.eg")
   {
-    randomWalk(staticInitialState, 10);
-    randomWalk(staticGoalState, 10);
+    randomWalk(staticInitialState, 0);
+    randomWalk(staticGoalState, 0);
     p = _low_initialAtoms;
     for (size_t at = 1; at < SIZE_ATOMS; ++at)
       if ( asserted( staticInitialState, at ) )
@@ -3911,7 +3911,7 @@ readEGraph(string fileName)
 
 
 bool
-printEGraph(string fileName)
+printEGraph(string fileName, double proportion = 1)
 {
   FILE *file = fopen( fileName.c_str(), "w" );
   if (file == nullptr)
@@ -3923,32 +3923,37 @@ printEGraph(string fileName)
   // TODO remove debug code
   fprintf(statsFile, "ExpSize= %u ", experience.size());
   
-  std::uniform_real_distribution<double> dist(0, 1);
+  int n = experience.size();
+  int k = std::round(n * proportion);
   for (auto& exper: experience)
-  if (dist(rng) < 0.5) // TODO debug: randomly remember edges
   {
-    fprintf( file, "%s\n", exper.opName );
-    /*for (size_t i = 0; i < SIZE_PACKS; ++i)
-      fprintf( file, " %u", exper.tailState[i].pack );
-    for (size_t i = 0; i < SIZE_PACKS; ++i)
-      fprintf( file, " %u", exper.headState[i].pack );
-    fprintf( file, "\n" );*/
-    int atomsToPrint = 0;
-    for (size_t p = 1; p < SIZE_ATOMS; ++p)
-      if (asserted(exper.tailState, p))
-        ++atomsToPrint;
-    fprintf( file, "%u\n", atomsToPrint );
-    for (size_t p = 1; p < SIZE_ATOMS; ++p)
-      if (asserted(exper.tailState, p))
-        fprintf( file, "%s\n", readAtomName(p) );
-    atomsToPrint = 0;
-    for (size_t p = 1; p < SIZE_ATOMS; ++p)
-      if (asserted(exper.headState, p))
-        ++atomsToPrint;
-    fprintf( file, "%u\n", atomsToPrint );
-    for (size_t p = 1; p < SIZE_ATOMS; ++p)
-      if (asserted(exper.headState, p))
-        fprintf( file, "%s\n", readAtomName(p) );
+    std::uniform_int_distribution<int> dist(0, --n);
+    if (dist(rng) < k) // TODO debug: randomly remember edges
+    {
+      --k;
+      fprintf( file, "%s\n", exper.opName );
+      /*for (size_t i = 0; i < SIZE_PACKS; ++i)
+        fprintf( file, " %u", exper.tailState[i].pack );
+      for (size_t i = 0; i < SIZE_PACKS; ++i)
+        fprintf( file, " %u", exper.headState[i].pack );
+      fprintf( file, "\n" );*/
+      int atomsToPrint = 0;
+      for (size_t p = 1; p < SIZE_ATOMS; ++p)
+        if (asserted(exper.tailState, p))
+          ++atomsToPrint;
+      fprintf( file, "%u\n", atomsToPrint );
+      for (size_t p = 1; p < SIZE_ATOMS; ++p)
+        if (asserted(exper.tailState, p))
+          fprintf( file, "%s\n", readAtomName(p) );
+      atomsToPrint = 0;
+      for (size_t p = 1; p < SIZE_ATOMS; ++p)
+        if (asserted(exper.headState, p))
+          ++atomsToPrint;
+      fprintf( file, "%u\n", atomsToPrint );
+      for (size_t p = 1; p < SIZE_ATOMS; ++p)
+        if (asserted(exper.headState, p))
+          fprintf( file, "%s\n", readAtomName(p) );
+    }
   }
   fclose( file );
   return true;
