@@ -8,6 +8,8 @@
 % Additional packages
 \usepackage{amsmath}
 \usepackage{amssymb}
+\usepackage{algorithm}
+\usepackage{algorithmic}
 \frenchspacing
 \setlength{\pdfpagewidth}{8.5in}
 \setlength{\pdfpageheight}{11in}
@@ -133,6 +135,22 @@ Upon encountering a new state $S\notin V^E$, we use dynamic programming as befor
 Here we see that, when E-graphs are involved, $g_S(S')$ is computed for many states S', not just the goal. Thus, we consult the E-graph essentially for free since HSP would compute all the $g$-values anyway. The only additional work here is the minimization over $S'\in V^E$, which is negligible for small E-graphs.
 
 We should remark that, although STRIPS problem as we defined them have multiple goal states defined by the goal condition $G$, the heuristic's monotonicity implies that the set of atoms precisely matching $G$ will be the lowest-cost goal to reach in the heuristic approximation.
+
+\begin{algorithm}
+\caption{Search()}
+\label{alg:HSP}
+\begin{algorithmic}
+\REPEAT
+\FORALL{$a \in A$}
+\IF{$a \in S$}
+\STATE $g_S(a) = 0$
+\ELSE
+\STATE $g_S(a) = \min_{op,a\in Add(op)} \left(g_S(Prec(op) + Cost(op))\right)$
+\ENDIF
+\ENDFOR
+\UNTIL{nothing changed}
+\end{algorithmic}
+\end{algorithm}
 
 \section{Experiments}
 
