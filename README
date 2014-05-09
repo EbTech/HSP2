@@ -1,3 +1,17 @@
+QUICK SETUP
+===========
+
+git clone https://github.com/EbTech/HSP2.git
+cd HSP2
+sudo apt-get install bison
+sudo apt-get install flex
+export HSPHOME='pwd'
+make compile
+
+
+Everything below this line is from the old README.
+=========================================================
+
 This is Alpha Release 2.0 of the Heuristic Search Planner.
 
 
