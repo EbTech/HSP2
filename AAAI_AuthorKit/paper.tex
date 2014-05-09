@@ -10,18 +10,19 @@
 \usepackage{amssymb}
 \usepackage{algorithm}
 \usepackage{algorithmic}
+\usepackage{graphicx}
 \frenchspacing
 \setlength{\pdfpagewidth}{8.5in}
 \setlength{\pdfpageheight}{11in}
 \pdfinfo{
-/Title (Bootstrapping Abstract Planning with Experience Graphs)
+/Title (STRIPS Planning with Experience Graphs)
 /Author (Aram Ebtekar, Mike Phillips, Maxim Likhachev, Sven Koenig)}
 \setcounter{secnumdepth}{0}  
  \begin{document}
 % The file aaai.sty is the style file for AAAI Press 
 % proceedings, working notes, and technical reports.
 %
-\title{Bootstrapping Abstract Planning with Experience Graphs}
+\title{Experience-Biased Planning in STRIPS}
 \author{Aram Ebtekar, Mike Phillips, Maxim Likhachev, Sven Koenig\\
 Carnegie Mellon University\\
 5000 Forbes Ave,\\
@@ -30,7 +31,7 @@ Pittsburgh, PA 15213\\
 \maketitle
 \begin{abstract}
 \begin{quote}
-A* and variants are regularly applied to plan paths in a graph. Rather than planning each query from scratch, we follow the recent trend across AI and robotics of collecting and reusing information, i.e. learning. Experience-graphs (E-graphs) store past plans in order to speed up related planning episodes in the future. New challenges arise when we try to apply E-graphs in high-level planning, where the state graph is implicitly exponentially sized in its description length. We describe an algorithm that combines E-graphs with a standard STRIPS relaxation to form $\epsilon$-admissible heuristics in a domain-independent manner.
+Experience graphs provide a means to augment existing heuristics with a bias toward using a select set of edges, typically taken from solutions to past queries. Thus, a planner can learn to bias its search toward well-understood regions and reuse parts of old plans. We show how to extend the HSP STRIPS planner with E-graphs at minimal cost, and in doing so speed up subsequent planning episodes across multiple domains.
 \end{quote}
 \end{abstract}
 
@@ -110,17 +111,17 @@ In cases where the heuristic compution is done by searching on a state space tha
 
 Suppose we have a consistent heuristic $h(S,S')$ for the distance between arbitrary pairs of states. That is, $h$ obeys the triangle inequality with respect to edge costs, and $h(G) = 0$ whenever $G$ is a goal. In order to derive a related heuristic which biases in favor of using the E-Graph, we inflate the heuristic by a factor $\epsilon^E > 1$, but allow it to use uninflated ``shortcuts" on the E-graph. To be precise, the E-graph heuristic is defined by
 
-\[h^E(S) = \min_\pi \sum_i \min \{\epsilon^E h(s_i,s_{i+1}),c^E(s_i,s_{i+1})\}\]
-over all paths $\pi = \langle s_0,s_1,...,s_N \rangle$ with $s_0 = S$ and $s_N$ being any goal. $c^E$ are E-graph costs, or $\infty$ if the E-graph edge doesn't exist.
+\[h^E(S) = \min_\pi \sum_i \min \{\epsilon^E h(S_i,S_{i+1}),c^E(S_i,S_{i+1})\}\]
+over all paths $\pi = \langle S_0,S_1,...,S_N \rangle$ with $S_0 = S$ and $S_N$ being any goal. $c^E$ are E-graph costs, or $\infty$ if the E-graph edge doesn't exist.
 
-In the limit as $\epsilon^E \rightarrow 1$, taking ``shortcuts" along the E-graph loses its advantage, so \[h^E(S) = \min_\pi \sum_i h(s_i,s_{i+1}) = \min_\pi h(s_0,s_N) = h(S,G)\]
+In the limit as $\epsilon^E \rightarrow 1$, taking ``shortcuts" along the E-graph loses its advantage, so \[h^E(S) = \min_\pi \sum_i h(S_i,S_{i+1}) = \min_\pi h(S_0,S_N) = h(S,G)\]
 by the triangle inequality, where $G$ is the minimizing goal.
 
-Conversely as $\epsilon^E \rightarrow\infty$, the minimizing path becomes the one which uses the fewest edges outside the E-graph, and the cost remains finite iff the E-graph component of $S$ contains a goal state.
+Conversely as $\epsilon^E \rightarrow\infty$, the minimizing path becomes the one which uses the fewest edges outside the E-graph, and the cost remains finite iff $S$ is in an E-graph component which also contains a goal state.
 
-We cannot afford to compute $h^E$ according to its literal definition, as there are far too many paths to consider. Fortunately, there exists a practical means of computing it. By the triangle inequality, any pair of consecutive $h(s_i,s_{i+1})$ terms can be combined into one. Thus for $0 < i < N$, we only need be concerned with states $s_i$ lying on the E-graph.
+We cannot afford to compute $h^E$ according to its literal definition, as there are far too many paths to consider. Fortunately, there exists a practical means of computing it. By the triangle inequality, any pair of consecutive $h(S_i,S_{i+1})$ terms can be combined into one. Thus for $0 < i < N$, we only need be concerned with states $S_i$ lying on the E-graph.
 
-Let $V^E$ consist of all goal states plus all endpoints of the E-graph's edges. In a preprocessing stage before the main search, we can apply Dijkstra's algorithm once in reverse to compute the estimated distance-to-goal $h^E(S)$ from every $S\in V^E$, optimizing over combinations of E-graph edges and ``jumps" of cost $\epsilon^E h(s_i,s_{i+1})$. If the blackbox heuristic $h$ is cheap to compute, this preprocessing runs in $O(|V^E|^2)$ time, which is negligible for small E-graphs.
+Let $V^E$ consist of all goal states plus all endpoints of the E-graph's edges. In a preprocessing stage before the main search, we can apply Dijkstra's algorithm once in reverse to compute the estimated distance-to-goal $h^E(S)$ from every $S\in V^E$, optimizing over combinations of E-graph edges and ``jumps" of cost $\epsilon^E h(S_i,S_{i+1})$. If the blackbox heuristic $h$ is cheap to compute, this preprocessing runs in $O(|V^E|^2)$ time, which is negligible for small E-graphs.
 
 Later, when generating $S \notin V^E$, we see that we have already precomputed all but the first ``leg" of the path in the definition of $h^E(S)$. Thus, we derive the mathematically equivalent but much cheaper computation
 \[h^E(S) = \min_{S'\in V^E} \left(\epsilon^E h(S,S') + h^E(S')\right)\]
@@ -189,12 +190,36 @@ Here we remark that, when E-graphs are involved, the values $g_S(S')$ appear on 
 
 ComputeG implements the dynamic programming computation of $g$-values. Each iteration of the outermost loop permanently fixes at least one $g_S(a)$ value, so it does at most $|A|+1$ iterations. Multiplying everything together and ignoring cardinality signs for brevity, the runtime bound is $O(\mathbf{A^2O})$. Thus, each state generated costs $O(\mathbf{A^2O + V^E})$ time, and the preprocessing cost is asymptotically equivalent to preemptively generating every state in $V^E$.
 
-\section{Experiments}
+By comparison, standard HSP without E-graphs takes $O(\mathbf{A^2O})$ time (with essentially the same constant factors) to generate a state, and does not incur the cost of generating a state unless the A* encounters it. The E-graph search maintains completeness and $\epsilon \epsilon^E$-suboptimality bounds on the path found. However, it makes no guarantee of improving the search time. Potential gains depend entirely on choosing a good small set of edges to call our E-graph. In our experiments we simply keep the previous solution path, but different choices remain a topic of investigation for future research.
 
+\includegraphics[scale=0.4]{Pentagon.png}
 
+\section{Experimental Setup}
 
-\section{Conclusion and Extensions}
+We augmented the HSP planner code [CITE] which won [AI COMPETITION IN 2000] with E-graphs. Our aim is to observe the effect of E-graphs on planning time given that we've already solved a closely related problem. To measure this, we run three searches for each problem instance. First, we run the original problem using standard HSP. Then, we generate a modified problem by moving the start and goal nodes randomly for X steps each. The second search solves the modified problem in the standard way. Finally, the third search solves the modified problem using as E-graph a random Y\% of the path returned from the first search. The reason for saving only a portion of the previous experience is to simulate the effects of disconnected E-graphs, as might arise after multiple searches. Our main comparisons will be between the number of nodes generated in the second and third searches. In practice, the times followed similar ratios to the number of nodes generated; as one would expect from the analyis in [PREVIOUS SECTION] since the E-graph resulting from Y\% of a single path is very small.
 
+\section{Experimental Results}
 
+\begin{center}
+    \begin{tabular}{| l | l | l | l |}
+    \hline
+    Domain & 0 steps & 10 steps & 20 steps
+    \\ \hline
+    BlocksWord & 0 & 0 & 0
+    \\ \hline
+    Grid & 0 & 0 & 0
+    \\ \hline
+    Satellite & 0 & 0 & 0
+    \\ \hline
+    \end{tabular}
+\end{center}
+
+\section{Conclusions and Extensions}
+
+Generalization from experiences
+
+Alternative E-graph edge-selection schemes (complete graph on $V^E$?)
+
+What if graph changes? Anytime incremental...
 
 \end{document}
