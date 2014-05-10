@@ -15,14 +15,14 @@
 \setlength{\pdfpagewidth}{8.5in}
 \setlength{\pdfpageheight}{11in}
 \pdfinfo{
-/Title (STRIPS Planning with Experience Graphs)
+/Title (Experience-Biased Symbolic Planning)
 /Author (Aram Ebtekar, Mike Phillips, Maxim Likhachev, Sven Koenig)}
 \setcounter{secnumdepth}{0}  
  \begin{document}
 % The file aaai.sty is the style file for AAAI Press 
 % proceedings, working notes, and technical reports.
 %
-\title{Experience-Biased Planning in STRIPS}
+\title{Experience-Biased Symbolic Planning}
 \author{Aram Ebtekar, Mike Phillips, Maxim Likhachev, Sven Koenig\\
 Carnegie Mellon University\\
 5000 Forbes Ave,\\
@@ -31,106 +31,131 @@ Pittsburgh, PA 15213\\
 \maketitle
 \begin{abstract}
 \begin{quote}
-Experience graphs provide a means to augment existing heuristics with a bias toward using a select set of edges, typically taken from solutions to past queries. Thus, a planner can learn to bias its search toward well-understood regions and reuse parts of old plans. We show how to extend the HSP STRIPS planner with E-graphs at minimal cost, and in doing so speed up subsequent planning episodes across multiple domains.
+Weighted-heuristic A* search is a standard technique in currently state-of-the-art domain-independent symbolic planners. Experience graphs provide a means to augment existing heuristics with a bias toward using a select set of edges, typically taken from solutions to past queries. Thus, a planner can learn to bias its search toward well-understood regions and reuse parts of old plans. We show how to extend the HSP STRIPS planner with E-graphs at minimal cost. In doing so, we maintain the ability to configure path cost suboptimality guarantees, while in practice speeding up subsequent planning episodes across multiple domains.
 \end{quote}
 \end{abstract}
 
 \section{Introduction}
 Planning entails finding action sequences that achieve a goal state.
 In order to apply the language of graph theory, states are often thought of as nodes connected by action transitions.
-A \textit{plan} is a path from start to goal.
+A \textbf{plan} is a path from the start state to one of many goal states.
 Despite the existence of classic polynomial-time search techniques, such as Dijkstra's algorithm, planning remains the crux of many difficult problems in AI.
-The reason usually is that the graphs involved are very large, too large to store explicitly.
-By either recording newly observed states or using a compressed representation of the graph's structure, states may be generated dynamically as the search progresses.
-In motion planning, the space may be a continuous geometric set which is dynamically discretized.
 
-In high-level logical planning, a domain language such as STRIPS, SAS+, ADL or PDDL encode a graph whose size may be exponential in its description length. 
-These short descriptions sometimes encode exploitable structure.
-In order to create a domain-independent solver for a language such as STRIPS, we need to automatically extract and interpret information about the problem. 
+The reason usually is that the graphs involved are very large; indeed, too large for explicit storage.
+In motion planning, the state space may be a continuous geometric set whose desired discretization is very fine.
+In symbolic planning, a planning language such as STRIPS, SAS+, ADL or PDDL [CITE] is chosen to give a compressed symbolic representation.
+
+The graph is exponentially larger than its encoding so, in both cases, states are generated only as needed.
+The compressed representation sometimes encodes exploitable structure.
+In order to create a domain-independent solver for a language such as STRIPS, we need to automatically extract and interpret structural information about the problem. 
 
 We may view planning as a process that generates distance-to-goal labels for each node of a graph.
-Given these distance labels, it's a simple matter to generate a plan by tracing steps from the goal, successively taking the optimal predecessor.
+Given these distance labels, it's a simple matter to generate a plan by tracing steps from the start, successively taking the optimal successor.
 Since there is no worst-case polynomial-time algorithm that can solve the shortest-paths problem in STRIPS (recall the graph is exponential-sized), we may try to roughly approximate the distance labels.
+
 The approximate labels we call \textbf{heuristics}, and we use them in hopes of finding plans more efficiently.
-If the heuristic precisely reflects the true distances, we saw how to immediately find a path.
+If the heuristic precisely reflects the true distances, we can immediately retrieve a path.
 Algorithms such as A* are designed to find solutions quickly whenever the heuristic is of reasonable quality.
-Note that in practice, any subexponential algorithm can only afford to look at a small fraction of all states, so it is only for these that we compute the heuristic.
+If we hope to take subexponential time, we can only afford to examine a vanishing fraction of the states, and it is only for these that we compute the heuristic.
 If the heuristic is good, we hope not to have to look at (i.e. generate) too many states.
-Hence, there is a tradeoff between spending more time to compute a tighter heuristic, vs evaluating a weaker heuristic more quickly but at many more states.
+Hence, there is a tradeoff between spending more time to compute a more accurage heuristic, vs evaluating a weaker heuristic quickly but at many more states.
 
 In practice, even with a domain-independent means of generating heuristics, STRIPS problems can be very difficult.
 Even humans have difficulty when faced with an unfamiliar kind of puzzle, though we get better with experience.
 Thus, one might hope that a planning agent would similarly learn to generalize solutions from past planning experiences to related new instances.
 A recent approach builds \textit{Experience graphs} to estimate the high-level connectivity of the free space in motion planning tasks.
-The intuition is to remember previously generated paths so that, when a new start and goal is queried, a new path can be more quickly generated by reusing subpaths from the E-graph.
+The intuition is to remember previously generated paths so that, when a new start and goal is queried, a new path can be quickly generated by reusing subpaths from the E-graph.
 However, E-graphs have never before been applied to high-level representations such as STRIPS. This is our present contribution.
 
 In section [???], we present the HSP heuristic for STRIPS.
 Then, we discuss E-graphs in more technical detail.
 This paper's novel contributions follow thereafter, where we extend E-graphs to STRIPS planning by using it to augment the HSP heuristic. 
-The resulting A* search is complete with a configurable suboptimality bound.
-Finally, we present experiment results in which this use of E-graphs is demonstrated to achieve considerable speedups over plain HSP in several planning domains.
+The resulting A* search is complete with a configurable suboptimality guarantee.
+Finally, we present experiment results in which this use of E-graphs is demonstrated to achieve considerable speedups over experience-free HSP in several planning domains.
 
 \section{Related Work}
 
-
-
-\section{HSP}
+\section{STRIPS Language}
 
 A STRIPS problem is a tuple $P = \langle A,O,I,G\rangle$ consisting of an atom set $A$, operator set $O$, initial state $I \subseteq A$ and goal condition $G \subseteq A$.
-Each operator $op\in O$ is defined by its cost and its precondition, add and delete lists: $Cost(op) \in \mathbb{R}^+$ and $Prec(op),Add(op),Del(op) \subseteq A$.
+Each operator $op\in O$ is defined by its cost, preconditions, add effects and delete effects: $Cost(op) \in \mathbb{R}^+$ and $Prec(op),Add(op),Del(op) \subseteq A$.
 
 The problem $P$ defines a directed state graph $(V,c)$ where $V$ is the power set of $A$ (i.e. states $S\in V$ correspond to collections of atoms), and the edge costs are
-\begin{eqnarray*} c(S,S') = \inf\{Cost(op) \mid S\subseteq Prec(op)\text{ and}
-\\S' = S - Del(op) \cup Add(op)\} \end{eqnarray*}
+\begin{eqnarray*} c(S,S') = \min\{Cost(op) \mid S\subseteq Prec(op)\text{ and}
+\\S' = \left(S \setminus Del(op)\right) \cup Add(op)\} \end{eqnarray*}
 %consists of states transitions $(u,v)$ for which there exists an operator $op\in O$ with $u\in Prec(op)$ and $v = u - Del(op) \cup Add(op)$; the weight of this edge is the minimum cost of such an $op$.
-Naturally, $c(S,S') = \infty$ when there is no operator directly transitioning from $S$ to $S'$.
+By default, $c(S,S') = \infty$ when there is no operator directly transitioning from $S$ to $S'$.
 Given a STRIPS problem $P$, we seek a low-cost path from the initial state $I\in V$ to any of the goal states $S\in V$ such that $S \supset G$.
+
+\section{HSP Heuristic}
 
 Many of today's state-of-the-art domain-independent STRIPS planners are based on the HSP planner, which we now describe.
 It's common to compute heuristics by solving an easier, relaxed version of the original problem. In STRIPS, one might ignore the delete lists of operations.
-Since having more atoms makes preconditions and the goal condition more likely to hold, this can only make the problem easier, so the resulting heuristic is admissible.
+Since having more atoms makes preconditions and the goal condition more likely to hold, this can only make the problem easier, so the resulting heuristic never overestimates the true cost.
 
 However, even the relaxed STRIPS planning problem includes set-cover as a special case, making it NP-hard.
 Intuitively, we see that the relaxed search space remains exponential.
-To reduce it, we decouple the atoms, instead estimating the cost of achieving each individual atom.
+To reduce it, HSP decouples the atoms, instead estimating the cost of achieving each individual atom.
 
-Let's say we want to compute a distance-to-$G$ heuristic from a state $S$. Estimate the cost to achieve an atom $a\in A$ from $S$ by $g_S(a) = $
+Let's say we want to compute a distance-to-$G$ heuristic from a state $S$. HSP estimates the cost to achieve an atom $a\in A$ from $S$ by $g_S(a) = $
 \[\begin{cases} 0  &\mbox{if } a \in S
-\\ \min_{op,a\in Add(op)} \left(g_S(Prec(op)) + Cost(op)\right)  &\mbox{if } a \notin S \end{cases}\]
+\\ \min_{op\mid a\in Add(op)} \left(g_S(Prec(op)) + Cost(op)\right)  &\mbox{if } a \notin S \end{cases}\]
 
-Define the HSP-max heuristic by \[h^{HSP}(S) = g_S(G),\] the estimated cost of achieving all atoms in $G$. In order to cheaply compute $g_S(G)$ and $g_S(Prec(op))$, we define $g_S(P) = \max_{p\in P} g_S(p)$ for sets of atoms $P$. This is admissible and consistent. If the atoms were truly independent, a much tighter estimate would be $g_S(P) = \sum_{p\in P} g_S(p)$. Despite its inadmissibility in general, the latter HSP-plus heuristic is often useful in practice, as it uses more information and biases more greedily toward the goal.
+The HSP heuristic is defined by
+\[h^{HSP}(S) = g_S(G),\]
+the estimated cost of achieving all atoms in $G$. Note that $g_S(\cdot)$ is evaluated on certain atom sets, namely $Prec(op)$ and $G$.
+To keep the computations feasible, define $g_S(P) = \max_{p\in P} g_S(p)$ for atom sets $P$.
+The resulting HSP-max heuristic is an underestimate; indeed, it satisfies a stronger property called \textbf{consistency}.
 
-From a computational perspective, the HSP heuristic must compute $g_S(a)$ for all $a\in A$ whenever a new state $S$ is generated. This can be done by dynamic programming, iterating the recursive formula to a fixpoint in Bellman-Ford-like fashion. In a sense, it seems we are wasting a lot of work by estimating the cost to reach every atom when we only require $g_S(G)$. Later, we'll see how to make fuller use of this computation.
+\textbf{Definition+Theorem (needs TeX formatting):} a heuristic $h$ is called $\epsilon$-consistent if $h(S) = 0$ when $S$ is a goal and $h(S) \le \epsilon c(S,S') + h(S')$ for all $S,S'\in V$.
+This property suffices to guarantee that each state is expanded only once by A*, and that the path it finds costs no more than $\epsilon$ times the optimal path. Consistency is synonymous with $1$-consistency.
+
+If the atoms were truly independent, a more accurate estimate would be $g_S(P) = \sum_{p\in P} g_S(p)$.
+Despite its inconsistency in general, the latter HSP-plus heuristic is often useful in practice, as it uses more information and biases more greedily toward the goal.
+
+From a computational perspective, the HSP heuristic must compute $g_S(a)$ for all $a\in A$ whenever a new state $S$ is generated.
+This can be done by dynamic programming, iterating the recursive formula to a fixpoint in Bellman-Ford-like fashion.
+In a sense, it seems we are wasting a lot of work by estimating the cost to reach every atom when we only require $g_S(G)$.
+Later, we'll see how to make better use of this computation.
 
 \section{Experience Graphs}
 
 E-graphs can improve total search time over a series of related queries on the same graph.
-Between queries, we update the set of edges which constitute the E-graph, typically by adding the solution path from the previous search.
-In cases where the heuristic compution is done by searching on a state space that was reduced by projection, the E-graph is considered as a subgraph of the reduced space.
+Formally, an E-graph is a subgraph of the state space.
+We update it between queries, typically by adding the solution path from the previous search query.
 
-Suppose we have a consistent heuristic $h(S,S')$ for the distance between arbitrary pairs of states. That is, $h$ obeys the triangle inequality with respect to edge costs, and $h(G) = 0$ whenever $G$ is a goal. In order to derive a related heuristic which biases in favor of using the E-Graph, we inflate the heuristic by a factor $\epsilon^E > 1$, but allow it to use uninflated ``shortcuts" on the E-graph. To be precise, the E-graph heuristic is defined by
+Suppose we have a consistent heuristic $h(S,S')$ for the distance between arbitrary pairs of states.
+That is, $h$ obeys the triangle inequality with respect to edge costs, and $h(S,S) = 0$ for all $S\in V$.
+The E-graph heuristic $h^E$ biases the search to follow E-Graph edges instead of $h$ by penalizing the latter by an inflation factor $\epsilon^E > 1$.
+To be precise, define
 
-\[h^E(S) = \min_\pi \sum_i \min \{\epsilon^E h(S_i,S_{i+1}),c^E(S_i,S_{i+1})\}\]
-over all paths $\pi = \langle S_0,S_1,...,S_N \rangle$ with $S_0 = S$ and $S_N$ being any goal. $c^E$ are E-graph costs, or $\infty$ if the E-graph edge doesn't exist.
+\[h^E(S_0) = \min_{N,S_N,\pi} \sum_{i=1}^N \min \{\epsilon^E h(S_{i-1},S_i),c^E(S_{i-1},S_i)\}\]
+over all goal states $S_N$ and paths $\pi = \langle S_0,S_1,...,S_N \rangle$.
 
-In the limit as $\epsilon^E \rightarrow 1$, taking ``shortcuts" along the E-graph loses its advantage, so \[h^E(S) = \min_\pi \sum_i h(S_i,S_{i+1}) = \min_\pi h(S_0,S_N) = h(S,G)\]
-by the triangle inequality, where $G$ is the minimizing goal.
+$c^E$ are E-graph edge costs, or $\infty$ if the E-graph edge does not exist.
 
-Conversely as $\epsilon^E \rightarrow\infty$, the minimizing path becomes the one which uses the fewest edges outside the E-graph, and the cost remains finite iff $S$ is in an E-graph component which also contains a goal state.
+In the limit as $\epsilon^E \rightarrow 1$, following E-graph edges offers no advantage as $h$ is already an underestimate. Hence, using the triangle inequality to coalesce the sum,
+\begin{eqnarray*}h^E(S_0) = \min_{N,S_N,\pi} \sum_{i=1}^N h(S_{i-1},S_i) = \min_{N,S_N,\pi} h(S_0,S_N)
+\\= \min_{S_N} h(S_0,S_N)\end{eqnarray*}
 
-We cannot afford to compute $h^E$ according to its literal definition, as there are far too many paths to consider. Fortunately, there exists a practical means of computing it. By the triangle inequality, any pair of consecutive $h(S_i,S_{i+1})$ terms can be combined into one. Thus for $0 < i < N$, we only need be concerned with states $S_i$ lying on the E-graph.
+Conversely as $\epsilon^E \rightarrow\infty$, the cost remains bounded iff $S_0$ is in an E-graph component which also contains a goal state, and the minimizing path becomes the one which uses the fewest edges outside the E-graph.
 
-Let $V^E$ consist of all goal states plus all endpoints of the E-graph's edges. In a preprocessing stage before the main search, we can apply Dijkstra's algorithm once in reverse to compute the estimated distance-to-goal $h^E(S)$ from every $S\in V^E$, optimizing over combinations of E-graph edges and ``jumps" of cost $\epsilon^E h(S_i,S_{i+1})$. If the blackbox heuristic $h$ is cheap to compute, this preprocessing runs in $O(|V^E|^2)$ time, which is negligible for small E-graphs.
+We cannot afford to compute $h^E$ according to its literal definition, as there are far too many paths to consider. Fortunately, there exists a practical means of computing it. By the triangle inequality, any consecutive pair of $h(S_{i-1},S_i)$ terms can be merged into one. Thus we lose no generality in restricting $S_i$ to lie on the E-graph for $0 < i < N$.
 
-Later, when generating $S \notin V^E$, we see that we have already precomputed all but the first ``leg" of the path in the definition of $h^E(S)$. Thus, we derive the mathematically equivalent but much cheaper computation
+Let $V^E$ be the union of the goal states and the E-graph's vertices.
+In addition to following E-graph edges, we imagine it's possible to ``jump" from $S$ to $S'$ with cost $\epsilon^E h(S,S')$. That is, let $c'(S,S') = \min\left(c(S,S'),~\epsilon^E g_S(S')\right)$
+
+
+In a preprocessing stage before the main search, we can apply Dijkstra's algorithm once in reverse with the costs $c'$ to compute the estimated distance-to-goal $h^E(S)$ from every $S\in V^E$. If the blackbox heuristic $h$ is cheap to compute, this preprocessing runs in $O(|V^E|^2)$ time, which is negligible for small E-graphs.
+
+Later, when generating $S \notin V^E$, we see that we have already precomputed costs of paths consisting of all but the first edge of $\pi$ according to the definition of $h^E(S)$. Thus, we derive the mathematically equivalent but much cheaper computation
 \[h^E(S) = \min_{S'\in V^E} \left(\epsilon^E h(S,S') + h^E(S')\right)\]
 
 $h^E$ is $\epsilon^E$-consistent [cite].
 
 \section{Algorithm Discussion and Analysis}
 
-Now we combine the ideas from HSP and E-graphs to construct a domain-independent STRIPS planner which learns from experience. In STRIPS, the consistent heuristic $h(S,S')$ is given by the HSP-max estimate $h^{HSP}_S(S')$. We can compute $h^{HSP}_S(S')$ for all $S,S'\in V^E$ in precisely $|V^E|$ runs of the dynamic programming we saw before.
+Now we combine the ideas from HSP and E-graphs to construct a domain-independent STRIPS planner which learns from experience. In STRIPS, the consistent heuristic $h(S,S')$ is given by the HSP-max estimate $h^{HSP}_S(S')$. We can compute $h^{HSP}_S(S')$ for all $S,S'\in V^E$ in precisely $|V^E|$ runs of the dynamic programming we saw before: each run gives us $|V^E|$ of these results, yielding $(|V^E|)^2$ values in total.
 
 Thus, our preprocessing work is roughly equivalent to that of generating $|V^E|$ states, which will be small. As before, Dijkstra's algorithm combines an inflation of these estimates with the E-graph edges to derive $h^E(S)$ for all $S\in V^E$. Note that in STRIPS, $V^E$ need not include every goal state: the minimal goal $G$ suffices as it's always the easiest to reach in the heuristic relaxation.
 
@@ -138,7 +163,7 @@ Upon encountering a new state $S\notin V^E$, we run dynamic programming procedur
 
 \[h^E(S) = \min_{S'\in V^E} \left( \epsilon^E g_S(S') + h^E(S') \right)\]
 
-Here we remark that, when E-graphs are involved, the values $g_S(S')$ appear on the right-hand side for multiple states S', not just $g_S(G)$. Since HSP would be computing all the $g$-values anyway, we get to consult the E-graph essentially for free. The only additional work here is the minimization over $S'\in V^E$, which is negligible for small E-graphs. A pseudocode implementation is listed in Algorithms \ref{alg:ComputeG} and \ref{alg:Search}.
+We remark that, when E-graphs are involved, the values $g_S(S')$ on the right-hand side range over a variety of different states $S'$. Compare this to the formula for $h^{HSP}$, which uses only $g_S(G)$. HSP would still compute all the $g_S$-values despite using them only once, so here we get to consult the E-graph essentially for free. The only additional work is the minimization over $S'\in V^E$, which is negligible for small E-graphs. A pseudocode implementation is listed in Algorithms \ref{alg:ComputeG} and \ref{alg:Search}.
 
 \begin{algorithm}
 \caption{ComputeG(S)}
