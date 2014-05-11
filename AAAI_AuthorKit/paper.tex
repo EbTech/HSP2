@@ -238,9 +238,21 @@ We remark that, when E-graphs are involved, the values $g_S(S')$ on the right-ha
 \end{algorithmic}
 \end{algorithm}
 
-ComputeG implements the dynamic programming computation of $g$-values. Each iteration of the outermost loop permanently fixes at least one $g_S(a)$ value, so it does at most $|A|+1$ iterations. Multiplying everything together and ignoring cardinality signs for brevity, the runtime bound is $O(\mathbf{A^2O})$. Thus, each state generated costs $O(\mathbf{A^2O + V^E})$ time. The preprocessing cost is $O(\mathbf{A^2OV^E + (V^E)^2})$, asymptotically equivalent to preemptively generating every state in $V^E$. For comparison, standard HSP without E-graphs takes $O(\mathbf{A^2O})$ time (with essentially the same constant factors) to generate a state, and does not incur the cost of generating a state unless the A* encounters it.
+ComputeG implements the dynamic programming computation of $g$-values.
+Each iteration of the outermost loop permanently fixes at least one $g_S(a)$ value, so it does at most $|A|+1$ iterations.
+Multiplying everything together and ignoring cardinality signs for brevity, the runtime bound is $O(\mathbf{A^2O})$.
+Thus, each state generated costs $O(\mathbf{A^2O + V^E})$ time.
+The preprocessing cost is $O(\mathbf{A^2OV^E + (V^E)^2})$, asymptotically equivalent to preemptively generating every state in $V^E$.
+For comparison, standard HSP without E-graphs takes $O(\mathbf{A^2O})$ time (with essentially the same constant factors) to generate a state, and does not incur the cost of generating a state unless the A* encounters it.
 
-By $\epsilon\epsilon^E$-consistency of the weighted heuristic $\epsilon h^E$, the E-graph search is complete and the path it finds is guaranteed to be at most $\epsilon \epsilon^E$-suboptimal. However, it makes no guarantee of improving the search time. Potential gains depend entirely on choosing a good small set of edges to call our E-graph. In our experiments we simply keep the previous solution path; different choices remain a topic of investigation for future research.
+\begin{thm}
+Provided there exists a path from initial state $I$ to a goal state $S\supseteq G$, the experience-biased HSP algorithm finds a path which is at most $\epsilon\epsilon^E$-suboptimal.
+\end{thm}
+
+This follows directly from Theorems 1 and 2, since the weighted heuristic $\epsilon h^E$ is $\epsilon \epsilon^E$-consistent.
+However, E-graphs make no guarantee of improving the search time. Indeed, biasing toward bad regions could trap the planner inside large local optima.
+Potential gains depend entirely on choosing a good small set of edges to form our E-graph.
+In our experiments, we simply keep the previous solution path; different choices remain a topic for future investigations.
 
 \section{Experimental Setup}
 
