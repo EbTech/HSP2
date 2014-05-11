@@ -8,9 +8,13 @@
 % Additional packages
 \usepackage{amsmath}
 \usepackage{amssymb}
+\usepackage{amsthm}
 \usepackage{algorithm}
 \usepackage{algorithmic}
 \usepackage{graphicx}
+\newtheorem{thm}{Theorem}
+\newtheorem{defn}{Definition}
+% END Additional packages
 \frenchspacing
 \setlength{\pdfpagewidth}{8.5in}
 \setlength{\pdfpageheight}{11in}
@@ -31,7 +35,18 @@ Pittsburgh, PA 15213\\
 \maketitle
 \begin{abstract}
 \begin{quote}
-Weighted-heuristic A* search is a standard technique in currently state-of-the-art domain-independent symbolic planners. Experience graphs provide a means to augment existing heuristics with a bias toward using a select set of edges, typically taken from solutions to past queries. Thus, a planner can learn to bias its search toward well-understood regions and reuse parts of old plans. We show how to extend the HSP STRIPS planner with E-graphs at minimal cost. In doing so, we maintain the ability to configure path cost suboptimality guarantees, while in practice speeding up subsequent planning episodes across multiple domains.
+Weighted A* search is the foundation for state-of-the-art domain-independent symbolic planners.
+An important open challenge for these planners is to utilize experience with similar planning problems to speed up subsequent planning episodes.
+Experience graphs have recently shown promise as a technique for plan reuse in the context of weighted A* searches in robotics, by biasing them towards a subgraph of the search space, typically chosen to consist of the edges used in previous plans.
+In this paper, we demonstrate how to augment symbolic planners with
+experience graphs, using the HSP STRIPS planner as a representative
+example.
+The resulting planners are able to trade off seamlessly
+between plan quality and runtime and thus have advantages over past
+plan-reuse techniques, such as planning by analogy.
+We demonstrate
+experimentally that our planner speeds up HSP by a factor of 2 or more on
+many domains while achieving about the same plan quality.
 \end{quote}
 \end{abstract}
 
@@ -107,8 +122,8 @@ the estimated cost of achieving all atoms in $G$. Note that $g_S(\cdot)$ is eval
 To keep the computations feasible, define $g_S(P) = \max_{p\in P} g_S(p)$ for atom sets $P$.
 The resulting HSP-max heuristic is an underestimate; indeed, it satisfies a stronger property called \textbf{consistency}.
 
-\textbf{Definition+Theorem (needs TeX formatting):} a heuristic $h$ is called $\epsilon$-consistent if $h(S) = 0$ when $S$ is a goal and $h(S) \le \epsilon c(S,S') + h(S')$ for all $S,S'\in V$.
-This property suffices to guarantee that each state is expanded only once by A*, and that the path it finds costs no more than $\epsilon$ times the optimal path. Consistency is synonymous with $1$-consistency.
+\begin{defn} For $\epsilon\ge 1$, a heuristic $h$ is called \textbf{$\epsilon$-consistent} if $h(S) = 0$ when $S$ is a goal and $h(S) \le \epsilon c(S,S') + h(S')$ for all $S,S'\in V$. $h$ is \textbf{consistent} if it is $1$-consistent. \end{defn}
+\begin{thm} Given an $\epsilon$-consistent heuristic and expanding no node more than once, A* is guaranteed to find a path costing no more than $\epsilon$ times the optimal path cost.  \end{thm}
 
 If the atoms were truly independent, a more accurate estimate would be $g_S(P) = \sum_{p\in P} g_S(p)$.
 Despite its inconsistency in general, the latter HSP-plus heuristic is often useful in practice, as it uses more information and biases more greedily toward the goal.
@@ -135,8 +150,7 @@ over all goal states $S_N$ and paths $\pi = \langle S_0,S_1,...,S_N \rangle$.
 $c^E$ are E-graph edge costs, or $\infty$ if the E-graph edge does not exist.
 
 In the limit as $\epsilon^E \rightarrow 1$, following E-graph edges offers no advantage as $h$ is already an underestimate. Hence, using the triangle inequality to coalesce the sum,
-\begin{eqnarray*}h^E(S_0) = \min_{N,S_N,\pi} \sum_{i=1}^N h(S_{i-1},S_i) = \min_{N,S_N,\pi} h(S_0,S_N)
-\\= \min_{S_N} h(S_0,S_N)\end{eqnarray*}
+\[h^E(S_0) = \min_{N,S_N,\pi} \sum_{i=1}^N h(S_{i-1},S_i) = \min_{S_N} h(S_0,S_N)\]
 
 Conversely as $\epsilon^E \rightarrow\infty$, the cost remains bounded iff $S_0$ is in an E-graph component which also contains a goal state, and the minimizing path becomes the one which uses the fewest edges outside the E-graph.
 
@@ -146,14 +160,18 @@ Let $V^E$ be the union of the goal states and the E-graph's vertices.
 In addition to following E-graph edges, we imagine it's possible to ``jump" from $S$ to $S'$ with cost $\epsilon^E h(S,S')$. That is, let $c'(S,S') = \min\left(c(S,S'),~\epsilon^E g_S(S')\right)$
 
 
-In a preprocessing stage before the main search, we can apply Dijkstra's algorithm once in reverse with the costs $c'$ to compute the estimated distance-to-goal $h^E(S)$ from every $S\in V^E$. If the blackbox heuristic $h$ is cheap to compute, this preprocessing runs in $O(|V^E|^2)$ time, which is negligible for small E-graphs.
+In a preprocessing stage before the main search, we apply Dijkstra's algorithm once in reverse with the costs $c'$ to compute the estimated distance-to-goal $h^E(S)$ from every $S\in V^E$. If the blackbox heuristic $h$ is cheap to compute, this preprocessing takes $O(|V^E|^2)$ time, which is negligible for small E-graphs.
 
 Later, when generating $S \notin V^E$, we see that we have already precomputed costs of paths consisting of all but the first edge of $\pi$ according to the definition of $h^E(S)$. Thus, we derive the mathematically equivalent but much cheaper computation
 \[h^E(S) = \min_{S'\in V^E} \left(\epsilon^E h(S,S') + h^E(S')\right)\]
 
-$h^E$ is $\epsilon^E$-consistent [cite].
+\begin{thm}$h^E$ is $\epsilon^E$-consistent. [cite]\end{thm}
 
-\section{Algorithm Discussion and Analysis}
+\includegraphics[scale=0.4]{Pentagon.png}
+
+This figure illustrates the idea. Dark edges have cost 3 and are in the E-graph. Light edges represent the jumps $h(S_i,S_j) = 2$ (with one exception: $h(S,G) = 5$), which we inflate by a factor $\epsilon^E=2$ to make 4 (or 10, respectively). Dijkstra's algorithm is used to compute the $h^E$ values shown alongside each node.
+
+\section{Experience-Biased HSP}
 
 Now we combine the ideas from HSP and E-graphs to construct a domain-independent STRIPS planner which learns from experience. In STRIPS, the consistent heuristic $h(S,S')$ is given by the HSP-max estimate $h^{HSP}_S(S')$. We can compute $h^{HSP}_S(S')$ for all $S,S'\in V^E$ in precisely $|V^E|$ runs of the dynamic programming we saw before: each run gives us $|V^E|$ of these results, yielding $(|V^E|)^2$ values in total.
 
@@ -163,7 +181,7 @@ Upon encountering a new state $S\notin V^E$, we run dynamic programming procedur
 
 \[h^E(S) = \min_{S'\in V^E} \left( \epsilon^E g_S(S') + h^E(S') \right)\]
 
-We remark that, when E-graphs are involved, the values $g_S(S')$ on the right-hand side range over a variety of different states $S'$. Compare this to the formula for $h^{HSP}$, which uses only $g_S(G)$. HSP would still compute all the $g_S$-values despite using them only once, so here we get to consult the E-graph essentially for free. The only additional work is the minimization over $S'\in V^E$, which is negligible for small E-graphs. A pseudocode implementation is listed in Algorithms \ref{alg:ComputeG} and \ref{alg:Search}.
+We remark that, when E-graphs are involved, the values $g_S(S')$ on the right-hand side range over a variety of different states $S'$. Compare this to the formula for $h^{HSP}$, which uses only $g_S(G)$. HSP would still compute all the $g_S$-values despite using them only once, so here we get to consult the E-graph essentially for free. The only additional work is the minimization over $S'\in V^E$, which is negligible for small E-graphs. A pseudocode implementation is listed in Algorithms \ref{alg:ComputeG} and \ref{alg:Search}. The parameter $\epsilon^E$ controls bias toward the E-graph, while $\epsilon$ provides an additional goal-directed bias.
 
 \begin{algorithm}
 \caption{ComputeG(S)}
@@ -199,7 +217,7 @@ We remark that, when E-graphs are involved, the values $g_S(S')$ on the right-ha
 \ENDFOR
 \ENDFOR
 \STATE Compute $h^E$ on $V^E$ by reverse Dijkstra from $G$ with $c'$.
-\STATE Do $\epsilon$-weighted A* from $I$ on full graph with heuristic $h^E$:
+\STATE Run A* on the full graph from $I$ with heuristic $\epsilon h^E$:
 \FOR{$S \notin V^E$ when generated}
 \STATE ComputeG(S)
 \STATE $h^E(S) \leftarrow \min_{S'\in V^E} \left( \epsilon^E g_S(S') + h^E(S') \right)$
@@ -213,11 +231,9 @@ We remark that, when E-graphs are involved, the values $g_S(S')$ on the right-ha
 \end{algorithmic}
 \end{algorithm}
 
-ComputeG implements the dynamic programming computation of $g$-values. Each iteration of the outermost loop permanently fixes at least one $g_S(a)$ value, so it does at most $|A|+1$ iterations. Multiplying everything together and ignoring cardinality signs for brevity, the runtime bound is $O(\mathbf{A^2O})$. Thus, each state generated costs $O(\mathbf{A^2O + V^E})$ time, and the preprocessing cost is asymptotically equivalent to preemptively generating every state in $V^E$.
+ComputeG implements the dynamic programming computation of $g$-values. Each iteration of the outermost loop permanently fixes at least one $g_S(a)$ value, so it does at most $|A|+1$ iterations. Multiplying everything together and ignoring cardinality signs for brevity, the runtime bound is $O(\mathbf{A^2O})$. Thus, each state generated costs $O(\mathbf{A^2O + V^E})$ time, and the preprocessing cost is asymptotically equivalent to preemptively generating every state in $V^E$. For comparison, standard HSP without E-graphs takes $O(\mathbf{A^2O})$ time (with essentially the same constant factors) to generate a state, and does not incur the cost of generating a state unless the A* encounters it.
 
-By comparison, standard HSP without E-graphs takes $O(\mathbf{A^2O})$ time (with essentially the same constant factors) to generate a state, and does not incur the cost of generating a state unless the A* encounters it. The E-graph search maintains completeness and $\epsilon \epsilon^E$-suboptimality bounds on the path found. However, it makes no guarantee of improving the search time. Potential gains depend entirely on choosing a good small set of edges to call our E-graph. In our experiments we simply keep the previous solution path, but different choices remain a topic of investigation for future research.
-
-\includegraphics[scale=0.4]{Pentagon.png}
+By $\epsilon\epsilon^E$-consistency of the weighted heuristic $\epsilon h^E$, the E-graph search is complete and the path it finds is guaranteed to be at most $\epsilon \epsilon^E$-suboptimal. However, it makes no guarantee of improving the search time. Potential gains depend entirely on choosing a good small set of edges to call our E-graph. In our experiments we simply keep the previous solution path; different choices remain a topic of investigation for future research.
 
 \section{Experimental Setup}
 
