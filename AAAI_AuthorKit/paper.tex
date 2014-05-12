@@ -157,7 +157,9 @@ $c^E$ are E-graph edge costs, or $\infty$ if the E-graph edge does not exist.
 In the limit as $\epsilon^E \rightarrow 1$, following E-graph edges offers no advantage as $h$ is already an underestimate. Hence, using the triangle inequality to coalesce the sum,
 \[h^E(S_0) = \min_{N,S_N,\pi} \sum_{i=1}^N h(S_{i-1},S_i) = \min_{S_N} h(S_0,S_N)\]
 
-Conversely as $\epsilon^E \rightarrow\infty$, the cost remains bounded iff $S_0$ is in an E-graph component which also contains a goal state, and the minimizing path becomes the one which uses the fewest edges outside the E-graph.
+Conversely, as $\epsilon^E \rightarrow\infty$, the inflated terms dominate. Hence, the minimizing path becomes the one which incurs the least estimated cost outside the E-graph. In particular, $h^E$ has the following property:
+
+\textit{For sufficiently large $\epsilon^E$, once the A* frontier touches an E-graph component which includes a goal state, no node outside the E-graph will ever again need to be expanded.} This means, for instance, that if the E-graph already contains a path from the start to a goal, then A* guided by $h^E$ with large bias term $\epsilon^E$ will never leave the E-graph. If the E-graph is small, a solution would promptly be discovered.
 
 We cannot afford to compute $h^E$ according to its literal definition, as there are far too many paths to consider. Fortunately, there exists a practical means of computing it. By the triangle inequality, any consecutive pair of $h(S_{i-1},S_i)$ terms can be merged into one. Thus we lose no generality in restricting $S_i$ to lie on the E-graph for $0 < i < N$.
 
