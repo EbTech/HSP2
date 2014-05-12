@@ -3895,8 +3895,8 @@ readEGraph(string fileName)
         eDist[i][j].max = min(eDist[i][j].max, eDist[i][k].max + eDist[k][j].max);
       }
   // TODO remove debug code
-  fprintf(statsFile, "EgSize= %u ", experience.size());
-  /*for (size_t i = 0; i < eNode.size(); ++i)
+  /*fprintf(statsFile, "EgSize= %u ", experience.size());
+  for (size_t i = 0; i < eNode.size(); ++i)
   {
       fprintf( stdout, "%d'th distance to goal is %d:\t", i, eDist[i][0].max );
       for( size_t p = 1; p < SIZE_ATOMS; ++p )
