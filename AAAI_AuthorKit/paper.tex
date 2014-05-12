@@ -145,7 +145,7 @@ Formally, an E-graph is a subgraph of the state space.
 We update it between queries, typically by adding the solution path from the previous search query.
 
 Suppose we have a consistent heuristic $h(S,S')$ for the distance between arbitrary pairs of states.
-That is, $h$ obeys the triangle inequality with respect to edge costs, and $h(S,S) = 0$ for all $S\in V$.
+That is, $h$ obeys the triangle inequality, is never dominated by an edge cost, and $h(S,S) = 0$ for all $S\in V$.
 The E-graph heuristic $h^E$ biases the search to follow E-Graph edges instead of $h$ by penalizing the latter by an inflation factor $\epsilon^E > 1$.
 To be precise, define
 
@@ -159,7 +159,7 @@ In the limit as $\epsilon^E \rightarrow 1$, following E-graph edges offers no ad
 
 Conversely, as $\epsilon^E \rightarrow\infty$, the inflated terms dominate. Hence, the minimizing path becomes the one which incurs the least estimated cost outside the E-graph. In particular, $h^E$ has the following property:
 
-\textit{For sufficiently large $\epsilon^E$, once the A* frontier touches an E-graph component which includes a goal state, no node outside the E-graph will ever again need to be expanded.} This means, for instance, that if the E-graph already contains a path from the start to a goal, then A* guided by $h^E$ with large bias term $\epsilon^E$ will never leave the E-graph. If the E-graph is small, a solution would promptly be discovered.
+\textit{For sufficiently large $\epsilon^E$, once the A* frontier touches an E-graph component which includes a goal state, no node outside the E-graph will ever again need to be expanded.} This means, for instance, that if the E-graph already contains a path from the start to a goal, then A*, guided by $h^E$ with large bias parameter $\epsilon^E$, will never leave the E-graph. If the E-graph is small, a solution would promptly be discovered.
 
 We cannot afford to compute $h^E$ according to its literal definition, as there are far too many paths to consider. Fortunately, there exists a practical means of computing it. By the triangle inequality, any consecutive pair of $h(S_{i-1},S_i)$ terms can be merged into one. Thus we lose no generality in restricting $S_i$ to lie on the E-graph for $0 < i < N$.
 
@@ -167,7 +167,7 @@ Let $V^E$ be the union of the goal states and the E-graph's vertices.
 In addition to following E-graph edges, we imagine it's possible to ``jump" from $S$ to $S'$ with cost $\epsilon^E h(S,S')$. That is, let $c'(S,S') = \min\left(c(S,S'),~\epsilon^E g_S(S')\right)$
 
 
-In a preprocessing stage before the main search, we apply Dijkstra's algorithm once in reverse with the costs $c'$ to compute the estimated distance-to-goal $h^E(S)$ from every $S\in V^E$. If the blackbox heuristic $h$ is cheap to compute, this preprocessing takes $O(|V^E|^2)$ time, which is negligible for small E-graphs.
+In a preprocessing stage before the main search, we apply Dijkstra's algorithm once in reverse with the costs $c'$ to compute the estimated distance-to-goal $h^E(S)$ from every $S\in V^E$. If the heuristic $h$ is cheap to compute, this preprocessing takes $O(|V^E|^2)$ time, which is insignificant for small E-graphs and goal sets.
 
 Later, when generating $S \notin V^E$, we see that we have already precomputed costs of paths consisting of all but the first edge of $\pi$ according to the definition of $h^E(S)$. Thus, we derive the mathematically equivalent but much cheaper computation
 \[h^E(S) = \min_{S'\in V^E} \left(\epsilon^E h(S,S') + h^E(S')\right)\]
@@ -176,9 +176,9 @@ Later, when generating $S \notin V^E$, we see that we have already precomputed c
 
 \includegraphics[scale=0.4]{Pentagon.png}
 
-The above figure illustrates the idea. Suppose the dark edges have cost 3 and make up the E-graph. Non-E-graph edges are not shown; instead, light edges represent the jump estimates $h(S_i,S_j) = 2$ (with one exception: $h(S,G) = 5$), which we inflate by a factor $\epsilon^E=2$ to make 4 (or 10, respectively). Dijkstra's algorithm follows the edges backward to compute the $h^E$ values shown alongside each node.
+The above figure illustrates the idea. Suppose the dark edges have cost 3 and make up the E-graph. Off-E-graph edges are not shown, as they are only accessed indirectly via $h$; instead, light edges represent the jump estimates $h(S_i,S_j) = 2$ (with one exception: $h(S,G) = 5$), which we inflate by a factor $\epsilon^E=2$ to make 4 (or 10, respectively). Dijkstra's algorithm follows dark and light edges backward to compute the $h^E$ values shown alongside each node.
 
-$G$ is on the E-graph, though this need not be the case in general. $V^E$ is the pentagon on the right, and its $h^E$ values are precomputed before the search. $h^E(S)$ is computed only when A* generates $S\notin V^E$.
+$G$ is on the E-graph, though this need not be the case in general. $V^E$ is the pentagon on the right, and its $h^E$ values are precomputed before the search. For $S\notin V^E$, $h^E(S)$ is computed only when A* generates $S$.
 
 \section{Experience-Biased HSP}
 
@@ -289,6 +289,6 @@ Distinct states in STRIPS can actually be very similar, differing only by a few 
 What if graph changes? Anytime incremental...
 
 \bibliographystyle{aaai}
-\bibliography{paper.bib}
+\bibliography{paper}
 
 \end{document}
