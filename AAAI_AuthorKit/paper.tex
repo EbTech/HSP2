@@ -150,9 +150,9 @@ Pseudocode is listed in Algorithm \ref{alg:ComputeG}.
 \ENDFOR
 \REPEAT
 \FORALL{$op \in O$}
-\STATE $pCost \leftarrow g_S(Prec(op))$
+\STATE $cost\_estimate \leftarrow g_S(Prec(op)) + Cost(op)$
 \FORALL{$a \in Add(op)$}
-\STATE $g_S(a) \leftarrow \min \left(g_S(a),~pCost + Cost(op)\right)$
+\STATE $g_S(a) \leftarrow \min \left(g_S(a),~cost\_estimate\right)$
 \ENDFOR
 \ENDFOR
 \UNTIL{no further change in $g_S$-values}
@@ -174,9 +174,7 @@ The E-graph heuristic $h^E$ biases the search to follow E-Graph edges instead of
 To be precise, define
 
 \[h^E(S_0) = \min_{N,S_N,\pi} \sum_{i=1}^N \min \{\epsilon^E h(S_{i-1},S_i),c^E(S_{i-1},S_i)\}\]
-over all goal states $S_N$ and paths $\pi = \langle S_0,S_1,...,S_N \rangle$.
-
-$c^E$ are E-graph edge costs, or $\infty$ if the E-graph edge does not exist.
+with the minimization taking place over all goal states $S_N$ and paths $\pi = \langle S_0,S_1,...,S_N \rangle$. $c^E$ are E-graph edge costs, or $\infty$ if the E-graph edge does not exist.
 
 In the limit as $\epsilon^E \rightarrow 1$, following E-graph edges offers no advantage as $h$ is already an underestimate. Hence, using the triangle inequality to coalesce the sum,
 \[h^E(S_0) = \min_{N,S_N,\pi} \sum_{i=1}^N h(S_{i-1},S_i) = \min_{S_N} h(S_0,S_N)\]
