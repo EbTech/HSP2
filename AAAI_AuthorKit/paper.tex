@@ -135,7 +135,31 @@ Despite its inconsistency in general, the latter HSP-plus heuristic is often use
 
 From a computational perspective, the HSP heuristic must compute $g_S(a)$ for all $a\in A$ whenever a new state $S$ is generated.
 This can be done by dynamic programming, iterating the recursive formula to a fixpoint in Bellman-Ford-like fashion.
-In a sense, it seems we are wasting a lot of work by estimating the cost to reach every atom when we only require $g_S(G)$.
+Pseudocode is listed in Algorithm \ref{alg:ComputeG}.
+
+\begin{algorithm}
+\caption{ComputeG($S$)}
+\label{alg:ComputeG}
+\begin{algorithmic}
+\FORALL{$a \in A$}
+\IF{$a \in S$}
+\STATE $g_S(a) \leftarrow 0$
+\ELSE
+\STATE $g_S(a) \leftarrow \infty$
+\ENDIF
+\ENDFOR
+\REPEAT
+\FORALL{$op \in O$}
+\STATE $pCost \leftarrow g_S(Prec(op))$
+\FORALL{$a \in Add(op)$}
+\STATE $g_S(a) \leftarrow \min \left(g_S(a),~pCost + Cost(op)\right)$
+\ENDFOR
+\ENDFOR
+\UNTIL{no further change in $g_S$-values}
+\end{algorithmic}
+\end{algorithm}
+
+In a sense, a lot of work is wasted by estimating the cost to reach every atom, when we only require $g_S(G)$.
 Later, we'll see how to make better use of this computation.
 
 \section{Experience Graphs}
@@ -186,37 +210,15 @@ $G$ is on the E-graph, though this need not be the case in general. $V^E$ is the
 
 \section{Experience-Biased HSP}
 
-Now we combine the ideas from HSP and E-graphs to construct a domain-independent STRIPS planner which learns from experience. In STRIPS, a consistent heuristic $h(S,S')$ is given by the HSP-max estimate $h^{HSP}_S(S')$. We can compute $h^{HSP}_S(S')$ for all $S,S'\in V^E$ in precisely $|V^E|$ runs of the dynamic programming we saw before: each run gives us $|V^E|$ of these results, yielding $(|V^E|)^2$ values in total.
+Now we combine the ideas from HSP and E-graphs to construct a domain-independent STRIPS planner which learns from experience. In STRIPS, a consistent heuristic $h(S,S')$ is given by the HSP-max estimate $g_S(S')$. We can compute $g_S(S')$ for all $S,S'\in V^E$ in precisely $|V^E|$ runs of Algorithm \ref{alg:ComputeG}: each run provides us with $|V^E|$ of these results, yielding $(|V^E|)^2$ values in total.
 
-Thus, our preprocessing work is roughly equivalent to that of generating $|V^E|$ states, which will be small. As before, Dijkstra's algorithm combines an inflation of these estimates with the E-graph edges to derive $h^E(S)$ for all $S\in V^E$. Note that in STRIPS, $V^E$ need not include every goal state: the minimal goal $G$ suffices as it's always the easiest to reach in the heuristic relaxation.
+As before, Dijkstra's algorithm combines an inflation of these estimates with the E-graph edges to derive $h^E(S)$ for all $S\in V^E$. Note that in STRIPS, $V^E$ need not include every goal state: the minimal goal $G$ suffices as it's always the easiest to reach in the heuristic relaxation.
 
-Upon encountering a new state $S\notin V^E$, we run dynamic programming procedure again to compute $g_S(a)$ for all atoms $a\in A$. Then it's a simple matter to compute the E-graph heuristic by
+Upon encountering a new state $S\notin V^E$, we run Algorithm \ref{alg:ComputeG} again to compute $g_S(a)$ for all atoms $a\in A$. Then it's a simple matter to compute the E-graph heuristic by
 
 \[h^E(S) = \min_{S'\in V^E} \left( \epsilon^E g_S(S') + h^E(S') \right)\]
 
-We remark that, when E-graphs are involved, the values $g_S(S')$ on the right-hand side range over a variety of different states $S'$. Compare this to the formula for $h^{HSP}$, which uses only $g_S(G)$. HSP would still compute all the $g_S$-values despite using them only once, so here we get to consult the E-graph essentially for free. The only additional work is the minimization over $S'\in V^E$, which takes O($|V^E||A|$) time. A pseudocode implementation is listed in Algorithms \ref{alg:ComputeG} and \ref{alg:Search}. The parameter $\epsilon^E$ controls bias toward the E-graph, while $\epsilon$ provides an additional goal-directed bias.
-
-\begin{algorithm}
-\caption{ComputeG($S$)}
-\label{alg:ComputeG}
-\begin{algorithmic}
-\FORALL{$a \in A$}
-\IF{$a \in S$}
-\STATE $g_S(a) \leftarrow 0$
-\ELSE
-\STATE $g_S(a) \leftarrow \infty$
-\ENDIF
-\ENDFOR
-\REPEAT
-\FORALL{$op \in O$}
-\STATE $pCost \leftarrow g_S(Prec(op))$
-\FORALL{$a \in Add(op)$}
-\STATE $g_S(a) \leftarrow \min \left(g_S(a),~pCost + Cost(op)\right)$
-\ENDFOR
-\ENDFOR
-\UNTIL{no further change in $g$-values}
-\end{algorithmic}
-\end{algorithm}
+We remark that, when E-graphs are involved, the values $g_S(S')$ on the right-hand side range over a variety of different states $S'$. Compare this to the formula for $h^{HSP}$, which uses only $g_S(G)$. HSP would still compute all the $g_S$-values despite using them only once, so here we get to consult the E-graph essentially for free. The only additional work is the minimization over $S'\in V^E$, which takes O($|V^E||A|$) time. A pseudocode implementation is listed in Algorithm \ref{alg:Search}. The parameter $\epsilon^E$ controls bias toward the E-graph, while $\epsilon$ provides an additional goal-directed bias.
 
 \begin{algorithm}
 \caption{Search()}
@@ -244,12 +246,14 @@ We remark that, when E-graphs are involved, the values $g_S(S')$ on the right-ha
 \end{algorithmic}
 \end{algorithm}
 
-ComputeG implements the dynamic programming computation of $g$-values.
+ComputeG($S$) implements the dynamic programming computation of $g_S$-values.
 Each iteration of the outermost loop permanently fixes at least one $g_S(a)$ value, so it does at most $|A|+1$ iterations.
-Multiplying everything together and ignoring cardinality signs for brevity, the runtime bound is $O(\mathbf{A^2O})$.
+Multiplying everything together and ignoring cardinality signs for brevity, the runtime bound on Algorithm \ref{alg:ComputeG} is $O(\mathbf{A^2O})$.
 Thus, each state generated costs $O(\mathbf{A^2O + V^EA})$ time.
 The preprocessing cost is $O(\mathbf{V^EA^2O + (V^E)^2A})$, asymptotically equivalent to preemptively generating every state in $V^E$.
-For comparison, standard HSP without E-graphs takes $O(\mathbf{A^2O})$ time (with essentially the same constant factors) to generate a state, and does not incur the cost of generating a state unless the A* encounters it. Provided the number of E-graph vertices is limited to $O(\mathbf{AO})$, the asymptotic cost of node generation is unchanged.
+
+For comparison, standard HSP without E-graphs takes $O(\mathbf{A^2O})$ time (with essentially the same constant factors) to generate each state, and does not incur the cost of generating a state unless the A* frontier encounters it.
+When HSP is augmented with small E-graphs, the same asymptotic bound continues to hold, provided that the number of E-graph vertices is limited to $O(\mathbf{AO})$. Furthermore, we retain completeness and the ability to configure suboptimality bounds by adjusting the bias parameters:
 
 \begin{thm}
 Provided there exists a path from initial state $I$ to a goal state $S\supseteq G$, the experience-biased HSP algorithm finds a path which is at most $\epsilon\epsilon^E$-suboptimal.
