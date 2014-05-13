@@ -94,13 +94,15 @@ The intuition is to remember previously generated paths so that, when a new star
 A variant of weighted A* is employed which biases its focus toward the E-graph.
 While this work demonstrates promising results in robot motion planning, E-graphs have never before been applied to symbolic domain representations such as the STRIPS language.
 
-Our present contribution is to investigate the use of E-graphs in STRIPS domains. In particular, we take the HSP planner \cite{bonet2001planning} as a representative of the class of modern weighted A* based symbolic planners, and augment its heuristic with a bias toward its E-graph. After presenting the related works, we begin by describing the STRIPS language and the original HSP heuristic. In the following section, we formally introduce E-graphs in technical detail. Then we combine the two approaches, resulting in the new Experience-Biased HSP planner. We present the algorithm and discuss its theoretical properties. This is followed by experiments showing promise for the application of E-graphs to symbolic problem solving. Finally, we conclude with some thoughts on extensions worth investigating.
+Our present contribution is to investigate the use of E-graphs in STRIPS domains. In particular, we take the HSP2 planner \cite{bonet2001planning} as a representative of the class of modern weighted A* based symbolic planners, and augment its heuristic with a bias toward its E-graph. After presenting the related works, we begin by describing the STRIPS language and the original HSP heuristic. In the following section, we formally introduce E-graphs in technical detail. Then we combine the two approaches, resulting in the new Experience-Biased HSP planner. We present the algorithm and discuss its theoretical properties. This is followed by experiments showing promise for the application of E-graphs to symbolic problem solving. Finally, we conclude with some thoughts on extensions worth investigating.
 
 \section{Related Work}
 
-In recent times, a lot of symbolic planners have emerged based on forward weighted A* search. This paper focuses on augmenting HSP2 as a representative example, because it is fairly simple and forms the foundation of many modern planners. The use of E-graphs is orthogonal to most recent improvements, so our methods can in principle be adapted to any heuristic A* planner.
+Alot of symbolic planners that have emerged in recent years are based on forward weighted A* search. This paper focuses on HSP2 as a representative example, because it is fairly simple and embodies the core ideas common to many state-of-the-art planners. The use of E-graphs is orthogonal to many of the latest improvements, so our methods can in principle be adapted to any A* planner.
 
-After HSP2, fast downward and LAMA...
+Fast Downward \cite{helmert2006fast} is a planner that decomposes planning tasks using a contruct called the causal graph heuristic. The LAMA planner \cite{richter2010lama}, which won the International Planning Competition 2008, replaces the causal graph with landmark heuristics.
+
+While many of these planners perform preprocessing in an attempt to automatically extract knowledge about the domain, none are capable of using their own fully generated plans to inform later searches. A few works were made in similar directions, for example \cite{fikes1972learning} are able to generalize their plans, \cite{veloso1992learning} is able to relate by analogy to known solutions, and \cite{borrajo2012probabilistically} probabilistically chooses whether to step along past plans or explore new paths.
 
 \section{STRIPS Language}
 
@@ -116,19 +118,19 @@ Given a STRIPS problem $P$, we seek a low-cost path from the initial state $I\in
 
 \section{HSP Heuristic}
 
-Many of today's state-of-the-art domain-independent STRIPS planners are based on the HSP planner \cite{bonet2001planning}, which we now describe.
+Many of today's state-of-the-art domain-independent STRIPS planners are based on the HSP2 planner \cite{bonet2001planning}, which we now describe.
 It's common to compute heuristics by solving an easier, relaxed version of the original problem. In STRIPS, one might ignore the delete lists of operations.
 Since having more atoms makes preconditions and the goal condition more likely to hold, this can only make the problem easier, so the resulting heuristic never overestimates the true cost.
 
 However, even the relaxed STRIPS planning problem includes set-cover as a special case, making it NP-hard.
 Intuitively, we see that the relaxed search space remains exponential.
-To reduce it, HSP decouples the atoms, instead estimating the cost of achieving each individual atom.
+To reduce it, HSP2 decouples the atoms, instead estimating the cost of achieving each individual atom.
 
-Let's say we want a heuristic estimate of the distance from $S$ to a goal that contains $G$. HSP estimates the cost to achieve an atom $a\in A$ from $S$ by $g_S(a) = $
+Let's say we want a heuristic estimate of the distance from $S$ to a goal that contains $G$. HSP2 estimates the cost to achieve an atom $a\in A$ from $S$ by $g_S(a) = $
 \[\begin{cases} 0  &\mbox{if } a \in S
 \\ \min_{op\mid a\in Add(op)} \left(g_S(Prec(op)) + Cost(op)\right)  &\mbox{if } a \notin S \end{cases}\]
 
-The HSP heuristic is then defined by
+The HSP heuristic (also used in HSP2) is then defined by
 \[h^{HSP}(S) = g_S(G),\]
 the estimated cost of achieving all atoms in $G$. Note that $g_S(\cdot)$ is evaluated on certain atom sets, namely $Prec(op)$ and $G$.
 To keep the computations feasible, define $g_S(P) = \max_{p\in P} g_S(p)$ for atom sets $P$.
@@ -219,7 +221,7 @@ $G$ is on the E-graph, though this need not be the case in general. $V^E$ is the
 
 \section{Experience-Biased HSP}
 
-Now we combine the ideas from HSP and E-graphs to construct a domain-independent STRIPS planner which learns from experience. In STRIPS, a consistent heuristic $h(S,S')$ is given by the HSP-max estimate $g_S(S')$. We can compute $g_S(S')$ for all $S,S'\in V^E$ in precisely $|V^E|$ runs of Algorithm \ref{alg:ComputeG}: each run provides us with $|V^E|$ of these results, yielding $(|V^E|)^2$ values in total.
+Now we combine the ideas from HSP2 and E-graphs to construct a domain-independent STRIPS planner which learns from experience. In STRIPS, a consistent heuristic $h(S,S')$ is given by the HSP-max estimate $g_S(S')$. We can compute $g_S(S')$ for all $S,S'\in V^E$ in precisely $|V^E|$ runs of Algorithm \ref{alg:ComputeG}: each run provides us with $|V^E|$ of these results, yielding $(|V^E|)^2$ values in total.
 
 As before, Dijkstra's algorithm combines an inflation of these estimates with the E-graph edges to derive $h^E(S)$ for all $S\in V^E$. Note that in STRIPS, $V^E$ need not include every goal state: the minimal goal $G$ suffices as it's always the easiest to reach in the heuristic relaxation.
 
@@ -227,7 +229,7 @@ Upon encountering a new state $S\notin V^E$, we run Algorithm \ref{alg:ComputeG}
 
 \[h^E(S) = \min_{S'\in V^E} \left( \epsilon^E g_S(S') + h^E(S') \right)\]
 
-We remark that, when E-graphs are involved, the values $g_S(S')$ on the right-hand side range over a variety of different states $S'$. Compare this to the formula for $h^{HSP}$, which uses only $g_S(G)$. HSP would still compute all the $g_S$-values despite using them only once, so here we get to consult the E-graph essentially for free. The only additional work is the minimization over $S'\in V^E$, which takes O($|V^E||A|$) time. A pseudocode implementation is listed in Algorithm \ref{alg:Search}. The parameter $\epsilon^E$ controls bias toward the E-graph, while the weight $\epsilon$ provides a uniform goal-directed bias.
+We remark that, when E-graphs are involved, the values $g_S(S')$ on the right-hand side range over a variety of different states $S'$. Compare this to the formula for $h^{HSP}$, which uses only $g_S(G)$. HSP2 would still compute all the $g_S$-values despite using them only once, so here we get to consult the E-graph essentially for free. The only additional work is the minimization over $S'\in V^E$, which takes O($|V^E||A|$) time. A pseudocode implementation is listed in Algorithm \ref{alg:Search}. The parameter $\epsilon^E$ controls bias toward the E-graph, while the weight $\epsilon$ provides a uniform goal-directed bias.
 
 \begin{algorithm}
 \caption{Search()}
@@ -256,14 +258,14 @@ We remark that, when E-graphs are involved, the values $g_S(S')$ on the right-ha
 
 ComputeG($S$) implements the dynamic programming computation of $g_S$-values.
 Each iteration of the outermost loop permanently fixes at least one $g_S(a)$ value, so it does at most $|A|+1$ iterations.
-Multiplying nested loop iterations together and ignoring cardinality signs for brevity, the runtime bound on Algorithm \ref{alg:ComputeG} is $O(\mathbf{A^2O})$.
+Multiplying nested loop iterations together and dropping cardinality signs for brevity, the runtime bound on Algorithm \ref{alg:ComputeG} is $O(\mathbf{A^2O})$.
 Thus, each state generated costs $O(\mathbf{A^2O + V^EA})$ time.
 
 The preprocessing cost is $O(\mathbf{V^EA^2O + (V^E)^2A})$, asymptotically equivalent to preemptively generating every state in $V^E$.
 In fact, most of the preprocessing requires no knowledge of $G$, so it can be done in advance of the new planning query. Once the query $\langle I,G\rangle$ is given, the remaining work consists of completing the $c'(S,G)$ computations from $g_S(a),a\in G$, and then running Dijkstra's algorithm from $G$. This costs only $O(\mathbf{V^E(A + V^E)})$ time.
 
-For comparison, standard HSP without E-graphs takes $O(\mathbf{A^2O})$ time (with essentially the same constant factors) to generate each state, and does not incur the cost of generating a state unless the A* frontier encounters it.
-When HSP is augmented with small E-graphs, the same asymptotic bound continues to hold, provided that the number of E-graph vertices is limited to $O(\mathbf{AO})$. Furthermore, we retain completeness and the ability to configure suboptimality bounds by adjusting the bias parameters:
+For comparison, standard HSP2 without E-graphs takes $O(\mathbf{A^2O})$ time (with essentially the same constant factors) to generate each state, and does not incur the cost of generating a state unless the A* frontier encounters it.
+When HSP2 is augmented with small E-graphs, the same asymptotic bound continues to hold, provided that the number of E-graph vertices is limited to $O(\mathbf{AO})$. Furthermore, we retain completeness and the ability to configure suboptimality bounds by adjusting the bias parameters:
 
 \begin{thm}
 Provided there exists a path from initial state $I$ to a goal state $S\supseteq G$, the experience-biased HSP algorithm finds a path which is at most $\epsilon\epsilon^E$-suboptimal.
@@ -278,7 +280,7 @@ Finally, we remark that the Experience-Biased HSP algorithm is highly paralleliz
 
 \section{Experimental Setup}
 
-We augmented the HSP planner code \cite{bonet2001planning} which won [AI COMPETITION IN 2000] with E-graphs. Our aim is to observe the effect of E-graphs on planning time given that we've already solved a closely related problem. To measure this, we run three searches for each problem instance. First, we run the original problem using standard HSP. Then, we generate a modified problem by moving the start and goal nodes randomly for X steps each. The second search solves the modified problem in the standard way. Finally, the third search solves the modified problem using as E-graph a random Y\% of the path obtained from the first search. The reason for saving only a portion of the previous experience is to simulate the effects of disconnected E-graphs, as might arise after multiple searches. Our main comparisons will be between the number of nodes generated in the second and third searches. In practice, the times followed similar ratios to the number of nodes generated; as one would expect from the analyis in [PREVIOUS SECTION] since the E-graph resulting from Y\% of a single path is very small.
+We augmented the HSP2 planner code \cite{bonet2001planning} which won [AI COMPETITION IN 2000] with E-graphs. Our aim is to observe the effect of E-graphs on planning time given that we've already solved a closely related problem. To measure this, we run three searches for each problem instance. First, we run the original problem using standard HSP2. Then, we generate a modified problem by moving the start and goal nodes randomly for X steps each. The second search solves the modified problem in the standard way. Finally, the third search solves the modified problem using as E-graph a random Y\% of the path obtained from the first search. The reason for saving only a portion of the previous experience is to simulate the effects of disconnected E-graphs, as might arise after multiple searches. Our main comparisons will be between the number of nodes generated in the second and third searches. In practice, the times followed similar ratios to the number of nodes generated; as one would expect from the analyis in [PREVIOUS SECTION] since the E-graph resulting from Y\% of a single path is very small.
 
 \section{Experimental Results}
 
