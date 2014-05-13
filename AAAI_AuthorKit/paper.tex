@@ -262,6 +262,8 @@ However, E-graphs make no guarantee of improving the search time. Indeed, biasin
 Potential gains depend entirely on choosing a good small set of edges to form our E-graph.
 In our experiments, we simply keep the previous solution path; different choices remain a topic for future investigations.
 
+Finally, we remark that the Experience-Biased HSP algorithm is highly parallelizable, even if A* is retricted to expanding nodes sequentially. Recall that the sum, min and max functions are computable in logarithmic time using linearly many processors. With minor adjustments, then, ComputeG($S$) has parallel depth $O(\mathbf{A\log A\log O})$. With $\mathbf{AO}$ processors, the total cost of generating a state is $O(\mathbf{(A\log O + \log V^E)\log A})$. Using even more processors, the cost of \textit{expanding} a state can be reduced to the same by generating its successors in parallel.
+
 \section{Experimental Setup}
 
 We augmented the HSP planner code \cite{bonet2001planning} which won [AI COMPETITION IN 2000] with E-graphs. Our aim is to observe the effect of E-graphs on planning time given that we've already solved a closely related problem. To measure this, we run three searches for each problem instance. First, we run the original problem using standard HSP. Then, we generate a modified problem by moving the start and goal nodes randomly for X steps each. The second search solves the modified problem in the standard way. Finally, the third search solves the modified problem using as E-graph a random Y\% of the path obtained from the first search. The reason for saving only a portion of the previous experience is to simulate the effects of disconnected E-graphs, as might arise after multiple searches. Our main comparisons will be between the number of nodes generated in the second and third searches. In practice, the times followed similar ratios to the number of nodes generated; as one would expect from the analyis in [PREVIOUS SECTION] since the E-graph resulting from Y\% of a single path is very small.
@@ -286,7 +288,7 @@ The plot shows speedup (i.e. ratio of nodes generated in the second and third se
     \end{tabular}
 \end{center}
 
-\section{Analysis of HSPr}
+\section{Analysis of HSPr (section might be deleted, but please have a look)}
 
 Whether or not E-graphs are used, the call to ComputeG($S$) at each node generation is quite substantial. For this reason, a variant of HSP, called HSPr, searches the regression space of STRIPS, where each node represents a ``subgoal". The search proceeds backward from the goal. In this case, the heuristic must estimate the cost to achieve a given state $S$ (considered as a subgoal) from the initial state $I$. A single preprocessing call to ComputeG($I$) allows each $h^{HSPr}(S) = g_I(S)$ to be computed in $O(\mathbf{A})$ time.
 
