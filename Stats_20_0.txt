@@ -336,7 +336,7 @@
 , SolSize= 47 Gen= 1714, SolSize= 47 Gen= 1714, SolSize= 50 Gen= 1049	examples/transport/p27.5.pddl
 , SolSize= 68 Gen= 1793, SolSize= 68 Gen= 1793, SolSize= 64 Gen= 1630	examples/transport/p28.5.pddl
 , SolSize= 54 Gen= 997, SolSize= 54 Gen= 997, SolSize= 56 Gen= 881	examples/transport/p29.5.pddl
-, SolSize= 67 Gen= 1625, SolSize= 67 Gen= 1625, !SolSize= 0 Gen= 2053	examples/transport/p30.5.pddl
+, SolSize= 67 Gen= 1625, SolSize= 67 Gen= 1625, SolSize= 75 Gen= 2571	examples/transport/p30.5.pddl
 , SolSize= 1 Gen= 5, SolSize= 1 Gen= 5, SolSize= 1 Gen= 5	examples/zenotravel/pfile1
 , SolSize= 29 Gen= 623, SolSize= 29 Gen= 623, SolSize= 29 Gen= 596	examples/zenotravel/pfile10
 , SolSize= 18 Gen= 793, SolSize= 18 Gen= 793, SolSize= 18 Gen= 517	examples/zenotravel/pfile11

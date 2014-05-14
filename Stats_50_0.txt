@@ -282,7 +282,7 @@
 , SolSize= 5 Gen= 11, SolSize= 5 Gen= 11, SolSize= 5 Gen= 9	examples/scananalyzer/p23.pddl
 , SolSize= 5 Gen= 11, SolSize= 5 Gen= 11, SolSize= 5 Gen= 9	examples/scananalyzer/p24.pddl
 , SolSize= 10 Gen= 103, SolSize= 10 Gen= 103, SolSize= 10 Gen= 68	examples/scananalyzer/p25.2.pddl
-, SolSize= 26 Gen= 247, SolSize= 26 Gen= 247, !SolSize= 0 Gen= 318	examples/scananalyzer/p26.2.pddl
+, SolSize= 26 Gen= 247, SolSize= 26 Gen= 247, SolSize= 28 Gen= 472	examples/scananalyzer/p26.2.pddl
 , SolSize= 49 Gen= 126, SolSize= 49 Gen= 126, SolSize= 49 Gen= 120	examples/sokoban/p01.pddl
 , SolSize= 41 Gen= 263, SolSize= 41 Gen= 263, SolSize= 41 Gen= 120	examples/sokoban/p02.pddl
 , SolSize= 51 Gen= 89, SolSize= 51 Gen= 89, SolSize= 51 Gen= 89	examples/sokoban/p03.pddl

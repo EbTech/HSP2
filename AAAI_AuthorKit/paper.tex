@@ -20,7 +20,7 @@
 \setlength{\pdfpageheight}{11in}
 \pdfinfo{
 /Title (Experience-Biased Symbolic Planning)
-/Author (Aram Ebtekar, Mike Phillips, Maxim Likhachev, Sven Koenig)
+/Author (Aram Ebtekar, Mike Phillips, Sven Koenig, Maxim Likhachev)
 /Keywords (symbolic planning, E-graph, experience-biasedh, A* search, STRIPS, HSP)
 }
 \setcounter{secnumdepth}{0}  
@@ -29,13 +29,10 @@
 % proceedings, working notes, and technical reports.
 %
 \title{Experience-Biased Symbolic Planning}
-\author{Aram Ebtekar \and Mike Phillips \and Maxim Likhachev\\
-Carnegie Mellon University\\
-5000 Forbes Ave,\\
-Pittsburgh, PA 15213\\
-\And Sven Koenig\\
-University of Southern California\\
-Los Angeles, CA 90089
+\author{Aram Ebtekar$^\dagger$ \and Mike Phillips$^\dagger$ \and Sven Koenig\thanks{University of Southern California, Los Angeles, CA} \and Maxim Likhachev% <-this % stops a space
+\thanks{Carnegie Mellon University, Pittsburgh, PA.
+We thank Willow Garage for their support of this work. This research was also sponsored by ARL, under the Robotics CTA program grant W911NF-10-2-0016.}% <-this % stops a space
+%
 }
 \maketitle
 \begin{abstract}
@@ -97,6 +94,56 @@ While this work demonstrates promising results in robot motion planning, E-graph
 Our present contribution is to investigate the use of E-graphs in STRIPS domains. In particular, we take the HSP2 planner \cite{bonet2001planning} as a representative of the class of modern weighted A* based symbolic planners, and augment its heuristic with a bias toward its E-graph. After presenting the related works, we begin by describing the STRIPS language and the original HSP heuristic. In the following section, we formally introduce E-graphs in technical detail. Then we combine the two approaches, resulting in the new Experience-Biased HSP planner. We present the algorithm and discuss its theoretical properties. This is followed by experiments showing promise for the application of E-graphs to symbolic problem solving. Finally, we conclude with some thoughts on extensions worth investigating.
 
 \section{Related Work}
+
+Classically, case-based reasoning methods 
+such as PRIAR~\cite{Kamb:92}, SPA~\cite{Hank:95}, MRL~\cite{Koeh:94}, and NoLimit~\cite{mljournal}
+have been used recall 
+previous plans that appear similar to the current problem and 
+then adapt them to meet the new specifications.
+Compared to these methods, our work reuses prior experience in
+the context of modern weighted A* methods. We also provide
+a bound on the suboptimality of the solution. 
+
+Recently there has been work on incorporating prior knowledge 
+into modern planners (based on weighted A* and powerful heuristics).
+For instance, GPG~\cite{Gere:00} uses planning graphs to adapt a prior path to the 
+new scenario by searching locally within windows around plan 
+inconsistencies. To guarantee completeness, the windows can grow 
+if solutions are not found until they contrain the whole plan.
+In this work~\cite{DBLP:conf/iccbr/RosaOB07} case-based reasoning is used to choose the 
+order of state evaluations of EHC (enforced hill-climbing) which 
+is a component in modern planners such as FF. 
+
+OAKplan~\cite{Serina:2010:KFC:1860143.1860472} is a recent 
+case-based reasoning method which converts 
+planning instances to into a compact graph representation and 
+then uses recent kernel methods for matching labeled graphs to select
+a similar case to the problem at hand. The selected case is then 
+adapted using LPG-ADAPT~\cite{Fox06planstability} LPG-ADAPT is a replanning method 
+encourages \textit{plan stability}, which tries to make 
+sure that the new plan is as similar to the previous plan as possible. 
+The method also uses a modern heuristic search approach.
+
+ERRT-PLAN~\cite{workshop-icaps12-errtplan} presents a very different 
+approach to reuse in planning. 
+Similar to E-Graphs, ERRT has its roots in motion planning~\cite{Bruce:2002}.
+ERRT-PLAN applies this sampling-based motion planner that leverages 
+reuse to symbolic planning. The planner randomly chooses to extend 
+the search tree toward the goal, toward goals from previous 
+plans, or to reuse an action from a previous plan. 
+The extension operations are based on modern heuristic search
+planners.
+The stochastic nature of the direction the search progresses toward
+allows it to overcome local minima caused by misleading heuristics.
+
+The primary difference between our approach and previous ones 
+is that we plan with prior experience in a way that have provable
+bounds on suboptimality of the solution. The use of E-Graphs also
+allows us to formulate this in a way that the user has control over
+this suboptimality bound with an intuitive parameter that trades
+reuse (speed) for solution quality.
+
+\section{Old version of related works (to delete)}
 
 Alot of symbolic planners that have emerged in recent years are based on forward weighted A* search. This paper focuses on HSP2 as a representative example, because it is fairly simple and embodies the core ideas common to many state-of-the-art planners. The use of E-graphs is orthogonal to many of the latest improvements, so our methods can in principle be adapted to any A* planner.
 
@@ -213,7 +260,9 @@ Later, when generating $S \notin V^E$, we see that we have already precomputed c
 
 \begin{thm}$h^E$ is $\epsilon^E$-consistent. \cite{phillips2012graphs}\end{thm}
 
-\includegraphics[scale=0.4]{Pentagon.png}
+\begin{center}
+\includegraphics[scale=0.5]{Pentagon.png}
+\end{center}
 
 The above figure illustrates the idea. Suppose the dark edges have cost 3 and make up the E-graph. Off-E-graph edges are not shown, as they are only accessed indirectly via $h$; instead, light edges represent the jump estimates $h(S_i,S_j) = 2$ (with one exception: $h(S,G) = 5$), which we inflate by a factor $\epsilon^E=2$ to make 4 (or 10, respectively). Dijkstra's algorithm follows dark and light edges backward to compute the $h^E$ values shown alongside each node.
 
@@ -278,29 +327,201 @@ In our experiments, we simply keep the previous solution path; different choices
 
 Finally, we remark that the Experience-Biased HSP algorithm is highly parallelizable, even if A* is retricted to expanding nodes sequentially. Recall that the sum, min and max functions are computable in logarithmic time using linearly many processors. Therefore, with minor adjustments, ComputeG($S$) has parallel depth $O(\mathbf{A\log A\log O})$. With $\mathbf{A\max(O,V^E)}$ processors, the total cost of generating a state is $O(\mathbf{(A\log O + \log V^E)\log A})$. Using even more processors, the cost of \textit{expanding} a state can be reduced to the same by generating its successors in parallel. If still more processors are available, some may dedicate to the task of preemptively computing $h^E$ for states that are likely to be generated in the future, e.g. near the A* frontier.
 
-\section{Experimental Setup}
+\section{Experiment 1}
 
 We augmented the HSP2 planner code \cite{bonet2001planning} which won [AI COMPETITION IN 2000] with E-graphs. Our aim is to observe the effect of E-graphs on planning time given that we've already solved a closely related problem. To measure this, we run three searches for each problem instance. First, we run the original problem using standard HSP2. Then, we generate a modified problem by moving the start and goal nodes randomly for X steps each. The second search solves the modified problem in the standard way. Finally, the third search solves the modified problem using as E-graph a random Y\% of the path obtained from the first search. The reason for saving only a portion of the previous experience is to simulate the effects of disconnected E-graphs, as might arise after multiple searches. Our main comparisons will be between the number of nodes generated in the second and third searches. In practice, the times followed similar ratios to the number of nodes generated; as one would expect from the analyis in [PREVIOUS SECTION] since the E-graph resulting from Y\% of a single path is very small.
 
-\section{Experimental Results}
+\begin{figure}
+	\begin{center}
+	\includegraphics[scale=0.5]{Speedup_20_0.png}
+	\end{center}
+	\caption{20\% E-graph}
+	 \label{fig:s_20_0}
+\end{figure}
 
-\includegraphics[scale=0.4]{AIPlot.png}
+\begin{figure}
+	\begin{center}
+	\includegraphics[scale=0.5]{Speedup_50_0.png}
+	\end{center}
+	\caption{50\% E-graph}
+	 \label{fig:s_50_0}
+\end{figure}
+
+\begin{figure}
+	\begin{center}
+	\includegraphics[scale=0.5]{Speedup_80_0.png}
+	\end{center}
+	\caption{80\% E-graph}
+	 \label{fig:s_80_0}
+\end{figure}
+
+\begin{figure}
+	\begin{center}
+	\includegraphics[scale=0.5]{Cost_20_0.png}
+	\end{center}
+	\caption{20\% E-graph}
+	 \label{fig:c_20_0}
+\end{figure}
+
+\begin{figure}
+	\begin{center}
+	\includegraphics[scale=0.5]{Cost_50_0.png}
+	\end{center}
+	\caption{50\% E-graph}
+	 \label{fig:c_50_0}
+\end{figure}
+
+\begin{figure}
+	\begin{center}
+	\includegraphics[scale=0.5]{Cost_80_0.png}
+	\end{center}
+	\caption{80\% E-graph}
+	 \label{fig:c_80_0}
+\end{figure}
+
+\begin{table}
+	\begin{center}
+	    \begin{tabular}{| l | l | l | l | l |}
+	    \hline
+	    Domain & Inst & 20\% & 50\% & 80\%
+	    \\ \hline
+	    blocksworld & 35 & 1.08-1.82 & 1.37-3.73 & 1.90-5.84
+	    \\ \hline
+	    driverlog & 14 & 1.00-1.49 & 1.11-1.58 & 1.15-1.60
+	    \\ \hline
+	    elevators & 30 & 1.00-1.62 & 1.00-2.84 & 1.04-3.19
+	    \\ \hline
+	    freecell & 34 & 1.00-1.06 & 1.00-1.12 & 1.00-1.08
+	    \\ \hline
+	    grid & 2 & 1.07-1.18 & 2.16-3.57 & 2.22-3.75
+	    \\ \hline
+	    logistics00 & 28 & 0.91-1.04 & 0.98-1.13 & 1.03-1.19
+	    \\ \hline
+	    logistics98 & 5 & 0.95-1.01 & 1.09-1.62 & 1.24-3.00
+	    \\ \hline
+	    mprime & 19 & 1.00-1.00 & 1.00-1.07 & 1.00-2.46
+	    \\ \hline
+	    pegsolitaire & 29 & 1.00-3.57 & 1.13-4.49 & 1.68-6.63
+	    \\ \hline
+	    pipesworld-notankage & 15 & 1.00-3.27 & 1.00-7.07 & 1.00-9.95
+	    \\ \hline
+	    pipesworld-tankage & 8 & 1.00-1.00 & 1.00-1.02 & 1.00-1.45
+	    \\ \hline
+	    rovers & 13 & 0.97-1.23 & 1.23-7.09 & 1.23-7.17
+	    \\ \hline
+	    satellite & 16 & 0.99-1.00 & 1.00-1.26 & 1.00-1.26
+	    \\ \hline
+	    scananalyzer & 16 & 1.00-1.15 & 0.93-1.20 & 1.00-1.36
+	    \\ \hline
+	    sokoban & 11 & 1.12-2.10 & 1.32-3.02 & 1.56-7.80
+	    \\ \hline
+	    tpp & 10 & 1.00-1.00 & 1.00-1.23 & 1.00-2.31
+	    \\ \hline
+	    transport & 23 & 1.00-1.14 & 1.09-1.86 & 1.19-1.89
+	    \\ \hline
+	    zenotravel & 13 & 1.02-1.15 & 1.08-1.44 & 1.14-1.58
+	    \\ \hline
+	    TOTAL & 321 & 1.00-1.29 & 1.00-1.91 & 1.02-2.68
+	    \\ \hline
+	    \end{tabular}
+	\end{center}
+	\caption{Speedups for various E-graph \%s over various domains.}
+	 \label{tab:percent}
+\end{table}
+
+\section{Experiment 2}
+
+\begin{figure}
+	\begin{center}
+	\includegraphics[scale=0.5]{Speedup_100_5.png}
+	\end{center}
+	\caption{5 random steps}
+	 \label{fig:s_100_5}
+\end{figure}
+
+\begin{figure}
+	\begin{center}
+	\includegraphics[scale=0.5]{Speedup_100_20.png}
+	\end{center}
+	\caption{20 random steps}
+	 \label{fig:s_100_20}
+\end{figure}
+
+\begin{figure}
+	\begin{center}
+	\includegraphics[scale=0.5]{Speedup_100_50.png}
+	\end{center}
+	\caption{50 random steps}
+	 \label{fig:s_100_50}
+\end{figure}
+
+\begin{figure}
+	\begin{center}
+	\includegraphics[scale=0.5]{Cost_100_5.png}
+	\end{center}
+	\caption{5 random steps}
+	 \label{fig:c_100_5}
+\end{figure}
+
+\begin{figure}
+	\begin{center}
+	\includegraphics[scale=0.5]{Cost_100_20.png}
+	\end{center}
+	\caption{20 random steps}
+	 \label{fig:c_100_20}
+\end{figure}
+
+\begin{figure}
+	\begin{center}
+	\includegraphics[scale=0.5]{Cost_100_50.png}
+	\end{center}
+	\caption{50 random steps}
+	 \label{fig:c_100_50}
+\end{figure}
 
 The plot shows speedup (i.e. ratio of nodes generated in the second and third searches) against a measure of problem size (i.e. nodes generated in the second search). Planning times followed similar trends as node generation counts, as one would expect from the analyis since the E-graph resulting from a half-path is very small. We see considerable speedups in many domains, while the plan costs stayed roughly the same (in fact, they became slightly shorter on average). Many domains saw no discernable effect, but none were significantly hurt by E-graphs.
 
-\begin{center}
-    \begin{tabular}{| l | l | l | l |}
-    \hline
-    Domain & 0 steps & 10 steps & 20 steps
-    \\ \hline
-    BlocksWord & 0 & 0 & 0
-    \\ \hline
-    Grid & 0 & 0 & 0
-    \\ \hline
-    Satellite & 0 & 0 & 0
-    \\ \hline
-    \end{tabular}
-\end{center}
+
+
+\begin{table}
+	\begin{center}
+	    \begin{tabular}{| l | l | l | l | l |}
+	    \hline
+	    Domain & Inst & 5 steps & 20 steps & 50 steps
+	    \\ \hline
+	    blocksworld & 35 & 2.12-7.92 & 2.12-8.70 & 2.21-6.25
+	    \\ \hline
+	    driverlog & 14 & 0.86-2.42 & 0.85-1.30 & 0.82-1.20
+	    \\ \hline
+	    elevators & 30 & 1.09-4.04 & 0.99-2.76 & 0.90-2.06
+	    \\ \hline
+	    grid & 2 & 2.21-3.71 & 1.11-1.34 & 1.10-1.30
+	    \\ \hline
+	    logistics00 & 28 & 1.00-1.15 & 0.90-1.11 & 0.84-1.18
+	    \\ \hline
+	    logistics98 & 5 & 1.01-2.95 & 0.82-2.06 & 0.80-2.41
+	    \\ \hline
+	    pipesworld-notankage & 15 & 1.09-5.30 & 1.00-5.46 & 1.00-2.88
+	    \\ \hline
+	    pipesworld-tankage & 8 & 1.00-1.20 & 0.99-1.00 & 1.00-1.13
+	    \\ \hline
+	    rovers & 13 & 1.00-1.50 & 1.00-1.00 & 1.00-1.00
+	    \\ \hline
+	    satellite & 16 & 0.91-1.25 & 0.87-1.15 & 0.90-1.43
+	    \\ \hline
+	    scananalyzer & 16 & 0.74-1.52 & 1.00-1.00 & 1.00-1.00
+	    \\ \hline
+	    transport & 23 & 1.26-1.91 & 0.93-1.87 & 0.98-1.46
+	    \\ \hline
+	    zenotravel & 13 & 0.80-1.27 & 0.84-1.02 & 1.00-1.00
+	    \\ \hline
+	    TOTAL & 218 & 0.99-2.72 & 1.00-2.07 & 1.00-1.88
+	    \\ \hline
+	    \end{tabular}
+	\end{center}
+	\caption{Speedups for various random walk distances over different domains.}
+	 \label{tab:walk}
+\end{table}
 
 \section{Analysis of HSPr (section to be deleted)}
 
