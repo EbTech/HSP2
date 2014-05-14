@@ -3540,8 +3540,8 @@ initialize( void )
   /* TODO make random walks configurable: randomly move start and goal */
   if (EGraphOut == "Test/trash.eg")
   {
-    randomWalk(staticInitialState, 0);
-    randomWalk(staticGoalState, 0);
+    randomWalk(staticInitialState, 50);
+    randomWalk(staticGoalState, 50);
     p = _low_initialAtoms;
     for (size_t at = 1; at < SIZE_ATOMS; ++at)
       if ( asserted( staticInitialState, at ) )
@@ -3921,7 +3921,7 @@ printEGraph(string fileName, double proportion = 1)
   }
   
   // TODO remove debug code
-  fprintf(statsFile, "ExpSize= %u ", experience.size());
+  //fprintf(statsFile, "ExpSize= %u ", experience.size());
   
   int n = experience.size();
   int k = std::round(n * proportion);
@@ -4108,7 +4108,7 @@ printStatistics( void )
   if (statsFile != nullptr)
   {
    if (EGraphIn == "Test/none.eg")
-      fprintf( statsFile, "Gen= %d ", generatedNodes );
+      fprintf( statsFile, "Gen= %d", generatedNodes );
     else
       fprintf( statsFile, "Gen= %d\t%s\n", generatedNodes, problemFile );
   }
@@ -4573,7 +4573,7 @@ scheduler( schedule_t *schedule )
       fprintf( stderr, "SOLUTION: no solution found\n" );
       // TODO debug remove extra prints
       if (statsFile != nullptr )
-          fprintf( statsFile, "!" );
+          fprintf( statsFile, "!SolSize= 0 " );
     }
     else
     {

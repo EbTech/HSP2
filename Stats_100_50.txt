@@ -302,7 +302,3 @@
 , SolSize= 16 Gen= 201, SolSize= 15 Gen= 174, SolSize= 14 Gen= 169	examples/zenotravel/pfile7
 , SolSize= 16 Gen= 403, SolSize= 18 Gen= 335, SolSize= 18 Gen= 335	examples/zenotravel/pfile8
 , SolSize= 25 Gen= 503, SolSize= 24 Gen= 394, SolSize= 33 Gen= 707	examples/zenotravel/pfile9
-, !SolSize= 0 Gen= 1312, !SolSize= 0 Gen= 984, !SolSize= 0 Gen= 1304	examples/zzztemp/prob13.pddl
-, !SolSize= 0 Gen= 2768, !SolSize= 0 Gen= 2878, !SolSize= 0 Gen= 2878	examples/zzztemp/prob14.pddl
-, !SolSize= 0 Gen= 12213, !SolSize= 0 Gen= 12329, !SolSize= 0 Gen= 12309	examples/zzztemp/prob15.pddl
-, !SolSize= 0 Gen= 6873, !SolSize= 0 Gen= 6878, !SolSize= 0 Gen= 6878	examples/zzztemp/prob16.pddl

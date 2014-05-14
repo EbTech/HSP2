@@ -1,5 +1,5 @@
-#!/bin/sh
-#rm -r Test/*
+!/bin/sh
+rm -r Test/*
 
 #for prob in "6-0" "7-0" "8-0" "9-0" "10-0" "11-0" "12-0" "13-0" "14-0" "14-1" "15-0" "15-1" "16-1" "16-2" "17-0"
 #do
@@ -14,20 +14,18 @@
 #  echo "--------------------------------------------------------------------------------"
 #done
 
-#for dir in examples/*/
-#for dir in "examples/mprime/" "examples/openstacks/" "examples/parcprinter-strips/" "examples/pegsolitaire/"
-#for dir in "examples/pipesworld-notankage/" "examples/pipesworld-tankage/" "examples/rovers/" "examples/satellite/" "examples/scananalyzer/" "examples/sokoban/" "examples/tpp/" "examples/transport/" "examples/zenotravel/"
-for dir in "examples/blocks/" "examples/elevators/" "examples/rovers/" "examples/satellite/"
+for dir in examples/*/
+#for dir in "examples/blocks/" "examples/driverlog/" "examples/elevators/" "examples/freecell/" "examples/grid/" "examples/logistics00/" "examples/logistics98/" "examples/mprime/" "examples/openstacks/" "examples/pegsolitaire/" "examples/pipesworld-notankage/" "examples/pipesworld-tankage/" "examples/rovers/" "examples/satellite/" "examples/scananalyzer/" "examples/sokoban/" "examples/tpp/" "examples/transport/" "examples/zenotravel/"
 do
 	mkdir -p Test/${dir}
-	for filename in ${dir}p*.pddl
+	for filename in ${dir}p*
 	do
-	if [ "${filename}" != "${dir}p*.pddl" ]
+	if [ "${filename}" != "${dir}p*" ]
 	then
 		#without file extension: Test/$(basename "$filename" .pddl).eg
-		./bin/hsp2 -v 0 -w 1 -e 5 -f Test/none.eg Test/${filename}.eg -S [forward,h1eplus,2000] ${filename} ${dir}domain.pddl
-		./bin/hsp2 -v 0 -w 1 -e 5 -f Test/none.eg Test/trash.eg -S [forward,h1eplus,2000] ${filename} ${dir}domain.pddl
-		./bin/hsp2 -v 0 -w 1 -e 5 -f Test/${filename}.eg Test/trash.eg -S [forward,h1eplus,2000] ${filename} ${dir}domain.pddl
+		./bin/hsp2 -v 0 -w 1 -e 5 -f Test/none.eg Test/${filename}.eg -S [forward,h1eplus,5000] ${filename} ${dir}domain.pddl
+		./bin/hsp2 -v 0 -w 1 -e 5 -f Test/none.eg Test/trash.eg -S [forward,h1eplus,5000] ${filename} ${dir}domain.pddl
+		./bin/hsp2 -v 0 -w 1 -e 5 -f Test/${filename}.eg Test/trash.eg -S [forward,h1eplus,5000] ${filename} ${dir}domain.pddl
 	fi
 	done
 done
