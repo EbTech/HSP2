@@ -29,9 +29,8 @@
 % proceedings, working notes, and technical reports.
 %
 \title{Experience-Biased Symbolic Planning}
-\author{Aram Ebtekar$^\dagger$ \and Mike Phillips$^\dagger$ \and Sven Koenig\thanks{University of Southern California, Los Angeles, CA} \and Maxim Likhachev% <-this % stops a space
-\thanks{Carnegie Mellon University, Pittsburgh, PA.
-We thank Willow Garage for their support of this work. This research was also sponsored by ARL, under the Robotics CTA program grant W911NF-10-2-0016.}% <-this % stops a space
+\author{Aram Ebtekar$^\dagger$ \and Mike Phillips$^\dagger$ \and Sven Koenig\thanks{University of Southern California, Los Angeles, CA 90089} \and Maxim Likhachev% <-this % stops a space
+\thanks{Carnegie Mellon University, Pittsburgh, PA 15217}% <-this % stops a space
 %
 }
 \maketitle
@@ -145,7 +144,7 @@ reuse (speed) for solution quality.
 
 \section{Old version of related works (to delete)}
 
-Alot of symbolic planners that have emerged in recent years are based on forward weighted A* search. This paper focuses on HSP2 as a representative example, because it is fairly simple and embodies the core ideas common to many state-of-the-art planners. The use of E-graphs is orthogonal to many of the latest improvements, so our methods can in principle be adapted to any A* planner.
+A lot of symbolic planners that have emerged in recent years are based on forward weighted A* search. This paper focuses on HSP2 as a representative example, because it is fairly simple and embodies the core ideas common to many state-of-the-art planners. The use of E-graphs is orthogonal to many of the latest improvements, so our methods can in principle be adapted to any A* planner.
 
 Fast Downward \cite{helmert2006fast} is a planner that decomposes planning tasks using a contruct called the causal graph heuristic. The LAMA planner \cite{richter2010lama}, which won the International Planning Competition 2008, replaces the causal graph with landmark heuristics.
 
@@ -184,7 +183,7 @@ To keep the computations feasible, define $g_S(P) = \max_{p\in P} g_S(p)$ for at
 The resulting HSP-max heuristic is an underestimate; indeed, it satisfies a stronger property called \textbf{consistency}.
 
 \begin{defn} For $\epsilon\ge 1$, a heuristic $h$ is called \textbf{$\epsilon$-consistent} if $h(S) = 0$ when $S$ is a goal and $h(S) \le \epsilon c(S,S') + h(S')$ for all $S,S'\in V$. $h$ is \textbf{consistent} if it is $1$-consistent. \end{defn}
-\begin{thm} Given an $\epsilon$-consistent heuristic and expanding no node more than once, A* is guaranteed to find a path costing no more than $\epsilon$ times the optimal path cost. [CITE ARA*] \end{thm}
+\begin{thm} Given an $\epsilon$-consistent heuristic and expanding no node more than once, A* is guaranteed to find a path costing no more than $\epsilon$ times the optimal path cost \cite{LikGorThr-ara}. \end{thm}
 
 If the atoms were truly independent, a more accurate estimate would be $g_S(P) = \sum_{p\in P} g_S(p)$.
 Despite its inconsistency in general, the latter HSP-plus heuristic is often useful in practice, as it uses more information and biases more greedily toward the goal.
@@ -260,11 +259,15 @@ Later, when generating $S \notin V^E$, we see that we have already precomputed c
 
 \begin{thm}$h^E$ is $\epsilon^E$-consistent. \cite{phillips2012graphs}\end{thm}
 
-\begin{center}
-\includegraphics[scale=0.5]{Pentagon.png}
-\end{center}
+\begin{figure}
+	\begin{center}
+	\includegraphics[scale=0.5]{Pentagon.png}
+	\end{center}
+	\caption{An example E-graph and corresponding heuristic computations.}
+	\label{fig:example}
+\end{figure}
 
-The above figure illustrates the idea. Suppose the dark edges have cost 3 and make up the E-graph. Off-E-graph edges are not shown, as they are only accessed indirectly via $h$; instead, light edges represent the jump estimates $h(S_i,S_j) = 2$ (with one exception: $h(S,G) = 5$), which we inflate by a factor $\epsilon^E=2$ to make 4 (or 10, respectively). Dijkstra's algorithm follows dark and light edges backward to compute the $h^E$ values shown alongside each node.
+Figure \ref{fig:example} illustrates the idea. Suppose the dark edges have cost 3 and make up the E-graph. Off-E-graph edges are not shown, as they are only accessed indirectly via $h$; instead, light edges represent the jump estimates $h(S_i,S_j) = 2$ (with one exception: $h(S,G) = 5$), which we inflate by a factor $\epsilon^E=2$ to make 4 (or 10, respectively). Dijkstra's algorithm follows dark and light edges backward to compute the $h^E$ values shown alongside each node.
 
 $G$ is on the E-graph, though this need not be the case in general. $V^E$ is the pentagon on the right, and its $h^E$ values are precomputed before the search. For $S\notin V^E$, $h^E(S)$ is computed only when A* generates $S$.
 
