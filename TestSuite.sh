@@ -14,8 +14,7 @@ rm -r Test/*
 #  echo "--------------------------------------------------------------------------------"
 #done
 
-#for dir in examples/*/
-for dir in "examples/satellite/" "examples/blocks/"
+for dir in examples/*/
 #for dir in "examples/blocks/" "examples/driverlog/" "examples/elevators/" "examples/freecell/" "examples/grid/" "examples/logistics00/" "examples/logistics98/" "examples/mprime/" "examples/openstacks/" "examples/pegsolitaire/" "examples/pipesworld-notankage/" "examples/pipesworld-tankage/" "examples/rovers/" "examples/satellite/" "examples/scananalyzer/" "examples/sokoban/" "examples/tpp/" "examples/transport/" "examples/zenotravel/"
 do
 	mkdir -p Test/${dir}
