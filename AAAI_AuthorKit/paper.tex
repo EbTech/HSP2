@@ -349,69 +349,71 @@ The E-graph consists of 20\%, 50\% or 80\% of the edges selected at random from 
 Define \textbf{speedup} as the ratio of the number of nodes generated in the control to the number generated in the E-graph search.
 Likewise, define the \textbf{cost improvement} as the ratio of solution cost in the control to cost in the E-graph search.
 
-The results are summarized in Table \ref{tab:percent}.
+Results are summarized in Table \ref{tab:percent}.
+To estimate the typical range of speedups, we present the 25th and 75th percentile speedups among the instances of each domain.
+The full data is plotted in Figured \ref{fig:s_20_0} to \ref{fig:s_80_0}.
 We see that while performance in virtually unaffected in some domains, it's never substantially worsened, and in certain domains the experience helps greatly.
-For example, results are highly encouraging in the Blocks World.
+For example, results are highly encouraging in the Blocks domain.
 Furthermore, Figure \ref{fig:c_50_0} shows that the solution quality remains competitive; indeed, we see that when E-graphs are employed, the path cost is slightly reduced on average.
 
-Note that 100\%, or perhaps even 80\%, of the E-graph would seem to trivially grant us the solution, as we could simply follow the remembered path depth-first.
+Note that using 100\%, or perhaps even 80\%, of the E-graph would seem to trivially grant us the solution, as we could simply follow the remembered path depth-first.
 In practice, since we fixed the bias parameter to $\epsilon^E=5$ rather than raising it to an extremely large value, the search expands a fair number of states even if we remember most or all of the path.
 This is necessary to ensure the suboptimality bound, as the planner does not know whether the E-graph can be ``trusted" to yield an efficient path.
 
 \begin{figure}
-	\begin{center}
+	\centering
 	\includegraphics[scale=0.5]{Cost_50_0.png}
-	\end{center}
-	\caption{Relative costs when planning with 50\% of the control experience, displaced 0 steps from the control query.}
+	\caption{Relative plan costs using 50\% of the control experience, displaced 0 steps from the control query.}
 	 \label{fig:c_50_0}
 \end{figure}
 
 \begin{table}
-	\begin{center}
-	    \begin{tabular}{| l | l | l | l | l |}
+	\centering
+	\resizebox{\columnwidth}{!}{%
+	    \begin{tabular}{| r | c | c | c | c |}
 	    \hline
-	    Domain & Inst & 20\% & 50\% & 80\%
+	    Domain & Count & 20\% exp & 50\% exp & 80\% exp
 	    \\ \hline
 	    blocks & 35 & 1.08-1.82 & 1.37-3.73 & 1.90-5.84
-	    \\ \hline
+	    \\ 
 	    driverlog & 14 & 1.00-1.49 & 1.11-1.58 & 1.15-1.60
-	    \\ \hline
+	    \\ 
 	    elevators & 30 & 1.00-1.62 & 1.00-2.84 & 1.04-3.19
-	    \\ \hline
+	    \\ 
 	    freecell & 34 & 1.00-1.06 & 1.00-1.12 & 1.00-1.08
-	    \\ \hline
+	    \\ 
 	    grid & 2 & 1.07-1.18 & 2.16-3.57 & 2.22-3.75
-	    \\ \hline
+	    \\ 
 	    logistics00 & 28 & 0.91-1.04 & 0.98-1.13 & 1.03-1.19
-	    \\ \hline
+	    \\ 
 	    logistics98 & 5 & 0.95-1.01 & 1.09-1.62 & 1.24-3.00
-	    \\ \hline
+	    \\ 
 	    mprime & 19 & 1.00-1.00 & 1.00-1.07 & 1.00-2.46
-	    \\ \hline
+	    \\ 
 	    pegsolitaire & 29 & 1.00-3.57 & 1.13-4.49 & 1.68-6.63
-	    \\ \hline
+	    \\ 
 	    pipesworld-notankage & 15 & 1.00-3.27 & 1.00-7.07 & 1.00-9.95
-	    \\ \hline
+	    \\ 
 	    pipesworld-tankage & 8 & 1.00-1.00 & 1.00-1.02 & 1.00-1.45
-	    \\ \hline
+	    \\ 
 	    rovers & 13 & 0.97-1.23 & 1.23-7.09 & 1.23-7.17
-	    \\ \hline
+	    \\ 
 	    satellite & 16 & 0.99-1.00 & 1.00-1.26 & 1.00-1.26
-	    \\ \hline
+	    \\ 
 	    scananalyzer & 16 & 1.00-1.15 & 0.93-1.20 & 1.00-1.36
-	    \\ \hline
+	    \\ 
 	    sokoban & 11 & 1.12-2.10 & 1.32-3.02 & 1.56-7.80
-	    \\ \hline
+	    \\ 
 	    tpp & 10 & 1.00-1.00 & 1.00-1.23 & 1.00-2.31
-	    \\ \hline
+	    \\ 
 	    transport & 23 & 1.00-1.14 & 1.09-1.86 & 1.19-1.89
-	    \\ \hline
+	    \\ 
 	    zenotravel & 13 & 1.02-1.15 & 1.08-1.44 & 1.14-1.58
 	    \\ \hline
 	    TOTAL & 321 & 1.00-1.29 & 1.00-1.91 & 1.02-2.68
 	    \\ \hline
-	    \end{tabular}
-	\end{center}
+	    \end{tabular}%
+	}
 	\caption{Experiment 1 speedup statistics, summarized by domain in the form (1st quartile)-(3rd quartile).}
 	 \label{tab:percent}
 \end{table}
@@ -427,58 +429,58 @@ This time, we save 100\% of the solution path found by the same control used in 
 Then for each problem, we form 3 modified problems where the start and goal are each displaced by 5, 20 or 50 steps of random walk along the graph, respectively.
 
 Note that due to the unpredictable nature of random walks, the shortest-paths distances of the moved nodes from their initial positions is only bounded from above by the number of steps taken, and may vary widely.
-In exactly one case out of the 3*218 = 654, this resulted in the goal already being achieved at the start state, with no nodes generated. In this case, we simply resolved the indeterminate form $\frac 00$ of the speedup to 1.
+In exactly one case out of the 3*218 = 654, this resulted in the goal already being achieved at the start state, with no nodes generated. In this case, we resolved the indeterminate form of the speedup $\frac 00$ to 1.
 
-Now for each of the displaced problems, we run 2 searches: the first uses no E-graph and acts as our new control, while the second uses the E-graph from the undisplaced original problem, consisting of the path found by the Experiment 1 control.
+Now on each of the displaced problems, we run 2 searches: the first uses no E-graph and acts as our new control, while the second uses the E-graph created using the undisplaced original problem, consisting of the path found by the Experiment 1 control.
 
 Results are summarized in Table \ref{tab:walk}.
-Again we observe encouraging speedups in some domains. As one would expect, the advantage provided by the E-graph decreases as we walk farther distances from the original query. Figure \ref{fig:c_100_20} is a representative plot to show that, once again, path quality is not typically made worse by using E-graphs.
+Again we observe encouraging speedups in some domains. As one would expect, the advantage provided by the E-graph decreases as we walk farther distances from the original query. Figure \ref{fig:c_100_20} is a representative plot to show that, once again, path quality is typically not made much worse by using E-graphs. Nonetheless, this time we do observe a slight cost degradation on average.
 
 \begin{figure}
-	\begin{center}
+	\centering
 	\includegraphics[scale=0.5]{Cost_100_20.png}
-	\end{center}
-	\caption{Relative costs when planning with 100\% of the control experience, displaced 20 steps from the control query.}
+	\caption{Relative plan costs using 100\% of the control experience, displaced 20 steps from the control query.}
 	 \label{fig:c_100_20}
 \end{figure}
 
 
 \begin{table}
-	\begin{center}
-	    \begin{tabular}{| l | l | l | l | l |}
+	\centering
+	\resizebox{\columnwidth}{!}{%
+	    \begin{tabular}{| r | c | c | c | c |}
 	    \hline
 	    Domain & Inst & 5 steps & 20 steps & 50 steps
 	    \\ \hline
 	    blocks & 35 & 2.12-7.92 & 2.12-8.70 & 2.21-6.25
-	    \\ \hline
+	    \\ 
 	    driverlog & 14 & 0.86-2.42 & 0.85-1.30 & 0.82-1.20
-	    \\ \hline
+	    \\ 
 	    elevators & 30 & 1.09-4.04 & 0.99-2.76 & 0.90-2.06
-	    \\ \hline
+	    \\ 
 	    grid & 2 & 2.21-3.71 & 1.11-1.34 & 1.10-1.30
-	    \\ \hline
+	    \\ 
 	    logistics00 & 28 & 1.00-1.15 & 0.90-1.11 & 0.84-1.18
-	    \\ \hline
+	    \\ 
 	    logistics98 & 5 & 1.01-2.95 & 0.82-2.06 & 0.80-2.41
-	    \\ \hline
+	    \\ 
 	    pipesworld-notankage & 15 & 1.09-5.30 & 1.00-5.46 & 1.00-2.88
-	    \\ \hline
+	    \\ 
 	    pipesworld-tankage & 8 & 1.00-1.20 & 0.99-1.00 & 1.00-1.13
-	    \\ \hline
+	    \\ 
 	    rovers & 13 & 1.00-1.50 & 1.00-1.00 & 1.00-1.00
-	    \\ \hline
+	    \\ 
 	    satellite & 16 & 0.91-1.25 & 0.87-1.15 & 0.90-1.43
-	    \\ \hline
+	    \\ 
 	    scananalyzer & 16 & 0.74-1.52 & 1.00-1.00 & 1.00-1.00
-	    \\ \hline
+	    \\ 
 	    transport & 23 & 1.26-1.91 & 0.93-1.87 & 0.98-1.46
-	    \\ \hline
+	    \\ 
 	    zenotravel & 13 & 0.80-1.27 & 0.84-1.02 & 1.00-1.00
 	    \\ \hline
 	    TOTAL & 218 & 0.99-2.72 & 1.00-2.07 & 1.00-1.88
 	    \\ \hline
-	    \end{tabular}
-	\end{center}
+	    \end{tabular}%
+	}
 	\caption{Experiment 2 speedup statistics, summarized by domain in the form (1st quartile)-(3rd quartile).}
 	 \label{tab:walk}
 \end{table}
@@ -489,59 +491,58 @@ Figures \ref{fig:s_20_0} to \ref{fig:s_100_50} display the individual speedups a
 
 On the other hand, there is some overhead to E-graph usage.
 Although we explained in the theoretical analysis that this overhead is not too large, constant factors do matter in practice, particularly when the speedups are still in the single-digits.
-We measured nodes generated instead of time to produce deterministic results which are independent of most engineering details.
-Our experiments serve as a proof-of-concept for our approach. Some additional work remains before state-of-the-art performance is achieved.
-Aside optimizations, parameter tuning, and integration with newer state-of-the-art heuristics, future work will need to consider ways to intelligently generalize from its experiences. This challenge does not arise to a great extent in domains such as geometric motion planning, making it unique to symbolic planning: distinct, even graphically distant, states can be conceptually related. (need to expand on this..)
+We measured the number of nodes generated instead of the time taken to complete each search, so as to produce deterministic results which are independent of most engineering details.
+Our experiments serve as a proof-of-concept for our approach.
+
+However, some additional work remains before state-of-the-art performance can be achieved.
+Aside from engineering optimizations, parameter tuning, and integration with newer state-of-the-art heuristics, future work will need to consider more intelligent ways to generalize from the experiences encoded by E-graphs.
+This presents a unique challenge in symbolic planning, as many distinct states which may even be a large distance apart in the state graph, may still be conceptually related.
+Thus, a planner could potentially benefit by learning to transfer experiences between parts of the state space which are somehow related.
+With such an approach, it would be essential to limit overgeneralization, so as not to waste time on a lot of false leads.
 
 \begin{figure}
-	\begin{center}
+	\centering
 	\includegraphics[scale=0.5]{Speedup_20_0.png}
-	\end{center}
 	\caption{Speedups when planning with 20\% of the control experience, displaced 0 steps from the control query.}
 	 \label{fig:s_20_0}
 \end{figure}
 
 \begin{figure}
-	\begin{center}
+	\centering
 	\includegraphics[scale=0.5]{Speedup_50_0.png}
-	\end{center}
 	\caption{Speedups when planning with 50\% of the control experience, displaced 0 steps from the control query.}
 	 \label{fig:s_50_0}
 \end{figure}
 
 \begin{figure}
-	\begin{center}
+	\centering
 	\includegraphics[scale=0.5]{Speedup_80_0.png}
-	\end{center}
 	\caption{Speedups when planning with 80\% of the control experience, displaced 0 steps from the control query.}
 	 \label{fig:s_80_0}
 \end{figure}
 
 \begin{figure}
-	\begin{center}
+	\centering
 	\includegraphics[scale=0.5]{Speedup_100_5.png}
-	\end{center}
 	\caption{Speedups when planning with 100\% of the control experience, displaced 5 steps from the control query.}
 	 \label{fig:s_100_5}
 \end{figure}
 
 \begin{figure}
-	\begin{center}
+	\centering
 	\includegraphics[scale=0.5]{Speedup_100_20.png}
-	\end{center}
 	\caption{Speedups when planning with 100\% of the control experience, displaced 20 steps from the control query.}
 	 \label{fig:s_100_20}
 \end{figure}
 
 \begin{figure}
-	\begin{center}
+	\centering
 	\includegraphics[scale=0.5]{Speedup_100_50.png}
-	\end{center}
 	\caption{Speedups when planning with 100\% of the control experience, displaced 50 steps from the control query.}
 	 \label{fig:s_100_50}
 \end{figure}
 
-\section{Conclusions (may need citations)}
+\section{Conclusions (will be revised)}
 
 We saw that by reusing pieces from past plans, E-graph-based planners can find solutions more quickly as they learn and acquire experiences. Many interesting directions remain for future investigation. It remains unclear how the bias parameters should be set. In addition, more advanced schemes will be needed to expand and prune E-graphs if they get large due to collecting a lot of solutions. Saving each computed plan seems like a good idea intuitively, but other possibilities may be worth investigating.
 
