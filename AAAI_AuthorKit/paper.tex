@@ -146,6 +146,8 @@ reuse (speed) for solution quality.
 
 A lot of symbolic planners that have emerged in recent years are based on forward weighted A* search. This paper focuses on HSP2 as a representative example, because it is fairly simple and embodies the core ideas common to many state-of-the-art planners. The use of E-graphs is orthogonal to many of the latest improvements, so our methods can in principle be adapted to any A* planner.
 
+HSP2 is based on the HSP planner [CITE] which performed well in the AIPS-98 planning competition. HSP combined a novel heuristic with a hill-climbing algorithm. HSP2 used the same heuristic, but with a weighted A* search, and produced even better results. FF and GRT develop these heuristics further.
+
 Fast Downward \cite{helmert2006fast} is a planner that decomposes planning tasks using a contruct called the causal graph heuristic. The LAMA planner \cite{richter2010lama}, which won the International Planning Competition 2008, replaces the causal graph with landmark heuristics.
 
 While many of these planners perform preprocessing in an attempt to automatically extract knowledge about the domain, none are capable of using their own fully generated plans to inform later searches. A few works were made in similar directions, for example \cite{fikes1972learning} are able to generalize their plans, \cite{veloso1992learning} is able to relate by analogy to known solutions, and \cite{borrajo2012probabilistically} probabilistically chooses whether to step along past plans or explore new paths.
@@ -310,7 +312,7 @@ We remark that, when E-graphs are involved, the values $g_S(S')$ on the right-ha
 
 ComputeG($S$) implements the dynamic programming computation of $g_S$-values.
 Each iteration of the outermost loop permanently fixes at least one $g_S(a)$ value, so it does at most $|A|+1$ iterations.
-Multiplying nested loop iterations together and dropping cardinality signs for brevity, the runtime bound on Algorithm \ref{alg:ComputeG} is $O(\mathbf{A^2O})$.
+Multiplying nested loop iterations together and dropping cardinality signs for brevity, a conservative runtime bound on Algorithm \ref{alg:ComputeG} is $O(\mathbf{A^2O})$.
 Thus, each state generated costs $O(\mathbf{A^2O + V^EA})$ time.
 
 The preprocessing cost is $O(\mathbf{V^EA^2O + (V^E)^2A})$, asymptotically equivalent to preemptively generating every state in $V^E$.
@@ -332,7 +334,33 @@ Finally, we remark that the Experience-Biased HSP algorithm is highly paralleliz
 
 \section{Experiment 1}
 
-We augmented the HSP2 planner code \cite{bonet2001planning} which won [AI COMPETITION IN 2000] with E-graphs. Our aim is to observe the effect of E-graphs on planning time given that we've already solved a closely related problem. To measure this, we run three searches for each problem instance. First, we run the original problem using standard HSP2. Then, we generate a modified problem by moving the start and goal nodes randomly for X steps each. The second search solves the modified problem in the standard way. Finally, the third search solves the modified problem using as E-graph a random Y\% of the path obtained from the first search. The reason for saving only a portion of the previous experience is to simulate the effects of disconnected E-graphs, as might arise after multiple searches. Our main comparisons will be between the number of nodes generated in the second and third searches. In practice, the times followed similar ratios to the number of nodes generated; as one would expect from the analyis in [PREVIOUS SECTION] since the E-graph resulting from Y\% of a single path is very small.
+We augmented the original HSP2 planner code \cite{bonet2001planning} with E-graphs.
+Since HSP-plus performs better in practice than HSP-max, we take the former heuristic as our baseline.
+Our aim is to observe the planning time speedup achieved by applying E-graphs on a variety of STRIPS domains.
+To measure this, we prepared two sets of experiments, of which this section describes the first.
+
+In this experiment set, we solve several hundred problem instances across 18 domains taken from the HSP2 test suite.
+For each problem, we first plan without experiences, using the HSP-plus heuristic in an A* search with weight $\epsilon=5$.
+This search acts as our scientific \textbf{control}.
+If the control fails to find a solution within 5 seconds, we discard the problem instance as being too difficult.
+Otherwise, we record the plan cost and the number of states that were generated during the search.
+Thus, we end up considering 321 problem instances.
+
+For each of these, we run 3 additional searches using E-graphs, setting $\epsilon^E=5$ but reducing $\epsilon$ to 1, thus maintaining the same theoretical suboptimality bound.
+The E-graphs consist of 20\%, 50\% and 80\% of the edges from the control's solution path, respectively, selected at random. For each of these, we again record the solution cost and number of nodes generated, and compare these figures to the control.
+Define \textbf{speedup} as the ratio of the number of nodes generated in the control to the number generated in the E-graph search.
+Likewise, define the \textbf{cost improvement} as the ratio of solution cost in the control to cost in the E-graph search.
+We use nodes generated instead of time to produce deterministic results which are independent of most engineering details.
+The times taken generally seemed to follow similar trends; as suggested by the analysis, the time spent per node changes little when small E-graphs are used.
+
+The results are summarized in Figure \ref{tab:percent}.
+We see that while performance in virtually unaffected in some domains, it's never substantially worsened, and in certain domains the experience helps greatly.
+For example, results are strongly positive in the Blocks World.
+Furthermore, figures [CITE numbers] show that the solution quality remains competitive; indeed, we see that when E-graphs are employed, the path cost is slightly reduced on average.
+
+Note that saving 100\% of the E-graph would seem to trivially grant us the solution, as we could simply follow the remembered path depth-first.
+In practice, since we fixed the bias parameter $\epsilon^E$ to 5 rather than raising it to an extremely large value, the search expands a fair number of states even if we remember most or all of the path.
+This is necessary to ensure the suboptimality bound, as the planner does not know whether the E-graph can be ``trusted" to yield an efficient path.
 
 \begin{figure}
 	\begin{center}
@@ -388,7 +416,7 @@ We augmented the HSP2 planner code \cite{bonet2001planning} which won [AI COMPET
 	    \hline
 	    Domain & Inst & 20\% & 50\% & 80\%
 	    \\ \hline
-	    blocksworld & 35 & 1.08-1.82 & 1.37-3.73 & 1.90-5.84
+	    blocks & 35 & 1.08-1.82 & 1.37-3.73 & 1.90-5.84
 	    \\ \hline
 	    driverlog & 14 & 1.00-1.49 & 1.11-1.58 & 1.15-1.60
 	    \\ \hline
@@ -428,11 +456,22 @@ We augmented the HSP2 planner code \cite{bonet2001planning} which won [AI COMPET
 	    \\ \hline
 	    \end{tabular}
 	\end{center}
-	\caption{Speedups for various E-graph \%s over various domains.}
+	\caption{Speedups for various E-graph \%s over various domains. Statistics are presented in the form (1st quartile)-(3rd quartile).}
 	 \label{tab:percent}
 \end{table}
 
 \section{Experiment 2}
+
+The previous experimental setup tested our ability to generalize from incomplete partial plans stored in memory; however, the new planning instances solved were identical to that used by the control to generate the E-graph.
+Now, we try moving the start and goal nodes by having each of them take 5, 20 or 50 random walk steps in the state space. 
+In this manner, we test how well E-graphs can generalize to nearby but non-identical queries.
+
+We narrow our focus to 13 domains, and take from each of them the same set of instances as in the previous experiment, yielding 218 problem instances in all.
+This time, we save 100\% of the solution path found by the control.
+Then for each problem, we run 3 queries using this E-graph, moving each the start and goal by 5, 20 and 50 random steps, respectively.
+
+Results are summarized in Figure \ref{fig:c_100_50}.
+Again we observe encouraging speedups, though they decrease as we walk farther distances from the original query.
 
 \begin{figure}
 	\begin{center}
@@ -482,9 +521,6 @@ We augmented the HSP2 planner code \cite{bonet2001planning} which won [AI COMPET
 	 \label{fig:c_100_50}
 \end{figure}
 
-The plot shows speedup (i.e. ratio of nodes generated in the second and third searches) against a measure of problem size (i.e. nodes generated in the second search). Planning times followed similar trends as node generation counts, as one would expect from the analyis since the E-graph resulting from a half-path is very small. We see considerable speedups in many domains, while the plan costs stayed roughly the same (in fact, they became slightly shorter on average). Many domains saw no discernable effect, but none were significantly hurt by E-graphs.
-
-
 
 \begin{table}
 	\begin{center}
@@ -492,7 +528,7 @@ The plot shows speedup (i.e. ratio of nodes generated in the second and third se
 	    \hline
 	    Domain & Inst & 5 steps & 20 steps & 50 steps
 	    \\ \hline
-	    blocksworld & 35 & 2.12-7.92 & 2.12-8.70 & 2.21-6.25
+	    blocks & 35 & 2.12-7.92 & 2.12-8.70 & 2.21-6.25
 	    \\ \hline
 	    driverlog & 14 & 0.86-2.42 & 0.85-1.30 & 0.82-1.20
 	    \\ \hline
@@ -522,7 +558,7 @@ The plot shows speedup (i.e. ratio of nodes generated in the second and third se
 	    \\ \hline
 	    \end{tabular}
 	\end{center}
-	\caption{Speedups for various random walk distances over different domains.}
+	\caption{Statistics are presented in the form (1st quartile)-(3rd quartile).}
 	 \label{tab:walk}
 \end{table}
 
@@ -537,15 +573,15 @@ Since $g_{S'}$ was precomputed, the cost of generating a state is reduced to jus
 
 Since a major benefit of backward HSP is being able to generate states in $O(\mathbf{A})$ time, it appears E-graphs in their present form are less likely to be of much help. However, in domains where forward search is more practical, we saw that E-graphs can effectively provide free hints.
 
-\section{Conclusions}
+\section{Conclusions (needs citations)}
 
-We saw that by reusing pieces from past plans, planning time can often be reduced. Many interesting directions remain for future investigation. The E-graph cannot be allowed to grow without bound over countless planning episodes, so a better scheme is needed for expansion and pruning as the agent learns.
+We saw that by reusing pieces from past plans, E-graph-based planners can find solutions more quickly as they learn and acquire experiences. Many interesting directions remain for future investigation. It remains unclear how the bias parameters should be set. In addition, more advanced schemes will be needed to expand and prune E-graphs if they get large due to collecting a lot of solutions. Saving each computed plan seems like a good idea intuitively, but other possibilities may be worth investigating.
 
-Distinct states in STRIPS can actually be very similar, differing only by a few irrelevant atoms; hence, experiences should be transferable to inexact matches.
+For STRIPS in particular, distinct states can actually be very similar, differing only by a few irrelevant atoms; hence, experiences should be transferable to inexact matches. However, it's crucial not to overgeneralize as that might simply lead to most of the graph being reweighted uniformly. The problem of generalization seem related to that of abstraction, or automatically extracting structural information from a symbolic domain or problem description.
 
-What if graph changes? Anytime incremental...
+E-Graphs should be thought of not so much as a specific algorithm, but as a tool which is orthogonal to a lot of the major planning techniques out there. Thus, in principle one could apply E-graphs to any of the state-of-the-art A* heuristic-based planners, and one might even adapt the method to get anytime, incremental search using experiences in symbolic domains.
 
-Another use of E-graphs: if something goes wrong along the path, we can replan using the E-graph to get a faster and less disruptive result.
+Finally, E-Graphs could potentially find other uses, in particular for replanning. If an unexpected event invalidates a robot's plan mid-execution, the replanner can remember the original solution as an E-graph to encourage reparations along the old path. In addition to speeding replanning, the E-graph could result in a less disruptive solution, in the sense that it avoids unnecessarily deviating from the original plan. Minimizing disruption is important when resources must be allocated according to the plan, or cognitively-burdened humans are involved with its execution.
 
 \bibliographystyle{aaai}
 \bibliography{paper}
