@@ -435,36 +435,13 @@ E-graphs are used as suggestions, not as a trusted form of knowledge; the planne
 	 \label{tab:percent}
 \end{table}
 
-\subsection{Experiment 2: Reusing Nearby Experiences}
-
-The previous experiment tested our ability to complete partial plans that are fragmented by gaps; however, the experimental searches solved identically the same problems as the control used to generate the E-Graph.
-Now, we try changing the start and goal states by moving each of them a small distance within the state space. 
-In this manner, we test how well E-Graphs enable the planner to generalize to nearby but non-identical queries.
-
-We narrow our focus to 13 domains, and take from each of them the same set of instances as in Experiment 1, yielding 218 problem instances in all.
-This time, we save 100\% of the solution path found by the problem's corresponding control from Experiment 1.
-Then, for each problem, we form 3 modified problems where the start and goal are each displaced by 5, 20 or 50 steps, respectively, of random walk along the graph.
-Note that, due to the unpredictable nature of random walks, the shortest-paths distances of the moved nodes from their initial positions is only bounded from above by the number of steps taken, and may vary widely.
-
-Now, on each of the displaced problems, we run 2 searches: the first uses no E-Graph and acts as our new control, while the second uses the E-Graph created using the undisplaced original problem, consisting of the path found by the Experiment 1 control. Speedup and cost improvement ratios are taken with respect to Experiment 2 controls; this is to provide an apples-to-apples comparison, as the displaced problem is different from the original.
-
-Results are summarized in Table \ref{tab:walk}, with the full distributions plotted in Figures \ref{fig:s_100_5} to \ref{fig:s_100_50}.
-Again we observe encouraging speedups in some domains. As one would expect, the advantage provided by the E-Graph decreases as we walk farther distances from the original query. Figure \ref{fig:c_100_20} is a representative plot to show that, once again, path quality is typically not made much worse by using E-Graphs. Nonetheless, this time we do observe a slight cost degradation on average.
-
-\begin{figure}
-	\centering
-	\includegraphics[scale=0.5]{Cost_100_20.png}
-	\caption{Relative plan costs using 100\% of the control experience, displaced 20 steps from the control query.}
-	 \label{fig:c_100_20}
-\end{figure}
-
 
 \begin{table}
 	\centering
 	\resizebox{\columnwidth}{!}{%
 	    \begin{tabular}{| r | c | c | c | c |}
 	    \hline
-	    Domain & Inst & 5 steps & 20 steps & 50 steps
+	    Domain & Count & 5 steps & 20 steps & 50 steps
 	    \\ \hline
 	    blocks & 35 & 2.12-7.92 & 2.12-8.70 & 2.21-6.25
 	    \\ 
@@ -500,6 +477,30 @@ Again we observe encouraging speedups in some domains. As one would expect, the 
 	 \label{tab:walk}
 \end{table}
 
+\subsection{Experiment 2: Reusing Nearby Experiences}
+
+The previous experiment tested our ability to complete partial plans that are fragmented by gaps; however, the experimental searches solved identically the same problems as the control used to generate the E-Graph.
+Now, we try changing the start and goal states by moving each of them a small distance within the state space. 
+In this manner, we test how well E-Graphs enable the planner to generalize to nearby but non-identical queries.
+
+We narrow our focus to 13 domains, and take from each of them the same set of instances as in Experiment 1, yielding 218 problem instances in all.
+This time, we save 100\% of the solution path found by the problem's corresponding control from Experiment 1.
+Then, for each problem, we form 3 modified problems where the start and goal are each displaced by 5, 20 or 50 steps, respectively, of random walk along the graph.
+Note that, due to the unpredictable nature of random walks, the shortest-paths distances of the moved nodes from their initial positions is only bounded from above by the number of steps taken, and may vary widely.
+
+Now, on each of the displaced problems, we run 2 searches: the first uses no E-Graph and acts as our new control, while the second uses the E-Graph created using the undisplaced original problem, consisting of the path found by the Experiment 1 control. Speedup and cost improvement ratios are taken with respect to Experiment 2 controls; this is to provide an apples-to-apples comparison, as the displaced problem is different from the original.
+
+Results are summarized in Table \ref{tab:walk}, with the full distributions plotted in Figures \ref{fig:s_100_5} to \ref{fig:s_100_50}.
+Again we observe encouraging speedups in some domains. As one would expect, the advantage provided by the E-Graph decreases as we walk farther distances from the original query. Figure \ref{fig:c_100_20} is a representative plot to show that, once again, path quality is typically not made much worse by using E-Graphs. Nonetheless, this time we do observe a slight cost degradation on average.
+
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.5]{Cost_100_20.png}
+	\caption{Relative plan costs using 100\% of the control experience, displaced 20 steps from the control query.}
+	 \label{fig:c_100_20}
+\end{figure}
+
+
 \section{Discussion}
 
 Figures \ref{fig:s_20_0} to \ref{fig:s_100_50} display the individual speedups achieved over all of our experimental trials. We observe that cases in which E-Graphs mislead the planner into generating more states (i.e. speedup $<$ 1) are quite rare, so it seems experiences can only help. We set the bias parameters arbitrarily; tuning them by domain or problem size may well yield even better results. Interestingly, we observe a clear positive correlation between problem size or difficulty, as measured by the number of nodes generated in the control, and the speedup factor. This suggests E-graphs may be especially helpful on the hardest problems.
@@ -517,6 +518,9 @@ With such an approach, it would be essential to limit overgeneralization, so as 
 
 Finally, we remark that the Experience-Biased HSP algorithm is highly parallelizable, even if A* is retricted to expanding nodes sequentially. Recall that the sum, min and max functions are computable in logarithmic time using linearly many processors. Therefore, with minor adjustments, ComputeG($S$) has parallel depth $O(\mathbf{A\log A\log O})$. With $\mathbf{A\max(O,V^E)}$ processors, the total cost of generating a state is $O(\mathbf{(A\log O + \log V^E)\log A})$. Using even more processors, the cost of \textit{expanding} a state can be reduced to the same by generating its successors in parallel. If still more processors are available, some may be dedicated to the task of preemptively computing $h^E$ for states that are likely to be generated in the future, e.g. near the E-graph or A* frontier.
 
+\section{Conclusions}
+
+We saw that, by reusing pieces from past plans, E-Graph-based planners can find solutions more quickly as they learn and acquire experiences. Many interesting directions remain for future investigation. It remains unclear how the bias parameters should be set. In addition, more advanced schemes will be needed to expand and prune E-Graphs if they grow large from collecting a lot of solutions. Keeping track of the most recently computed plans seems like a good idea intuitively, but other possibilities may be worth trying.
 \begin{figure}
 	\centering
 	\includegraphics[scale=0.5]{Speedup_20_0.png}
@@ -558,16 +562,11 @@ Finally, we remark that the Experience-Biased HSP algorithm is highly paralleliz
 	\caption{Speedups when planning with 100\% of the control experience, displaced 50 steps from the control query.}
 	 \label{fig:s_100_50}
 \end{figure}
-
-\section{Conclusions}
-
-We saw that, by reusing pieces from past plans, E-Graph-based planners can find solutions more quickly as they learn and acquire experiences. Many interesting directions remain for future investigation. It remains unclear how the bias parameters should be set. In addition, more advanced schemes will be needed to expand and prune E-Graphs if they grow large from collecting a lot of solutions. Keeping track of the most recently computed plans seems like a good idea intuitively, but other possibilities may be worth trying.
-
 As mentioned in the discussion, generalization and parallelization certainly merit further investigation. Generalization is a particularly important problem in AI learning theory, and there is plenty of literature on the topic. For example, \cite{fikes1972learning} generalize plans on the original STRIPS problem solver. The problem of generalization seems related to that of abstraction, or automatically extracting structural information from a symbolic domain or problem description. Works such as \cite{helmert2007flexible} project symbolic state graphs onto smaller spaces; one could potentially apply E-graphs on the projected space to achieve the desired generalization.
 
 E-Graphs should be thought of not so much as a specific algorithm, but as a tool which is orthogonal to a lot of the major planning techniques out there. In principle, one could apply E-Graphs to any of the state-of-the-art A* heuristic-based planners, and one might even adapt the method to obtain anytime, incremental search using experiences as in \cite{phillips2013anytime}, but in symbolic domains.
 
-Finally, E-Graphs might find other uses, such as in replanning. If an unexpected event invalidates a robot's plan mid-execution, the replanner can recall the original solution as an E-Graph to encourage reparations along the old path. In addition to speeding up replanning, the E-Graph could result in a less disruptive solution, in the sense that it avoids unnecessarily deviating from the original plan. Minimizing disruption is important when resources must be allocated in advance according to the plan, or when cognitively-burdened humans are involved with its execution.
+Finally, E-Graphs might find other uses, such as in replanning. If an unexpected event invalidates a robot's plan mid-execution, the replanner can recall the original solution as an E-Graph to encourage reparations along the old path. In addition to speeding up replanning, the E-Graph could result in a less disruptive solution, in the sense that it avoids unnecessarily deviating from the original plan. Minimizing disruption is important when resources must be allocated in advance according to the plan, or when cognitively burdened humans are involved with its execution.
 
 \bibliographystyle{aaai}
 \bibliography{paper}
