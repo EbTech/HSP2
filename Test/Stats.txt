@@ -2,4 +2,4 @@
 , SolSize= 44 Gen= 645, SolSize= 44 Gen= 1455, SolSize= 44 Gen= 185	examples/blocks/probBLOCKS-10-1.pddl
 , SolSize= 48 Gen= 737, SolSize= 46 Gen= 725, SolSize= 46 Gen= 180	examples/blocks/probBLOCKS-10-2.pddl
 , SolSize= 54 Gen= 1268, SolSize= 56 Gen= 1461, SolSize= 64 Gen= 288	examples/blocks/probBLOCKS-11-0.pddl
-, SolSize= 58 Gen= 2412
+, 
